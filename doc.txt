@@ -1,0 +1,41 @@
+
+Abstract class GameObject
+Field
+ - int xPosition
+ - int yPosition
+
+Constructor
+ + GameObject()
+ + GameObject(int xPostion, int yPostion)
+
+Method
+ + Getter and Setter
+
+--------------------------
+
+Class Player extends GameObject
+
+Field
+ - int hp
+ - int bombCount
+ - int power
+ - int speed
+ - int score
+ - Weapon currentWeapon
+ - boolean hasShield
+ - boolean CanPushBomb
+ - PlayerState currentPlayerState
+
+Constructor
+ + Player(int score)
+
+Method
+ + Getter and Setter
+
+
+--------------------------
+
+Abstract class Item extends GameObject
+
+--------------------------
+
