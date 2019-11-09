@@ -12,6 +12,9 @@ package item
 
 Interface PowerUp
 
+Method
++ void OnPlayerGetItem(Player player)
+
 --------------------------
 package gameobject
 
@@ -64,6 +67,8 @@ package item
 
 Abstract class Item extends GameObject implement Destroyable
 
+public PlayerGetItem
+
 --------------------------
 package item
 
@@ -74,12 +79,21 @@ class LifeIncreaseItem extends Item implement PowerUp
 class Shield extends Item implement PowerUp
 class PushBombSkillItem extends Item implement PowerUp
 
-class Bomb extends Item implement Weapon
-class LandMine extends Item implement Weapon
-class Grenade extends Item implement Weapon 
-class PoisonDart extends Item implement Weapon
-class RocketLauncher extends Item implement Weapon
-class RemoteBomb extends Item implement Weapon
+class LandMineItem extends Item implement PowerUp
+class GrenadeItem extends Item implement PowerUp
+class PoisonDartItem extends Item implement PowerUp
+class RocketLauncherItem extends Item implement PowerUp
+class RemoteBombItem extends Item implement PowerUp
+
+--------------------------
+package Weapon
+
+class Bomb implement Weapon
+class LandMine implement Weapon
+class Grenade implement Weapon 
+class PoisonDart implement Weapon
+class RocketLauncher implement Weapon
+class RemoteBomb implement Weapon
 
 
 
