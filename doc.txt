@@ -1,3 +1,19 @@
+package gameobject
+
+Interface Destroyable
+
+--------------------------
+package item
+
+Interface Weapon
+
+--------------------------
+package item
+
+Interface PowerUp
+
+--------------------------
+package gameobject
 
 Abstract class GameObject
 Field
@@ -12,6 +28,17 @@ Method
  + Getter and Setter
 
 --------------------------
+package gameobject
+
+class Wall extends GameObject
+
+--------------------------
+package gameobject
+
+class Obstacle extends GameObject implement Destroyable
+
+--------------------------
+package player
 
 Class Player extends GameObject
 
@@ -32,10 +59,27 @@ Constructor
 Method
  + Getter and Setter
 
+--------------------------
+package item
+
+Abstract class Item extends GameObject implement Destroyable
 
 --------------------------
+package item
 
-Abstract class Item extends GameObject
+class BombUpgradeItem extends Item implement PowerUp
+class PowerUpgradeItem extends Item implement PowerUp
+class SpeedUpgradeItem extends Item implement PowerUp
+class LifeIncreaseItem extends Item implement PowerUp
+class Shield extends Item implement PowerUp
+class PushBombSkillItem extends Item implement PowerUp
 
---------------------------
+class Bomb extends Item implement Weapon
+class LandMine extends Item implement Weapon
+class Grenade extends Item implement Weapon 
+class PoisonDart extends Item implement Weapon
+class RocketLauncher extends Item implement Weapon
+class RemoteBomb extends Item implement Weapon
+
+
 

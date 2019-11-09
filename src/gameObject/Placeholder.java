@@ -1,4 +1,4 @@
-package gameObject;
+package gameobject;
 
 public class Placeholder {
 

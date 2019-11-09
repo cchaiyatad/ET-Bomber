@@ -1,4 +1,4 @@
-package gameController;
+package gamecontroller;
 
 public class Placeholder {
 
