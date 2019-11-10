@@ -2,10 +2,18 @@ package gameobject
 
 Interface Destroyable
 
+Method
+ + void OnDestroyObject()
+
 --------------------------
 package item
 
 Interface Weapon
+
+Method
+ + void GetDamageRange(Player player)
+ + boolean CanMakeDamageToObject(GameObject targetObj)
+ + boolean MakeDamageToPlayer(Player target)
 
 --------------------------
 package item
@@ -13,7 +21,7 @@ package item
 Interface PowerUp
 
 Method
-+ void OnPlayerGetItem(Player player)
+ + void OnPlayerGetItem(Player player)
 
 --------------------------
 package gameobject
@@ -22,10 +30,11 @@ Abstract class GameObject
 Field
  - int xPosition
  - int yPosition
+ - string imagePath
 
 Constructor
  + GameObject()
- + GameObject(int xPostion, int yPostion)
+ + GameObject(int xPostion, int yPostion, string imagePath)
 
 Method
  + Getter and Setter
@@ -33,12 +42,16 @@ Method
 --------------------------
 package gameobject
 
-class Wall extends GameObject
+Class Wall extends GameObject
 
 --------------------------
 package gameobject
 
-class Obstacle extends GameObject implement Destroyable
+Class Obstacle extends GameObject implement Destroyable
+
+Field 
+ - Item itemInObstacle
+
 
 --------------------------
 package player
@@ -72,14 +85,14 @@ public PlayerGetItem
 --------------------------
 package item
 
-class BombUpgradeItem extends Item implement PowerUp
-class PowerUpgradeItem extends Item implement PowerUp
-class SpeedUpgradeItem extends Item implement PowerUp
-class LifeIncreaseItem extends Item implement PowerUp
-class Shield extends Item implement PowerUp
-class PushBombSkillItem extends Item implement PowerUp
+Class BombUpgradeItem extends Item implement PowerUp
+Class PowerUpgradeItem extends Item implement PowerUp
+Class SpeedUpgradeItem extends Item implement PowerUp
+Class LifeIncreaseItem extends Item implement PowerUp
+Class Shield extends Item implement PowerUp
+Class PushBombSkillItem extends Item implement PowerUp
 
-class LandMineItem extends Item implement PowerUp
+Class LandMineItem extends Item implement PowerUp
 class GrenadeItem extends Item implement PowerUp
 class PoisonDartItem extends Item implement PowerUp
 class RocketLauncherItem extends Item implement PowerUp
@@ -88,12 +101,12 @@ class RemoteBombItem extends Item implement PowerUp
 --------------------------
 package Weapon
 
-class Bomb implement Weapon
-class LandMine implement Weapon
-class Grenade implement Weapon 
-class PoisonDart implement Weapon
-class RocketLauncher implement Weapon
-class RemoteBomb implement Weapon
+Class Bomb extends GameObject implement Weapon
+Class LandMine extends GameObject implement Weapon
+Class Grenade extends GameObject implement Weapon 
+Class PoisonDart extends GameObject implement Weapon
+Class RocketLauncher extends GameObject implement Weapon
+Class RemoteBomb extends GameObject implement Weapon
 
 
 
