@@ -30,11 +30,11 @@ Abstract class GameObject
 Field
  - int xPosition
  - int yPosition
- - string imagePath
+ - String imagePath
 
 Constructor
  + GameObject()
- + GameObject(int xPostion, int yPostion, string imagePath)
+ + GameObject(int xPosition, int yPosition, String imagePath)
 
 Method
  + Getter and Setter
@@ -70,7 +70,7 @@ Field
  - PlayerState currentPlayerState
 
 Constructor
- + Player(int score)
+ + Player(int xPosition, int yPosition, String imagePath)
 
 Method
  + Getter and Setter
@@ -107,6 +107,14 @@ Class Grenade extends GameObject implement Weapon
 Class PoisonDart extends GameObject implement Weapon
 Class RocketLauncher extends GameObject implement Weapon
 Class RemoteBomb extends GameObject implement Weapon
+
+--------------------------
+package GUI
+
+Class GameScene extends HBox 
+Class ScoreBoard extends VBox
+Class GameField extends GridPane
+Class PlayerStatusBoard extends GridPane
 
 
 
