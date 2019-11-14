@@ -155,11 +155,26 @@ Field
  - Obstacle[] obstacles
  - Player[] players
 
+Method
+ - Getter 
 --------------------------
 package gamecontroller
 
 Class InputInGame
 
+Field
+ - Scene scene
+ - BitSet keyboardBitSet
+
+Constructor
+ + InputInGame(Scene scene)
+
+Method
+ + void AddListeners()
+ + void RemoveListeners()
+ + boolean IsKeyPress(KeyCode key)
+ - EventHandler<KeyEvent> KeyOnPressHandle
+ - EventHandler<KeyEvent> KeyOnReleaseHandle
 --------------------------
 package setting
 

@@ -1,5 +1,6 @@
 package main;
 
+import gamecontroller.InputInGame;
 import gui.GameScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		GameScene gameScene = new GameScene();
 		Scene scene = new Scene(gameScene, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
+		InputInGame inputInGame = new InputInGame(scene);
+		inputInGame.AddListeners();
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
