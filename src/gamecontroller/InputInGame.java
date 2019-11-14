@@ -1,5 +1,5 @@
 package gamecontroller;
 
-public class Placeholder {
+public class InputInGame {
 
 }

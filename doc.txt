@@ -130,11 +130,6 @@ package gui
 
 Class GameField extends Pane
 
-Field 
- - Wall[] walls
- - Obstacle[] obstacles
- - Player[] players
-
 Constructor
  + GameField() 
 
@@ -154,6 +149,16 @@ Class PlayerStatusBoard extends GridPane
 package gamecontroller
 
 Class GameController
+
+Field 
+ - Wall[] walls
+ - Obstacle[] obstacles
+ - Player[] players
+
+--------------------------
+package gamecontroller
+
+Class InputInGame
 
 --------------------------
 package setting
