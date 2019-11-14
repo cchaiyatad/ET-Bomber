@@ -6,6 +6,17 @@ Method
  + void OnDestroyObject()
 
 --------------------------
+package gameobject
+
+Interface Moveable
+
+Fields
+ int DefaultMoveSpeed 
+
+Method
+ + void Move()
+
+--------------------------
 package item
 
 Interface Weapon
@@ -39,6 +50,7 @@ Constructor
  + GameObject(int xPosition, int yPosition, String imagePath)
 
 Method
+ + void SetPositionOnScreen()
  + Getter and Setter
 
 --------------------------

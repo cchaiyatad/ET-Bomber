@@ -2,8 +2,9 @@ package gameobject;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
-public abstract class GameObject {
+public abstract class GameObject extends Pane {
 	private int xPosition;
 	private int yPosition;
 	private String imagePath;
@@ -14,12 +15,21 @@ public abstract class GameObject {
 		setxPosition(0);
 		setyPosition(0);
 		setImagePath("");
+		image = new Image(getImagePath());
+		imageView = new ImageView(image);
 	}
 	
 	public GameObject(int xPosition, int yPosition, String imagePath){
+		super();
 		setxPosition(xPosition);
 		setyPosition(yPosition);
 		setImagePath(imagePath);
+		image = new Image(getImagePath());
+		imageView = new ImageView(image);
+	}
+	
+	public void SetPosition() {
+		imageView.relocate(getxPosition(), getyPosition());
 	}
 
 	public int getxPosition() {
@@ -43,6 +53,7 @@ public abstract class GameObject {
 	}
 
 	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+//		this.imagePath = imagePath;
+		this.imagePath = "res/Image/placeholder.PNG";
 	}
 }
