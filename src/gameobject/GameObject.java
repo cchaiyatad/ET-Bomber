@@ -28,7 +28,7 @@ public abstract class GameObject extends Pane {
 		imageView = new ImageView(image);
 	}
 	
-	public void SetPosition() {
+	public void SetPositionOnScreen() {
 		imageView.relocate(getxPosition(), getyPosition());
 	}
 
