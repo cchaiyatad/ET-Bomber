@@ -1,18 +1,21 @@
 package main;
 
+import gui.GameScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import setting.Setting;
 
 public class Main extends Application{
 	
 	@SuppressWarnings("exports")
 	@Override
 	public void start(Stage primaryStage) {
-		VBox pane = new VBox();
-		Scene scene = new Scene(pane, 960, 790);
+		GameScene gameScene = new GameScene();
+		Scene scene = new Scene(gameScene, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	

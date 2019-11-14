@@ -1,9 +1,14 @@
 package gameobject;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public abstract class GameObject {
 	private int xPosition;
 	private int yPosition;
 	private String imagePath;
+	private ImageView imageView;
+	private Image image;
 	
 	public GameObject(){
 		setxPosition(0);

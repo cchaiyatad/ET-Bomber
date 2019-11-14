@@ -31,6 +31,8 @@ Field
  - int xPosition
  - int yPosition
  - String imagePath
+ - ImageView imageView;
+ - Image image;
 
 Constructor
  + GameObject()
@@ -99,7 +101,7 @@ class RocketLauncherItem extends Item implement PowerUp
 class RemoteBombItem extends Item implement PowerUp
 
 --------------------------
-package Weapon
+package weapon
 
 Class Bomb extends GameObject implement Weapon
 Class LandMine extends GameObject implement Weapon
@@ -109,12 +111,61 @@ Class RocketLauncher extends GameObject implement Weapon
 Class RemoteBomb extends GameObject implement Weapon
 
 --------------------------
-package GUI
+package gui
 
 Class GameScene extends HBox 
+// set padding to 20
+
+Field
+ - GameField gameField
+ - PlayerStatusBoard playerStatusBoard
+ - ScoreBoard scoreBoard
+
+Constructor
+ + GameScene() 
+ 		
+
+--------------------------
+package gui
+
+Class GameField extends Pane
+
+Field 
+ - Wall[] walls
+ - Obstacle[] obstacles
+ - Player[] players
+
+Constructor
+ + GameField() 
+
+--------------------------
+package gui
+
 Class ScoreBoard extends VBox
-Class GameField extends GridPane
+
+Constructor
+ + ScoreBoard()
+--------------------------
+package gui
+
 Class PlayerStatusBoard extends GridPane
 
+--------------------------
+package gamecontroller
 
+Class GameController
+
+--------------------------
+package setting
+
+Class Setting
+ + static double SCENE_WIDTH
+ + static double SCENE_HEIGHT
+ + static KeyCode PLAYERONE_MOVEUP
+ + static KeyCode PLAYERONE_MOVEDOWN
+ + static KeyCode PLAYERONE_MOVELEFT
+ + static KeyCode PLAYERONE_MOVERIGHT
+ + static KeyCode PLAYERONE_PLACEBOMB
+
+ 
 
