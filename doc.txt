@@ -168,6 +168,7 @@ Field
  - Player[] players
 
 Method
+ + Scene CreateGameScene()
  - Getter 
 --------------------------
 package gamecontroller
