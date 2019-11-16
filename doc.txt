@@ -58,6 +58,10 @@ package gameobject
 
 Class Wall extends GameObject
 
+Constructor
+ + Wall()
+ + Wall(int xPosition, int yPosition, String imagePath)
+
 --------------------------
 package gameobject
 

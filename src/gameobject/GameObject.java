@@ -17,15 +17,18 @@ public abstract class GameObject extends Pane {
 		setImagePath("");
 		image = new Image(getImagePath());
 		imageView = new ImageView(image);
+		this.getChildren().add(imageView);
+		SetPositionOnScreen();
 	}
 	
 	public GameObject(int xPosition, int yPosition, String imagePath){
-		super();
 		setxPosition(xPosition);
 		setyPosition(yPosition);
 		setImagePath(imagePath);
 		image = new Image(getImagePath());
 		imageView = new ImageView(image);
+		this.getChildren().add(imageView);
+		SetPositionOnScreen();
 	}
 	
 	public void SetPositionOnScreen() {
@@ -54,6 +57,6 @@ public abstract class GameObject extends Pane {
 
 	public void setImagePath(String imagePath) {
 //		this.imagePath = imagePath;
-		this.imagePath = "res/Image/placeholder.PNG";
+		this.imagePath = "file:res/Image/placeholder.PNG";
 	}
 }

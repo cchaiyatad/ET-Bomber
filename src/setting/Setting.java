@@ -6,7 +6,6 @@ public class Setting {
 	public static double SCENE_WIDTH 	= 1010;
 	public static double SCENE_HEIGHT 	= 790;
 	
-	
 	//Input
 	public static KeyCode PLAYERONE_MOVEUP 		= KeyCode.UP;
 	public static KeyCode PLAYERONE_MOVEDOWN  	= KeyCode.DOWN;
