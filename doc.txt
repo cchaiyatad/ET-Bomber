@@ -170,13 +170,16 @@ package gamecontroller
 Class GameController
 
 Field 
- - Wall[] walls
- - Obstacle[] obstacles
- - Player[] players
+ - List<Wall> backgrounds
+ - List<Wall> walls;
+ - List<Obstacle> obstacles;
+ - List<Player> players;
 
 Method
  + Scene CreateGameScene()
- - Getter 
+ - void CreateBackground()
+ - void CreateInitWall()
+ + Getter 
 --------------------------
 package gamecontroller
 
