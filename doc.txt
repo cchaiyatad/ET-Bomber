@@ -39,15 +39,15 @@ package gameobject
 
 Abstract class GameObject
 Field
- - int xPosition
- - int yPosition
- - String imagePath
- - ImageView imageView;
- - Image image;
+ protected int xPosition
+ protected int yPosition
+ protected String imagePath
+ protected ImageView imageView;
+ protected Image image;
+ protected Pane Layer
 
 Constructor
- + GameObject()
- + GameObject(int xPosition, int yPosition, String imagePath)
+ + GameObject(int xPosition, int yPosition, String imagePath, Pane Layer)
 
 Method
  + void SetPositionOnScreen()
@@ -59,8 +59,7 @@ package gameobject
 Class Wall extends GameObject
 
 Constructor
- + Wall()
- + Wall(int xPosition, int yPosition, String imagePath)
+ + Wall(int xPosition, int yPosition, String imagePath, Pane layer)
 
 --------------------------
 package gameobject
@@ -88,7 +87,7 @@ Field
  - PlayerState currentPlayerState
 
 Constructor
- + Player(int xPosition, int yPosition, String imagePath)
+ + Player(int xPosition, int yPosition, String imagePath, pane layer)
 
 Method
  + Getter and Setter
@@ -145,9 +144,13 @@ Constructor
 package gui
 
 Class GameField extends Pane
+ - Pane layer
 
 Constructor
  + GameField() 
+
+Method
+ Getter
 
 --------------------------
 package gui

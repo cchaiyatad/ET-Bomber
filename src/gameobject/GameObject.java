@@ -4,30 +4,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public abstract class GameObject extends Pane {
-	private int xPosition;
-	private int yPosition;
-	private String imagePath;
-	private ImageView imageView;
-	private Image image;
+public abstract class GameObject {
+	protected int xPosition;
+	protected int yPosition;
+	protected String imagePath;
+	protected ImageView imageView;
+	protected Image image;
+	protected Pane Layer;
 	
-	public GameObject(){
-		setxPosition(0);
-		setyPosition(0);
-		setImagePath("");
-		image = new Image(getImagePath());
-		imageView = new ImageView(image);
-		this.getChildren().add(imageView);
-		SetPositionOnScreen();
-	}
-	
-	public GameObject(int xPosition, int yPosition, String imagePath){
+	public GameObject(int xPosition, int yPosition, String imagePath, Pane layer){
 		setxPosition(xPosition);
 		setyPosition(yPosition);
 		setImagePath(imagePath);
 		image = new Image(getImagePath());
 		imageView = new ImageView(image);
-		this.getChildren().add(imageView);
+		this.Layer = layer;
+		this.Layer.getChildren().add(this.imageView);
 		SetPositionOnScreen();
 	}
 	
@@ -57,6 +49,7 @@ public abstract class GameObject extends Pane {
 
 	public void setImagePath(String imagePath) {
 //		this.imagePath = imagePath;
-		this.imagePath = "file:res/Image/placeholder.PNG";
+		this.imagePath = "file:res/Image/placeholder.png";
 	}
+	
 }

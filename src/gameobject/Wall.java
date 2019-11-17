@@ -1,12 +1,10 @@
 package gameobject;
 
+import javafx.scene.layout.Pane;
+
 public class Wall extends GameObject{
 	
-	public Wall() {
-		super();
-	}
-	
-	public Wall(int xPosition, int yPosition, String imagePath) {
-		super(xPosition,yPosition,imagePath);
+	public Wall(int xPosition, int yPosition, String imagePath, Pane layer) {
+		super(xPosition,yPosition,imagePath, layer);
 	}
 }

@@ -1,8 +1,8 @@
 package gui; 
 
-import gameobject.GameObject;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import setting.Setting;
 
 public class GameScene extends HBox{
@@ -21,8 +21,8 @@ public class GameScene extends HBox{
 		this.getChildren().add(gameField);
 	}
 	
-	public void AddItemOnScene(GameObject gameObject) {
-		gameField.getChildren().add(gameObject);
+	public Pane GetGameFieldPane() {
+		return gameField.getLayer();
 	}
 		
 }
