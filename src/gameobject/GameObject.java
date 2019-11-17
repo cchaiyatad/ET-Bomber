@@ -11,8 +11,8 @@ public abstract class GameObject {
 	protected ImageView imageView;
 	protected Image image;
 	protected Pane Layer;
-	
-	public GameObject(int xPosition, int yPosition, String imagePath, Pane layer){
+
+	public GameObject(int xPosition, int yPosition, String imagePath, Pane layer) {
 		setxPosition(xPosition);
 		setyPosition(yPosition);
 		setImagePath(imagePath);
@@ -22,7 +22,7 @@ public abstract class GameObject {
 		this.Layer.getChildren().add(this.imageView);
 		SetPositionOnScreen();
 	}
-	
+
 	public void SetPositionOnScreen() {
 		imageView.relocate(getxPosition(), getyPosition());
 	}
@@ -48,8 +48,7 @@ public abstract class GameObject {
 	}
 
 	public void setImagePath(String imagePath) {
-//		this.imagePath = imagePath;
-		this.imagePath = "file:res/Image/placeholder.png";
+		this.imagePath = imagePath.equals("") ? "file:res/Image/placeholder.png" : "file:res/Image/" + imagePath + ".png";
 	}
-	
+
 }
