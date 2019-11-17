@@ -39,6 +39,20 @@ public class GameController {
 		return walls;
 	}
 
+	public Thread GameLoop() {
+		Thread gameLoop = new Thread(() -> {
+			while (true) {
+				javafx.application.Platform.runLater(() -> {
+					for (Player player : players) {
+						CheckPlayerMoveAndSetState(player);
+					}
+				});
+			}
+		});
+
+		return gameLoop;
+	}
+
 	public void CheckPlayerMoveAndSetState(Player player) {
 		KeyCode buttonUp = null;
 		KeyCode buttonRight = null;
@@ -56,23 +70,19 @@ public class GameController {
 		boolean right = inputInGame.IsKeyPress(buttonRight);
 		boolean down = inputInGame.IsKeyPress(buttonDown);
 		boolean left = inputInGame.IsKeyPress(buttonLeft);
-		
-		if(up && !right && !down && !left) {
+
+		if (up && !right && !down && !left) {
 			player.setCurrentPlayerState(PlayerState.MOVEUP);
-		}
-		else if(!up && right && !down && !left) {
+		} else if (!up && right && !down && !left) {
 			player.setCurrentPlayerState(PlayerState.MOVERIGHT);
-		}
-		else if(!up && !right && down && !left) {
+		} else if (!up && !right && down && !left) {
 			player.setCurrentPlayerState(PlayerState.MOVEDOWN);
-		}
-		else if(up && !right && !down && left) {
+		} else if (up && !right && !down && left) {
 			player.setCurrentPlayerState(PlayerState.MOVELEFT);
-		}
-		else {
+		} else {
 			player.setCurrentPlayerState(PlayerState.IDLE);
 		}
-		
+		System.out.println(player.getCurrentPlayerState());
 	}
 
 	private void CreateBackground() {
