@@ -85,9 +85,10 @@ Field
  - boolean hasShield
  - boolean CanPushBomb
  - PlayerState currentPlayerState
+ - int playerNumber
 
 Constructor
- + Player(int xPosition, int yPosition, String imagePath, pane layer)
+ + Player(int xPosition, int yPosition, String imagePath, pane layer, int playerNumber)
 
 Method
  + Getter and Setter
@@ -180,6 +181,7 @@ Method
  - void CreateBackground()
  - void CreateInitWall()
  - void CreatePlayer(int numberOfPlayer)
+ + AnimationTimer GameLoop() 
  + void CheckPlayerMoveAndSetState(Player player)
  + Getter 
 --------------------------

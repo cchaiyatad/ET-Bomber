@@ -16,6 +16,29 @@ public class Player extends GameObject implements Moveable {
 
 	@Override
 	public void Move() {
+		int xDirectionSpeed = 0;
+		int yDirectionSpeed = 0;
+
+		switch (currentPlayerState) {
+		case MOVEUP:
+			yDirectionSpeed = DefaultMoveSpeed * -1;
+			break;
+		case MOVERIGHT:
+			xDirectionSpeed = DefaultMoveSpeed;
+			break;
+		case MOVELEFT:
+			xDirectionSpeed = DefaultMoveSpeed * -1;
+			break;
+		case MOVEDOWN:
+			yDirectionSpeed = DefaultMoveSpeed;
+			break;
+		default:
+			break;
+		}
+
+		xPosition += xDirectionSpeed;
+		yPosition += yDirectionSpeed;
+		SetPositionOnScreen();
 	}
 
 	public int getPlayerNumber() {
@@ -28,6 +51,6 @@ public class Player extends GameObject implements Moveable {
 
 	public void setCurrentPlayerState(PlayerState currentPlayerState) {
 		this.currentPlayerState = currentPlayerState;
-	}	
-	
+	}
+
 }

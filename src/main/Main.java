@@ -1,6 +1,7 @@
 package main;
 
 import gamecontroller.GameController;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,7 +15,7 @@ public class Main extends Application{
 		primaryStage.setScene(gamecontroller.CreateGameScene());
 		primaryStage.setResizable(false);
 		primaryStage.show();
-		Thread gameLoop = gamecontroller.GameLoop();
+		AnimationTimer gameLoop = gamecontroller.GameLoop();
 		gameLoop.start();
 		
 	}

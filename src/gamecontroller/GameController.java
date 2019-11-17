@@ -3,8 +3,10 @@ package gamecontroller;
 import java.util.ArrayList;
 import java.util.List;
 
+import gameobject.Moveable;
 import gameobject.Wall;
 import gui.GameScene;
+import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import player.Player;
@@ -39,18 +41,18 @@ public class GameController {
 		return walls;
 	}
 
-	public Thread GameLoop() {
-		Thread gameLoop = new Thread(() -> {
-			while (true) {
-				javafx.application.Platform.runLater(() -> {
-					for (Player player : players) {
-						CheckPlayerMoveAndSetState(player);
-					}
-				});
+	public AnimationTimer GameLoop() {
+		AnimationTimer gameLoop = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				for (Player player : players) {
+					CheckPlayerMoveAndSetState(player);
+				}
+				players.forEach(Moveable -> Moveable.Move());
 			}
-		});
-
+		};
 		return gameLoop;
+
 	}
 
 	public void CheckPlayerMoveAndSetState(Player player) {
@@ -77,12 +79,11 @@ public class GameController {
 			player.setCurrentPlayerState(PlayerState.MOVERIGHT);
 		} else if (!up && !right && down && !left) {
 			player.setCurrentPlayerState(PlayerState.MOVEDOWN);
-		} else if (up && !right && !down && left) {
+		} else if (!up && !right && !down && left) {
 			player.setCurrentPlayerState(PlayerState.MOVELEFT);
 		} else {
 			player.setCurrentPlayerState(PlayerState.IDLE);
 		}
-		System.out.println(player.getCurrentPlayerState());
 	}
 
 	private void CreateBackground() {
