@@ -7,9 +7,9 @@ public class Setting {
 	public static double SCENE_HEIGHT 	= 790;
 	
 	//Input
-	public static KeyCode PLAYERONE_MOVEUP 		= KeyCode.UP;
-	public static KeyCode PLAYERONE_MOVEDOWN  	= KeyCode.DOWN;
-	public static KeyCode PLAYERONE_MOVELEFT  	= KeyCode.LEFT;
-	public static KeyCode PLAYERONE_MOVERIGHT  	= KeyCode.RIGHT;
+	public static KeyCode PLAYERONE_MOVEUP 		= KeyCode.W;
+	public static KeyCode PLAYERONE_MOVEDOWN  	= KeyCode.S;
+	public static KeyCode PLAYERONE_MOVELEFT  	= KeyCode.A;
+	public static KeyCode PLAYERONE_MOVERIGHT  	= KeyCode.D;
 	public static KeyCode PLAYERONE_PLACEBOMB  	= KeyCode.SPACE;
 }

@@ -2,18 +2,16 @@ package weapon;
 
 import gameobject.GameObject;
 import item.Weapon;
+import javafx.scene.layout.Pane;
 import player.Player;
 
 public class Grenade extends GameObject implements Weapon {
 
-	public Grenade() {
+	public Grenade(int xPosition, int yPosition, String imagePath,Pane layer) {
+		super(xPosition, yPosition, imagePath,layer);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Grenade(int xPosition, int yPosition, String imagePath) {
-		super(xPosition, yPosition, imagePath);
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void GetDamageRange(Player player) {

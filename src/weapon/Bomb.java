@@ -2,16 +2,13 @@ package weapon;
 
 import gameobject.GameObject;
 import item.Weapon;
+import javafx.scene.layout.Pane;
 import player.Player;
 
 public class Bomb extends GameObject implements Weapon {
 
-	public Bomb() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Bomb(int xPosition, int yPosition, String imagePath) {
-		super(xPosition, yPosition, imagePath);
+	public Bomb(int xPosition, int yPosition, String imagePath,Pane layer) {
+		super(xPosition, yPosition, imagePath,layer);
 		// TODO Auto-generated constructor stub
 	}
 
