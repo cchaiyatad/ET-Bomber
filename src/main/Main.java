@@ -14,6 +14,9 @@ public class Main extends Application{
 		primaryStage.setScene(gamecontroller.CreateGameScene());
 		primaryStage.setResizable(false);
 		primaryStage.show();
+		Thread gameLoop = gamecontroller.GameLoop();
+		gameLoop.start();
+		
 	}
 	
 	public static void main(String[] args) {
