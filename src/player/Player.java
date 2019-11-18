@@ -11,7 +11,8 @@ public class Player extends GameObject implements Moveable {
 	private PlayerState currentPlayerState;
 	private GameController gameController;
 
-	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber, GameController gameController) {
+	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
+			GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer);
 		this.speed = DefaultMoveSpeed;
 		currentPlayerState = PlayerState.IDLE;
@@ -23,6 +24,29 @@ public class Player extends GameObject implements Moveable {
 	public void Move() {
 		int xDirectionSpeed = 0;
 		int yDirectionSpeed = 0;
+
+		switch (currentPlayerState) {
+		case MOVEUP:
+		case MOVEDOWN:
+			if (xPosition % 50 != 0) {
+				int xMid = (xPosition / 50 + 1) * 50;
+				currentPlayerState = Math.abs(xMid - xPosition) >= Math.abs(xMid - (xPosition + 50))
+						? PlayerState.MOVELEFT
+						: PlayerState.MOVERIGHT;
+			}
+			break;
+		case MOVERIGHT:
+		case MOVELEFT:
+			if (yPosition % 50 != 0) {
+				int yMid = (yPosition / 50 + 1) * 50;
+				currentPlayerState = Math.abs(yMid - yPosition) >= Math.abs(yMid - (yPosition + 50))
+						? PlayerState.MOVEUP
+						: PlayerState.MOVEDOWN;
+			}
+			break;
+		default:
+			break;
+		}
 
 		switch (currentPlayerState) {
 		case MOVEUP:
@@ -41,10 +65,9 @@ public class Player extends GameObject implements Moveable {
 			break;
 		}
 
-		
-		if(gameController.isMoveAble(xPosition + xDirectionSpeed, yPosition + yDirectionSpeed,this)) {
+		if (gameController.isMoveAble(xPosition + xDirectionSpeed, yPosition + yDirectionSpeed, this)) {
 			xPosition += xDirectionSpeed;
-			yPosition += yDirectionSpeed;	
+			yPosition += yDirectionSpeed;
 		}
 		SetPositionOnScreen();
 	}
