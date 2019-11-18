@@ -3,6 +3,7 @@ package gamecontroller;
 import java.util.ArrayList;
 import java.util.List;
 
+import gameobject.Obstacle;
 import gameobject.Wall;
 import gui.GameScene;
 import javafx.animation.AnimationTimer;
@@ -16,7 +17,7 @@ public class GameController {
 	private boolean[][] objectsArray = new boolean[15][15];
 	private List<Wall> backgrounds;
 	private List<Wall> walls;
-//	private Obstacle[] obstacles;
+	private List<Obstacle> obstacles;
 	private List<Player> players;
 
 	private GameScene gameScene;
@@ -52,7 +53,6 @@ public class GameController {
 			}
 		};
 		return gameLoop;
-
 	}
 
 	public void CheckPlayerMoveAndSetState(Player player) {
