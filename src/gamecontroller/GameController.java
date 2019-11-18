@@ -3,7 +3,6 @@ package gamecontroller;
 import java.util.ArrayList;
 import java.util.List;
 
-import gameobject.Moveable;
 import gameobject.Wall;
 import gui.GameScene;
 import javafx.animation.AnimationTimer;
@@ -14,7 +13,7 @@ import player.PlayerState;
 import setting.Setting;
 
 public class GameController {
-	private boolean[][] objectsArray = new boolean[15][15]; 
+	private boolean[][] objectsArray = new boolean[15][15];
 	private List<Wall> backgrounds;
 	private List<Wall> walls;
 //	private Obstacle[] obstacles;
@@ -88,13 +87,14 @@ public class GameController {
 	}
 
 	public boolean isMoveAble(int x, int y, Player player) {
-		int x2 = (x + 50 - player.getSpeed())/50;
-		int y2 = (y + 50 - player.getSpeed())/50;
+		int x2 = (x + 50 - player.getSpeed()) / 50;
+		int y2 = (y + 50 - player.getSpeed()) / 50;
 		x /= 50;
 		y /= 50;
-		return !objectsArray[x][y] && !objectsArray[x2][y2];
+//		System.out.println(x + " " + x2 + " " + y + " " + y2 + " " + !objectsArray[x][y] + " " + !objectsArray[x2][y2]);
+		return !objectsArray[x][y] && !objectsArray[x][y2] && !objectsArray[x2][y] && !objectsArray[x2][y2];
 	}
-	
+
 	private void CreateBackground() {
 		backgrounds = new ArrayList<Wall>();
 		for (int i = 1; i <= 13; i++) {
@@ -114,12 +114,18 @@ public class GameController {
 					walls.add(new Wall(50 * j, 50 * i, gameScene.GetGameFieldPane()));
 					objectsArray[j][i] = true;
 				}
+			} else if (i % 2 == 0) {
+				for (int j = 2; j <= 12; j += 2) {
+					walls.add(new Wall(50 * j, 50 * i, gameScene.GetGameFieldPane()));
+					objectsArray[j][i] = true;
+				}
 			}
 			walls.add(new Wall(0, 50 * i, gameScene.GetGameFieldPane()));
 			walls.add(new Wall(50 * 14, 50 * i, gameScene.GetGameFieldPane()));
 			objectsArray[0][i] = true;
 			objectsArray[14][i] = true;
 		}
+
 //		for(int i = 0; i <= 14;i++) {
 //			for(int j = 0; j <= 14; j++) {
 //				System.out.print(objectsArray[i][j] + " ");
@@ -131,7 +137,7 @@ public class GameController {
 	private void CreatePlayer(int numberOfPlayer) {
 		players = new ArrayList<Player>();
 		for (int i = 0; i < numberOfPlayer; i++) {
-			Player player = new Player(300, 300, "", gameScene.GetGameFieldPane(), 1, this);
+			Player player = new Player(50, 50, "", gameScene.GetGameFieldPane(), 1, this);
 			players.add(player);
 		}
 	}
