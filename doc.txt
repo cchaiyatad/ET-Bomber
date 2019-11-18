@@ -86,11 +86,13 @@ Field
  - boolean CanPushBomb
  - PlayerState currentPlayerState
  - int playerNumber
+ - GameController gameController
 
 Constructor
- + Player(int xPosition, int yPosition, String imagePath, pane layer, int playerNumber)
+ + Player(int xPosition, int yPosition, String imagePath, pane layer, int playerNumber, GameController gameController)
 
 Method
+ - bool CheckCollider(int x, int y)
  + Getter and Setter
 
 --------------------------
@@ -171,10 +173,11 @@ package gamecontroller
 Class GameController
 
 Field 
+ - boolean[][] gameobjects
  - List<Wall> backgrounds
- - List<Wall> walls;
- - List<Obstacle> obstacles;
- - List<Player> players;
+ - List<Wall> walls
+ - List<Obstacle> obstacles
+ - List<Player> players
 
 Method
  + Scene CreateGameScene()

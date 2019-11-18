@@ -14,6 +14,7 @@ import player.PlayerState;
 import setting.Setting;
 
 public class GameController {
+	private boolean[][] objectsArray = new boolean[15][15]; 
 	private List<Wall> backgrounds;
 	private List<Wall> walls;
 //	private Obstacle[] obstacles;
@@ -86,6 +87,14 @@ public class GameController {
 		}
 	}
 
+	public boolean isMoveAble(int x, int y, Player player) {
+		int x2 = (x + 50 - player.getSpeed())/50;
+		int y2 = (y + 50 - player.getSpeed())/50;
+		x /= 50;
+		y /= 50;
+		return !objectsArray[x][y] && !objectsArray[x2][y2];
+	}
+	
 	private void CreateBackground() {
 		backgrounds = new ArrayList<Wall>();
 		for (int i = 1; i <= 13; i++) {
@@ -103,17 +112,26 @@ public class GameController {
 			if (i == 0 || i == 14) {
 				for (int j = 1; j <= 13; j++) {
 					walls.add(new Wall(50 * j, 50 * i, gameScene.GetGameFieldPane()));
+					objectsArray[j][i] = true;
 				}
 			}
 			walls.add(new Wall(0, 50 * i, gameScene.GetGameFieldPane()));
 			walls.add(new Wall(50 * 14, 50 * i, gameScene.GetGameFieldPane()));
+			objectsArray[0][i] = true;
+			objectsArray[14][i] = true;
 		}
+//		for(int i = 0; i <= 14;i++) {
+//			for(int j = 0; j <= 14; j++) {
+//				System.out.print(objectsArray[i][j] + " ");
+//			}
+//			System.out.println("");
+//		}
 	}
 
 	private void CreatePlayer(int numberOfPlayer) {
 		players = new ArrayList<Player>();
 		for (int i = 0; i < numberOfPlayer; i++) {
-			Player player = new Player(300, 300, "", gameScene.GetGameFieldPane(), 1);
+			Player player = new Player(300, 300, "", gameScene.GetGameFieldPane(), 1, this);
 			players.add(player);
 		}
 	}
