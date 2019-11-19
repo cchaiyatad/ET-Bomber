@@ -2,5 +2,5 @@ package item;
 
 import player.Player;
 public interface PowerUp {
-	void OnPlayerGetItem(Player player);
+	void onPlayerGetItem(Player player);
 }

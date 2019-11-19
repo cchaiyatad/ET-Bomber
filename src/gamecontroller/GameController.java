@@ -23,14 +23,15 @@ public class GameController {
 	private GameScene gameScene;
 	private InputInGame inputInGame;
 
-	public Scene CreateGameScene() {
+	public Scene createGameScene() {
 		gameScene = new GameScene();
-		CreateBackground();
-		CreateInitWall();
-		CreatePlayer(1);
+		createBackground();
+		createInitWall();
+		createInitObstacle();
+		createPlayer(1);
 		Scene scene = new Scene(gameScene, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 		inputInGame = new InputInGame(scene);
-		inputInGame.AddListeners();
+		inputInGame.addListeners();
 		return scene;
 	}
 
@@ -42,20 +43,20 @@ public class GameController {
 		return walls;
 	}
 
-	public AnimationTimer GameLoop() {
+	public AnimationTimer gameLoop() {
 		AnimationTimer gameLoop = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 				for (Player player : players) {
-					CheckPlayerMoveAndSetState(player);
+					checkPlayerMoveAndSetState(player);
 				}
-				players.forEach(Moveable -> Moveable.Move());
+				players.forEach(Moveable -> Moveable.move());
 			}
 		};
 		return gameLoop;
 	}
 
-	public void CheckPlayerMoveAndSetState(Player player) {
+	private void checkPlayerMoveAndSetState(Player player) {
 		KeyCode buttonUp = null;
 		KeyCode buttonRight = null;
 		KeyCode buttonDown = null;
@@ -68,10 +69,10 @@ public class GameController {
 			buttonLeft = Setting.PLAYERONE_MOVELEFT;
 			break;
 		}
-		boolean up = inputInGame.IsKeyPress(buttonUp);
-		boolean right = inputInGame.IsKeyPress(buttonRight);
-		boolean down = inputInGame.IsKeyPress(buttonDown);
-		boolean left = inputInGame.IsKeyPress(buttonLeft);
+		boolean up = inputInGame.isKeyPress(buttonUp);
+		boolean right = inputInGame.isKeyPress(buttonRight);
+		boolean down = inputInGame.isKeyPress(buttonDown);
+		boolean left = inputInGame.isKeyPress(buttonLeft);
 
 		if (up && !right && !down && !left) {
 			player.setCurrentPlayerState(PlayerState.MOVEUP);
@@ -91,11 +92,10 @@ public class GameController {
 		int y2 = (y + 50 - player.getSpeed()) / 50;
 		x /= 50;
 		y /= 50;
-//		System.out.println(x + " " + x2 + " " + y + " " + y2 + " " + !objectsArray[x][y] + " " + !objectsArray[x2][y2]);
 		return !objectsArray[x][y] && !objectsArray[x][y2] && !objectsArray[x2][y] && !objectsArray[x2][y2];
 	}
 
-	private void CreateBackground() {
+	private void createBackground() {
 		backgrounds = new ArrayList<Wall>();
 		for (int i = 1; i <= 13; i++) {
 			for (int j = 1; j <= 13; j++) {
@@ -104,10 +104,9 @@ public class GameController {
 		}
 	}
 
-	private void CreateInitWall() {
+	private void createInitWall() {
 		walls = new ArrayList<Wall>();
 
-		// 15*15
 		for (int i = 0; i <= 14; i++) {
 			if (i == 0 || i == 14) {
 				for (int j = 1; j <= 13; j++) {
@@ -126,15 +125,16 @@ public class GameController {
 			objectsArray[14][i] = true;
 		}
 
-//		for(int i = 0; i <= 14;i++) {
-//			for(int j = 0; j <= 14; j++) {
-//				System.out.print(objectsArray[i][j] + " ");
-//			}
-//			System.out.println("");
-//		}
+	}
+	
+	private void createInitObstacle() {
+		obstacles = new ArrayList<Obstacle>();
+		
+		obstacles.add(new Obstacle(350, 300, "obstacle", gameScene.GetGameFieldPane()));
+		objectsArray[7][6] = true;
 	}
 
-	private void CreatePlayer(int numberOfPlayer) {
+	private void createPlayer(int numberOfPlayer) {
 		players = new ArrayList<Player>();
 		for (int i = 0; i < numberOfPlayer; i++) {
 			Player player = new Player(50, 50, "", gameScene.GetGameFieldPane(), 1, this);

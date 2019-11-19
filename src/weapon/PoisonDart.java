@@ -13,21 +13,20 @@ public class PoisonDart extends GameObject implements Weapon {
 	}
 
 	@Override
-	public void GetDamageRange(Player player) {
+	public int getDamageRange(Player player) {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 	@Override
-	public boolean CanMakeDamageToobject(GameObject targetobj) {
+	public boolean canMakeDamageToobject(GameObject targetobj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean MakeDamageToPlayer(Player target) {
+	public boolean makeDamageToPlayer(Player target) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

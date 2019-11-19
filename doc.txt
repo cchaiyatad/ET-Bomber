@@ -184,7 +184,7 @@ Method
  - void CreateBackground()
  - void CreateInitWall()
  - void CreatePlayer(int numberOfPlayer)
- + AnimationTimer GameLoop() 
+ - AnimationTimer GameLoop() 
  + void CheckPlayerMoveAndSetState(Player player)
  + Getter 
 --------------------------
@@ -217,5 +217,5 @@ Class Setting
  + static KeyCode PLAYERONE_MOVERIGHT
  + static KeyCode PLAYERONE_PLACEBOMB
 
- 
+ https://docs.google.com/spreadsheets/d/1Te8mq8t-X2jb7Sa3ZhOW_c67nMh1_XXs--MRZ740xtA/edit#gid=784070594
 
