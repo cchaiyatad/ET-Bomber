@@ -14,14 +14,14 @@ public class Player extends GameObject implements Moveable {
 	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer);
-		this.speed = DefaultMoveSpeed;
+		this.speed = defaultMoveSpeed;
 		currentPlayerState = PlayerState.IDLE;
 		this.playerNumber = playerNumber;
 		this.gameController = gameController;
 	}
 
 	@Override
-	public void Move() {
+	public void move() {
 		int xDirectionSpeed = 0;
 		int yDirectionSpeed = 0;
 

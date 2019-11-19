@@ -12,10 +12,10 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		gamecontroller = new GameController();
-		primaryStage.setScene(gamecontroller.CreateGameScene());
+		primaryStage.setScene(gamecontroller.createGameScene());
 		primaryStage.setResizable(false);
 		primaryStage.show();
-		AnimationTimer gameLoop = gamecontroller.GameLoop();
+		AnimationTimer gameLoop = gamecontroller.gameLoop();
 		gameLoop.start();
 		
 	}

@@ -6,6 +6,5 @@ public enum PlayerState {
 	MOVERIGHT,
 	MOVEDOWN,
 	MOVELEFT,
-	PLACEBOMB,
 	DEAD	
 }

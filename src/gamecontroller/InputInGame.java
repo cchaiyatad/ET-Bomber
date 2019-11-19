@@ -1,7 +1,6 @@
 package gamecontroller;
 
 import java.util.BitSet;
-
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -16,28 +15,28 @@ public class InputInGame {
 		this.scene = scene;
 	}
 	
-	public void AddListeners() {
-		scene.addEventFilter(KeyEvent.KEY_PRESSED, KeyOnPressHandle);
-		scene.addEventFilter(KeyEvent.KEY_RELEASED, KeyOnReleaseHandle);
+	public void addListeners() {
+		scene.addEventFilter(KeyEvent.KEY_PRESSED, keyOnPressHandle);
+		scene.addEventFilter(KeyEvent.KEY_RELEASED, keyOnReleaseHandle);
 	}
 	
-	public void RemoveListeners() {
-		scene.removeEventFilter(KeyEvent.KEY_PRESSED, KeyOnPressHandle);
-		scene.removeEventFilter(KeyEvent.KEY_RELEASED, KeyOnReleaseHandle);
+	public void removeListeners() {
+		scene.removeEventFilter(KeyEvent.KEY_PRESSED, keyOnPressHandle);
+		scene.removeEventFilter(KeyEvent.KEY_RELEASED, keyOnReleaseHandle);
 	}
 	
-	public boolean IsKeyPress(KeyCode key) {
+	public boolean isKeyPress(KeyCode key) {
 		return keyboardBitSet.get(key.ordinal());
 	}
 	
-	private EventHandler<KeyEvent> KeyOnPressHandle = new EventHandler<KeyEvent>() {
+	private EventHandler<KeyEvent> keyOnPressHandle = new EventHandler<KeyEvent>() {
 		@Override
 		public void handle(KeyEvent e) {
             keyboardBitSet.set(e.getCode().ordinal(), true);
 		}
 	};
 	
-	private EventHandler<KeyEvent> KeyOnReleaseHandle = new EventHandler<KeyEvent>() {
+	private EventHandler<KeyEvent> keyOnReleaseHandle = new EventHandler<KeyEvent>() {
 		@Override
 		public void handle(KeyEvent e) {
 			keyboardBitSet.set(e.getCode().ordinal(), false);

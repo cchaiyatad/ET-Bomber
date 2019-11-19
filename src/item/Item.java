@@ -11,7 +11,7 @@ public abstract class Item extends GameObject implements Destroyable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void PlayerGetItem() {
+	public void playerGetItem() {
 
 	}
 }
