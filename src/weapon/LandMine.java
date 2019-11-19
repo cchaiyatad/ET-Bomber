@@ -7,7 +7,7 @@ import player.Player;
 
 public class LandMine extends GameObject implements Weapon {
 
-	public LandMine(int xPosition, int yPosition, String imagePath, Pane layer) {
+	public LandMine(int xPosition, int yPosition, String imagePath,Pane layer) {
 		super(xPosition, yPosition, imagePath, layer);
 		// TODO Auto-generated constructor stub
 	}
