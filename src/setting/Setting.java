@@ -6,6 +6,8 @@ public class Setting {
 	public static double SCENE_WIDTH 	= 1010;
 	public static double SCENE_HEIGHT 	= 790;
 	
+	public static String PATH_TO_PLACEHOLDER = "file:res/Image/placeholder.png";
+	
 	//Input
 	public static KeyCode PLAYERONE_MOVEUP 		= KeyCode.W;
 	public static KeyCode PLAYERONE_MOVEDOWN  	= KeyCode.S;

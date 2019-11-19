@@ -99,7 +99,7 @@ public class GameController {
 		backgrounds = new ArrayList<Wall>();
 		for (int i = 1; i <= 13; i++) {
 			for (int j = 1; j <= 13; j++) {
-				backgrounds.add(new Wall(50 * j, 50 * i, "background", gameScene.GetGameFieldPane()));
+				backgrounds.add(new Wall(50 * j, 50 * i, "background", gameScene.getGameFieldPane()));
 			}
 		}
 	}
@@ -110,17 +110,17 @@ public class GameController {
 		for (int i = 0; i <= 14; i++) {
 			if (i == 0 || i == 14) {
 				for (int j = 1; j <= 13; j++) {
-					walls.add(new Wall(50 * j, 50 * i, gameScene.GetGameFieldPane()));
+					walls.add(new Wall(50 * j, 50 * i, gameScene.getGameFieldPane()));
 					objectsArray[j][i] = true;
 				}
 			} else if (i % 2 == 0) {
 				for (int j = 2; j <= 12; j += 2) {
-					walls.add(new Wall(50 * j, 50 * i, gameScene.GetGameFieldPane()));
+					walls.add(new Wall(50 * j, 50 * i, gameScene.getGameFieldPane()));
 					objectsArray[j][i] = true;
 				}
 			}
-			walls.add(new Wall(0, 50 * i, gameScene.GetGameFieldPane()));
-			walls.add(new Wall(50 * 14, 50 * i, gameScene.GetGameFieldPane()));
+			walls.add(new Wall(0, 50 * i, gameScene.getGameFieldPane()));
+			walls.add(new Wall(50 * 14, 50 * i, gameScene.getGameFieldPane()));
 			objectsArray[0][i] = true;
 			objectsArray[14][i] = true;
 		}
@@ -130,15 +130,16 @@ public class GameController {
 	private void createInitObstacle() {
 		obstacles = new ArrayList<Obstacle>();
 		
-		obstacles.add(new Obstacle(350, 300, "obstacle", gameScene.GetGameFieldPane()));
+		obstacles.add(new Obstacle(350, 300, "obstacle", gameScene.getGameFieldPane()));
 		objectsArray[7][6] = true;
 	}
 
 	private void createPlayer(int numberOfPlayer) {
 		players = new ArrayList<Player>();
 		for (int i = 0; i < numberOfPlayer; i++) {
-			Player player = new Player(50, 50, "", gameScene.GetGameFieldPane(), 1, this);
+			Player player = new Player(50, 50, "", gameScene.getGameFieldPane(), 1, this);
 			players.add(player);
+			gameScene.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
 		}
 	}
 

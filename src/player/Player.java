@@ -3,23 +3,35 @@ package player;
 import gamecontroller.GameController;
 import gameobject.GameObject;
 import gameobject.Moveable;
+import item.Weapon;
 import javafx.scene.layout.Pane;
+import weapon.WeaponType;
 
 public class Player extends GameObject implements Moveable {
+	private int hp;
+	private int bombCount;
+	private int bombRange;
 	private int speed;
-	private int playerNumber;
+	private int score;
+	
+	private WeaponType currentWeapon;
+	private boolean hasShield;
+	private boolean CanPushBomb;
+	
 	private PlayerState currentPlayerState;
+	private int playerNumber;
 	private GameController gameController;
 
 	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer);
-		this.speed = defaultMoveSpeed;
-		currentPlayerState = PlayerState.IDLE;
+		
+		setDefaultPlayer();
+		
 		this.playerNumber = playerNumber;
 		this.gameController = gameController;
 	}
-
+	
 	@Override
 	public void move() {
 		int xDirectionSpeed = 0;
@@ -72,6 +84,30 @@ public class Player extends GameObject implements Moveable {
 		SetPositionOnScreen();
 	}
 
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+	public int getBombCount() {
+		return bombCount;
+	}
+
+	public void setBombCount(int bombCount) {
+		this.bombCount = bombCount;
+	}
+
+	public int getBombRange() {
+		return bombRange;
+	}
+
+	public void setBombRange(int bombRange) {
+		this.bombRange = bombRange;
+	}
+
 	public int getSpeed() {
 		return speed;
 	}
@@ -80,8 +116,36 @@ public class Player extends GameObject implements Moveable {
 		this.speed = speed;
 	}
 
-	public int getPlayerNumber() {
-		return playerNumber;
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public WeaponType getCurrentWeapon() {
+		return currentWeapon;
+	}
+
+	public void setCurrentWeapon(WeaponType currentWeapon) {
+		this.currentWeapon = currentWeapon;
+	}
+
+	public boolean isHasShield() {
+		return hasShield;
+	}
+
+	public void setHasShield(boolean hasShield) {
+		this.hasShield = hasShield;
+	}
+
+	public boolean isCanPushBomb() {
+		return CanPushBomb;
+	}
+
+	public void setCanPushBomb(boolean canPushBomb) {
+		CanPushBomb = canPushBomb;
 	}
 
 	public PlayerState getCurrentPlayerState() {
@@ -90,6 +154,31 @@ public class Player extends GameObject implements Moveable {
 
 	public void setCurrentPlayerState(PlayerState currentPlayerState) {
 		this.currentPlayerState = currentPlayerState;
+	}
+
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+
+	public void setPlayerNumber(int playerNumber) {
+		this.playerNumber = playerNumber;
+	}
+
+	public GameController getGameController() {
+		return gameController;
+	}
+
+	public void setGameController(GameController gameController) {
+		this.gameController = gameController;
+	}
+	
+	private void setDefaultPlayer() {
+		setHp(3);
+		setBombRange(1);
+		setBombCount(1);
+		setSpeed(defaultMoveSpeed);
+		setCurrentWeapon(WeaponType.BOMB);
+		currentPlayerState = PlayerState.IDLE;
 	}
 
 }

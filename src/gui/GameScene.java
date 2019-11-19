@@ -21,8 +21,12 @@ public class GameScene extends HBox{
 		this.getChildren().add(gameField);
 	}
 	
-	public Pane GetGameFieldPane() {
+	public Pane getGameFieldPane() {
 		return gameField.getLayer();
+	}
+	
+	public ScoreBoard getScoreBoard() {
+		return scoreBoard;
 	}
 		
 }

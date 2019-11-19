@@ -30,5 +30,4 @@ public class Bomb extends GameObject implements Weapon {
 		return false;
 	}
 
-
 }
