@@ -9,7 +9,6 @@ public class Obstacle extends GameObject implements Destroyable {
 	
 	public Obstacle(int xPosition, int yPosition, String imagePath, Pane layer) {
 		super(xPosition, yPosition, imagePath, layer);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

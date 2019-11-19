@@ -27,6 +27,7 @@ public class GameController {
 		gameScene = new GameScene();
 		createBackground();
 		createInitWall();
+		createInitObstacle();
 		createPlayer(1);
 		Scene scene = new Scene(gameScene, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 		inputInGame = new InputInGame(scene);
@@ -91,7 +92,6 @@ public class GameController {
 		int y2 = (y + 50 - player.getSpeed()) / 50;
 		x /= 50;
 		y /= 50;
-//		System.out.println(x + " " + x2 + " " + y + " " + y2 + " " + !objectsArray[x][y] + " " + !objectsArray[x2][y2]);
 		return !objectsArray[x][y] && !objectsArray[x][y2] && !objectsArray[x2][y] && !objectsArray[x2][y2];
 	}
 
@@ -107,7 +107,6 @@ public class GameController {
 	private void createInitWall() {
 		walls = new ArrayList<Wall>();
 
-		// 15*15
 		for (int i = 0; i <= 14; i++) {
 			if (i == 0 || i == 14) {
 				for (int j = 1; j <= 13; j++) {
@@ -126,12 +125,13 @@ public class GameController {
 			objectsArray[14][i] = true;
 		}
 
-//		for(int i = 0; i <= 14;i++) {
-//			for(int j = 0; j <= 14; j++) {
-//				System.out.print(objectsArray[i][j] + " ");
-//			}
-//			System.out.println("");
-//		}
+	}
+	
+	private void createInitObstacle() {
+		obstacles = new ArrayList<Obstacle>();
+		
+		Obstacle obstacle = new Obstacle(350, 300, "obstacle", gameScene.GetGameFieldPane());
+		objectsArray[7][6] = true;
 	}
 
 	private void createPlayer(int numberOfPlayer) {
