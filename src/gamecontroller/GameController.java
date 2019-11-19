@@ -130,7 +130,7 @@ public class GameController {
 	private void createInitObstacle() {
 		obstacles = new ArrayList<Obstacle>();
 		
-		Obstacle obstacle = new Obstacle(350, 300, "obstacle", gameScene.GetGameFieldPane());
+		obstacles.add(new Obstacle(350, 300, "obstacle", gameScene.GetGameFieldPane()));
 		objectsArray[7][6] = true;
 	}
 
