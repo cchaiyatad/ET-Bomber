@@ -7,7 +7,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class ScoreBoard extends VBox{
+public class ScoreBoard extends VBox implements HasButton{
 	
 	private PlayerStatusBoard[] playerStatusBoards = new PlayerStatusBoard[4];
 	private Label timer;
@@ -23,11 +23,15 @@ public class ScoreBoard extends VBox{
 			playerStatusBoards[i] = new PlayerStatusBoard();
 			this.getChildren().add(playerStatusBoards[i]);
 		}
-		
-		
 	}
 	
 	public PlayerStatusBoard getPlayerStatusBoardViaIndex(int index) {
 		return playerStatusBoards[index];
+	}
+
+	@Override
+	public void setButtonAction() {
+		// TODO Auto-generated method stub
+		
 	}
 }

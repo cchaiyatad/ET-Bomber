@@ -1,6 +1,8 @@
 package gui;
 
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -8,8 +10,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import setting.Setting;
 
-public class InstuctionPage extends FlowPane {
-	public InstuctionPage() {
+public class InstuctionPage extends FlowPane implements HasButton{
+	private StartPage startPage;
+	private Button backButton;
+
+	public InstuctionPage(StartPage startPage) {
 		Label instuctionLabel = new Label("Lorem ipsum dolor sit amet, cu sed atqui homero, "
 				+ "eu idque civibus pri. Vim eu idque vivendo, te sea graeci equidem volutpat. "
 				+ "Eam at tale melius, cu dico paulo legendos his. Per eligendi deleniti ea, "
@@ -22,9 +27,22 @@ public class InstuctionPage extends FlowPane {
 				+ "elitr accusata intellegebat ut cum.");
 
 		instuctionLabel.setWrapText(true);
-		instuctionLabel.setPrefSize(Setting.SCENE_WIDTH - 100, Setting.SCENE_HEIGHT - 100);
+		instuctionLabel.setPrefWidth(Setting.SCENE_WIDTH - 100);
+
+		backButton = new Button("Back");
+		setButtonAction();
+		this.setOrientation(Orientation.VERTICAL);
 		this.setAlignment(Pos.CENTER);
 		this.setBackground(new Background(new BackgroundFill(Color.FIREBRICK, null, null)));
-		this.getChildren().add(instuctionLabel);
+		this.getChildren().addAll(instuctionLabel, backButton);
+
+		this.startPage = startPage;
+	}
+
+	@Override
+	public void setButtonAction() {
+		backButton.setOnAction(e -> {
+			startPage.setInstructionAppear(false);
+		});
 	}
 }

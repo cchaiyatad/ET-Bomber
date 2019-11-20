@@ -7,15 +7,11 @@ import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import setting.Setting;
 
-public class StartPage extends StackPane {
+public class StartPage extends StackPane implements HasButton{
 
 	private Label gameLabel;
 	private Button playButton;
@@ -38,7 +34,7 @@ public class StartPage extends StackPane {
 		instuctionButton = new Button("INSTUCTION");
 		quitButton = new Button("QUIT");
 
-		instuctionPage = new InstuctionPage();
+		instuctionPage = new InstuctionPage(this);
 		
 		setButtonAction();
 		mainMenu.getChildren().addAll(gameLabel, playButton, instuctionButton, quitButton);
@@ -46,7 +42,8 @@ public class StartPage extends StackPane {
 		this.getChildren().add(mainMenu);
 	}
 
-	private void setButtonAction() {
+	@Override
+	public void setButtonAction() {
 		playButton.setOnAction(e -> {
 			Controller otherController = controller.getOtherController();
 			controller.getStage().setScene(otherController.getScene());
@@ -57,11 +54,20 @@ public class StartPage extends StackPane {
 			}
 		});
 		instuctionButton.setOnAction(e -> {
-			this.getChildren().add(instuctionPage);
+			setInstructionAppear(true);
 		});
 		quitButton.setOnAction(e -> {
 			Platform.exit();
 			System.exit(0);
 		});
 	}
+	
+	public void setInstructionAppear(boolean value) {
+		if(value) {
+			this.getChildren().add(instuctionPage);
+		}else {
+			this.getChildren().remove(instuctionPage);
+		}
+	}
+
 }

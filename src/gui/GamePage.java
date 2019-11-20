@@ -5,7 +5,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import setting.Setting;
 
-public class GamePage extends HBox{
+public class GamePage extends HBox {
 	private GameField gameField;
 	private ScoreBoard scoreBoard;
 	
