@@ -33,11 +33,25 @@ public class GameController extends Controller {
 		createInitObstacle();
 		createPlayer(1);
 		this.scene = new Scene(gamePage, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
+		
 		inputInGame = new InputInGame(scene);
 		inputInGame.addListeners();
+		
 		isPlaying = false;
 		return scene;
 	}
+	
+	
+
+	@Override
+	public Scene getScene() {
+		if(this.scene != null) {
+			inputInGame.addListeners();
+		}
+		return super.getScene();
+	}
+
+
 
 	public List<Player> getPlayers() {
 		return players;
@@ -107,6 +121,11 @@ public class GameController extends Controller {
 		x /= 50;
 		y /= 50;
 		return !objectsArray[x][y] && !objectsArray[x][y2] && !objectsArray[x2][y] && !objectsArray[x2][y2];
+	}
+	
+	public void onRemoveScene() {
+		inputInGame.removeListeners();
+		inputInGame.clearKeyBoardCheck();
 	}
 
 	private void createBackground() {

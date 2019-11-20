@@ -71,6 +71,7 @@ public class ScoreBoard extends VBox implements HasButton {
 				AnimationTimer gameLoop = ((GameController) controller).gameLoop();
 				gameLoop.stop();
 				((GameController) controller).setPlaying(false);
+				((GameController) controller).onRemoveScene();
 			}
 			Controller otherController = controller.getOtherController();
 			controller.getStage().setScene(otherController.getScene());
