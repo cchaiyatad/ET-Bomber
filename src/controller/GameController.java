@@ -23,21 +23,33 @@ public class GameController extends Controller {
 
 	private GamePage gamePage;
 	private InputInGame inputInGame;
-	
+	private AnimationTimer gameLoop;
+	private boolean isPlaying;
+
 	@Override
 	protected Scene createScene() {
-		gamePage = new GamePage();
+		gamePage = new GamePage(this);
 		createBackground();
 		createInitWall();
 		createInitObstacle();
 		createPlayer(1);
 		this.scene = new Scene(gamePage, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
+		
 		inputInGame = new InputInGame(scene);
 		inputInGame.addListeners();
+		
+		isPlaying = false;
 		return scene;
 	}
-	
-	
+
+	@Override
+	public Scene getScene() {
+		if(this.scene != null) {
+			inputInGame.addListeners();
+		}
+		return super.getScene();
+	}
+
 	public List<Player> getPlayers() {
 		return players;
 	}
@@ -45,30 +57,40 @@ public class GameController extends Controller {
 	public List<Wall> getWalls() {
 		return walls;
 	}
+	
+	public boolean isPlaying() {
+		return isPlaying;
+	}
+
+	public void setPlaying(boolean isPlaying) {
+		this.isPlaying = isPlaying;
+	}
 
 	public AnimationTimer gameLoop() {
-		AnimationTimer gameLoop = new AnimationTimer() {
-			int count = 0;
-			@Override
-			public void handle(long now) {
-				for (Player player : players) {
-					checkPlayerMoveAndSetState(player);
-				}
-				players.forEach(Moveable -> Moveable.move());
-				for(Player player : players) {
-					if(isPressSpace()) {
-						player.setCanUseWeapon(count);
-						if(player.isCanUseWeapon()) {
-							Bomb bomb = new Bomb(player.getxPosition() / 50 * 50, player.getyPosition() / 50 * 50,
-									"bomb", gamePage.getGameFieldPane(),player.getBombRange());
-							count++;
-							inputInGame.changeBitset();
+		if (this.gameLoop == null) {
+			this.gameLoop = new AnimationTimer() {
+				int count = 0;
+				@Override
+				public void handle(long now) {
+					for (Player player : players) {
+						checkPlayerMoveAndSetState(player);
+					}
+					players.forEach(Moveable -> Moveable.move());
+					for(Player player : players) {
+						if(isPressSpace()) {
+							player.setCanUseWeapon(count);
+							if(player.isCanUseWeapon()) {
+								Bomb bomb = new Bomb(player.getxPosition() / 50 * 50, player.getyPosition() / 50 * 50,
+										"bomb", gamePage.getGameFieldPane(),player.getBombRange());
+								count++;
+								inputInGame.changeBitset();
+							}
 						}
 					}
+					
 				}
-				
-			}
-		};
+			};
+		}
 		return gameLoop;
 	}
 
@@ -113,6 +135,12 @@ public class GameController extends Controller {
 		y /= 50;
 		return !objectsArray[x][y] && !objectsArray[x][y2] && !objectsArray[x2][y] && !objectsArray[x2][y2];
 	}
+	
+	public void onRemoveScene() {
+		inputInGame.removeListeners();
+		inputInGame.clearKeyBoardCheck();
+		this.scene = null;
+	}
 
 	private void createBackground() {
 		backgrounds = new ArrayList<Wall>();
@@ -145,10 +173,10 @@ public class GameController extends Controller {
 		}
 
 	}
-	
+
 	private void createInitObstacle() {
 		obstacles = new ArrayList<Obstacle>();
-		
+
 		obstacles.add(new Obstacle(350, 300, "obstacle", gamePage.getGameFieldPane()));
 		objectsArray[7][6] = true;
 	}
@@ -161,8 +189,5 @@ public class GameController extends Controller {
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
 		}
 	}
-
-
-	
 
 }

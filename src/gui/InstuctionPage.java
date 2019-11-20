@@ -30,6 +30,8 @@ public class InstuctionPage extends FlowPane implements HasButton{
 		instuctionLabel.setPrefWidth(Setting.SCENE_WIDTH - 100);
 
 		backButton = new Button("Back");
+		backButton.setFocusTraversable(false);
+		
 		setButtonAction();
 		this.setOrientation(Orientation.VERTICAL);
 		this.setAlignment(Pos.CENTER);

@@ -3,7 +3,6 @@ package player;
 import controller.GameController;
 import gameobject.GameObject;
 import gameobject.Moveable;
-import item.Weapon;
 import javafx.scene.layout.Pane;
 import weapon.Bomb;
 import weapon.WeaponType;

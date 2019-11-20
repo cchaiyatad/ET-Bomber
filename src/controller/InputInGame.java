@@ -26,6 +26,10 @@ public class InputInGame {
 		scene.removeEventFilter(KeyEvent.KEY_RELEASED, keyOnReleaseHandle);
 	}
 	
+	public void clearKeyBoardCheck() {
+		keyboardBitSet = new BitSet();
+	}
+	
 	public boolean isKeyPress(KeyCode key) {
 		return keyboardBitSet.get(key.ordinal());
 	}
