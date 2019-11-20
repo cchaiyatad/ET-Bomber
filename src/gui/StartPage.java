@@ -31,8 +31,13 @@ public class StartPage extends StackPane implements HasButton{
 		
 		gameLabel = new Label("Bomberman");
 		playButton = new Button("PLAY");
+		playButton.setFocusTraversable(false);
+		
 		instuctionButton = new Button("INSTUCTION");
+		instuctionButton.setFocusTraversable(false);
+		
 		quitButton = new Button("QUIT");
+		quitButton.setFocusTraversable(false);
 
 		instuctionPage = new InstuctionPage(this);
 		
@@ -51,11 +56,14 @@ public class StartPage extends StackPane implements HasButton{
 			if (otherController instanceof GameController) {
 				AnimationTimer gameLoop = ((GameController) otherController).gameLoop();
 				gameLoop.start();
+				((GameController) otherController).setPlaying(true);
 			}
 		});
+		
 		instuctionButton.setOnAction(e -> {
 			setInstructionAppear(true);
 		});
+		
 		quitButton.setOnAction(e -> {
 			Platform.exit();
 			System.exit(0);
