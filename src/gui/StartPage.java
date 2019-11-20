@@ -1,5 +1,9 @@
 package gui;
 
+import controller.Controller;
+import controller.GameController;
+import controller.StartPageController;
+import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,7 +17,10 @@ public class StartPage extends VBox {
 	private Button instuctionButton;
 	private Button quitButton;
 
-	public StartPage() {
+	private Controller controller;
+
+	public StartPage(Controller controller) {
+		this.controller = controller;
 		this.setAlignment(Pos.CENTER);
 		gameLabel = new Label("Bomberman");
 		playButton = new Button("PLAY");
@@ -26,7 +33,15 @@ public class StartPage extends VBox {
 
 	private void setButtonAction() {
 		playButton.setOnAction(e -> {
+			Controller otherController = controller.getOtherController();
+			controller.getStage().setScene(otherController.getScene());
+
+			if (otherController instanceof GameController) {
+				AnimationTimer gameLoop = ((GameController) otherController).gameLoop();
+				gameLoop.start();
+			}
 		});
+		
 		instuctionButton.setOnAction(e -> {
 		});
 		quitButton.setOnAction(e -> {

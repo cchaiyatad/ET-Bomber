@@ -16,13 +16,13 @@ public class Main extends Application{
 		gameController = new GameController();
 		
 		startPageController.setOtherController(gameController);
+		startPageController.setStage(primaryStage);
 		gameController.setOtherController(startPageController);
+		gameController.setStage(primaryStage);
 		
 		primaryStage.setScene(startPageController.getScene());
 		primaryStage.setResizable(false);
 		primaryStage.show();
-//		AnimationTimer gameLoop = gamecontroller.gameLoop();
-//		gameLoop.start();
 		
 	}
 	
