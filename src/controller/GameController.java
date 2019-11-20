@@ -1,11 +1,11 @@
-package gamecontroller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import gameobject.Obstacle;
 import gameobject.Wall;
-import gui.GameScene;
+import gui.GamePage;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -13,28 +13,30 @@ import player.Player;
 import player.PlayerState;
 import setting.Setting;
 
-public class GameController {
+public class GameController extends Controller {
 	private boolean[][] objectsArray = new boolean[15][15];
 	private List<Wall> backgrounds;
 	private List<Wall> walls;
 	private List<Obstacle> obstacles;
 	private List<Player> players;
 
-	private GameScene gameScene;
+	private GamePage gamePage;
 	private InputInGame inputInGame;
-
-	public Scene createGameScene() {
-		gameScene = new GameScene();
+	
+	@Override
+	protected Scene createScene() {
+		gamePage = new GamePage();
 		createBackground();
 		createInitWall();
 		createInitObstacle();
 		createPlayer(1);
-		Scene scene = new Scene(gameScene, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
+		this.scene = new Scene(gamePage, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 		inputInGame = new InputInGame(scene);
 		inputInGame.addListeners();
 		return scene;
 	}
-
+	
+	
 	public List<Player> getPlayers() {
 		return players;
 	}
@@ -99,7 +101,7 @@ public class GameController {
 		backgrounds = new ArrayList<Wall>();
 		for (int i = 1; i <= 13; i++) {
 			for (int j = 1; j <= 13; j++) {
-				backgrounds.add(new Wall(50 * j, 50 * i, "background", gameScene.getGameFieldPane()));
+				backgrounds.add(new Wall(50 * j, 50 * i, "background", gamePage.getGameFieldPane()));
 			}
 		}
 	}
@@ -110,17 +112,17 @@ public class GameController {
 		for (int i = 0; i <= 14; i++) {
 			if (i == 0 || i == 14) {
 				for (int j = 1; j <= 13; j++) {
-					walls.add(new Wall(50 * j, 50 * i, gameScene.getGameFieldPane()));
+					walls.add(new Wall(50 * j, 50 * i, gamePage.getGameFieldPane()));
 					objectsArray[j][i] = true;
 				}
 			} else if (i % 2 == 0) {
 				for (int j = 2; j <= 12; j += 2) {
-					walls.add(new Wall(50 * j, 50 * i, gameScene.getGameFieldPane()));
+					walls.add(new Wall(50 * j, 50 * i, gamePage.getGameFieldPane()));
 					objectsArray[j][i] = true;
 				}
 			}
-			walls.add(new Wall(0, 50 * i, gameScene.getGameFieldPane()));
-			walls.add(new Wall(50 * 14, 50 * i, gameScene.getGameFieldPane()));
+			walls.add(new Wall(0, 50 * i, gamePage.getGameFieldPane()));
+			walls.add(new Wall(50 * 14, 50 * i, gamePage.getGameFieldPane()));
 			objectsArray[0][i] = true;
 			objectsArray[14][i] = true;
 		}
@@ -130,17 +132,20 @@ public class GameController {
 	private void createInitObstacle() {
 		obstacles = new ArrayList<Obstacle>();
 		
-		obstacles.add(new Obstacle(350, 300, "obstacle", gameScene.getGameFieldPane()));
+		obstacles.add(new Obstacle(350, 300, "obstacle", gamePage.getGameFieldPane()));
 		objectsArray[7][6] = true;
 	}
 
 	private void createPlayer(int numberOfPlayer) {
 		players = new ArrayList<Player>();
 		for (int i = 0; i < numberOfPlayer; i++) {
-			Player player = new Player(50, 50, "", gameScene.getGameFieldPane(), 1, this);
+			Player player = new Player(50, 50, "", gamePage.getGameFieldPane(), 1, this);
 			players.add(player);
-			gameScene.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
+			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
 		}
 	}
+
+
+	
 
 }

@@ -33,6 +33,5 @@ public class StartPage extends VBox {
 			Platform.exit();
 			System.exit(0);
 		});
-
 	}
 }

@@ -1,9 +1,7 @@
 package main;
 
-import gamecontroller.GameController;
-import gamecontroller.StartPageController;
-import gui.StartPage;
-import javafx.animation.AnimationTimer;
+import controller.GameController;
+import controller.StartPageController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,8 +14,11 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		startPageController = new StartPageController();
 		gameController = new GameController();
-//		primaryStage.setScene(gamecontroller.createGameScene());
-		primaryStage.setScene(startPageController.createStartScene());
+		
+		startPageController.setOtherController(gameController);
+		gameController.setOtherController(startPageController);
+		
+		primaryStage.setScene(startPageController.getScene());
 		primaryStage.setResizable(false);
 		primaryStage.show();
 //		AnimationTimer gameLoop = gamecontroller.gameLoop();

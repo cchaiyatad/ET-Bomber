@@ -5,11 +5,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import setting.Setting;
 
-public class GameScene extends HBox{
+public class GamePage extends HBox{
 	private GameField gameField;
 	private ScoreBoard scoreBoard;
 	
-	public GameScene() {
+	public GamePage() {
 		this.setPadding(new Insets(20));
 		this.setPrefSize(Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 		this.setSpacing(20);
