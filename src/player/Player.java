@@ -5,6 +5,7 @@ import gameobject.GameObject;
 import gameobject.Moveable;
 import item.Weapon;
 import javafx.scene.layout.Pane;
+import weapon.Bomb;
 import weapon.WeaponType;
 
 public class Player extends GameObject implements Moveable {
@@ -17,6 +18,7 @@ public class Player extends GameObject implements Moveable {
 	private WeaponType currentWeapon;
 	private boolean hasShield;
 	private boolean CanPushBomb;
+	private boolean canUseWeapon;
 	
 	private PlayerState currentPlayerState;
 	private int playerNumber;
@@ -82,6 +84,14 @@ public class Player extends GameObject implements Moveable {
 			yPosition += yDirectionSpeed;
 		}
 		SetPositionOnScreen();
+	}
+	
+	public boolean isCanUseWeapon() {
+		return canUseWeapon;
+	}
+
+	public void setCanUseWeapon(int count) {
+		this.canUseWeapon = count < this.getBombCount();
 	}
 
 	public int getHp() {
@@ -175,7 +185,7 @@ public class Player extends GameObject implements Moveable {
 	private void setDefaultPlayer() {
 		setHp(3);
 		setBombRange(1);
-		setBombCount(1);
+		setBombCount(3);
 		setSpeed(defaultMoveSpeed);
 		setCurrentWeapon(WeaponType.BOMB);
 		currentPlayerState = PlayerState.IDLE;

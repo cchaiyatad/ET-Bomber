@@ -6,16 +6,17 @@ import javafx.scene.layout.Pane;
 import player.Player;
 
 public class Bomb extends GameObject implements Weapon {
-
-	public Bomb(int xPosition, int yPosition, String imagePath, Pane layer) {
+	private int range;
+	public Bomb(int xPosition, int yPosition, String imagePath, Pane layer,int range) {
 		super(xPosition, yPosition, imagePath, layer);
 		// TODO Auto-generated constructor stub
+		this.range = range;
 	}
 
 	@Override
 	public int getDamageRange(Player player) {
 		// TODO Auto-generated method stub
-		return 0;
+		return player.getBombRange();
 	}
 
 	@Override

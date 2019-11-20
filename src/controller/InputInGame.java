@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import setting.Setting;
 
 public class InputInGame {
 	
@@ -42,5 +43,9 @@ public class InputInGame {
 			keyboardBitSet.set(e.getCode().ordinal(), false);
 		}
 	};
+	public void changeBitset() {
+		keyboardBitSet.set(Setting.PLAYERONE_PLACEBOMB.ordinal(), false);
+	}
+	
 
 }

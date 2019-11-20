@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import player.Player;
 import player.PlayerState;
 import setting.Setting;
+import weapon.Bomb;
 
 public class GameController extends Controller {
 	private boolean[][] objectsArray = new boolean[15][15];
@@ -47,12 +48,25 @@ public class GameController extends Controller {
 
 	public AnimationTimer gameLoop() {
 		AnimationTimer gameLoop = new AnimationTimer() {
+			int count = 0;
 			@Override
 			public void handle(long now) {
 				for (Player player : players) {
 					checkPlayerMoveAndSetState(player);
 				}
 				players.forEach(Moveable -> Moveable.move());
+				for(Player player : players) {
+					if(isPressSpace()) {
+						player.setCanUseWeapon(count);
+						if(player.isCanUseWeapon()) {
+							Bomb bomb = new Bomb(player.getxPosition() / 50 * 50, player.getyPosition() / 50 * 50,
+									"bomb", gamePage.getGameFieldPane(),player.getBombRange());
+							count++;
+							inputInGame.changeBitset();
+						}
+					}
+				}
+				
 			}
 		};
 		return gameLoop;
@@ -87,6 +101,9 @@ public class GameController extends Controller {
 		} else {
 			player.setCurrentPlayerState(PlayerState.IDLE);
 		}
+	}
+	public boolean isPressSpace() {
+		return inputInGame.isKeyPress(Setting.PLAYERONE_PLACEBOMB);
 	}
 
 	public boolean isMoveAble(int x, int y, Player player) {
