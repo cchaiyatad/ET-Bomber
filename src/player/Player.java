@@ -1,6 +1,6 @@
 package player;
 
-import gamecontroller.GameController;
+import controller.GameController;
 import gameobject.GameObject;
 import gameobject.Moveable;
 import item.Weapon;

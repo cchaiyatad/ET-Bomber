@@ -1,4 +1,4 @@
-package gamecontroller;
+package controller;
 
 import java.util.BitSet;
 import javafx.event.EventHandler;

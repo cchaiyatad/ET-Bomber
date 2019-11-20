@@ -1,22 +1,28 @@
 package main;
 
-import gamecontroller.GameController;
-import javafx.animation.AnimationTimer;
+import controller.GameController;
+import controller.StartPageController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application{
-	private GameController gamecontroller;
+	private StartPageController startPageController;
+	private GameController gameController;
 	
 	@SuppressWarnings("exports")
 	@Override
 	public void start(Stage primaryStage) {
-		gamecontroller = new GameController();
-		primaryStage.setScene(gamecontroller.createGameScene());
+		startPageController = new StartPageController();
+		gameController = new GameController();
+		
+		startPageController.setOtherController(gameController);
+		startPageController.setStage(primaryStage);
+		gameController.setOtherController(startPageController);
+		gameController.setStage(primaryStage);
+		
+		primaryStage.setScene(startPageController.getScene());
 		primaryStage.setResizable(false);
 		primaryStage.show();
-		AnimationTimer gameLoop = gamecontroller.gameLoop();
-		gameLoop.start();
 		
 	}
 	
