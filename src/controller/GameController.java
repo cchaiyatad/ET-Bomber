@@ -40,8 +40,6 @@ public class GameController extends Controller {
 		isPlaying = false;
 		return scene;
 	}
-	
-	
 
 	@Override
 	public Scene getScene() {
@@ -50,8 +48,6 @@ public class GameController extends Controller {
 		}
 		return super.getScene();
 	}
-
-
 
 	public List<Player> getPlayers() {
 		return players;
@@ -126,6 +122,7 @@ public class GameController extends Controller {
 	public void onRemoveScene() {
 		inputInGame.removeListeners();
 		inputInGame.clearKeyBoardCheck();
+		this.scene = null;
 	}
 
 	private void createBackground() {
