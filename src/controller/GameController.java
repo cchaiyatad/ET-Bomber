@@ -185,7 +185,7 @@ public class GameController extends Controller {
 	private void createPlayer(int numberOfPlayer) {
 		players = new ArrayList<Player>();
 		for (int i = 0; i < numberOfPlayer; i++) {
-			Player player = new Player(50, 50, "", gamePage.getGameFieldPane(), 1, this);
+			Player player = new Player(50, 50, "playerOne", gamePage.getGameFieldPane(), 1, this);
 			players.add(player);
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
 		}
