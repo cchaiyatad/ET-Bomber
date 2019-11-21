@@ -16,7 +16,6 @@ import weapon.Bomb;
 
 public class GameController extends Controller {
 	private boolean[][] objectsArray = new boolean[15][15];
-	private List<Wall> backgrounds;
 	private List<Wall> walls;
 	private List<Obstacle> obstacles;
 	private List<Player> players;
@@ -143,10 +142,9 @@ public class GameController extends Controller {
 	}
 
 	private void createBackground() {
-		backgrounds = new ArrayList<Wall>();
 		for (int i = 1; i <= 13; i++) {
 			for (int j = 1; j <= 13; j++) {
-				backgrounds.add(new Wall(50 * j, 50 * i, "background", gamePage.getGameFieldPane()));
+				new Wall(50 * j, 50 * i, "background", gamePage.getGameFieldPane());
 			}
 		}
 	}
