@@ -5,8 +5,8 @@ import player.Player;
 
 public class GrenadeItem extends Item implements PowerUp{
 
-	public GrenadeItem(int xPosition, int yPosition, String imagePath, Pane layer) {
-		super(xPosition, yPosition, imagePath, layer);
+	public GrenadeItem(int xPosition, int yPosition, Pane layer) {
+		super(xPosition, yPosition, "grenade", layer);
 		// TODO Auto-generated constructor stub
 	}
 

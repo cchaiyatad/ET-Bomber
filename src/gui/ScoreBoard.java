@@ -53,10 +53,15 @@ public class ScoreBoard extends VBox implements HasButton {
 		String timeText = String.format("%01d:%02d", minute, second);
 		timer.setText(timeText);
 	}
+	
+	public void updateStatus() {
+		for(PlayerStatusBoard playerStatusBoard : playerStatusBoards) {
+			playerStatusBoard.upDateStatus();
+		}
+	}
 
 	@Override
 	public void setButtonAction() {
-
 		pauseButton.setOnAction(e -> {
 			if (controller instanceof GameController) {
 				AnimationTimer gameLoop = ((GameController) controller).gameLoop();

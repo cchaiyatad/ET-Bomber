@@ -10,7 +10,7 @@ public abstract class GameObject {
 	protected String imagePath;
 	protected ImageView imageView;
 	protected Image image;
-	protected Pane Layer;
+	protected Pane layer;
 
 	public GameObject(int xPosition, int yPosition, String imagePath, Pane layer) {
 		setxPosition(xPosition);
@@ -18,8 +18,8 @@ public abstract class GameObject {
 		setImagePath(imagePath);
 		image = new Image(getImagePath());
 		imageView = new ImageView(image);
-		this.Layer = layer;
-		this.Layer.getChildren().add(this.imageView);
+		this.layer = layer;
+		this.layer.getChildren().add(this.imageView);
 		SetPositionOnScreen();
 	}
 

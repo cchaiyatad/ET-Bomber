@@ -5,8 +5,8 @@ import player.Player;
 
 public class PoisonDartItem extends Item implements PowerUp{
 
-	public PoisonDartItem(int xPosition, int yPosition, String imagePath, Pane layer) {
-		super(xPosition, yPosition, imagePath, layer);
+	public PoisonDartItem(int xPosition, int yPosition, Pane layer) {
+		super(xPosition, yPosition, "poisonDart", layer);
 		// TODO Auto-generated constructor stub
 	}
 

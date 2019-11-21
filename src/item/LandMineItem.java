@@ -5,8 +5,8 @@ import player.Player;
 
 public class LandMineItem extends Item implements PowerUp{
 
-	public LandMineItem(int xPosition, int yPosition, String imagePath, Pane layer) {
-		super(xPosition, yPosition, imagePath, layer);
+	public LandMineItem(int xPosition, int yPosition, Pane layer) {
+		super(xPosition, yPosition, "landMine", layer);
 		// TODO Auto-generated constructor stub
 	}
 

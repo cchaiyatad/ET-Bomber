@@ -7,8 +7,8 @@ public class Obstacle extends GameObject implements Destroyable {
 	
 	private Item itemInObstacle;
 	
-	public Obstacle(int xPosition, int yPosition, String imagePath, Pane layer, Item item) {
-		super(xPosition, yPosition, imagePath, layer);
+	public Obstacle(int xPosition, int yPosition, Pane layer, Item item) {
+		super(xPosition, yPosition, "obstacle", layer);
 		itemInObstacle = item;
 	}
 

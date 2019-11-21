@@ -5,8 +5,8 @@ import player.Player;
 
 public class PowerUpgradeItem extends Item implements PowerUp {
 
-	public PowerUpgradeItem(int xPosition, int yPosition, String imagePath, Pane layer) {
-		super(xPosition, yPosition, imagePath, layer);
+	public PowerUpgradeItem(int xPosition, int yPosition, Pane layer) {
+		super(xPosition, yPosition, "powerItem", layer);
 		// TODO Auto-generated constructor stub
 	}
 

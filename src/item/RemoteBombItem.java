@@ -5,8 +5,8 @@ import player.Player;
 
 public class RemoteBombItem extends Item implements PowerUp {
 
-	public RemoteBombItem(int xPosition, int yPosition, String imagePath, Pane layer) {
-		super(xPosition, yPosition, imagePath, layer);
+	public RemoteBombItem(int xPosition, int yPosition, Pane layer) {
+		super(xPosition, yPosition, "remoteBomb", layer);
 		// TODO Auto-generated constructor stub
 	}
 

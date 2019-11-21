@@ -22,7 +22,8 @@ public class LevelGenerator {
 				} else {
 					objectsArray[i][j] = ObjectInGame.EMPTY;
 					if(random.nextInt(100) < obstacleRate) {
-						objectsArray[i][j] = ObjectInGame.EMPTYOBSTACLE;
+//						objectsArray[i][j] = ObjectInGame.EMPTYOBSTACLE;
+						objectsArray[i][j] = ObjectInGame.LIFEINCREASEITEM;
 					}
 				}
 			}

@@ -5,8 +5,8 @@ import player.Player;
 
 public class Shield extends Item implements PowerUp {
 
-	public Shield(int xPosition, int yPosition, String imagePath, Pane layer) {
-		super(xPosition, yPosition, imagePath, layer);
+	public Shield(int xPosition, int yPosition, Pane layer) {
+		super(xPosition, yPosition, "shield", layer);
 		// TODO Auto-generated constructor stub
 	}
 

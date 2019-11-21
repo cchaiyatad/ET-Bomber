@@ -49,6 +49,9 @@ public class PlayerStatusBoard extends VBox {
 	}
 
 	public void upDateStatus() {
+		if(player == null) {
+			return;
+		}
 		scoreLabel.setText(String.valueOf(player.getScore()));
 		hpLabel.setText(String.valueOf(player.getHp()));
 		String imagePath = "";

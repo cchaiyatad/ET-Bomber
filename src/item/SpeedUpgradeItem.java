@@ -5,8 +5,8 @@ import player.Player;
 
 public class SpeedUpgradeItem extends Item implements PowerUp{
 
-	public SpeedUpgradeItem(int xPosition, int yPosition, String imagePath, Pane layer) {
-		super(xPosition, yPosition, imagePath, layer);
+	public SpeedUpgradeItem(int xPosition, int yPosition, Pane layer) {
+		super(xPosition, yPosition, "speedItem", layer);
 		// TODO Auto-generated constructor stub
 	}
 

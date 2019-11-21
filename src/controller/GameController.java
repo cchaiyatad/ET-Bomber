@@ -3,9 +3,13 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import gameobject.GameObject;
 import gameobject.Obstacle;
 import gameobject.Wall;
 import gui.GamePage;
+import item.Item;
+import item.LifeIncreaseItem;
+import item.PowerUp;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -15,7 +19,8 @@ import setting.Setting;
 import weapon.Bomb;
 
 public class GameController extends Controller {
-	private ObjectInGame[][] objectsArray = new ObjectInGame[15][15];
+	private ObjectInGame[][] spawnObjectsInfomationArray = new ObjectInGame[15][15];
+	private GameObject[][] gameObjectArray = new GameObject[15][15];
 	private List<Player> players;
 
 	private GamePage gamePage;
@@ -28,9 +33,9 @@ public class GameController extends Controller {
 	@Override
 	protected Scene createScene() {
 		LevelGenerator levelGenerator = new LevelGenerator();
-		objectsArray = levelGenerator.generateLevel();
+		spawnObjectsInfomationArray = levelGenerator.generateLevel();
 		gamePage = new GamePage(this);
-		
+
 		createBackground();
 		createGame();
 
@@ -77,19 +82,21 @@ public class GameController extends Controller {
 				@Override
 				public void handle(long now) {
 
-					if (TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) - startTime == 1) {
-						remainingTime -= TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) - startTime;
-						startTime = TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS);
-					} else if (TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) != startTime) {
-						startTime = TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS);
-					}
-
+					setTimer(now);
 					gamePage.getScoreBoard().setTimer(remainingTime);
 
 					for (Player player : players) {
 						checkPlayerMoveAndSetState(player);
 					}
+
 					players.forEach(Moveable -> Moveable.move());
+
+					for (Player player : players) {
+						checkPlayerGetItem(player);
+					}
+
+					gamePage.getScoreBoard().updateStatus();
+
 					for (Player player : players) {
 						if (isPressSpace()) {
 							player.setCanUseWeapon(count);
@@ -148,8 +155,7 @@ public class GameController extends Controller {
 		int y2 = (y + 50 - player.getSpeed()) / 50;
 		x /= 50;
 		y /= 50;
-		return objectsArray[x][y] == ObjectInGame.EMPTY && objectsArray[x][y2] == ObjectInGame.EMPTY
-				&& objectsArray[x2][y] == ObjectInGame.EMPTY && objectsArray[x2][y2] == ObjectInGame.EMPTY;
+		return checkMove(x, y) && checkMove(x, y2) && checkMove(x2, y) && checkMove(x2, y2);
 	}
 
 	public void onRemoveScene() {
@@ -157,6 +163,46 @@ public class GameController extends Controller {
 		inputInGame.clearKeyBoardCheck();
 		this.scene = null;
 		remainingTime = Setting.GAME_TIME;
+	}
+
+	private void setTimer(long now) {
+		if (TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) - startTime == 1) {
+			remainingTime -= TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) - startTime;
+			startTime = TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS);
+		} else if (TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) != startTime) {
+			startTime = TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS);
+		}
+	}
+
+	private boolean checkMove(int x, int y) {
+		return spawnObjectsInfomationArray[x][y] != ObjectInGame.BOMB
+				&& spawnObjectsInfomationArray[x][y] != ObjectInGame.WALL
+				&& spawnObjectsInfomationArray[x][y] != ObjectInGame.EMPTYOBSTACLE;
+	}
+
+	private void checkPlayerGetItem(Player player) {
+		int x = player.getxPosition();
+		int y = player.getyPosition();
+		int x2 = (x + 50 - player.getSpeed()) / 50;
+		int y2 = (y + 50 - player.getSpeed()) / 50;
+		x = x / 50;
+		y = y / 50;
+
+		if (x != x2) {
+			getItem(x, y, player);
+			getItem(x2, y, player);
+		} else if (y != y2) {
+			getItem(x, y, player);
+			getItem(x, y2, player);
+		}
+	}
+
+	private void getItem(int x, int y, Player player) {
+		if (gameObjectArray[x][y] != null && gameObjectArray[x][y] instanceof Item) {
+			((PowerUp) gameObjectArray[x][y]).onPlayerGetItem(player);
+			((Item) gameObjectArray[x][y]).onObjectIsDestroyed();
+			gameObjectArray[x][y] = null;
+		}
 	}
 
 	private void createBackground() {
@@ -168,16 +214,21 @@ public class GameController extends Controller {
 	}
 
 	private void createGame() {
+		GameObject gameObject = null;
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				switch (objectsArray[i][j]) {
+				switch (spawnObjectsInfomationArray[i][j]) {
 				case WALL:
-					new Wall(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new Wall(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
 				case EMPTYOBSTACLE:
-					new Obstacle(i * 50, j * 50, "obstacle", gamePage.getGameFieldPane(), null);
+//					new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(), null);
 					break;
+				case LIFEINCREASEITEM:
+					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane());
 				}
+				gameObjectArray[i][j] = gameObject;
 			}
 		}
 	}

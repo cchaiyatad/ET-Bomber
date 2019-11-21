@@ -190,4 +190,5 @@ public class Player extends GameObject implements Moveable {
 		currentPlayerState = PlayerState.IDLE;
 	}
 
+
 }
