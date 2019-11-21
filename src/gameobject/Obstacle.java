@@ -12,9 +12,8 @@ public class Obstacle extends GameObject implements Destroyable {
 	}
 
 	@Override
-	public void onDestroyObject() {
+	public void onObjectIsDestroyed() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

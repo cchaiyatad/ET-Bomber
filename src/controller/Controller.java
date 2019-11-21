@@ -7,8 +7,7 @@ public abstract class Controller {
 	protected Stage stage;
 	protected Scene scene;
 	protected Controller otherController;
-	
-	
+		
 	protected abstract Scene createScene();
 	
 	public Scene getScene() {

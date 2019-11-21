@@ -1,5 +1,5 @@
 package gameobject;
 
 public interface Destroyable {
-	void onDestroyObject();
+	void onObjectIsDestroyed();
 }
