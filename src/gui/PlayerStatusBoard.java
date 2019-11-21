@@ -49,7 +49,7 @@ public class PlayerStatusBoard extends VBox {
 	}
 
 	public void upDateStatus() {
-		if(player == null) {
+		if (player == null) {
 			return;
 		}
 		scoreLabel.setText(String.valueOf(player.getScore()));
@@ -62,6 +62,7 @@ public class PlayerStatusBoard extends VBox {
 		case BOMBDETONATER:
 			break;
 		case GRENADE:
+			imagePath = "grenade";
 			break;
 		case LANDMINE:
 			break;

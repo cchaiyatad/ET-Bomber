@@ -7,11 +7,7 @@ import gameobject.GameObject;
 import gameobject.Obstacle;
 import gameobject.Wall;
 import gui.GamePage;
-import item.BombUpgradeItem;
-import item.Item;
-import item.LifeIncreaseItem;
-import item.PowerUp;
-import item.SpeedUpgradeItem;
+import item.*;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -224,7 +220,6 @@ public class GameController extends Controller {
 					gameObject = new Wall(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
 				case EMPTYOBSTACLE:
-//					new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
 					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(), null);
 					break;
 				case LIFEINCREASEITEM:
@@ -235,6 +230,10 @@ public class GameController extends Controller {
 					break;
 				case BOMBUPGRADEITEM:
 					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					break;
+				case GRENADEITEM:
+					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					break;
 				default:
 					break;
 				}
