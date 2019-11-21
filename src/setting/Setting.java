@@ -7,6 +7,7 @@ public class Setting {
 	public static double SCENE_HEIGHT 	= 790;
 	
 	public static String PATH_TO_PLACEHOLDER = "file:res/Image/placeholder.png";
+	public static int GAME_TIME = 120;
 	
 	//Input
 	public static KeyCode PLAYERONE_MOVEUP 		= KeyCode.W;

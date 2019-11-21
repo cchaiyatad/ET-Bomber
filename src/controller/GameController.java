@@ -2,7 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.TimeUnit;
 import gameobject.Obstacle;
 import gameobject.Wall;
 import gui.GamePage;
@@ -24,6 +24,8 @@ public class GameController extends Controller {
 	private InputInGame inputInGame;
 	private AnimationTimer gameLoop;
 	private boolean isPlaying;
+	private long remainingTime = Setting.GAME_TIME;
+	private long startTime;
 
 	@Override
 	protected Scene createScene() {
@@ -33,17 +35,17 @@ public class GameController extends Controller {
 		createInitObstacle();
 		createPlayer(1);
 		this.scene = new Scene(gamePage, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
-		
+
 		inputInGame = new InputInGame(scene);
 		inputInGame.addListeners();
-		
+
 		isPlaying = false;
 		return scene;
 	}
 
 	@Override
 	public Scene getScene() {
-		if(this.scene != null) {
+		if (this.scene != null) {
 			inputInGame.addListeners();
 		}
 		return super.getScene();
@@ -56,7 +58,7 @@ public class GameController extends Controller {
 	public List<Wall> getWalls() {
 		return walls;
 	}
-	
+
 	public boolean isPlaying() {
 		return isPlaying;
 	}
@@ -64,29 +66,45 @@ public class GameController extends Controller {
 	public void setPlaying(boolean isPlaying) {
 		this.isPlaying = isPlaying;
 	}
+	
+	public void setStartTime(long startTime) {
+		this.startTime = TimeUnit.SECONDS.convert(startTime, TimeUnit.NANOSECONDS);
+	}
 
 	public AnimationTimer gameLoop() {
 		if (this.gameLoop == null) {
+			startTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
 			this.gameLoop = new AnimationTimer() {
 				int count = 0;
+
 				@Override
 				public void handle(long now) {
+					
+					if (TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) - startTime == 1) {
+						remainingTime -= TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) - startTime;
+						startTime = TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS);
+					}else if(TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) != startTime){
+						startTime = TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS);
+					}
+					
+					gamePage.getScoreBoard().setTimer(remainingTime);
+					
 					for (Player player : players) {
 						checkPlayerMoveAndSetState(player);
 					}
 					players.forEach(Moveable -> Moveable.move());
-					for(Player player : players) {
-						if(isPressSpace()) {
+					for (Player player : players) {
+						if (isPressSpace()) {
 							player.setCanUseWeapon(count);
-							if(player.isCanUseWeapon()) {
+							if (player.isCanUseWeapon()) {
 								Bomb bomb = new Bomb(player.getxPosition() / 50 * 50, player.getyPosition() / 50 * 50,
-										"bomb", gamePage.getGameFieldPane(),player.getBombRange());
+										"bomb", gamePage.getGameFieldPane(), player.getBombRange());
 								count++;
 								inputInGame.changeBitset();
 							}
 						}
 					}
-					
+
 				}
 			};
 		}
@@ -123,6 +141,7 @@ public class GameController extends Controller {
 			player.setCurrentPlayerState(PlayerState.IDLE);
 		}
 	}
+
 	public boolean isPressSpace() {
 		return inputInGame.isKeyPress(Setting.PLAYERONE_PLACEBOMB);
 	}
@@ -134,7 +153,7 @@ public class GameController extends Controller {
 		y /= 50;
 		return !objectsArray[x][y] && !objectsArray[x][y2] && !objectsArray[x2][y] && !objectsArray[x2][y2];
 	}
-	
+
 	public void onRemoveScene() {
 		inputInGame.removeListeners();
 		inputInGame.clearKeyBoardCheck();

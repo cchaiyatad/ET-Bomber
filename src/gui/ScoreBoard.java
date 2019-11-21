@@ -46,6 +46,13 @@ public class ScoreBoard extends VBox implements HasButton {
 	public PlayerStatusBoard getPlayerStatusBoardViaIndex(int index) {
 		return playerStatusBoards[index];
 	}
+	
+	public void setTimer(long time) {
+		int minute = (int) (time / 60);
+		int second = (int) (time % 60);
+		String timeText = String.format("%01d:%02d", minute, second);
+		timer.setText(timeText);
+	}
 
 	@Override
 	public void setButtonAction() {
@@ -60,6 +67,7 @@ public class ScoreBoard extends VBox implements HasButton {
 				} else {
 					gameLoop.start();
 					gameController.setPlaying(true);
+					gameController.setStartTime(System.nanoTime());
 				}
 				String pauseButtonText = gameController.isPlaying() ? "PAUSE" : "RESUME";
 				pauseButton.setText(pauseButtonText);
