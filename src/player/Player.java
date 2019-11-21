@@ -4,7 +4,6 @@ import controller.GameController;
 import gameobject.GameObject;
 import gameobject.Moveable;
 import javafx.scene.layout.Pane;
-import weapon.Bomb;
 import weapon.WeaponType;
 
 public class Player extends GameObject implements Moveable {

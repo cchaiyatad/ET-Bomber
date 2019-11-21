@@ -17,7 +17,6 @@ public class LifeIncreaseItem extends Item implements PowerUp{
 	@Override
 	public void onPlayerGetItem(Player player) {
 		player.setHp(player.getHp() + 1);
-		
 	}
 
 }
