@@ -186,6 +186,7 @@ public class GameController extends Controller {
 		x = x / 50;
 		y = y / 50;
 
+//		System.out.println(x + " " + x2 + " " + y + " " + y2);
 		if (x != x2) {
 			getItem(x, y, player);
 			getItem(x2, y, player);
@@ -212,9 +213,10 @@ public class GameController extends Controller {
 	}
 
 	private void createGame() {
-		GameObject gameObject = null;
+		
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
+				GameObject gameObject = null;
 				switch (spawnObjectsInfomationArray[i][j]) {
 				case WALL:
 					gameObject = new Wall(i * 50, j * 50, gamePage.getGameFieldPane());
@@ -240,6 +242,19 @@ public class GameController extends Controller {
 				gameObjectArray[i][j] = gameObject;
 			}
 		}
+//		for (int i = 0; i < 15; i++) {
+//			for (int j = 0; j < 15; j++) {
+//				System.out.print(i + " " + j + " " + spawnObjectsInfomationArray[i][j] + "\t");
+//			}
+//			System.out.println();
+//		}
+//
+//		for (int i = 0; i < 15; i++) {
+//			for (int j = 0; j < 15; j++) {
+//				System.out.print(i + " " + j + " " + gameObjectArray[i][j] + "\t");
+//			}
+//			System.out.println();
+//		}
 	}
 
 	private void createPlayer(int numberOfPlayer) {

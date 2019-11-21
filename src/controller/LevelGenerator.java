@@ -23,12 +23,12 @@ public class LevelGenerator {
 					objectsArray[i][j] = ObjectInGame.EMPTY;
 					if(random.nextInt(100) < obstacleRate) {
 //						objectsArray[i][j] = ObjectInGame.EMPTYOBSTACLE;
-						objectsArray[i][j] = ObjectInGame.GRENADEITEM;
+						objectsArray[i][j] = ObjectInGame.LIFEINCREASEITEM;
 					}
 				}
 			}
 		}
-//
+
 //		for (int i = 0; i < 15; i++) {
 //			for (int j = 0; j < 15; j++) {
 //				System.out.print(objectsArray[i][j] + "\t");

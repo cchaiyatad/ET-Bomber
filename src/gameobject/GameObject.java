@@ -50,5 +50,10 @@ public abstract class GameObject {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath.equals("") ? "file:res/Image/placeholder.png" : "file:res/Image/" + imagePath + ".png";
 	}
+	
+	@Override
+	public String toString() {
+		return imagePath;
+	}
 
 }
