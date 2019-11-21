@@ -30,10 +30,8 @@ public class GameController extends Controller {
 		LevelGenerator levelGenerator = new LevelGenerator();
 		objectsArray = levelGenerator.generateLevel();
 		gamePage = new GamePage(this);
+		
 		createBackground();
-
-//		createInitWall();
-//		createInitObstacle();
 		createGame();
 
 		createPlayer(1);
@@ -158,6 +156,7 @@ public class GameController extends Controller {
 		inputInGame.removeListeners();
 		inputInGame.clearKeyBoardCheck();
 		this.scene = null;
+		remainingTime = Setting.GAME_TIME;
 	}
 
 	private void createBackground() {
@@ -176,7 +175,7 @@ public class GameController extends Controller {
 					new Wall(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
 				case EMPTYOBSTACLE:
-					new Obstacle(i * 50, j * 50, "obstacle", gamePage.getGameFieldPane());
+					new Obstacle(i * 50, j * 50, "obstacle", gamePage.getGameFieldPane(), null);
 					break;
 				}
 			}
