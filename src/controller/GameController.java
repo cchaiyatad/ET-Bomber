@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-
 import gameobject.GameObject;
 import gameobject.Obstacle;
 import gameobject.Wall;
@@ -39,7 +38,7 @@ public class GameController extends Controller {
 		createBackground();
 		createGame();
 
-		createPlayer(1);
+		createPlayer(2);
 		this.scene = new Scene(gamePage, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 
 		inputInGame = new InputInGame(scene);
@@ -99,7 +98,7 @@ public class GameController extends Controller {
 
 					for (Player player : players) {
 						if (isPressSpace()) {
-							if(player.isCanUseWeapon()) {
+							if (player.isCanUseWeapon()) {
 								player.useWeapon();
 								inputInGame.changeBitset();
 							}
@@ -123,6 +122,12 @@ public class GameController extends Controller {
 			buttonRight = Setting.PLAYERONE_MOVERIGHT;
 			buttonDown = Setting.PLAYERONE_MOVEDOWN;
 			buttonLeft = Setting.PLAYERONE_MOVELEFT;
+			break;
+		case 2:
+			buttonUp = Setting.PLAYERTWO_MOVEUP;
+			buttonRight = Setting.PLAYERTWO_MOVERIGHT;
+			buttonDown = Setting.PLAYERTWO_MOVEDOWN;
+			buttonLeft = Setting.PLAYERTWO_MOVELEFT;
 			break;
 		}
 		boolean up = inputInGame.isKeyPress(buttonUp);
@@ -148,12 +153,10 @@ public class GameController extends Controller {
 	}
 
 	public boolean isMoveAble(int x, int y, Player player) {
-//		System.out.println(x + " " + (x + 50 - player.getSpeed()) + " " + y + " " + (y + 50 - player.getSpeed()));
 		int x2 = (x + 50 - player.getSpeed()) / 50;
 		int y2 = (y + 50 - player.getSpeed()) / 50;
 		x /= 50;
 		y /= 50;
-//		System.out.println(x + " " + x2 + " " + y + " " + y2);
 		return checkMove(x, y) && checkMove(x, y2) && checkMove(x2, y) && checkMove(x2, y2);
 	}
 
@@ -263,13 +266,15 @@ public class GameController extends Controller {
 	private void createPlayer(int numberOfPlayer) {
 		players = new ArrayList<Player>();
 		for (int i = 0; i < numberOfPlayer; i++) {
-			Player player = new Player(50, 50, "playerOne", gamePage.getGameFieldPane(), 1, this);
+			Player player = null;
+			if (i == 0) {
+				player = new Player(50, 50, "playerOne", gamePage.getGameFieldPane(), 1, this);
+			}else if(i == 1) {
+				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPane(), 2, this);
+			}
 			players.add(player);
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
 		}
 	}
-
-	
-	
 
 }
