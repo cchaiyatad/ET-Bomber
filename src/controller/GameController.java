@@ -225,9 +225,10 @@ public class GameController extends Controller {
 					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(), null);
 					break;
 				case LIFEINCREASEITEM:
-					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(),
-							new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane()));
-					spawnObjectsInfomationArray[i][j] = ObjectInGame.OBSTACLE;
+					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane());
+//					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(),
+//							new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane()));
+//					spawnObjectsInfomationArray[i][j] = ObjectInGame.OBSTACLE;
 					break;
 				case SPEEDUPGRADEITEM:
 					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
@@ -244,12 +245,12 @@ public class GameController extends Controller {
 				gameObjectArray[i][j] = gameObject;
 			}
 		}
-		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 15; j++) {
-				System.out.print(i + " " + j + " " + spawnObjectsInfomationArray[i][j] + "\t");
-			}
-			System.out.println();
-		}
+//		for (int i = 0; i < 15; i++) {
+//			for (int j = 0; j < 15; j++) {
+//				System.out.print(i + " " + j + " " + spawnObjectsInfomationArray[i][j] + "\t");
+//			}
+//			System.out.println();
+//		}
 
 //		for (int i = 0; i < 15; i++) {
 //			for (int j = 0; j < 15; j++) {
