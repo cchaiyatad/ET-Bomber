@@ -4,12 +4,20 @@ import controller.GameController;
 import gameobject.GameObject;
 import gameobject.Moveable;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 import weapon.WeaponType;
+import weapon.*;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 public class Player extends GameObject implements Moveable {
 	private int hp;
 	private int bombCount;
 	private int bombRange;
+	//private int otherCount;
 	private int speed;
 	private int score;
 	
@@ -21,7 +29,8 @@ public class Player extends GameObject implements Moveable {
 	private PlayerState currentPlayerState;
 	private int playerNumber;
 	private GameController gameController;
-
+	private Queue<Pair<Bomb,Long>> countBomb;
+	
 	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer);
@@ -88,8 +97,26 @@ public class Player extends GameObject implements Moveable {
 		return canUseWeapon;
 	}
 
-	public void setCanUseWeapon(int count) {
-		this.canUseWeapon = count < this.getBombCount();
+	public void setCanUseWeapon() {
+		this.canUseWeapon = countBomb.size() != this.getBombCount();
+	}
+	public void useWeapon() {
+		long startWeapon = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
+		switch(getCurrentWeapon()) {
+		case BOMB:
+			Bomb bomb = new Bomb(getxPosition()/50*50,getyPosition()/50*50,layer,getBombRange());
+			Pair<Bomb,Long> pair = new Pair<Bomb, Long>(bomb,startWeapon+3);
+			countBomb.add(pair);
+			setCanUseWeapon();
+			if(TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS) >= countBomb.element().getValue() ) {
+				bomb = null;
+				countBomb.poll();
+				setCanUseWeapon();
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 	public int getHp() {
@@ -184,6 +211,9 @@ public class Player extends GameObject implements Moveable {
 		setHp(3);
 		setBombRange(1);
 		setBombCount(3);
+		countBomb = new LinkedList<Pair<Bomb,Long>>();
+		setCanUseWeapon();
+		
 		setSpeed(defaultMoveSpeed);
 		setCurrentWeapon(WeaponType.BOMB);
 		currentPlayerState = PlayerState.IDLE;

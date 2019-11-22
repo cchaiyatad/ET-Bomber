@@ -7,8 +7,8 @@ import player.Player;
 
 public class Bomb extends GameObject implements Weapon {
 	private int range;
-	public Bomb(int xPosition, int yPosition, String imagePath, Pane layer,int range) {
-		super(xPosition, yPosition, imagePath, layer);
+	public Bomb(int xPosition, int yPosition, Pane layer,int range) {
+		super(xPosition, yPosition, "bomb", layer);
 		// TODO Auto-generated constructor stub
 		this.range = range;
 	}

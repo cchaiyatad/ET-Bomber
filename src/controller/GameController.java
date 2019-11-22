@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+
 import gameobject.GameObject;
 import gameobject.Obstacle;
 import gameobject.Wall;
@@ -97,11 +99,8 @@ public class GameController extends Controller {
 
 					for (Player player : players) {
 						if (isPressSpace()) {
-							player.setCanUseWeapon(count);
-							if (player.isCanUseWeapon()) {
-								Bomb bomb = new Bomb(player.getxPosition() / 50 * 50, player.getyPosition() / 50 * 50,
-										"bomb", gamePage.getGameFieldPane(), player.getBombRange());
-								count++;
+							if(player.isCanUseWeapon()) {
+								player.useWeapon();
 								inputInGame.changeBitset();
 							}
 						}
@@ -265,5 +264,8 @@ public class GameController extends Controller {
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
 		}
 	}
+
+	
+	
 
 }
