@@ -15,7 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import player.Player;
 import player.PlayerState;
-import setting.Setting; 
+import setting.Setting;
+import weapon.Bomb; 
 
 public class GameController extends Controller {
 	private ObjectInGame[][] spawnObjectsInfomationArray = new ObjectInGame[15][15];
@@ -98,7 +99,15 @@ public class GameController extends Controller {
 					for (Player player : players) {
 						if (isPressSpace()) {
 							if(player.isCanUseWeapon()) {
-								player.useWeapon();
+								switch(player.getCurrentWeapon()) {
+								case BOMB:
+									Bomb bomb = new Bomb(player.getxPosition()/50*50, player.getyPosition()/50*50, gamePage.getGameFieldPane(), player.getBombRange(), player);
+									bomb = null;
+									break;
+								default:
+									break;
+								
+								}
 								inputInGame.changeBitset();
 							}
 						}

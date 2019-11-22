@@ -29,7 +29,7 @@ public class Player extends GameObject implements Moveable {
 	private PlayerState currentPlayerState;
 	private int playerNumber;
 	private GameController gameController;
-	private Queue<Long> countBomb;
+	private Queue<Bomb> countBomb;
 	
 	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
@@ -136,22 +136,6 @@ public class Player extends GameObject implements Moveable {
 	public void setCanUseWeapon() {
 		this.canUseWeapon = countBomb.size() <= this.getBombCount();
 	}
-	public void useWeapon() {
-		
-		switch(getCurrentWeapon()) {
-		case BOMB:
-			Bomb bomb = new Bomb(getxPosition()/50*50,getyPosition()/50*50,layer,getBombRange());
-			bomb = null;
-			if(bomb == null) System.out.println("Yahooo");
-			long startWeapon = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
-			countBomb.add(startWeapon+3);
-			System.out.println(countBomb.size());
-			setCanUseWeapon();
-			break;
-		default:
-			break;
-		}
-	}
 
 	public int getHp() {
 		return hp;
@@ -246,12 +230,16 @@ public class Player extends GameObject implements Moveable {
 		setHp(3);
 		setBombRange(1);
 		setBombCount(3);
-		countBomb = new LinkedList<Long>();
+		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();
 		
 		setSpeed(defaultMoveSpeed);
 		setCurrentWeapon(WeaponType.BOMB);
 		currentPlayerState = PlayerState.IDLE;
+	}
+
+	public Queue<Bomb> getCountBomb() {
+		return countBomb;
 	}
 
 }

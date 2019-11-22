@@ -10,9 +10,11 @@ import player.Player;
 public class Bomb extends GameObject implements Weapon, Destroyable {
 	private int range;
 	Thread thread;
-	public Bomb(int xPosition, int yPosition, Pane layer,int range) {
+	public Bomb(int xPosition, int yPosition, Pane layer,int range,Player player) {
 		super(xPosition, yPosition, "bomb", layer);
 		this.range = range;
+		player.getCountBomb().add(this);
+		player.setCanUseWeapon();
 		// TODO Auto-generated constructor stub
 		thread = new Thread(() -> {
 				try {
@@ -23,6 +25,8 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 						public void run() {
 							// TODO Auto-generated method stub
 							onObjectIsDestroyed();
+							player.getCountBomb().poll();
+							player.setCanUseWeapon();
 						}
 					});
 				} catch (InterruptedException e) {

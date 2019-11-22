@@ -23,7 +23,7 @@ public class LevelGenerator {
 					objectsArray[i][j] = ObjectInGame.EMPTY;
 					if(random.nextInt(100) < 10) {
 //						objectsArray[i][j] = ObjectInGame.EMPTYOBSTACLE;
-						objectsArray[i][j] = ObjectInGame.BOMBUPGRADEITEM;
+						//objectsArray[i][j] = ObjectInGame.BOMBUPGRADEITEM;
 					}
 				}
 			}
