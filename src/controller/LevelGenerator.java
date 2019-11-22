@@ -21,9 +21,9 @@ public class LevelGenerator {
 					objectsArray[i][j] = ObjectInGame.EMPTY;
 				} else {
 					objectsArray[i][j] = ObjectInGame.EMPTY;
-					if(random.nextInt(100) < obstacleRate) {
+					if(random.nextInt(100) < 5) {
 //						objectsArray[i][j] = ObjectInGame.EMPTYOBSTACLE;
-						objectsArray[i][j] = ObjectInGame.LIFEINCREASEITEM;
+						objectsArray[i][j] = ObjectInGame.SPEEDUPGRADEITEM;
 					}
 				}
 			}

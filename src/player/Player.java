@@ -12,12 +12,12 @@ public class Player extends GameObject implements Moveable {
 	private int bombRange;
 	private int speed;
 	private int score;
-	
+
 	private WeaponType currentWeapon;
 	private boolean hasShield;
 	private boolean CanPushBomb;
 	private boolean canUseWeapon;
-	
+
 	private PlayerState currentPlayerState;
 	private int playerNumber;
 	private GameController gameController;
@@ -25,13 +25,13 @@ public class Player extends GameObject implements Moveable {
 	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer);
-		
+
 		setDefaultPlayer();
-		
+
 		this.playerNumber = playerNumber;
 		this.gameController = gameController;
 	}
-	
+
 	@Override
 	public void move() {
 		int xDirectionSpeed = 0;
@@ -42,18 +42,37 @@ public class Player extends GameObject implements Moveable {
 		case MOVEDOWN:
 			if (xPosition % 50 != 0) {
 				int xMid = (xPosition / 50 + 1) * 50;
-				currentPlayerState = Math.abs(xMid - xPosition) >= Math.abs(xMid - (xPosition + 50))
-						? PlayerState.MOVELEFT
-						: PlayerState.MOVERIGHT;
+				if (Math.abs(xMid - xPosition) >= Math.abs(xMid - (xPosition + 50))) {
+					currentPlayerState = PlayerState.MOVELEFT;
+					int dx = xPosition % 50;
+					xDirectionSpeed = dx < speed ? dx * -1 : speed * -1;
+				} else {
+					currentPlayerState = PlayerState.MOVERIGHT;
+					int dx = 50 - (xPosition % 50);
+					xDirectionSpeed = dx < speed ? dx : speed;
+				}
+				xPosition += xDirectionSpeed;
+				SetPositionOnScreen();
+				return;
 			}
 			break;
+
 		case MOVERIGHT:
 		case MOVELEFT:
 			if (yPosition % 50 != 0) {
 				int yMid = (yPosition / 50 + 1) * 50;
-				currentPlayerState = Math.abs(yMid - yPosition) >= Math.abs(yMid - (yPosition + 50))
-						? PlayerState.MOVEUP
-						: PlayerState.MOVEDOWN;
+				if (Math.abs(yMid - yPosition) >= Math.abs(yMid - (yPosition + 50))) {
+					currentPlayerState = PlayerState.MOVEUP;
+					int dy = yPosition % 50;
+					yDirectionSpeed = dy < speed * -1 ? dy : speed * -1;
+				} else {
+					currentPlayerState = PlayerState.MOVEDOWN;
+					int dy = 50 - (yPosition % 50);
+					yDirectionSpeed = dy < speed ? dy : speed;
+				}
+				yPosition += yDirectionSpeed;
+				SetPositionOnScreen();
+				return;
 			}
 			break;
 		default:
@@ -83,7 +102,7 @@ public class Player extends GameObject implements Moveable {
 		}
 		SetPositionOnScreen();
 	}
-	
+
 	public boolean isCanUseWeapon() {
 		return canUseWeapon;
 	}
@@ -121,6 +140,7 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void setSpeed(int speed) {
+		speed = speed > 10 ? 10 : speed;
 		this.speed = speed;
 	}
 
@@ -179,7 +199,7 @@ public class Player extends GameObject implements Moveable {
 	public void setGameController(GameController gameController) {
 		this.gameController = gameController;
 	}
-	
+
 	private void setDefaultPlayer() {
 		setHp(3);
 		setBombRange(1);
@@ -188,6 +208,5 @@ public class Player extends GameObject implements Moveable {
 		setCurrentWeapon(WeaponType.BOMB);
 		currentPlayerState = PlayerState.IDLE;
 	}
-
 
 }

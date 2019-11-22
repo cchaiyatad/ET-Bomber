@@ -149,10 +149,12 @@ public class GameController extends Controller {
 	}
 
 	public boolean isMoveAble(int x, int y, Player player) {
+//		System.out.println(x + " " + (x + 50 - player.getSpeed()) + " " + y + " " + (y + 50 - player.getSpeed()));
 		int x2 = (x + 50 - player.getSpeed()) / 50;
 		int y2 = (y + 50 - player.getSpeed()) / 50;
 		x /= 50;
 		y /= 50;
+//		System.out.println(x + " " + x2 + " " + y + " " + y2);
 		return checkMove(x, y) && checkMove(x, y2) && checkMove(x2, y) && checkMove(x2, y2);
 	}
 
@@ -213,7 +215,7 @@ public class GameController extends Controller {
 	}
 
 	private void createGame() {
-		
+
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
 				GameObject gameObject = null;
