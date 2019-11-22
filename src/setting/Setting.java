@@ -15,4 +15,10 @@ public class Setting {
 	public static KeyCode PLAYERONE_MOVELEFT  	= KeyCode.A;
 	public static KeyCode PLAYERONE_MOVERIGHT  	= KeyCode.D;
 	public static KeyCode PLAYERONE_PLACEBOMB  	= KeyCode.SPACE;
+	
+	public static KeyCode PLAYERTWO_MOVEUP 		= KeyCode.UP;
+	public static KeyCode PLAYERTWO_MOVEDOWN  	= KeyCode.DOWN;
+	public static KeyCode PLAYERTWO_MOVELEFT  	= KeyCode.LEFT;
+	public static KeyCode PLAYERTWO_MOVERIGHT  	= KeyCode.RIGHT;
+	public static KeyCode PLAYERTWO_PLACEBOMB  	= KeyCode.BACK_SLASH;
 }
