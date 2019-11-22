@@ -17,6 +17,7 @@ public class BombUpgradeItem extends Item implements PowerUp{
 	@Override
 	public void onPlayerGetItem(Player player) {
 		player.setBombCount(player.getBombCount() + 1);
+		player.setCanUseWeapon();
 	}
 
 }

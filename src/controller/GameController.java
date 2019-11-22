@@ -15,8 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import player.Player;
 import player.PlayerState;
-import setting.Setting;
-import weapon.Bomb;
+import setting.Setting; 
 
 public class GameController extends Controller {
 	private ObjectInGame[][] spawnObjectsInfomationArray = new ObjectInGame[15][15];
@@ -77,7 +76,6 @@ public class GameController extends Controller {
 		if (this.gameLoop == null) {
 			startTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
 			this.gameLoop = new AnimationTimer() {
-				int count = 0;
 
 				@Override
 				public void handle(long now) {
@@ -244,12 +242,12 @@ public class GameController extends Controller {
 				gameObjectArray[i][j] = gameObject;
 			}
 		}
-		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 15; j++) {
-				System.out.print(i + " " + j + " " + spawnObjectsInfomationArray[i][j] + "\t");
-			}
-			System.out.println();
-		}
+//		for (int i = 0; i < 15; i++) {
+//			for (int j = 0; j < 15; j++) {
+//				System.out.print(i + " " + j + " " + spawnObjectsInfomationArray[i][j] + "\t");
+//			}
+//			System.out.println();
+//		}
 
 //		for (int i = 0; i < 15; i++) {
 //			for (int j = 0; j < 15; j++) {

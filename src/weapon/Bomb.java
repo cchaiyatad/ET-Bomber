@@ -1,16 +1,36 @@
 package weapon;
 
+import gameobject.Destroyable;
 import gameobject.GameObject;
 import item.Weapon;
+import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import player.Player;
 
-public class Bomb extends GameObject implements Weapon {
+public class Bomb extends GameObject implements Weapon, Destroyable {
 	private int range;
+	Thread thread;
 	public Bomb(int xPosition, int yPosition, Pane layer,int range) {
 		super(xPosition, yPosition, "bomb", layer);
-		// TODO Auto-generated constructor stub
 		this.range = range;
+		// TODO Auto-generated constructor stub
+		thread = new Thread(() -> {
+				try {
+					Thread.sleep(3000);
+					Platform.runLater(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							onObjectIsDestroyed();
+						}
+					});
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		});
+		thread.start();
 	}
 
 	@Override
@@ -30,5 +50,13 @@ public class Bomb extends GameObject implements Weapon {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void onObjectIsDestroyed() {
+		// TODO Auto-generated method stub
+		this.layer.getChildren().remove(this.imageView);
+		
+	}
+	
 
 }

@@ -29,7 +29,7 @@ public class Player extends GameObject implements Moveable {
 	private PlayerState currentPlayerState;
 	private int playerNumber;
 	private GameController gameController;
-	private Queue<Pair<Bomb,Long>> countBomb;
+	private Queue<Long> countBomb;
 	
 	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
@@ -134,21 +134,19 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void setCanUseWeapon() {
-		this.canUseWeapon = countBomb.size() != this.getBombCount();
+		this.canUseWeapon = countBomb.size() <= this.getBombCount();
 	}
 	public void useWeapon() {
-		long startWeapon = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
+		
 		switch(getCurrentWeapon()) {
 		case BOMB:
 			Bomb bomb = new Bomb(getxPosition()/50*50,getyPosition()/50*50,layer,getBombRange());
-			Pair<Bomb,Long> pair = new Pair<Bomb, Long>(bomb,startWeapon+3);
-			countBomb.add(pair);
+			bomb = null;
+			if(bomb == null) System.out.println("Yahooo");
+			long startWeapon = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
+			countBomb.add(startWeapon+3);
+			System.out.println(countBomb.size());
 			setCanUseWeapon();
-			if(TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS) >= countBomb.element().getValue() ) {
-				bomb = null;
-				countBomb.poll();
-				setCanUseWeapon();
-			}
 			break;
 		default:
 			break;
@@ -248,7 +246,7 @@ public class Player extends GameObject implements Moveable {
 		setHp(3);
 		setBombRange(1);
 		setBombCount(3);
-		countBomb = new LinkedList<Pair<Bomb,Long>>();
+		countBomb = new LinkedList<Long>();
 		setCanUseWeapon();
 		
 		setSpeed(defaultMoveSpeed);
