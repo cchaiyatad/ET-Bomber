@@ -3,7 +3,7 @@ package controller;
 public enum ObjectInGame {
 	WALL,
 	EMPTY,
-	EMPTYOBSTACLE,
+	OBSTACLE,
 	BOMBUPGRADEITEM,
 	SPEEDUPGRADEITEM,
 	LIFEINCREASEITEM,
