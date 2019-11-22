@@ -96,19 +96,16 @@ public class GameController extends Controller {
 					gamePage.getScoreBoard().updateStatus();
 
 					for (Player player : players) {
-						if (isPressSpace()) {
-							if(player.isCanUseWeapon()) {
-								switch(player.getCurrentWeapon()) {
-								case BOMB:
-									Bomb bomb = new Bomb(player.getxPosition()/50*50, player.getyPosition()/50*50, gamePage.getGameFieldPane(), player.getBombRange(), player);
-									bomb = null;
-									break;
-								default:
-									break;
-								
-							}
-								inputInGame.changeBitset();
-							}
+						switch(player.getPlayerNumber()) {
+						case 1:
+							if(inputInGame.isKeyPress(Setting.PLAYERONE_PLACEBOMB) && player.isCanUseWeapon()) player.useWeapon();
+							inputInGame.changeBitset();
+							break;
+						
+						case 2:
+							if(inputInGame.isKeyPress(Setting.PLAYERTWO_PLACEBOMB) && player.isCanUseWeapon()) player.useWeapon();
+							inputInGame.changeBitset();
+							break;
 						}
 					}
 

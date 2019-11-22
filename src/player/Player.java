@@ -134,7 +134,17 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void setCanUseWeapon() {
-		this.canUseWeapon = countBomb.size() <= this.getBombCount();
+		this.canUseWeapon = countBomb.size() < this.getBombCount();
+	}
+	public void useWeapon() {
+		switch(getCurrentWeapon()) {
+		case BOMB:
+			Bomb bomb = new Bomb(getxPosition(),getyPosition(),this.layer,getBombRange(),this);
+			bomb = null;
+			break;
+		default:
+			break;
+		}
 	}
 
 	public int getHp() {
@@ -229,7 +239,7 @@ public class Player extends GameObject implements Moveable {
 	private void setDefaultPlayer() {
 		setHp(3);
 		setBombRange(1);
-		setBombCount(3);
+		setBombCount(5);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();
 		
