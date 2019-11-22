@@ -99,6 +99,23 @@ public class Player extends GameObject implements Moveable {
 		if (gameController.isMoveAble(xPosition + xDirectionSpeed, yPosition + yDirectionSpeed, this)) {
 			xPosition += xDirectionSpeed;
 			yPosition += yDirectionSpeed;
+		} else {
+			xPosition = (xPosition + xDirectionSpeed) / 50 * 50;
+			yPosition = (yPosition + yDirectionSpeed) / 50 * 50;
+			switch (currentPlayerState) {
+			case MOVEUP:
+				if (gameController.isMoveAble(xPosition, yPosition + 50, this)) {
+					yPosition += 50;
+				}
+				break;
+			case MOVELEFT:
+				if (gameController.isMoveAble(xPosition + 50, yPosition, this)) {
+					xPosition += 50;
+				}
+				break;
+			default:
+				break;
+			}
 		}
 		SetPositionOnScreen();
 	}
