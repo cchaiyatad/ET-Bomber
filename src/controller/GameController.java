@@ -177,7 +177,7 @@ public class GameController extends Controller {
 	private boolean checkMove(int x, int y) {
 		return spawnObjectsInfomationArray[x][y] != ObjectInGame.BOMB
 				&& spawnObjectsInfomationArray[x][y] != ObjectInGame.WALL
-				&& spawnObjectsInfomationArray[x][y] != ObjectInGame.EMPTYOBSTACLE;
+				&& spawnObjectsInfomationArray[x][y] != ObjectInGame.OBSTACLE;
 	}
 
 	private void checkPlayerGetItem(Player player) {
@@ -188,7 +188,6 @@ public class GameController extends Controller {
 		x = x / 50;
 		y = y / 50;
 
-//		System.out.println(x + " " + x2 + " " + y + " " + y2);
 		if (x != x2) {
 			getItem(x, y, player);
 			getItem(x2, y, player);
@@ -223,11 +222,13 @@ public class GameController extends Controller {
 				case WALL:
 					gameObject = new Wall(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
-				case EMPTYOBSTACLE:
+				case OBSTACLE:
 					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(), null);
 					break;
 				case LIFEINCREASEITEM:
-					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(),
+							new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane()));
+					spawnObjectsInfomationArray[i][j] = ObjectInGame.OBSTACLE;
 					break;
 				case SPEEDUPGRADEITEM:
 					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
@@ -244,13 +245,13 @@ public class GameController extends Controller {
 				gameObjectArray[i][j] = gameObject;
 			}
 		}
-//		for (int i = 0; i < 15; i++) {
-//			for (int j = 0; j < 15; j++) {
-//				System.out.print(i + " " + j + " " + spawnObjectsInfomationArray[i][j] + "\t");
-//			}
-//			System.out.println();
-//		}
-//
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 15; j++) {
+				System.out.print(i + " " + j + " " + spawnObjectsInfomationArray[i][j] + "\t");
+			}
+			System.out.println();
+		}
+
 //		for (int i = 0; i < 15; i++) {
 //			for (int j = 0; j < 15; j++) {
 //				System.out.print(i + " " + j + " " + gameObjectArray[i][j] + "\t");
