@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import player.Player;
 import setting.Setting;
 
 public class InputInGame {
@@ -47,8 +48,15 @@ public class InputInGame {
 			keyboardBitSet.set(e.getCode().ordinal(), false);
 		}
 	};
-	public void changeBitset() {
-		keyboardBitSet.set(Setting.PLAYERONE_PLACEBOMB.ordinal(), false);
+	public void changeBitset(Player player) {
+		switch(player.getPlayerNumber()) {
+		case 1:
+			keyboardBitSet.set(Setting.PLAYERONE_PLACEBOMB.ordinal(), false);
+			break;
+		case 2:
+			keyboardBitSet.set(Setting.PLAYERTWO_PLACEBOMB.ordinal(), false);
+			break;
+		}
 	}
 	
 

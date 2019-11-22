@@ -139,7 +139,7 @@ public class Player extends GameObject implements Moveable {
 	public void useWeapon() {
 		switch(getCurrentWeapon()) {
 		case BOMB:
-			Bomb bomb = new Bomb(getxPosition(),getyPosition(),this.layer,getBombRange(),this);
+			Bomb bomb = new Bomb(getxPosition()/50*50,getyPosition()/50*50,this.layer,getBombRange(),this);
 			bomb = null;
 			break;
 		default:

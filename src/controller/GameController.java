@@ -99,14 +99,13 @@ public class GameController extends Controller {
 						switch(player.getPlayerNumber()) {
 						case 1:
 							if(inputInGame.isKeyPress(Setting.PLAYERONE_PLACEBOMB) && player.isCanUseWeapon()) player.useWeapon();
-							inputInGame.changeBitset();
 							break;
 						
 						case 2:
 							if(inputInGame.isKeyPress(Setting.PLAYERTWO_PLACEBOMB) && player.isCanUseWeapon()) player.useWeapon();
-							inputInGame.changeBitset();
 							break;
 						}
+						inputInGame.changeBitset(player);
 					}
 
 				}
