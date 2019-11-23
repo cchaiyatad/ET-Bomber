@@ -7,19 +7,16 @@ public class PowerUpgradeItem extends Item implements PowerUp {
 
 	public PowerUpgradeItem(int xPosition, int yPosition, Pane layer) {
 		super(xPosition, yPosition, "powerItem", layer);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void onObjectIsDestroyed() {
-		// TODO Auto-generated method stub
-		
+		this.layer.getChildren().remove(this.imageView);
 	}
 
 	@Override
 	public void onPlayerGetItem(Player player) {
-		// TODO Auto-generated method stub
-		
+		player.setBombRange(player.getBombRange() + 1);
 	}
 
 }

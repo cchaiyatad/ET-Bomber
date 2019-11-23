@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class LevelGenerator {
 
-	private final int obstacleRate = 113;
-	private final int emptyTileCount = 133;
+	private final int obstacleRate = 103;
+	private final int emptyTileCount = 121;
 	private ObjectInGame[][] objectsArray = new ObjectInGame[15][15];
 	private Random random;
 
@@ -20,7 +20,7 @@ public class LevelGenerator {
 		int objectCount = random.nextInt(emptyTileCount - obstacleRate) + obstacleRate;
 		List<ObjectInGame> suffleList = new ArrayList<ObjectInGame>();
 
-		for (int k = 3; k < 13; k++) {
+		for (int k = 3; k < 14; k++) {
 			int count;
 			if (k == 3 || k == 4 || k == 5) {
 				count = random.nextInt(4) + 12;
@@ -38,7 +38,11 @@ public class LevelGenerator {
 			suffleList.add(ObjectInGame.EMPTY);
 		}
 
-		Collections.shuffle(suffleList);
+//		for(int i = 0; i < suffleList.size();i++) {
+//			System.out.println(suffleList.get(i));
+//		}
+//		
+//		Collections.shuffle(suffleList);
 
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
@@ -52,7 +56,6 @@ public class LevelGenerator {
 					
 					objectsArray[i][j] = ObjectInGame.EMPTY;
 					if(random.nextInt(100) < 10) {
-//						objectsArray[i][j] = ObjectInGame.EMPTYOBSTACLE;
 						objectsArray[i][j] = ObjectInGame.BOMBUPGRADEITEM;
 					}	
 					if(random.nextInt(100) < obstacleRate) {
@@ -62,7 +65,9 @@ public class LevelGenerator {
 				}
 			}
 		}
-
+		
+//		System.out.println(suffleList.size());
+//
 //		for (int i = 0; i < 15; i++) {
 //			for (int j = 0; j < 15; j++) {
 //				System.out.print(objectsArray[i][j] + "\t");
