@@ -173,27 +173,33 @@ public class GameController extends Controller {
 	}
 
 	public boolean isMoveAble(int x, int y, Player player) {
-//		boolean canMove = true;
-//		switch (player.getCurrentPlayerState()) {
-//		case MOVEDOWN:
-//			canMove = checkMove(x / 50, (y + 50 - player.getSpeed()) / 50);
-//			break;
-//		case MOVERIGHT:
-//			canMove = checkMove((x + 50 - player.getSpeed()) / 50, y / 50);
-//			break;
-//		case MOVELEFT:
-//		case MOVEUP:
-//			canMove = checkMove(x / 50, y / 50);
-//			break;
-//		default:
-//			break;
-//		}
-//		return canMove;
-		int x2 = (x + 50 - player.getSpeed()) / 50;
-		int y2 = (y + 50 - player.getSpeed()) / 50;
-		x /= 50;
-		y /= 50;
-		return checkMove(x, y) && checkMove(x, y2) && checkMove(x2, y) && checkMove(x2, y2);
+		boolean canMove = true;
+		switch (player.getCurrentPlayerState()) {
+		case MOVEDOWN:
+			if (x % 50 == 0 && (y - player.getSpeed()) % 50 == 0) {
+				canMove = checkMove(x, y + 50 - player.getSpeed());
+			}
+			break;
+		case MOVERIGHT:
+			if ((x - player.getSpeed()) % 50 == 0 && y % 50 == 0) {
+				canMove = checkMove(x + 50 - player.getSpeed(), y);
+			}
+			break;
+		case MOVELEFT:
+			System.out.println(x + " " + y);
+			if ((x + player.getSpeed()) % 50 == 0 && y % 50 == 0) {
+				canMove = checkMove(x, y);
+			}
+			break;
+		case MOVEUP:
+			if (x % 50 == 0 && (y + player.getSpeed()) % 50 == 0) {
+				canMove = checkMove(x, y);
+			}
+			break;
+		default:
+			break;
+		}
+		return canMove;
 	}
 
 	public void onRemoveScene() {
@@ -213,9 +219,10 @@ public class GameController extends Controller {
 	}
 
 	private boolean checkMove(int x, int y) {
-		return !(gameObjectArray[x][y] instanceof Wall) && !(gameObjectArray[x][y] instanceof Obstacle);
-//		return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall)
-//				&& !(gameObjectArray[x][y] instanceof Obstacle);
+		x /= 50;
+		y /= 50;
+		return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall)
+				&& !(gameObjectArray[x][y] instanceof Obstacle);
 	}
 
 	private void checkPlayerGetItem(Player player) {
