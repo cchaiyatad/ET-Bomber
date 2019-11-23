@@ -232,7 +232,6 @@ public class GameController extends Controller {
 					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
 				case POWERUPGRADEITEM:
-					//TODO:
 					gameObject = new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
 				case SPEEDUPGRADEITEM:
@@ -253,7 +252,6 @@ public class GameController extends Controller {
 					gameObject = new PushBombSkillItem(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
 				case LANDMINEITEM:
-					//TODO:
 					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
 				case GRENADEITEM:
