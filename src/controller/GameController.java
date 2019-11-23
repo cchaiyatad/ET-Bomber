@@ -173,6 +173,22 @@ public class GameController extends Controller {
 	}
 
 	public boolean isMoveAble(int x, int y, Player player) {
+//		boolean canMove = true;
+//		switch (player.getCurrentPlayerState()) {
+//		case MOVEDOWN:
+//			canMove = checkMove(x / 50, (y + 50 - player.getSpeed()) / 50);
+//			break;
+//		case MOVERIGHT:
+//			canMove = checkMove((x + 50 - player.getSpeed()) / 50, y / 50);
+//			break;
+//		case MOVELEFT:
+//		case MOVEUP:
+//			canMove = checkMove(x / 50, y / 50);
+//			break;
+//		default:
+//			break;
+//		}
+//		return canMove;
 		int x2 = (x + 50 - player.getSpeed()) / 50;
 		int y2 = (y + 50 - player.getSpeed()) / 50;
 		x /= 50;
@@ -199,7 +215,7 @@ public class GameController extends Controller {
 	private boolean checkMove(int x, int y) {
 		return !(gameObjectArray[x][y] instanceof Wall) && !(gameObjectArray[x][y] instanceof Obstacle);
 //		return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall)
-//				&& !(gameObjectArray[x][y] instanceof Obstacle); 
+//				&& !(gameObjectArray[x][y] instanceof Obstacle);
 	}
 
 	private void checkPlayerGetItem(Player player) {

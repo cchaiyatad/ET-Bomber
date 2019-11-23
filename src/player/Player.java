@@ -4,14 +4,10 @@ import controller.GameController;
 import gameobject.GameObject;
 import gameobject.Moveable;
 import javafx.scene.layout.Pane;
-import javafx.util.Pair;
 import weapon.WeaponType;
 import weapon.*;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.concurrent.TimeUnit;
 
 public class Player extends GameObject implements Moveable {
 	private int hp;
@@ -138,12 +134,21 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void useWeapon() {
+		int x = xPosition / 50;
+		int y = yPosition / 50;
+		if (xPosition % 50 != 0) {
+			int xMid = (xPosition / 50 + 1) * 50;
+			x = Math.abs(xMid - xPosition) >= Math.abs(xMid - (xPosition + 50)) ? x : x + 1;
+		} else if (yPosition % 50 != 0) {
+			int yMid = (yPosition / 50 + 1) * 50;
+			y = Math.abs(yMid - yPosition) >= Math.abs(yMid - (yPosition + 50)) ? y : y + 1;
+		}
+
 		switch (getCurrentWeapon()) {
 		case BOMB:
-			if (this.gameController.canSetObject(getxPosition() / 50, getyPosition() / 50)) {
-				this.gameController.setObjectInGame(getxPosition() / 50, getyPosition() / 50,
-						new Bomb(getxPosition() / 50 * 50, getyPosition() / 50 * 50,
-								this.getGameController().getGamePage().getGameFieldItemPane(), getBombRange(), this));
+			if (this.gameController.canSetObject(x, y)) {
+				this.gameController.setObjectInGame(x, y, new Bomb(x * 50, y * 50,
+						this.getGameController().getGamePage().getGameFieldItemPane(), getBombRange(), this));
 			}
 			break;
 		default:
