@@ -173,13 +173,12 @@ public class GameController extends Controller {
 	}
 
 	public int[] isMoveAble(int x, int y, Player player) {
-		boolean canMove = true;
 		int[] xy = { 0, 0 };
 		switch (player.getCurrentPlayerState()) {
 		case MOVEDOWN:
-			if (x % 50 == 0 && (y - player.getSpeed()) % 50 == 0) {
-				canMove = checkMove(x, y + 50 - player.getSpeed());
-			}
+			xy[1] = ((50 - ((y - player.getSpeed()) % 50)) % 50 < player.getSpeed() && x % 50 == 0
+					&& !checkMove(x, y + 50 + player.getSpeed())) ? (50 - ((y - player.getSpeed()) % 50)) % 50
+							: player.getSpeed();
 			break;
 		case MOVERIGHT:
 			xy[0] = ((50 - ((x - player.getSpeed()) % 50)) % 50 < player.getSpeed() && y % 50 == 0
@@ -192,9 +191,9 @@ public class GameController extends Controller {
 					: player.getSpeed() * -1;
 			break;
 		case MOVEUP:
-			if (x % 50 == 0 && (y + player.getSpeed()) % 50 == 0) {
-				canMove = checkMove(x, y);
-			}
+			xy[1] = ((y + player.getSpeed()) % 50 < player.getSpeed() && x % 50 == 0 && !checkMove(x, y))
+					? ((y + player.getSpeed()) % 50) * -1
+					: player.getSpeed() * -1;
 			break;
 		default:
 			break;
