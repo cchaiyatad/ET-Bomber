@@ -9,58 +9,54 @@ import player.Player;
 
 public class Bomb extends GameObject implements Weapon, Destroyable {
 	private int range;
+	private Player player;
 	Thread thread;
-	public Bomb(int xPosition, int yPosition, Pane layer,int range,Player player) {
+
+	public Bomb(int xPosition, int yPosition, Pane layer, int range, Player player) {
 		super(xPosition, yPosition, "bomb", layer);
+		this.player = player;
 		this.range = range;
 		player.getCountBomb().add(this);
 		player.setCanUseWeapon();
-		// TODO Auto-generated constructor stub
+
 		thread = new Thread(() -> {
-				try {
-					Thread.sleep(3000);
-					Platform.runLater(new Runnable() {
-						
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							onObjectIsDestroyed();
-							player.getCountBomb().poll();
-							player.setCanUseWeapon();
-						}
-					});
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			try {
+				Thread.sleep(3000);
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						onObjectIsDestroyed();
+						player.getCountBomb().poll();
+						player.setCanUseWeapon();
+					}
+				});
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		});
 		thread.start();
 	}
 
 	@Override
 	public int getDamageRange(Player player) {
-		// TODO Auto-generated method stub
 		return player.getBombRange();
 	}
 
 	@Override
 	public boolean canMakeDamageToobject(GameObject targetobj) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean makeDamageToPlayer(Player target) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void onObjectIsDestroyed() {
-		// TODO Auto-generated method stub
 		this.layer.getChildren().remove(this.imageView);
-		
+		player.getGameController().removeItem(xPosition / 50, yPosition / 50);
 	}
-	
 
 }

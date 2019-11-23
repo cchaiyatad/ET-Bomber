@@ -140,8 +140,11 @@ public class Player extends GameObject implements Moveable {
 	public void useWeapon() {
 		switch (getCurrentWeapon()) {
 		case BOMB:
-			new Bomb(getxPosition() / 50 * 50, getyPosition() / 50 * 50,
-					this.getGameController().getGamePage().getGameFieldItemPane(), getBombRange(), this);
+			if (this.gameController.canSetObject(getxPosition() / 50, getyPosition() / 50)) {
+				this.gameController.setObjectInGame(getxPosition() / 50, getyPosition() / 50,
+						new Bomb(getxPosition() / 50 * 50, getyPosition() / 50 * 50,
+								this.getGameController().getGamePage().getGameFieldItemPane(), getBombRange(), this));
+			}
 			break;
 		default:
 			break;

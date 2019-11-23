@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
 import gameobject.Wall;
@@ -57,7 +59,7 @@ public class GameController extends Controller {
 	public GamePage getGamePage() {
 		return this.gamePage;
 	}
-	
+
 	public List<Player> getPlayers() {
 		return players;
 	}
@@ -72,6 +74,16 @@ public class GameController extends Controller {
 
 	public void setStartTime(long startTime) {
 		this.startTime = TimeUnit.SECONDS.convert(startTime, TimeUnit.NANOSECONDS);
+	}
+
+	public void setObjectInGame(int x, int y, GameObject gameObject) {
+		if (gameObjectArray[x][y] == null) {
+			gameObjectArray[x][y] = gameObject;
+		}
+	}
+
+	public boolean canSetObject(int x, int y) {
+		return gameObjectArray[x][y] == null;
 	}
 
 	public AnimationTimer gameLoop() {
@@ -98,13 +110,15 @@ public class GameController extends Controller {
 					gamePage.getScoreBoard().updateStatus();
 
 					for (Player player : players) {
-						switch(player.getPlayerNumber()) {
+						switch (player.getPlayerNumber()) {
 						case 1:
-							if(inputInGame.isKeyPress(Setting.PLAYERONE_PLACEBOMB) && player.isCanUseWeapon()) player.useWeapon();
+							if (inputInGame.isKeyPress(Setting.PLAYERONE_PLACEBOMB) && player.isCanUseWeapon())
+								player.useWeapon();
 							break;
-						
+
 						case 2:
-							if(inputInGame.isKeyPress(Setting.PLAYERTWO_PLACEBOMB) && player.isCanUseWeapon()) player.useWeapon();
+							if (inputInGame.isKeyPress(Setting.PLAYERTWO_PLACEBOMB) && player.isCanUseWeapon())
+								player.useWeapon();
 							break;
 						}
 						inputInGame.changeBitset(player);
@@ -212,6 +226,12 @@ public class GameController extends Controller {
 		}
 	}
 
+	public void removeItem(int x, int y) {
+		if (gameObjectArray[x][y] != null) {
+			gameObjectArray[x][y] = null;
+		}
+	}
+
 	private void createBackground() {
 		for (int i = 1; i <= 13; i++) {
 			for (int j = 1; j <= 13; j++) {
@@ -295,7 +315,7 @@ public class GameController extends Controller {
 			Player player = null;
 			if (i == 0) {
 				player = new Player(50, 50, "playerOne", gamePage.getGameFieldPlayerPane(), 1, this);
-			}else if(i == 1) {
+			} else if (i == 1) {
 				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this);
 			}
 			players.add(player);
