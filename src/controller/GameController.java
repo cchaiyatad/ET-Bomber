@@ -268,7 +268,7 @@ public class GameController extends Controller {
 					gameObject = new Wall(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case OBSTACLE:
-					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldItemPane(), null);
+					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldItemPane(), null, this);
 					break;
 				case BOMBUPGRADEITEM:
 					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
