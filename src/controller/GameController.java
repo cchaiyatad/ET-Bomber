@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import player.Player;
 import player.PlayerState;
 import setting.Setting;
+import weapon.Bomb;
 
 public class GameController extends Controller {
 	private ObjectInGame[][] spawnObjectsInfomationArray = new ObjectInGame[15][15];
@@ -196,9 +197,9 @@ public class GameController extends Controller {
 	}
 
 	private boolean checkMove(int x, int y) {
-		return spawnObjectsInfomationArray[x][y] != ObjectInGame.BOMB
-				&& spawnObjectsInfomationArray[x][y] != ObjectInGame.WALL
-				&& spawnObjectsInfomationArray[x][y] != ObjectInGame.OBSTACLE;
+		return !(gameObjectArray[x][y] instanceof Wall) && !(gameObjectArray[x][y] instanceof Obstacle);
+//		return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall)
+//				&& !(gameObjectArray[x][y] instanceof Obstacle); 
 	}
 
 	private void checkPlayerGetItem(Player player) {
