@@ -140,7 +140,8 @@ public class Player extends GameObject implements Moveable {
 	public void useWeapon() {
 		switch (getCurrentWeapon()) {
 		case BOMB:
-			new Bomb(getxPosition() / 50 * 50, getyPosition() / 50 * 50, this.layer, getBombRange(), this);
+			new Bomb(getxPosition() / 50 * 50, getyPosition() / 50 * 50,
+					this.getGameController().getGamePage().getGameFieldItemPane(), getBombRange(), this);
 			break;
 		default:
 			break;
@@ -160,7 +161,7 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void setBombCount(int bombCount) {
-		bombCount = bombCount  > 9 ? 9 : bombCount;
+		bombCount = bombCount > 9 ? 9 : bombCount;
 		this.bombCount = bombCount;
 	}
 
@@ -169,7 +170,7 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void setBombRange(int bombRange) {
-		bombRange  = bombRange  > 9 ? 9 : bombRange ;
+		bombRange = bombRange > 9 ? 9 : bombRange;
 		this.bombRange = bombRange;
 	}
 

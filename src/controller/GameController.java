@@ -54,6 +54,10 @@ public class GameController extends Controller {
 		return super.getScene();
 	}
 
+	public GamePage getGamePage() {
+		return this.gamePage;
+	}
+	
 	public List<Player> getPlayers() {
 		return players;
 	}
@@ -211,7 +215,7 @@ public class GameController extends Controller {
 	private void createBackground() {
 		for (int i = 1; i <= 13; i++) {
 			for (int j = 1; j <= 13; j++) {
-				new Wall(50 * j, 50 * i, "background", gamePage.getGameFieldPane());
+				new Wall(50 * j, 50 * i, "background", gamePage.getGameFieldItemPane());
 			}
 		}
 	}
@@ -223,51 +227,46 @@ public class GameController extends Controller {
 				GameObject gameObject = null;
 				switch (spawnObjectsInfomationArray[i][j]) {
 				case WALL:
-					gameObject = new Wall(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new Wall(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case OBSTACLE:
-					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(), null);
+					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldItemPane(), null);
 					break;
 				case BOMBUPGRADEITEM:
-					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case POWERUPGRADEITEM:
-					gameObject = new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case SPEEDUPGRADEITEM:
-					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case LIFEINCREASEITEM:
-					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 //					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(),
 //							new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane()));
 //					spawnObjectsInfomationArray[i][j] = ObjectInGame.OBSTACLE;
 					break;
 				case SHIELDITEM:
-					//TODO:
-					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case PUSHBOMBSKILLITEM:
-					//TODO:
-					gameObject = new PushBombSkillItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new PushBombSkillItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case LANDMINEITEM:
-					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case GRENADEITEM:
-					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case POISIONDARTITEM:
-					//TODO:
-					gameObject = new PoisonDartItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new PoisonDartItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case ROCKETLAUNCHERITEM:
-					//TODO:
-					gameObject = new RocketLauncherItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new RocketLauncherItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				case REMOTEBOMBITEM:
-					//TODO:
-					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				default:
 					break;
@@ -295,9 +294,9 @@ public class GameController extends Controller {
 		for (int i = 0; i < numberOfPlayer; i++) {
 			Player player = null;
 			if (i == 0) {
-				player = new Player(50, 50, "playerOne", gamePage.getGameFieldPane(), 1, this);
+				player = new Player(50, 50, "playerOne", gamePage.getGameFieldPlayerPane(), 1, this);
 			}else if(i == 1) {
-				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPane(), 2, this);
+				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this);
 			}
 			players.add(player);
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);

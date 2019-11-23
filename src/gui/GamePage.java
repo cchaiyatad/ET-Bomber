@@ -22,8 +22,12 @@ public class GamePage extends HBox {
 		this.getChildren().add(gameField);
 	}
 	
-	public Pane getGameFieldPane() {
-		return gameField.getLayer();
+	public Pane getGameFieldItemPane() {
+		return gameField.getItemLayer();
+	}
+	
+	public Pane getGameFieldPlayerPane() {
+		return gameField.getPlayerLayer();
 	}
 	
 	public ScoreBoard getScoreBoard() {
