@@ -172,8 +172,9 @@ public class GameController extends Controller {
 		return inputInGame.isKeyPress(Setting.PLAYERONE_PLACEBOMB);
 	}
 
-	public boolean isMoveAble(int x, int y, Player player) {
+	public int[] isMoveAble(int x, int y, Player player) {
 		boolean canMove = true;
+		int[] xy = { 0, 0 };
 		switch (player.getCurrentPlayerState()) {
 		case MOVEDOWN:
 			if (x % 50 == 0 && (y - player.getSpeed()) % 50 == 0) {
@@ -181,15 +182,14 @@ public class GameController extends Controller {
 			}
 			break;
 		case MOVERIGHT:
-			if ((x - player.getSpeed()) % 50 == 0 && y % 50 == 0) {
-				canMove = checkMove(x + 50 - player.getSpeed(), y);
-			}
+			xy[0] = ((50 - ((x - player.getSpeed()) % 50)) % 50 < player.getSpeed() && y % 50 == 0
+					&& !checkMove(x + 50 + player.getSpeed(), y)) ? (50 - ((x - player.getSpeed()) % 50)) % 50
+							: player.getSpeed();
 			break;
 		case MOVELEFT:
-			System.out.println(x + " " + y);
-			if ((x + player.getSpeed()) % 50 == 0 && y % 50 == 0) {
-				canMove = checkMove(x, y);
-			}
+			xy[0] = ((x + player.getSpeed()) % 50 < player.getSpeed() && y % 50 == 0 && !checkMove(x, y))
+					? ((x + player.getSpeed()) % 50) * -1
+					: player.getSpeed() * -1;
 			break;
 		case MOVEUP:
 			if (x % 50 == 0 && (y + player.getSpeed()) % 50 == 0) {
@@ -199,7 +199,8 @@ public class GameController extends Controller {
 		default:
 			break;
 		}
-		return canMove;
+		return xy;
+
 	}
 
 	public void onRemoveScene() {
