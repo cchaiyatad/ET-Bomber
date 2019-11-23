@@ -14,7 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import player.Player;
 import player.PlayerState;
-import setting.Setting; 
+import setting.Setting;
+import weapon.LandMine;
+import weapon.PoisonDart;
+import weapon.RemoteBomb; 
 
 public class GameController extends Controller {
 	private ObjectInGame[][] spawnObjectsInfomationArray = new ObjectInGame[15][15];
@@ -225,20 +228,48 @@ public class GameController extends Controller {
 				case OBSTACLE:
 					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(), null);
 					break;
+				case BOMBUPGRADEITEM:
+					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					break;
+				case POWERUPGRADEITEM:
+					//TODO:
+					gameObject = new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					break;
+				case SPEEDUPGRADEITEM:
+					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					break;
 				case LIFEINCREASEITEM:
 					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane());
 //					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(),
 //							new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane()));
 //					spawnObjectsInfomationArray[i][j] = ObjectInGame.OBSTACLE;
 					break;
-				case SPEEDUPGRADEITEM:
-					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+				case SHIELDITEM:
+					//TODO:
+					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
-				case BOMBUPGRADEITEM:
-					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+				case PUSHBOMBSKILLITEM:
+					//TODO:
+					gameObject = new PushBombSkillItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					break;
+				case LANDMINEITEM:
+					//TODO:
+					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
 				case GRENADEITEM:
 					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					break;
+				case POISIONDARTITEM:
+					//TODO:
+					gameObject = new PoisonDartItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					break;
+				case ROCKETLAUNCHERITEM:
+					//TODO:
+					gameObject = new RocketLauncherItem(i * 50, j * 50, gamePage.getGameFieldPane());
+					break;
+				case REMOTEBOMBITEM:
+					//TODO:
+					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldPane());
 					break;
 				default:
 					break;
