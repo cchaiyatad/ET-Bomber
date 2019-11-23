@@ -8,17 +8,19 @@ import weapon.WeaponType;
 import weapon.*;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 public class Player extends GameObject implements Moveable {
+	private final long shieldDuration = 5;
+
 	private int hp;
 	private int bombCount;
 	private int bombRange;
-	// private int otherCount;
 	private int speed;
 	private int score;
 
 	private WeaponType currentWeapon;
-	private boolean hasShield;
+	private long shieldTime;
 	private boolean CanPushBomb;
 	private boolean canUseWeapon;
 
@@ -143,6 +145,7 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void setHp(int hp) {
+		hp = hp < 0 ? 0 : hp;
 		this.hp = hp;
 	}
 
@@ -190,11 +193,11 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public boolean isHasShield() {
-		return hasShield;
+		return shieldTime > TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
 	}
 
-	public void setHasShield(boolean hasShield) {
-		this.hasShield = hasShield;
+	public void setShield() {
+		this.shieldTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS) + shieldDuration;
 	}
 
 	public boolean isCanPushBomb() {

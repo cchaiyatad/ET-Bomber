@@ -38,10 +38,6 @@ public class LevelGenerator {
 			suffleList.add(ObjectInGame.EMPTY);
 		}
 
-//		for(int i = 0; i < suffleList.size();i++) {
-//			System.out.println(suffleList.get(i));
-//		}
-//		
 //		Collections.shuffle(suffleList);
 
 		for (int i = 0; i < 15; i++) {

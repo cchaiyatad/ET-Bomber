@@ -3,8 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
 import gameobject.Wall;
@@ -166,10 +164,6 @@ public class GameController extends Controller {
 		} else {
 			player.setCurrentPlayerState(PlayerState.IDLE);
 		}
-	}
-
-	public boolean isPressSpace() {
-		return inputInGame.isKeyPress(Setting.PLAYERONE_PLACEBOMB);
 	}
 
 	public int[] isMoveAble(int x, int y, Player player) {

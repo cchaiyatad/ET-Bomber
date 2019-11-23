@@ -3,7 +3,6 @@ package item;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import javafx.scene.layout.Pane;
-import player.Player;
 
 public abstract class Item extends GameObject implements Destroyable {
 
