@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import gameobject.GameObject;
 import gameobject.Obstacle;
 import gameobject.Wall;

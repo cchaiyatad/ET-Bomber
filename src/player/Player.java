@@ -17,7 +17,7 @@ public class Player extends GameObject implements Moveable {
 	private int hp;
 	private int bombCount;
 	private int bombRange;
-	//private int otherCount;
+	// private int otherCount;
 	private int speed;
 	private int score;
 
@@ -30,7 +30,7 @@ public class Player extends GameObject implements Moveable {
 	private int playerNumber;
 	private GameController gameController;
 	private Queue<Bomb> countBomb;
-	
+
 	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer);
@@ -136,11 +136,11 @@ public class Player extends GameObject implements Moveable {
 	public void setCanUseWeapon() {
 		this.canUseWeapon = countBomb.size() < this.getBombCount();
 	}
+
 	public void useWeapon() {
-		switch(getCurrentWeapon()) {
+		switch (getCurrentWeapon()) {
 		case BOMB:
-			Bomb bomb = new Bomb(getxPosition()/50*50,getyPosition()/50*50,this.layer,getBombRange(),this);
-			bomb = null;
+			new Bomb(getxPosition() / 50 * 50, getyPosition() / 50 * 50, this.layer, getBombRange(), this);
 			break;
 		default:
 			break;
@@ -160,6 +160,7 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void setBombCount(int bombCount) {
+		bombCount = bombCount  > 9 ? 9 : bombCount;
 		this.bombCount = bombCount;
 	}
 
@@ -168,6 +169,7 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void setBombRange(int bombRange) {
+		bombRange  = bombRange  > 9 ? 9 : bombRange ;
 		this.bombRange = bombRange;
 	}
 
@@ -242,7 +244,7 @@ public class Player extends GameObject implements Moveable {
 		setBombCount(5);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();
-		
+
 		setSpeed(defaultMoveSpeed);
 		setCurrentWeapon(WeaponType.BOMB);
 		currentPlayerState = PlayerState.IDLE;
