@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
 import gameobject.Wall;
@@ -17,10 +19,10 @@ import setting.Setting;
 import weapon.Bomb;
 
 public class GameController extends Controller {
-	private ObjectInGame[][] spawnObjectsInfomationArray = new ObjectInGame[15][15];
 	private GameObject[][] gameObjectArray = new GameObject[15][15];
 	private List<Player> players;
 
+	private LevelGenerator levelGenerator;
 	private GameSummaryPage gameSummaryPage;
 	private GamePage gamePage;
 	private InputInGame inputInGame;
@@ -31,10 +33,10 @@ public class GameController extends Controller {
 
 	@Override
 	protected Scene createScene() {
-		LevelGenerator levelGenerator = new LevelGenerator();
-		spawnObjectsInfomationArray = levelGenerator.generateLevel();
+
 		gamePage = new GamePage(this);
 		gameSummaryPage = new GameSummaryPage(this);
+		levelGenerator = new LevelGenerator();
 		createBackground();
 		createGame();
 
@@ -211,7 +213,16 @@ public class GameController extends Controller {
 
 	}
 
+	public void restartGame() {
+		createGame();
+		createPlayer(2);
+		this.gameLoop = gameLoop();
+		gameLoop.start();
+		remainingTime = Setting.GAME_TIME;
+	}
+
 	public void onRemoveScene() {
+		players = null;
 		inputInGame.removeListeners();
 		inputInGame.clearKeyBoardCheck();
 		this.scene = null;
@@ -296,6 +307,7 @@ public class GameController extends Controller {
 	}
 
 	private void createGame() {
+		ObjectInGame[][] spawnObjectsInfomationArray = levelGenerator.generateLevel();
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
 				GameObject gameObject = null;
@@ -364,7 +376,10 @@ public class GameController extends Controller {
 	}
 
 	private void createPlayer(int numberOfPlayer) {
-		players = new ArrayList<Player>();
+		if (players == null) {
+			players = new ArrayList<Player>();
+		}
+
 		for (int i = 0; i < numberOfPlayer; i++) {
 			Player player = null;
 			if (i == 0) {
@@ -372,20 +387,50 @@ public class GameController extends Controller {
 			} else if (i == 1) {
 				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this);
 			}
-			players.add(player);
+			if (players.size() == numberOfPlayer) {
+				player.setScore(players.get(i).getScore());
+				players.get(i).onObjectIsDestroyed();
+				players.set(i, player);
+			} else {
+				players.add(player);
+			}
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
 		}
 	}
 
 	private void checkGameFinish() {
 		int survirerCount = 0;
+		int survirerIndex = -1;
 		for (int i = 0; i < players.size(); i++) {
 			if (!players.get(i).isDead()) {
 				survirerCount++;
+				survirerIndex = i;
 			}
 		}
 		if (survirerCount == 1) {
+			setSummaryPageAppear(true);
+			players.get(survirerIndex).setScore(players.get(survirerIndex).getScore() + 1);
 			gameLoop.stop();
+			removeGame();
+		}
+	}
+
+	private void removeGame() {
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 15; j++) {
+				if (gameObjectArray[i][j] != null && gameObjectArray[i][j] instanceof Destroyable) {
+					((Destroyable) gameObjectArray[i][j]).onObjectIsDestroyed();
+				}
+			}
+		}
+
+	}
+
+	public void setSummaryPageAppear(boolean value) {
+		if (value) {
+			this.gamePage.getChildren().add(gameSummaryPage);
+		} else {
+			this.gamePage.getChildren().remove(gameSummaryPage);
 		}
 	}
 
