@@ -1,24 +1,27 @@
 package weapon;
 
-
+import controller.GameController;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import item.Weapon;
 import javafx.application.Platform;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import player.Player;
 
 public class Bomb extends GameObject implements Weapon, Destroyable {
-	private Player player;
+	private int range;
+	private GameController gameController;
 	Thread thread;
 
-	public Bomb(int xPosition, int yPosition, Pane layer, int range, Player player) {
+	public Bomb(int xPosition, int yPosition, Pane layer, int range, Player player, GameController gameController) {
 		super(xPosition, yPosition, "bomb", layer);
-		this.player = player;
-		player.getCountBomb().add(this);
-		player.setCanUseWeapon();
+		if (player != null) {
+			System.out.println("Hit");
+			player.getCountBomb().add(this);
+			player.setCanUseWeapon();
+		}
+		this.range = range;
+		this.gameController = gameController;
 		BombArea area = new BombArea(this);
 
 		thread = new Thread(() -> {
@@ -30,13 +33,15 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 					public void run() {
 						onObjectIsDestroyed();
 						area.showRange();
-						player.getCountBomb().poll();
-						player.setCanUseWeapon();
+						if (player != null) {
+							player.getCountBomb().poll();
+							player.setCanUseWeapon();
+						}
 					}
 				});
 				Thread.sleep(1000);
 				Platform.runLater(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						area.removeRange();
@@ -50,8 +55,8 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	}
 
 	@Override
-	public int getDamageRange(Player player) {
-		return player.getBombRange();
+	public int getDamageRange() {
+		return this.range;
 	}
 
 	@Override
@@ -67,12 +72,11 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	@Override
 	public void onObjectIsDestroyed() {
 		this.layer.getChildren().remove(this.imageView);
-		player.getGameController().removeItem(xPosition / 50, yPosition / 50);
+		gameController.removeItem(xPosition / 50, yPosition / 50);
 	}
 
-	public Player getPlayer() {
-		return player;
+	public GameController getGameController() {
+		return gameController;
 	}
-	
 
 }

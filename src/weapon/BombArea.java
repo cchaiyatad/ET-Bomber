@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import player.Player;
 
 public class BombArea {
 
@@ -25,7 +24,7 @@ public class BombArea {
 		xPos = bomb.getxPosition() / 50;
 		yPos = bomb.getyPosition() / 50;
 		imagePath = "file:res/Image/bombArea.png";
-		setRange(bomb.getPlayer().getBombRange());
+		setRange(bomb.getDamageRange());
 		isCanShowTop = new boolean[getRange()];
 		isCanShowBot = new boolean[getRange()];
 		isCanShowLeft = new boolean[getRange()];
@@ -56,19 +55,19 @@ public class BombArea {
 		for (int j = 0; j < getRange(); j++) {
 			switch (site) {
 			case TOP:
-				isCanShow[j] = bomb.getPlayer().getGameController().canSetObject(xPos, Math.max(yPos - j - 1, 0));
+				isCanShow[j] = bomb.getGameController().canSetObject(xPos, Math.max(yPos - j - 1, 0));
 				System.out.println(isCanShow[j]);
 				break;
 			case BOT:
-				isCanShow[j] = bomb.getPlayer().getGameController().canSetObject(xPos, Math.min(yPos + j + 1, 14));
+				isCanShow[j] = bomb.getGameController().canSetObject(xPos, Math.min(yPos + j + 1, 14));
 				System.out.println(isCanShow[j]);
 				break;
 			case LEFT:
-				isCanShow[j] = bomb.getPlayer().getGameController().canSetObject(Math.max(xPos - j - 1, 0), yPos);
+				isCanShow[j] = bomb.getGameController().canSetObject(Math.max(xPos - j - 1, 0), yPos);
 				System.out.println(isCanShow[j]);
 				break;
 			case RIGHT:
-				isCanShow[j] = bomb.getPlayer().getGameController().canSetObject(Math.min(xPos + j + 1, 14), yPos);
+				isCanShow[j] = bomb.getGameController().canSetObject(Math.min(xPos + j + 1, 14), yPos);
 				System.out.println(isCanShow[j]);
 				break;
 			}

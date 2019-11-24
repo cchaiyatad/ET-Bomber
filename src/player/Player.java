@@ -132,8 +132,9 @@ public class Player extends GameObject implements Moveable, Destroyable {
 		switch (getCurrentWeapon()) {
 		case BOMB:
 			if (this.gameController.canSetObject(x, y)) {
-				this.gameController.setObjectInGame(x, y, new Bomb(x * 50, y * 50,
-						this.getGameController().getGamePage().getGameFieldItemPane(), getBombRange(), this));
+				this.gameController.setObjectInGame(x, y,
+						new Bomb(x * 50, y * 50, this.getGameController().getGamePage().getGameFieldItemPane(),
+								getBombRange(), this, this.getGameController()));
 			}
 			break;
 		default:
@@ -242,7 +243,7 @@ public class Player extends GameObject implements Moveable, Destroyable {
 
 	private void setDefaultPlayer() {
 		setHp(3);
-		setBombRange(10);
+		setBombRange(3);
 		setBombCount(1);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();

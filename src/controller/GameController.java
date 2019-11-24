@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import gameobject.Destroyable;
@@ -12,6 +13,7 @@ import gui.GamePage;
 import gui.GameSummaryPage;
 import item.*;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import player.*;
@@ -30,6 +32,8 @@ public class GameController extends Controller {
 	private boolean isPlaying;
 	private long remainingTime = Setting.GAME_TIME;
 	private long startTime;
+	private Thread createBombThread;
+	private int currentNextThreadTime = 60;
 
 	@Override
 	protected Scene createScene() {
@@ -98,6 +102,7 @@ public class GameController extends Controller {
 
 					checkGameFinish();
 					setTimer(now);
+					checkRemainingTime();
 					gamePage.getScoreBoard().setTimer(remainingTime);
 
 					for (Player player : players) {
@@ -219,6 +224,11 @@ public class GameController extends Controller {
 		this.gameLoop = gameLoop();
 		gameLoop.start();
 		remainingTime = Setting.GAME_TIME;
+		if (this.createBombThread != null) {
+			this.createBombThread.interrupt();
+		}
+		currentNextThreadTime = 60;
+		this.createBombThread = null;
 	}
 
 	public void onRemoveScene() {
@@ -227,6 +237,11 @@ public class GameController extends Controller {
 		inputInGame.clearKeyBoardCheck();
 		this.scene = null;
 		remainingTime = Setting.GAME_TIME;
+		if (this.createBombThread != null) {
+			this.createBombThread.interrupt();
+		}
+		currentNextThreadTime = 60;
+		this.createBombThread = null;
 	}
 
 	private void setTimer(long now) {
@@ -236,6 +251,75 @@ public class GameController extends Controller {
 		} else if (TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS) != startTime) {
 			startTime = TimeUnit.SECONDS.convert(now, TimeUnit.NANOSECONDS);
 		}
+	}
+
+	private void checkRemainingTime() {
+		int generateRateSec = 0;
+		int bombGenerateRate = 0;
+		long endTime = 0;
+		if (remainingTime <= 0) {
+			remainingTime = 0;
+			generateRateSec = 1;
+			bombGenerateRate = 4;
+			endTime = -1;
+		} else if (remainingTime == 15) {
+			generateRateSec = 1;
+			bombGenerateRate = 3;
+			endTime = 0;
+		} else if (remainingTime == 30) {
+			generateRateSec = 2;
+			bombGenerateRate = 3;
+			endTime = 15;
+		} else if (remainingTime == 45) {
+			generateRateSec = 2;
+			bombGenerateRate = 2;
+			endTime = 30;
+		} else if (remainingTime == 60) {
+			generateRateSec = 2;
+			bombGenerateRate = 1;
+			endTime = 45;
+		} else {
+			return;
+		}
+		if (currentNextThreadTime == remainingTime) {
+			generateBombThread(generateRateSec, bombGenerateRate, endTime);
+		}
+	}
+
+	private void generateBombThread(int time, int bomb, long endTime) {
+		Random random = new Random();
+		this.createBombThread = new Thread(() -> {
+
+			while (true) {
+				try {
+					Thread.sleep(time * 1000);
+					if (remainingTime <= endTime) {
+						break;
+					}
+					Platform.runLater(() -> {
+						for (int i = 0; i < bomb; i++) {
+							int x;
+							int y;
+							while (true) {
+								x = random.nextInt(13) + 1;
+								y = random.nextInt(13) + 1;
+								if (canSetObject(x, y)) {
+									setObjectInGame(x, y, new Bomb(x * 50, y * 50, getGamePage().getGameFieldItemPane(),
+											2, null, this));
+									break;
+								}
+							}
+
+						}
+					});
+				} catch (InterruptedException e) {
+					break;
+				}
+			}
+		});
+		this.createBombThread.start();
+		this.currentNextThreadTime = (int) endTime;
+
 	}
 
 	private boolean checkMove(int x, int y) {
@@ -414,7 +498,7 @@ public class GameController extends Controller {
 			removeGame();
 			int[] data = new int[players.size() + 1];
 			data[0] = survirerIndex;
-			for(int i = 0; i < players.size(); i++) {
+			for (int i = 0; i < players.size(); i++) {
 				data[i + 1] = players.get(i).getScore();
 			}
 			gameSummaryPage.setText(data);
@@ -439,6 +523,5 @@ public class GameController extends Controller {
 			this.gamePage.getChildren().remove(gameSummaryPage);
 		}
 	}
-	
 
 }
