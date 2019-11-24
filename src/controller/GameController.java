@@ -11,8 +11,7 @@ import item.*;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import player.Player;
-import player.PlayerState;
+import player.*;
 import setting.Setting;
 import weapon.Bomb;
 
@@ -140,6 +139,9 @@ public class GameController extends Controller {
 	}
 
 	private void checkPlayerMoveAndSetState(Player player) {
+		if(player.isDead()) {
+			return;
+		}
 		KeyCode buttonUp = null;
 		KeyCode buttonRight = null;
 		KeyCode buttonDown = null;
@@ -247,6 +249,9 @@ public class GameController extends Controller {
 	}
 
 	private void checkPlayerPlaceBome(Player player) {
+		if(player.isDead()) {
+			return;
+		}
 		KeyCode placeBombKey = null;
 		switch (player.getPlayerNumber()) {
 		case 1:
@@ -288,7 +293,6 @@ public class GameController extends Controller {
 	}
 
 	private void createGame() {
-
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
 				GameObject gameObject = null;

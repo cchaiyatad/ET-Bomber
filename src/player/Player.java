@@ -1,6 +1,7 @@
 package player;
 
 import controller.GameController;
+import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Moveable;
 import javafx.scene.layout.Pane;
@@ -10,7 +11,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
-public class Player extends GameObject implements Moveable {
+public class Player extends GameObject implements Moveable, Destroyable {
 	private final long shieldDuration = 5;
 
 	private int hp;
@@ -145,7 +146,11 @@ public class Player extends GameObject implements Moveable {
 	}
 
 	public void setHp(int hp) {
-		hp = hp < 0 ? 0 : hp;
+		if (hp <= 0) {
+			hp = 0;
+			this.layer.getChildren().remove(this.imageView);
+			currentPlayerState = PlayerState.DEAD;
+		}
 		this.hp = hp;
 	}
 
@@ -232,6 +237,10 @@ public class Player extends GameObject implements Moveable {
 		this.gameController = gameController;
 	}
 
+	public boolean isDead() {
+		return currentPlayerState == PlayerState.DEAD;
+	}
+
 	private void setDefaultPlayer() {
 		setHp(3);
 		setBombRange(1);
@@ -246,6 +255,11 @@ public class Player extends GameObject implements Moveable {
 
 	public Queue<Bomb> getCountBomb() {
 		return countBomb;
+	}
+
+	@Override
+	public void onObjectIsDestroyed() {
+		this.layer.getChildren().remove(this.imageView);
 	}
 
 }
