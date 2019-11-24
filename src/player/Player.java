@@ -146,6 +146,9 @@ public class Player extends GameObject implements Moveable, Destroyable {
 	}
 
 	public void setHp(int hp) {
+		if (hp < this.hp && isHasShield()) {
+			return;
+		}
 		if (hp <= 0) {
 			hp = 0;
 			this.layer.getChildren().remove(this.imageView);
@@ -225,10 +228,6 @@ public class Player extends GameObject implements Moveable, Destroyable {
 		return playerNumber;
 	}
 
-	public void setPlayerNumber(int playerNumber) {
-		this.playerNumber = playerNumber;
-	}
-
 	public GameController getGameController() {
 		return gameController;
 	}
@@ -247,6 +246,7 @@ public class Player extends GameObject implements Moveable, Destroyable {
 		setBombCount(5);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();
+		shieldTime = 0;
 
 		setSpeed(defaultMoveSpeed);
 		setCurrentWeapon(WeaponType.BOMB);
