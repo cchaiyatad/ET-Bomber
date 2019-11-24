@@ -10,7 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import setting.Setting;
 
-public class InstuctionPage extends FlowPane implements HasButton{
+public class InstuctionPage extends FlowPane implements HasButtonPage{
 	private StartPage startPage;
 	private Button backButton;
 

@@ -11,7 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import setting.Setting;
 
-public class StartPage extends StackPane implements HasButton{
+public class StartPage extends StackPane implements HasButtonPage{
 
 	private Label gameLabel;
 	private Button playButton;

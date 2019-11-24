@@ -10,7 +10,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class ScoreBoard extends VBox implements HasButton {
+public class ScoreBoard extends VBox implements HasButtonPage {
 
 	private PlayerStatusBoard[] playerStatusBoards = new PlayerStatusBoard[4];
 	private Label timer;
@@ -46,16 +46,16 @@ public class ScoreBoard extends VBox implements HasButton {
 	public PlayerStatusBoard getPlayerStatusBoardViaIndex(int index) {
 		return playerStatusBoards[index];
 	}
-	
+
 	public void setTimer(long time) {
 		int minute = (int) (time / 60);
 		int second = (int) (time % 60);
 		String timeText = String.format("%01d:%02d", minute, second);
 		timer.setText(timeText);
 	}
-	
+
 	public void updateStatus() {
-		for(PlayerStatusBoard playerStatusBoard : playerStatusBoards) {
+		for (PlayerStatusBoard playerStatusBoard : playerStatusBoards) {
 			playerStatusBoard.upDateStatus();
 		}
 	}
@@ -78,17 +78,23 @@ public class ScoreBoard extends VBox implements HasButton {
 				pauseButton.setText(pauseButtonText);
 			}
 		});
-		
+
 		mainMenuButton.setOnAction(e -> {
-			if (controller instanceof GameController) {
-				AnimationTimer gameLoop = ((GameController) controller).gameLoop();
-				gameLoop.stop();
-				((GameController) controller).setPlaying(false);
-				((GameController) controller).onRemoveScene();
-			}
-			Controller otherController = controller.getOtherController();
-			controller.getStage().setScene(otherController.getScene());
+			backToMainMenuAction();
 		});
+
+	}
+
+	public void backToMainMenuAction() {
+
+		if (controller instanceof GameController) {
+			AnimationTimer gameLoop = ((GameController) controller).gameLoop();
+			gameLoop.stop();
+			((GameController) controller).setPlaying(false);
+			((GameController) controller).onRemoveScene();
+		}
+		Controller otherController = controller.getOtherController();
+		controller.getStage().setScene(otherController.getScene());
 
 	}
 }

@@ -7,6 +7,7 @@ import gameobject.GameObject;
 import gameobject.Obstacle;
 import gameobject.Wall;
 import gui.GamePage;
+import gui.GameSummaryPage;
 import item.*;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ public class GameController extends Controller {
 	private GameObject[][] gameObjectArray = new GameObject[15][15];
 	private List<Player> players;
 
+	private GameSummaryPage gameSummaryPage;
 	private GamePage gamePage;
 	private InputInGame inputInGame;
 	private AnimationTimer gameLoop;
@@ -32,7 +34,7 @@ public class GameController extends Controller {
 		LevelGenerator levelGenerator = new LevelGenerator();
 		spawnObjectsInfomationArray = levelGenerator.generateLevel();
 		gamePage = new GamePage(this);
-
+		gameSummaryPage = new GameSummaryPage(this);
 		createBackground();
 		createGame();
 
@@ -92,6 +94,7 @@ public class GameController extends Controller {
 				@Override
 				public void handle(long now) {
 
+					checkGameFinish();
 					setTimer(now);
 					gamePage.getScoreBoard().setTimer(remainingTime);
 
@@ -139,7 +142,7 @@ public class GameController extends Controller {
 	}
 
 	private void checkPlayerMoveAndSetState(Player player) {
-		if(player.isDead()) {
+		if (player.isDead()) {
 			return;
 		}
 		KeyCode buttonUp = null;
@@ -249,7 +252,7 @@ public class GameController extends Controller {
 	}
 
 	private void checkPlayerPlaceBome(Player player) {
-		if(player.isDead()) {
+		if (player.isDead()) {
 			return;
 		}
 		KeyCode placeBombKey = null;
@@ -371,6 +374,18 @@ public class GameController extends Controller {
 			}
 			players.add(player);
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
+		}
+	}
+
+	private void checkGameFinish() {
+		int survirerCount = 0;
+		for (int i = 0; i < players.size(); i++) {
+			if (!players.get(i).isDead()) {
+				survirerCount++;
+			}
+		}
+		if (survirerCount == 1) {
+			gameLoop.stop();
 		}
 	}
 

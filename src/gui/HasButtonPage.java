@@ -1,5 +1,5 @@
 package gui;
 
-public interface HasButton {
+public interface HasButtonPage {
 	void setButtonAction();
 }
