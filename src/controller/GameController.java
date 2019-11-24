@@ -109,19 +109,29 @@ public class GameController extends Controller {
 					gamePage.getScoreBoard().updateStatus();
 
 					for (Player player : players) {
+						checkPlayerPlaceBome(player);
+					}
+
+					/// Debug
+					for (Player player : players) {
+						KeyCode key = null;
 						switch (player.getPlayerNumber()) {
 						case 1:
-							if (inputInGame.isKeyPress(Setting.PLAYERONE_PLACEBOMB) && player.isCanUseWeapon())
-								player.useWeapon();
+							key = KeyCode.U;
 							break;
-
 						case 2:
-							if (inputInGame.isKeyPress(Setting.PLAYERTWO_PLACEBOMB) && player.isCanUseWeapon())
-								player.useWeapon();
+							key = KeyCode.I;
 							break;
+						default:
+							return;
 						}
-						inputInGame.changeBitset(player);
+
+						if (inputInGame.isKeyPress(key)) {
+							player.setHp(player.getHp() - 1);
+						}
+						inputInGame.changeBitset(key, false);
 					}
+					///
 
 				}
 			};
@@ -234,6 +244,25 @@ public class GameController extends Controller {
 			getItem(x, y, player);
 			getItem(x, y2, player);
 		}
+	}
+
+	private void checkPlayerPlaceBome(Player player) {
+		KeyCode placeBombKey = null;
+		switch (player.getPlayerNumber()) {
+		case 1:
+			placeBombKey = Setting.PLAYERONE_PLACEBOMB;
+			break;
+		case 2:
+			placeBombKey = Setting.PLAYERTWO_PLACEBOMB;
+			break;
+		default:
+			return;
+		}
+
+		if (inputInGame.isKeyPress(placeBombKey) && player.isCanUseWeapon()) {
+			player.useWeapon();
+		}
+		inputInGame.changeBitset(placeBombKey, false);
 	}
 
 	private void getItem(int x, int y, Player player) {
