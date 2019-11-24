@@ -23,7 +23,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 
 		thread = new Thread(() -> {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 				Platform.runLater(new Runnable() {
 
 					@Override
@@ -34,7 +34,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 						player.setCanUseWeapon();
 					}
 				});
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				Platform.runLater(new Runnable() {
 					
 					@Override
