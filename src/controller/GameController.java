@@ -412,6 +412,12 @@ public class GameController extends Controller {
 			players.get(survirerIndex).setScore(players.get(survirerIndex).getScore() + 1);
 			gameLoop.stop();
 			removeGame();
+			int[] data = new int[players.size() + 1];
+			data[0] = survirerIndex;
+			for(int i = 0; i < players.size(); i++) {
+				data[i + 1] = players.get(i).getScore();
+			}
+			gameSummaryPage.setText(data);
 		}
 	}
 
