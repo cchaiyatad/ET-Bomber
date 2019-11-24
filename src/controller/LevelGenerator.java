@@ -47,10 +47,10 @@ public class LevelGenerator {
 				} else if (((i == 1 || i == 2 || i == 12 || i == 13) && (j == 1 || j == 2 || j == 12 || j == 13))) {
 					objectsArray[i][j] = ObjectInGame.EMPTY;
 				} else {
-					objectsArray[i][j] = suffleList.get(0);
-					suffleList.remove(0);
-					
-//					objectsArray[i][j] = ObjectInGame.EMPTY;
+//					objectsArray[i][j] = suffleList.get(0);
+//					suffleList.remove(0);
+//					
+					objectsArray[i][j] = ObjectInGame.EMPTY;
 //					if(random.nextInt(100) < 10) {
 //						objectsArray[i][j] = ObjectInGame.BOMBUPGRADEITEM;
 //					}	

@@ -439,5 +439,6 @@ public class GameController extends Controller {
 			this.gamePage.getChildren().remove(gameSummaryPage);
 		}
 	}
+	
 
 }

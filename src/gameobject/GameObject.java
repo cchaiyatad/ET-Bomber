@@ -56,4 +56,7 @@ public abstract class GameObject {
 		return imagePath;
 	}
 
+	public Pane getLayer() {
+		return layer;
+	}
 }

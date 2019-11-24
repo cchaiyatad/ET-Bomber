@@ -1,34 +1,45 @@
 package weapon;
 
+
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import item.Weapon;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import player.Player;
 
 public class Bomb extends GameObject implements Weapon, Destroyable {
-	private int range;
 	private Player player;
 	Thread thread;
 
 	public Bomb(int xPosition, int yPosition, Pane layer, int range, Player player) {
 		super(xPosition, yPosition, "bomb", layer);
 		this.player = player;
-		this.range = range;
 		player.getCountBomb().add(this);
 		player.setCanUseWeapon();
+		BombArea area = new BombArea(this);
 
 		thread = new Thread(() -> {
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				Platform.runLater(new Runnable() {
 
 					@Override
 					public void run() {
 						onObjectIsDestroyed();
+						area.showRange();
 						player.getCountBomb().poll();
 						player.setCanUseWeapon();
+					}
+				});
+				Thread.sleep(1000);
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						area.removeRange();
 					}
 				});
 			} catch (InterruptedException e) {
@@ -58,5 +69,10 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 		this.layer.getChildren().remove(this.imageView);
 		player.getGameController().removeItem(xPosition / 50, yPosition / 50);
 	}
+
+	public Player getPlayer() {
+		return player;
+	}
+	
 
 }

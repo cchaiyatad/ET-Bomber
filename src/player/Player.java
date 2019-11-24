@@ -242,8 +242,8 @@ public class Player extends GameObject implements Moveable, Destroyable {
 
 	private void setDefaultPlayer() {
 		setHp(3);
-		setBombRange(1);
-		setBombCount(5);
+		setBombRange(10);
+		setBombCount(1);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();
 		shieldTime = 0;
