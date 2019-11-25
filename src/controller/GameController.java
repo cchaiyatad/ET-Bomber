@@ -44,7 +44,7 @@ public class GameController extends Controller {
 		createBackground();
 		createGame();
 
-		createPlayer(2);
+		createPlayer(4);
 		this.scene = new Scene(gamePage, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 
 		inputInGame = new InputInGame(scene);
@@ -130,6 +130,12 @@ public class GameController extends Controller {
 							break;
 						case 2:
 							key = KeyCode.I;
+							break;
+						case 3:
+							key = KeyCode.O;
+							break;
+						case 4:
+							key = KeyCode.P;
 							break;
 						default:
 							return;
@@ -222,7 +228,7 @@ public class GameController extends Controller {
 
 	public void restartGame() {
 		createGame();
-		createPlayer(2);
+		createPlayer(4);
 		this.gameLoop = gameLoop();
 		gameLoop.start();
 		remainingTime = Setting.GAME_TIME;
@@ -469,11 +475,15 @@ public class GameController extends Controller {
 		}
 
 		for (int i = 0; i < numberOfPlayer; i++) {
-			Player player = null;
+			PlayerBase player = null;
 			if (i == 0) {
 				player = new Player(50, 50, "playerOne", gamePage.getGameFieldPlayerPane(), 1, this);
 			} else if (i == 1) {
 				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this);
+			} else if (i == 2) {
+				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this);
+			} else if (i == 3) {
+				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this);
 			}
 			if (players.size() == numberOfPlayer) {
 				player.setScore(players.get(i).getScore());

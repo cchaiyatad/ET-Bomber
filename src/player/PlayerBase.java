@@ -1,5 +1,6 @@
 package player;
 
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
@@ -31,10 +32,27 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	protected Queue<Bomb> countBomb;
 
 	public abstract void useWeapon();
-	protected abstract void setDefaultPlayer();
 
-	public PlayerBase(int xPosition, int yPosition, String imagePath, Pane layer) {
+	public PlayerBase(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
+			GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer);
+		this.playerNumber = playerNumber;
+		this.gameController = gameController;
+		setDefaultPlayer();
+	}
+
+	protected void setDefaultPlayer() {
+		setHp(3);
+		setBombRange(3);
+		setBombCount(1);
+		countBomb = new LinkedList<Bomb>();
+		setCanUseWeapon();
+		shieldTime = 0;
+
+		setSpeed(defaultMoveSpeed);
+		setCurrentWeapon(WeaponType.BOMB);
+		currentPlayerState = PlayerState.IDLE;
+
 	}
 
 	public boolean isCanUseWeapon() {

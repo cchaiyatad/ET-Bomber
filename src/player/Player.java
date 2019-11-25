@@ -2,20 +2,12 @@ package player;
 
 import controller.GameController;
 import javafx.scene.layout.Pane;
-import weapon.WeaponType;
 import weapon.*;
-import java.util.LinkedList;
-
 public class Player extends PlayerBase {
 	
 	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
-		super(xPosition, yPosition, imagePath, layer);
-
-		setDefaultPlayer();
-
-		this.playerNumber = playerNumber;
-		this.gameController = gameController;
+		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController);	
 	}
 
 	@Override
@@ -111,20 +103,6 @@ public class Player extends PlayerBase {
 		default:
 			break;
 		}
-	}
-
-	@Override
-	protected void setDefaultPlayer() {
-		setHp(3);
-		setBombRange(3);
-		setBombCount(1);
-		countBomb = new LinkedList<Bomb>();
-		setCanUseWeapon();
-		shieldTime = 0;
-
-		setSpeed(defaultMoveSpeed);
-		setCurrentWeapon(WeaponType.BOMB);
-		currentPlayerState = PlayerState.IDLE;
 	}
 
 	@Override
