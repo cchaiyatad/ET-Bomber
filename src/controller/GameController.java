@@ -148,6 +148,17 @@ public class GameController extends Controller {
 					}
 					///
 
+					/// Debug
+					if (inputInGame.isKeyPress(KeyCode.Y)) {
+						PlayerBase player = players.get(0);
+						int x = player.getxPosition() / 50;
+						int y = player.getyPosition() / 50;
+						if (gameObjectArray[x + 1][y] != null && gameObjectArray[x + 1][y] instanceof Destroyable) {
+							((Destroyable) gameObjectArray[x + 1][y]).onObjectIsDestroyed();
+						}
+						inputInGame.changeBitset(KeyCode.Y, false);
+					}
+
 				}
 			};
 		}
@@ -240,6 +251,7 @@ public class GameController extends Controller {
 	}
 
 	public void onRemoveScene() {
+		removeGame();
 		players = null;
 		inputInGame.removeListeners();
 		inputInGame.clearKeyBoardCheck();
@@ -404,13 +416,15 @@ public class GameController extends Controller {
 		ObjectInGame[][] spawnObjectsInfomationArray = levelGenerator.generateLevel();
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				GameObject gameObject = null;
+
+				if (spawnObjectsInfomationArray[i][j] == ObjectInGame.WALL) {
+					gameObjectArray[i][j] = new Wall(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					continue;
+				}
+
+				Item gameObject = null;
 				switch (spawnObjectsInfomationArray[i][j]) {
-				case WALL:
-					gameObject = new Wall(i * 50, j * 50, gamePage.getGameFieldItemPane());
-					break;
 				case OBSTACLE:
-					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldItemPane(), null, this);
 					break;
 				case BOMBUPGRADEITEM:
 					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
@@ -423,9 +437,6 @@ public class GameController extends Controller {
 					break;
 				case LIFEINCREASEITEM:
 					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
-//					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(),
-//							new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane()));
-//					spawnObjectsInfomationArray[i][j] = ObjectInGame.OBSTACLE;
 					break;
 				case SHIELDITEM:
 					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldItemPane());
@@ -449,9 +460,9 @@ public class GameController extends Controller {
 					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				default:
-					break;
+					continue;
 				}
-				gameObjectArray[i][j] = gameObject;
+				gameObjectArray[i][j] = new Obstacle(i * 50, j * 50, gamePage.getGameFieldItemPane(), gameObject, this);
 			}
 		}
 //		for (int i = 0; i < 15; i++) {
@@ -522,9 +533,8 @@ public class GameController extends Controller {
 	private void removeGame() {
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				if (gameObjectArray[i][j] != null && gameObjectArray[i][j] instanceof Destroyable) {
-					((Destroyable) gameObjectArray[i][j]).onObjectIsDestroyed();
-				}
+				gameObjectArray[i][j] = null;
+
 			}
 		}
 
