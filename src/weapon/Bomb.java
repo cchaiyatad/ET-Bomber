@@ -3,6 +3,7 @@ package weapon;
 import controller.GameController;
 import gameobject.Destroyable;
 import gameobject.GameObject;
+import gameobject.Wall;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import player.Player;
@@ -32,7 +33,9 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 
 					@Override
 					public void run() {
+						area.setIsCanShowRange();
 						onObjectIsDestroyed();
+						makeDamageToObject();
 						area.showRange();
 						if (player != null) {
 							player.getCountBomb().poll();
@@ -62,9 +65,12 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 
 	@Override
 	public boolean canMakeDamageToobject(GameObject targetobj) {
-		return false;
+		if (targetobj instanceof Wall) {
+			return false;
+		} else {
+			return true;
+		}
 	}
-
 
 	@Override
 	public void onObjectIsDestroyed() {
@@ -77,9 +83,47 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	}
 
 	@Override
-	public boolean makeDamageToObject(GameObject targetobj) {
-		// TODO Auto-generated method stub
-		return false;
+	public void makeDamageToObject() {
+		int xPos = getxPosition() / 50;
+		int yPos = getyPosition() / 50;
+		for (int i = 1; i < getDamageRange() + 1; i++) {
+			GameObject object = getGameController().getObjecyInGame(xPos, Math.max(yPos - i, 0));
+			if (!area.getIsCanShowTop()[i - 1] && canMakeDamageToobject(object)) {
+				if(object instanceof Wall) break;
+				this.layer.getChildren().remove(object.getImageView());
+				getGameController().removeItem(xPos, Math.max(yPos - i, 0));
+				break;
+			}
+		}
+		for (int i = 1; i < getDamageRange() + 1; i++) {
+			GameObject object = getGameController().getObjecyInGame(xPos, Math.min(yPos + i, 14));
+			if (!area.getIsCanShowBot()[i - 1] && canMakeDamageToobject(object)) {
+				if(object instanceof Wall) break;
+				this.layer.getChildren().remove(object.getImageView());
+				getGameController().removeItem(xPos, Math.min(yPos + i, 14));
+				break;
+
+			}
+		}
+		for (int i = 1; i < getDamageRange() + 1; i++) {
+			GameObject object = getGameController().getObjecyInGame(Math.max(xPos - i, 0), yPos);
+			if (!area.getIsCanShowLeft()[i - 1] && canMakeDamageToobject(object)) {
+				if(object instanceof Wall) break;
+				this.layer.getChildren().remove(object.getImageView());
+				getGameController().removeItem(Math.max(xPos - i, 0), yPos);
+				break;
+			}
+		}
+		for (int i = 1; i < getDamageRange() + 1; i++) {
+			GameObject object = getGameController().getObjecyInGame(Math.min(xPos + i, 14), yPos);
+			if (!area.getIsCanShowRight()[i - 1] && canMakeDamageToobject(object)) {
+				if(object instanceof Wall) break;
+				this.layer.getChildren().remove(object.getImageView());
+				getGameController().removeItem(Math.min(xPos + i, 14), yPos);
+				break;
+			}
+		}
+
 	}
 
 }

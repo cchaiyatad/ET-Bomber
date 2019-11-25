@@ -59,4 +59,9 @@ public abstract class GameObject {
 	public Pane getLayer() {
 		return layer;
 	}
+
+	public ImageView getImageView() {
+		return imageView;
+	}
+	
 }

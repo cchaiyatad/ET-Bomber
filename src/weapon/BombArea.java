@@ -29,10 +29,10 @@ public class BombArea {
 		isCanShowBot = new boolean[getRange()];
 		isCanShowLeft = new boolean[getRange()];
 		isCanShowRight = new boolean[getRange()];
-		setIsCanShowRange();
 	}
 
 	public void showRange() {
+		setIsCanShowRange();
 		showRangeBySite(Site.BOT);
 		showRangeBySite(Site.TOP);
 		showRangeBySite(Site.RIGHT);
