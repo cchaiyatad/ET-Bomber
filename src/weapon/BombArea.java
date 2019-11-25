@@ -56,19 +56,15 @@ public class BombArea {
 			switch (site) {
 			case TOP:
 				isCanShow[j] = bomb.getGameController().canSetObject(xPos, Math.max(yPos - j - 1, 0));
-				System.out.println(isCanShow[j]);
 				break;
 			case BOT:
 				isCanShow[j] = bomb.getGameController().canSetObject(xPos, Math.min(yPos + j + 1, 14));
-				System.out.println(isCanShow[j]);
 				break;
 			case LEFT:
 				isCanShow[j] = bomb.getGameController().canSetObject(Math.max(xPos - j - 1, 0), yPos);
-				System.out.println(isCanShow[j]);
 				break;
 			case RIGHT:
 				isCanShow[j] = bomb.getGameController().canSetObject(Math.min(xPos + j + 1, 14), yPos);
-				System.out.println(isCanShow[j]);
 				break;
 			}
 		}
