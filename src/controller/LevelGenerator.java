@@ -49,7 +49,6 @@ public class LevelGenerator {
 				} else {
 //					objectsArray[i][j] = suffleList.get(0);
 //					suffleList.remove(0);
-//					
 					objectsArray[i][j] = ObjectInGame.EMPTY;
 //					if(random.nextInt(100) < 10) {
 //						objectsArray[i][j] = ObjectInGame.BOMBUPGRADEITEM;

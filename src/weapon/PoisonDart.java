@@ -13,7 +13,7 @@ public class PoisonDart extends GameObject implements Weapon {
 	}
 
 	@Override
-	public int getDamageRange(Player player) {
+	public int getDamageRange() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
