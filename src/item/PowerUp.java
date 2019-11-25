@@ -1,6 +1,6 @@
 package item;
 
-import player.Player;
+import player.PlayerBase;
 public interface PowerUp {
-	void onPlayerGetItem(Player player);
+	void onPlayerGetItem(PlayerBase player);
 }

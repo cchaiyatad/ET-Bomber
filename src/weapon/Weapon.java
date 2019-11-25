@@ -1,10 +1,10 @@
-package item;
+package weapon;
 
-import player.Player;
 import gameobject.GameObject;
+import player.PlayerBase;
 
 public interface Weapon {
 	int getDamageRange();
 	boolean canMakeDamageToobject(GameObject targetobj);
-	boolean makeDamageToPlayer(Player target);
+	boolean makeDamageToPlayer(PlayerBase target);
 }

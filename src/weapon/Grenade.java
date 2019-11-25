@@ -1,9 +1,8 @@
 package weapon;
 
 import gameobject.GameObject;
-import item.Weapon;
 import javafx.scene.layout.Pane;
-import player.Player;
+import player.PlayerBase;
 
 public class Grenade extends GameObject implements Weapon {
 
@@ -25,7 +24,7 @@ public class Grenade extends GameObject implements Weapon {
 	}
 
 	@Override
-	public boolean makeDamageToPlayer(Player target) {
+	public boolean makeDamageToPlayer(PlayerBase target) {
 		// TODO Auto-generated method stub
 		return false;
 	}

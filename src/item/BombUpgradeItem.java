@@ -1,7 +1,7 @@
 package item;
 
 import javafx.scene.layout.Pane;
-import player.Player;
+import player.PlayerBase;
 
 public class BombUpgradeItem extends Item implements PowerUp{
 
@@ -15,7 +15,7 @@ public class BombUpgradeItem extends Item implements PowerUp{
 	}
 
 	@Override
-	public void onPlayerGetItem(Player player) {
+	public void onPlayerGetItem(PlayerBase player) {
 		player.setBombCount(player.getBombCount() + 1);
 		player.setCanUseWeapon();
 	}

@@ -3,10 +3,10 @@ package weapon;
 import controller.GameController;
 import gameobject.Destroyable;
 import gameobject.GameObject;
-import item.Weapon;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import player.Player;
+import player.PlayerBase;
 
 public class Bomb extends GameObject implements Weapon, Destroyable {
 	private int range;
@@ -65,7 +65,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	}
 
 	@Override
-	public boolean makeDamageToPlayer(Player target) {
+	public boolean makeDamageToPlayer(PlayerBase target) {
 		return false;
 	}
 

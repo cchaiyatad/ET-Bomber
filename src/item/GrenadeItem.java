@@ -1,7 +1,7 @@
 package item;
 
 import javafx.scene.layout.Pane;
-import player.Player;
+import player.PlayerBase;
 import weapon.WeaponType;
 
 public class GrenadeItem extends Item implements PowerUp{
@@ -16,7 +16,7 @@ public class GrenadeItem extends Item implements PowerUp{
 	}
 
 	@Override
-	public void onPlayerGetItem(Player player) {
+	public void onPlayerGetItem(PlayerBase player) {
 		player.setCurrentWeapon(WeaponType.GRENADE);
 	}
 }
