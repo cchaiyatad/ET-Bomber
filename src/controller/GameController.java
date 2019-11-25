@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import ai.AI;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
