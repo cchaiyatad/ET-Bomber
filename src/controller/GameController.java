@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import ai.AI;
+import ai.AStar;
+import ai.Node;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -35,6 +37,8 @@ public class GameController extends Controller {
 	private long startTime;
 	private Thread createBombThread;
 	private int currentNextThreadTime = 60;
+	//AI
+	private AStar astar;
 
 	@Override
 	protected Scene createScene() {
@@ -95,6 +99,8 @@ public class GameController extends Controller {
 
 	public AnimationTimer gameLoop() {
 		if (this.gameLoop == null) {
+
+			AStar astar = new AStar(this);
 			startTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
 			this.gameLoop = new AnimationTimer() {
 
@@ -158,6 +164,12 @@ public class GameController extends Controller {
 							((Destroyable) gameObjectArray[x + 1][y]).onObjectIsDestroyed();
 						}
 						inputInGame.changeBitset(KeyCode.Y, false);
+					}
+					// Debug
+					if (inputInGame.isKeyPress(KeyCode.T)) {
+						astar.findPath(1, 1, 1, 2);
+						inputInGame.changeBitset(KeyCode.T, false);
+						
 					}
 
 				}
@@ -343,7 +355,7 @@ public class GameController extends Controller {
 
 	}
 
-	private boolean checkMove(int x, int y) {
+	public boolean checkMove(int x, int y) {
 		x /= 50;
 		y /= 50;
 		return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall)
