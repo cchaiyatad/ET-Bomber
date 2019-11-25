@@ -6,5 +6,5 @@ import player.PlayerBase;
 public interface Weapon {
 	int getDamageRange();
 	boolean canMakeDamageToobject(GameObject targetobj);
-	boolean makeDamageToPlayer(PlayerBase target);
+	boolean makeDamageToObject(GameObject targetobj);
 }

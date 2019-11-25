@@ -145,4 +145,22 @@ public class BombArea {
 		this.bomb = bomb;
 	}
 
+	public boolean[] getIsCanShowTop() {
+		return isCanShowTop;
+	}
+
+	public boolean[] getIsCanShowBot() {
+		return isCanShowBot;
+	}
+
+	public boolean[] getIsCanShowLeft() {
+		return isCanShowLeft;
+	}
+
+	public boolean[] getIsCanShowRight() {
+		return isCanShowRight;
+	}
+	
+	
+
 }

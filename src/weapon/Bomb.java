@@ -12,6 +12,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	private int range;
 	private GameController gameController;
 	Thread thread;
+	BombArea area;
 
 	public Bomb(int xPosition, int yPosition, Pane layer, int range, Player player, GameController gameController) {
 		super(xPosition, yPosition, "bomb", layer);
@@ -22,11 +23,11 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 		}
 		this.range = range;
 		this.gameController = gameController;
-		BombArea area = new BombArea(this);
 
 		thread = new Thread(() -> {
 			try {
 				Thread.sleep(3000);
+				area = new BombArea(this);
 				Platform.runLater(new Runnable() {
 
 					@Override
@@ -64,10 +65,6 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 		return false;
 	}
 
-	@Override
-	public boolean makeDamageToPlayer(PlayerBase target) {
-		return false;
-	}
 
 	@Override
 	public void onObjectIsDestroyed() {
@@ -77,6 +74,12 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 
 	public GameController getGameController() {
 		return gameController;
+	}
+
+	@Override
+	public boolean makeDamageToObject(GameObject targetobj) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -547,5 +547,9 @@ public class GameController extends Controller {
 			this.gamePage.getChildren().remove(gameSummaryPage);
 		}
 	}
+	
+	public GameObject getObjecyInGame(int x, int y) {
+		return this.gameObjectArray[x][y];
+	}
 
 }

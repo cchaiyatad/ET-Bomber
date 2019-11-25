@@ -24,10 +24,8 @@ public class RemoteBomb extends GameObject implements Weapon {
 	}
 
 	@Override
-	public boolean makeDamageToPlayer(PlayerBase target) {
+	public boolean makeDamageToObject(GameObject targetobj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 }
