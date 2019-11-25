@@ -22,7 +22,7 @@ import weapon.Bomb;
 
 public class GameController extends Controller {
 	private GameObject[][] gameObjectArray = new GameObject[15][15];
-	private List<Player> players;
+	private List<PlayerBase> players;
 
 	private LevelGenerator levelGenerator;
 	private GameSummaryPage gameSummaryPage;
@@ -44,7 +44,7 @@ public class GameController extends Controller {
 		createBackground();
 		createGame();
 
-		createPlayer(2);
+		createPlayer(4);
 		this.scene = new Scene(gamePage, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 
 		inputInGame = new InputInGame(scene);
@@ -66,7 +66,7 @@ public class GameController extends Controller {
 		return this.gamePage;
 	}
 
-	public List<Player> getPlayers() {
+	public List<PlayerBase> getPlayers() {
 		return players;
 	}
 
@@ -105,24 +105,24 @@ public class GameController extends Controller {
 					checkRemainingTime();
 					gamePage.getScoreBoard().setTimer(remainingTime);
 
-					for (Player player : players) {
+					for (PlayerBase player : players) {
 						checkPlayerMoveAndSetState(player);
 					}
 
 					players.forEach(Moveable -> Moveable.move());
 
-					for (Player player : players) {
+					for (PlayerBase player : players) {
 						checkPlayerGetItem(player);
 					}
 
 					gamePage.getScoreBoard().updateStatus();
 
-					for (Player player : players) {
+					for (PlayerBase player : players) {
 						checkPlayerPlaceBome(player);
 					}
 
 					/// Debug
-					for (Player player : players) {
+					for (PlayerBase player : players) {
 						KeyCode key = null;
 						switch (player.getPlayerNumber()) {
 						case 1:
@@ -130,6 +130,12 @@ public class GameController extends Controller {
 							break;
 						case 2:
 							key = KeyCode.I;
+							break;
+						case 3:
+							key = KeyCode.O;
+							break;
+						case 4:
+							key = KeyCode.P;
 							break;
 						default:
 							return;
@@ -142,13 +148,24 @@ public class GameController extends Controller {
 					}
 					///
 
+					/// Debug
+					if (inputInGame.isKeyPress(KeyCode.Y)) {
+						PlayerBase player = players.get(0);
+						int x = player.getxPosition() / 50;
+						int y = player.getyPosition() / 50;
+						if (gameObjectArray[x + 1][y] != null && gameObjectArray[x + 1][y] instanceof Destroyable) {
+							((Destroyable) gameObjectArray[x + 1][y]).onObjectIsDestroyed();
+						}
+						inputInGame.changeBitset(KeyCode.Y, false);
+					}
+
 				}
 			};
 		}
 		return gameLoop;
 	}
 
-	private void checkPlayerMoveAndSetState(Player player) {
+	private void checkPlayerMoveAndSetState(PlayerBase player) {
 		if (player.isDead()) {
 			return;
 		}
@@ -156,39 +173,41 @@ public class GameController extends Controller {
 		KeyCode buttonRight = null;
 		KeyCode buttonDown = null;
 		KeyCode buttonLeft = null;
-		switch (player.getPlayerNumber()) {
-		case 1:
-			buttonUp = Setting.PLAYERONE_MOVEUP;
-			buttonRight = Setting.PLAYERONE_MOVERIGHT;
-			buttonDown = Setting.PLAYERONE_MOVEDOWN;
-			buttonLeft = Setting.PLAYERONE_MOVELEFT;
-			break;
-		case 2:
-			buttonUp = Setting.PLAYERTWO_MOVEUP;
-			buttonRight = Setting.PLAYERTWO_MOVERIGHT;
-			buttonDown = Setting.PLAYERTWO_MOVEDOWN;
-			buttonLeft = Setting.PLAYERTWO_MOVELEFT;
-			break;
-		}
-		boolean up = inputInGame.isKeyPress(buttonUp);
-		boolean right = inputInGame.isKeyPress(buttonRight);
-		boolean down = inputInGame.isKeyPress(buttonDown);
-		boolean left = inputInGame.isKeyPress(buttonLeft);
+		if (player instanceof Player) {
+			switch (player.getPlayerNumber()) {
+			case 1:
+				buttonUp = Setting.PLAYERONE_MOVEUP;
+				buttonRight = Setting.PLAYERONE_MOVERIGHT;
+				buttonDown = Setting.PLAYERONE_MOVEDOWN;
+				buttonLeft = Setting.PLAYERONE_MOVELEFT;
+				break;
+			case 2:
+				buttonUp = Setting.PLAYERTWO_MOVEUP;
+				buttonRight = Setting.PLAYERTWO_MOVERIGHT;
+				buttonDown = Setting.PLAYERTWO_MOVEDOWN;
+				buttonLeft = Setting.PLAYERTWO_MOVELEFT;
+				break;
+			}
+			boolean up = inputInGame.isKeyPress(buttonUp);
+			boolean right = inputInGame.isKeyPress(buttonRight);
+			boolean down = inputInGame.isKeyPress(buttonDown);
+			boolean left = inputInGame.isKeyPress(buttonLeft);
 
-		if (up && !right && !down && !left) {
-			player.setCurrentPlayerState(PlayerState.MOVEUP);
-		} else if (!up && right && !down && !left) {
-			player.setCurrentPlayerState(PlayerState.MOVERIGHT);
-		} else if (!up && !right && down && !left) {
-			player.setCurrentPlayerState(PlayerState.MOVEDOWN);
-		} else if (!up && !right && !down && left) {
-			player.setCurrentPlayerState(PlayerState.MOVELEFT);
-		} else {
-			player.setCurrentPlayerState(PlayerState.IDLE);
+			if (up && !right && !down && !left) {
+				player.setCurrentPlayerState(PlayerState.MOVEUP);
+			} else if (!up && right && !down && !left) {
+				player.setCurrentPlayerState(PlayerState.MOVERIGHT);
+			} else if (!up && !right && down && !left) {
+				player.setCurrentPlayerState(PlayerState.MOVEDOWN);
+			} else if (!up && !right && !down && left) {
+				player.setCurrentPlayerState(PlayerState.MOVELEFT);
+			} else {
+				player.setCurrentPlayerState(PlayerState.IDLE);
+			}
 		}
 	}
 
-	public int[] isMoveAble(int x, int y, Player player) {
+	public int[] isMoveAble(int x, int y, PlayerBase player) {
 		int[] xy = { 0, 0 };
 		switch (player.getCurrentPlayerState()) {
 		case MOVEDOWN:
@@ -220,7 +239,7 @@ public class GameController extends Controller {
 
 	public void restartGame() {
 		createGame();
-		createPlayer(2);
+		createPlayer(4);
 		this.gameLoop = gameLoop();
 		gameLoop.start();
 		remainingTime = Setting.GAME_TIME;
@@ -232,6 +251,7 @@ public class GameController extends Controller {
 	}
 
 	public void onRemoveScene() {
+		removeGame();
 		players = null;
 		inputInGame.removeListeners();
 		inputInGame.clearKeyBoardCheck();
@@ -329,7 +349,7 @@ public class GameController extends Controller {
 				&& !(gameObjectArray[x][y] instanceof Obstacle);
 	}
 
-	private void checkPlayerGetItem(Player player) {
+	private void checkPlayerGetItem(PlayerBase player) {
 		int x = player.getxPosition();
 		int y = player.getyPosition();
 		int x2 = (x + 50 - player.getSpeed()) / 50;
@@ -346,29 +366,31 @@ public class GameController extends Controller {
 		}
 	}
 
-	private void checkPlayerPlaceBome(Player player) {
+	private void checkPlayerPlaceBome(PlayerBase player) {
 		if (player.isDead()) {
 			return;
 		}
 		KeyCode placeBombKey = null;
-		switch (player.getPlayerNumber()) {
-		case 1:
-			placeBombKey = Setting.PLAYERONE_PLACEBOMB;
-			break;
-		case 2:
-			placeBombKey = Setting.PLAYERTWO_PLACEBOMB;
-			break;
-		default:
-			return;
-		}
+		if (player instanceof Player) {
+			switch (player.getPlayerNumber()) {
+			case 1:
+				placeBombKey = Setting.PLAYERONE_PLACEBOMB;
+				break;
+			case 2:
+				placeBombKey = Setting.PLAYERTWO_PLACEBOMB;
+				break;
+			default:
+				return;
+			}
 
-		if (inputInGame.isKeyPress(placeBombKey) && player.isCanUseWeapon()) {
-			player.useWeapon();
+			if (inputInGame.isKeyPress(placeBombKey) && player.isCanUseWeapon()) {
+				player.useWeapon();
+			}
+			inputInGame.changeBitset(placeBombKey, false);
 		}
-		inputInGame.changeBitset(placeBombKey, false);
 	}
 
-	private void getItem(int x, int y, Player player) {
+	private void getItem(int x, int y, PlayerBase player) {
 		if (gameObjectArray[x][y] != null && gameObjectArray[x][y] instanceof Item) {
 			((PowerUp) gameObjectArray[x][y]).onPlayerGetItem(player);
 			((Item) gameObjectArray[x][y]).onObjectIsDestroyed();
@@ -394,13 +416,15 @@ public class GameController extends Controller {
 		ObjectInGame[][] spawnObjectsInfomationArray = levelGenerator.generateLevel();
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				GameObject gameObject = null;
+
+				if (spawnObjectsInfomationArray[i][j] == ObjectInGame.WALL) {
+					gameObjectArray[i][j] = new Wall(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					continue;
+				}
+
+				Item gameObject = null;
 				switch (spawnObjectsInfomationArray[i][j]) {
-				case WALL:
-					gameObject = new Wall(i * 50, j * 50, gamePage.getGameFieldItemPane());
-					break;
 				case OBSTACLE:
-					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldItemPane(), null, this);
 					break;
 				case BOMBUPGRADEITEM:
 					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
@@ -413,9 +437,6 @@ public class GameController extends Controller {
 					break;
 				case LIFEINCREASEITEM:
 					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
-//					gameObject = new Obstacle(i * 50, j * 50, gamePage.getGameFieldPane(),
-//							new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldPane()));
-//					spawnObjectsInfomationArray[i][j] = ObjectInGame.OBSTACLE;
 					break;
 				case SHIELDITEM:
 					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldItemPane());
@@ -439,9 +460,9 @@ public class GameController extends Controller {
 					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					break;
 				default:
-					break;
+					continue;
 				}
-				gameObjectArray[i][j] = gameObject;
+				gameObjectArray[i][j] = new Obstacle(i * 50, j * 50, gamePage.getGameFieldItemPane(), gameObject, this);
 			}
 		}
 //		for (int i = 0; i < 15; i++) {
@@ -461,15 +482,19 @@ public class GameController extends Controller {
 
 	private void createPlayer(int numberOfPlayer) {
 		if (players == null) {
-			players = new ArrayList<Player>();
+			players = new ArrayList<PlayerBase>();
 		}
 
 		for (int i = 0; i < numberOfPlayer; i++) {
-			Player player = null;
+			PlayerBase player = null;
 			if (i == 0) {
 				player = new Player(50, 50, "playerOne", gamePage.getGameFieldPlayerPane(), 1, this);
 			} else if (i == 1) {
 				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this);
+			} else if (i == 2) {
+				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this);
+			} else if (i == 3) {
+				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this);
 			}
 			if (players.size() == numberOfPlayer) {
 				player.setScore(players.get(i).getScore());
@@ -508,9 +533,8 @@ public class GameController extends Controller {
 	private void removeGame() {
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				if (gameObjectArray[i][j] != null && gameObjectArray[i][j] instanceof Destroyable) {
-					((Destroyable) gameObjectArray[i][j]).onObjectIsDestroyed();
-				}
+				gameObjectArray[i][j] = null;
+
 			}
 		}
 

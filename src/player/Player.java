@@ -1,43 +1,17 @@
 package player;
 
-import controller.GameController;
-import gameobject.Destroyable;
-import gameobject.GameObject;
-import gameobject.Moveable;
-import javafx.scene.layout.Pane;
-import weapon.WeaponType;
-import weapon.*;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
-public class Player extends GameObject implements Moveable, Destroyable {
-	private final long shieldDuration = 5;
-
-	private int hp;
-	private int bombCount;
-	private int bombRange;
-	private int speed;
-	private int score;
-
-	private WeaponType currentWeapon;
-	private long shieldTime;
-	private boolean CanPushBomb;
-	private boolean canUseWeapon;
-
-	private PlayerState currentPlayerState;
-	private int playerNumber;
-	private GameController gameController;
-	private Queue<Bomb> countBomb;
-
+import controller.GameController;
+import javafx.scene.layout.Pane;
+import weapon.*;
+public class Player extends PlayerBase {
+	
 	public Player(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
-		super(xPosition, yPosition, imagePath, layer);
-
-		setDefaultPlayer();
-
-		this.playerNumber = playerNumber;
-		this.gameController = gameController;
+		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController);	
 	}
 
 	@Override
@@ -109,15 +83,8 @@ public class Player extends GameObject implements Moveable, Destroyable {
 		yPosition += xy[1];
 		SetPositionOnScreen();
 	}
-
-	public boolean isCanUseWeapon() {
-		return canUseWeapon;
-	}
-
-	public void setCanUseWeapon() {
-		this.canUseWeapon = countBomb.size() < this.getBombCount();
-	}
-
+	
+	@Override
 	public void useWeapon() {
 		int x = xPosition / 50;
 		int y = yPosition / 50;
@@ -206,7 +173,7 @@ public class Player extends GameObject implements Moveable, Destroyable {
 	}
 
 	public void setShield() {
-		this.shieldTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS) + shieldDuration;
+		this.shieldTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS) + getShieldDuration();
 	}
 
 	public boolean isCanPushBomb() {
@@ -241,10 +208,10 @@ public class Player extends GameObject implements Moveable, Destroyable {
 		return currentPlayerState == PlayerState.DEAD;
 	}
 
-	private void setDefaultPlayer() {
+	protected void setDefaultPlayer() {
 		setHp(3);
-		setBombRange(1);
-		setBombCount(3);
+		setBombRange(3);
+		setBombCount(1);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();
 		shieldTime = 0;

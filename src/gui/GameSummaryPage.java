@@ -48,7 +48,7 @@ public class GameSummaryPage extends FlowPane implements HasButtonPage {
 
 	public void setText(int[] data) {
 		mainLabel.setText(String.format("Player %d win!!", data[0] + 1));
-		statusLabel.setText(String.format("Player 1: %d\n" + "Player 2: %d", data[1], data[2]));
+		statusLabel.setText(String.format("Player 1: %d\nPlayer 2: %d\nPlayer 3: %d\nPlayer 4: %d", data[1], data[2], data[3], data[4]));
 	}
 
 }

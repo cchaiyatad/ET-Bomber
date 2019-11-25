@@ -8,7 +8,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import player.Player;
+import player.PlayerBase;
 import setting.Setting;
 
 public class PlayerStatusBoard extends VBox {
@@ -16,7 +16,7 @@ public class PlayerStatusBoard extends VBox {
 	private ImageView itemImageView;
 	private Label scoreLabel;
 	private Label hpLabel;
-	private Player player;
+	private PlayerBase player;
 
 	public PlayerStatusBoard() {
 		this.setPrefSize(200, 160);
@@ -43,7 +43,7 @@ public class PlayerStatusBoard extends VBox {
 		this.getChildren().addAll(topHBox, scoreLabel);
 	}
 
-	public void linkToPlayer(Player player) {
+	public void linkToPlayer(PlayerBase player) {
 		this.player = player;
 		upDateStatus();
 	}

@@ -48,6 +48,9 @@ public class InputInGame {
 	};
 
 	public void changeBitset(KeyCode keyCode, boolean value) {
+//		if (keyCode == KeyCode.Y) {
+//			System.out.println("Hit" + " " + keyCode + " " + value);
+//		}
 		keyboardBitSet.set(keyCode.ordinal(), value);
 	}
 

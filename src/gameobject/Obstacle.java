@@ -18,6 +18,7 @@ public class Obstacle extends GameObject implements Destroyable {
 	@Override
 	public void onObjectIsDestroyed() {
 		this.layer.getChildren().remove(this.imageView);
+		this.gameController.removeItem(xPosition / 50, yPosition / 50);
 		if (itemInObstacle != null) {
 			gameController.setObjectInGame(xPosition / 50, yPosition / 50, this.itemInObstacle);
 		}
