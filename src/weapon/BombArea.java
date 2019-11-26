@@ -67,6 +67,7 @@ public class BombArea {
 				isCanShow[j] = bomb.getGameController().canSetObject(Math.min(xPos + j + 1, 14), yPos);
 				break;
 			}
+			if(!isCanShow[j]) break;
 		}
 		return isCanShow;
 	}
