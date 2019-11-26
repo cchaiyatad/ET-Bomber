@@ -1,5 +1,6 @@
 package item;
 
+import controller.ObjectInGame;
 import javafx.scene.layout.Pane;
 import player.PlayerBase;
 
@@ -19,4 +20,8 @@ public class SpeedUpgradeItem extends Item implements PowerUp{
 		player.setSpeed(player.getSpeed() + 1);
 	}
 
+	@Override
+	public ObjectInGame getObjectInGame() {
+		return ObjectInGame.SPEEDUPGRADEITEM;
+	}
 }

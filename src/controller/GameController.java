@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 import ai.AI;
 import ai.AStar;
-import ai.Node;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -37,8 +36,6 @@ public class GameController extends Controller {
 	private long startTime;
 	private Thread createBombThread;
 	private int currentNextThreadTime = 60;
-	//AI
-	private AStar astar;
 
 	@Override
 	protected Scene createScene() {
@@ -116,6 +113,12 @@ public class GameController extends Controller {
 						checkPlayerMoveAndSetState(player);
 					}
 
+					for (PlayerBase player : players) {
+						if (player instanceof AI) {
+							((AI) player).checkStatus();
+						}
+					}
+
 					players.forEach(Moveable -> Moveable.move());
 
 					for (PlayerBase player : players) {
@@ -169,7 +172,7 @@ public class GameController extends Controller {
 					if (inputInGame.isKeyPress(KeyCode.T)) {
 						astar.findPath(1, 1, 1, 2);
 						inputInGame.changeBitset(KeyCode.T, false);
-						
+
 					}
 
 				}
@@ -434,7 +437,6 @@ public class GameController extends Controller {
 					gameObjectArray[i][j] = new Wall(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					continue;
 				}
-
 				Item gameObject = null;
 				switch (spawnObjectsInfomationArray[i][j]) {
 				case OBSTACLE:
@@ -478,19 +480,6 @@ public class GameController extends Controller {
 				gameObjectArray[i][j] = new Obstacle(i * 50, j * 50, gamePage.getGameFieldItemPane(), gameObject, this);
 			}
 		}
-//		for (int i = 0; i < 15; i++) {
-//			for (int j = 0; j < 15; j++) {
-//				System.out.print(i + " " + j + " " + spawnObjectsInfomationArray[i][j] + "\t");
-//			}
-//			System.out.println();
-//		}
-
-//		for (int i = 0; i < 15; i++) {
-//			for (int j = 0; j < 15; j++) {
-//				System.out.print(i + " " + j + " " + gameObjectArray[i][j] + "\t");
-//			}
-//			System.out.println();
-//		}
 	}
 
 	private void createPlayer(int numberOfPlayer) {
@@ -550,7 +539,6 @@ public class GameController extends Controller {
 
 			}
 		}
-
 	}
 
 	public void setSummaryPageAppear(boolean value) {
@@ -561,4 +549,16 @@ public class GameController extends Controller {
 		}
 	}
 
+	public ObjectInGame getObjectOnPositionXY(int x, int y) {
+		if(gameObjectArray[x][y] != null && gameObjectArray[x][y] instanceof Wall) {
+			return ObjectInGame.WALL;
+		}
+		else if(gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Obstacle)) {
+			return ObjectInGame.OBSTACLE;
+		}
+		else if(gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Item)) {
+			return ((Item)gameObjectArray[x][y]).getObjectInGame();
+		}
+		return null;
+	}
 }

@@ -1,5 +1,6 @@
 package item;
 
+import controller.ObjectInGame;
 import javafx.scene.layout.Pane;
 import player.PlayerBase;
 
@@ -17,6 +18,11 @@ public class PushBombSkillItem extends Item implements PowerUp{
 	@Override
 	public void onPlayerGetItem(PlayerBase player) {
 		player.setCanPushBomb(true);
+	}
+	
+	@Override
+	public ObjectInGame getObjectInGame() {
+		return ObjectInGame.PUSHBOMBSKILLITEM;
 	}
 
 }

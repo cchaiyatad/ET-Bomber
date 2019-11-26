@@ -1,8 +1,5 @@
 package ai;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Node {
 	private int x;
 	private int y;
@@ -40,7 +37,6 @@ public class Node {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Node) {
-//			System.out.println(this.x + " " + ((Node) obj).x+ " " + this.y + " " + ((Node) obj).y);
 			return this.x == ((Node) obj).x && this.y == ((Node) obj).y;
 		}
 		return false;
