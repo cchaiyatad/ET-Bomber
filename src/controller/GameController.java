@@ -254,6 +254,7 @@ public class GameController extends Controller {
 	}
 
 	public void restartGame() {
+		removeGame();
 		createGame();
 		createPlayer(4);
 		this.gameLoop = gameLoop();
@@ -497,10 +498,10 @@ public class GameController extends Controller {
 				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this, players.get(0),
 						players.get(1));
 			} else if (i == 3) {
-				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this,players.get(0),
+				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this, players.get(0),
 						players.get(1));
-				((AI)player).setOtherAI(players.get(2));
-				((AI)players.get(2)).setOtherAI(player);
+				((AI) player).setOtherAI(players.get(2));
+				((AI) players.get(2)).setOtherAI(player);
 			}
 			if (players.size() == numberOfPlayer) {
 				player.setScore(players.get(i).getScore());
@@ -539,6 +540,12 @@ public class GameController extends Controller {
 	private void removeGame() {
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
+				if (gameObjectArray[i][j] instanceof Obstacle) {
+					((Destroyable) gameObjectArray[i][j]).onObjectIsDestroyed();
+				}
+				if (gameObjectArray[i][j] instanceof Destroyable) {
+					((Destroyable) gameObjectArray[i][j]).onObjectIsDestroyed();
+				}
 				gameObjectArray[i][j] = null;
 
 			}
@@ -552,7 +559,7 @@ public class GameController extends Controller {
 			this.gamePage.getChildren().remove(gameSummaryPage);
 		}
 	}
-	
+
 	public GameObject getObjecyInGame(int x, int y) {
 		return this.gameObjectArray[x][y];
 	}

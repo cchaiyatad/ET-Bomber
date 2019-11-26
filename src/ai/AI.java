@@ -29,7 +29,7 @@ public class AI extends PlayerBase {
 
 	public void checkStatus() {
 //		setCurrentPlayerState(PlayerState.MOVELEFT);
-		checkPlayerInSightObject();
+//		checkPlayerInSightObject();
 	}
 
 	public void checkPlayerInSightObject() {
