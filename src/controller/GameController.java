@@ -21,6 +21,7 @@ import javafx.scene.input.KeyCode;
 import player.*;
 import setting.Setting;
 import weapon.Bomb;
+import weapon.WeaponType;
 
 public class GameController extends Controller {
 	private GameObject[][] gameObjectArray = new GameObject[15][15];
@@ -177,6 +178,12 @@ public class GameController extends Controller {
 //						}
 //						Action.GoTo((AI) players.get(2), 1, 13);
 						inputInGame.changeBitset(KeyCode.T, false);
+
+					}
+					// Debug
+					if (inputInGame.isKeyPress(KeyCode.R)) {
+						players.get(0).setCurrentWeapon(WeaponType.BOMB);
+						inputInGame.changeBitset(KeyCode.R, false);
 
 					}
 
