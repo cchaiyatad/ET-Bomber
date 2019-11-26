@@ -26,8 +26,7 @@ public class AI extends PlayerBase {
 
 	public void checkStatus() {
 		checkPlayerInSightObject();
-
-//		Action.GoTo(this, 1, 13);
+		aiStatus.canUseWeapon = this.canUseWeapon;
 		setCurrentPlayerState(aiStatus.moveDirection);
 	}
 

@@ -7,7 +7,7 @@ public class AIStatusCheckList {
 	public PlayerState moveDirection = PlayerState.IDLE;
 	public PlayerState previousMoveDirection = null;
 	public boolean isMoveComplete = true;
-	public int bombCount;
+	public boolean canUseWeapon = false;
 	public boolean[] playerDead = new boolean[3];
 	public boolean bombNearBy = false;
 	public boolean hasAction = false;

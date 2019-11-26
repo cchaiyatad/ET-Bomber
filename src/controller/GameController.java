@@ -469,17 +469,11 @@ public class GameController extends Controller {
 				case SHIELDITEM:
 					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
-				case PUSHBOMBSKILLITEM:
-					gameObject = new PushBombSkillItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
-					break;
 				case LANDMINEITEM:
 					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case GRENADEITEM:
 					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
-					break;
-				case POISIONDARTITEM:
-					gameObject = new PoisonDartItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case ROCKETLAUNCHERITEM:
 					gameObject = new RocketLauncherItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);

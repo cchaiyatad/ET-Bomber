@@ -3,7 +3,6 @@ package player;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
-
 import controller.GameController;
 import gameobject.Destroyable;
 import gameobject.GameObject;
@@ -23,7 +22,6 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 
 	protected WeaponType currentWeapon;
 	protected long shieldTime;
-	protected boolean CanPushBomb;
 	protected boolean canUseWeapon;
 
 	protected PlayerState currentPlayerState;
@@ -125,15 +123,7 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	}
 
 	public void setShield() {
-		this.shieldTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS) + getShieldDuration();
-	}
-
-	public boolean isCanPushBomb() {
-		return CanPushBomb;
-	}
-
-	public void setCanPushBomb(boolean canPushBomb) {
-		CanPushBomb = canPushBomb;
+		this.shieldTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS) + shieldDuration;
 	}
 
 	public PlayerState getCurrentPlayerState() {
@@ -259,10 +249,6 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 		default:
 			break;
 		}
-	}
-
-	public long getShieldDuration() {
-		return shieldDuration;
 	}
 
 }
