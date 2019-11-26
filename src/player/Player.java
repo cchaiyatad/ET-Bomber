@@ -140,7 +140,7 @@ public class Player extends PlayerBase {
 
 	protected void setDefaultPlayer() {
 		setHp(3);
-		setBombRange(3);
+		setBombRange(1);
 		setBombCount(1);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();

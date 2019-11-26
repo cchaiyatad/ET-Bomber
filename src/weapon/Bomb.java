@@ -27,7 +27,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 
 		thread = new Thread(() -> {
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				area = new BombArea(this);
 				Platform.runLater(new Runnable() {
 
@@ -43,7 +43,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 						}
 					}
 				});
-				Thread.sleep(1500);
+				Thread.sleep(750);
 				Platform.runLater(new Runnable() {
 
 					@Override
@@ -90,12 +90,8 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			GameObject object = getGameController().getObjecyInGame(xPos, Math.max(yPos - i, 0));
 			if (object instanceof Wall)
 				break;
-			if (object instanceof PlayerBase) {
-				((PlayerBase) object).setHp(((PlayerBase) object).getHp()-1);
-			}
 			if (!area.getIsCanShowTop()[i - 1] && canMakeDamageToobject(object)) {
-				this.layer.getChildren().remove(object.getImageView());
-				getGameController().removeItem(xPos, Math.max(yPos - i, 0));
+				((Destroyable)object).onObjectIsDestroyed();
 				break;
 			}
 		}
@@ -104,8 +100,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowBot()[i - 1] && canMakeDamageToobject(object)) {
-				this.layer.getChildren().remove(object.getImageView());
-				getGameController().removeItem(xPos, Math.min(yPos + i, 14));
+				((Destroyable)object).onObjectIsDestroyed();
 				break;
 
 			}
@@ -115,8 +110,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowLeft()[i - 1] && canMakeDamageToobject(object)) {
-				this.layer.getChildren().remove(object.getImageView());
-				getGameController().removeItem(Math.max(xPos - i, 0), yPos);
+				((Destroyable)object).onObjectIsDestroyed();
 				break;
 			}
 		}
@@ -125,8 +119,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowRight()[i - 1] && canMakeDamageToobject(object)) {
-				this.layer.getChildren().remove(object.getImageView());
-				getGameController().removeItem(Math.min(xPos + i, 14), yPos);
+				((Destroyable)object).onObjectIsDestroyed();
 				break;
 			}
 		}
