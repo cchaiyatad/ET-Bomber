@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import ai.AI;
 import ai.AStar;
+import ai.Action;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -170,7 +171,8 @@ public class GameController extends Controller {
 					}
 					// Debug
 					if (inputInGame.isKeyPress(KeyCode.T)) {
-						astar.findPath(1, 1, 1, 2);
+//						astar.findPath(1, 1, 1, 2);
+//						Action.GoTo((AI) players.get(2), 1, 13);
 						inputInGame.changeBitset(KeyCode.T, false);
 
 					}

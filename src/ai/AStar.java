@@ -13,7 +13,7 @@ public class AStar {
 		this.gameController = gameController;
 	}
 	
-	public void findPath(int startX, int startY, int destinationX, int destinationY) {
+	public int[] findPath(int startX, int startY, int destinationX, int destinationY) {
 		Node destinateNode = new Node(startX, startY, null, null, null);
 		Node startNode = new Node(destinationX, destinationY, null, null, destinateNode);
 		List<Node> nodeList = new ArrayList<Node>();
@@ -23,6 +23,10 @@ public class AStar {
 		Node currentNode;
 		while (true) {
 			nodeSort(nodeList);
+			if(nodeList.isEmpty()) {
+				int[] xy = {startX, startY};
+				return xy;
+			}
 			currentNode = nodeList.get(0);
 			nodeList.remove(0);
 			if (currentNode.isFinish()) {
@@ -43,8 +47,8 @@ public class AStar {
 				}
 			}
 		}
-
-		System.out.println(currentNode.getParent().getXY()[0] + " " + currentNode.getParent().getXY()[1]+ "\n");
+		return currentNode.getParent().getXY();
+//		System.out.println(currentNode.getParent().getXY()[0] + " " + currentNode.getParent().getXY()[1]+ "\n");
 	}
 
 	private void nodeSort(List<Node> nodeList) {

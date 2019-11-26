@@ -1,7 +1,6 @@
 package ai;
 
 import java.util.BitSet;
-
 import controller.GameController;
 import controller.ObjectInGame;
 import javafx.scene.layout.Pane;
@@ -9,7 +8,7 @@ import player.PlayerBase;
 import player.PlayerState;
 
 public class AI extends PlayerBase {
-	private BitSet aiStatus = new BitSet();
+	private AIStatusCheckList aiStatus = new AIStatusCheckList();
 	private ObjectInGame[] objectInSightPlayer = new ObjectInGame[4]; // (wasd)
 	private int[] objectRangeInSightPlayer = new int[4]; // (wasd)
 	private ObjectInGame[] objectAroundPlayer = new ObjectInGame[8]; // (wqazxcde)
@@ -30,6 +29,10 @@ public class AI extends PlayerBase {
 	public void checkStatus() {
 //		setCurrentPlayerState(PlayerState.MOVELEFT);
 //		checkPlayerInSightObject();
+
+		Action.GoTo(this, 1, 13);
+		System.out.println(aiStatus.moveDirection);
+		setCurrentPlayerState(aiStatus.moveDirection);
 	}
 
 	public void checkPlayerInSightObject() {
@@ -116,7 +119,7 @@ public class AI extends PlayerBase {
 
 	}
 
-	public BitSet getAiStatus() {
+	public AIStatusCheckList getAiStatus() {
 		return aiStatus;
 	}
 }
