@@ -443,37 +443,37 @@ public class GameController extends Controller {
 				case OBSTACLE:
 					break;
 				case BOMBUPGRADEITEM:
-					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case POWERUPGRADEITEM:
-					gameObject = new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case SPEEDUPGRADEITEM:
-					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case LIFEINCREASEITEM:
-					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case SHIELDITEM:
-					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case PUSHBOMBSKILLITEM:
-					gameObject = new PushBombSkillItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new PushBombSkillItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case LANDMINEITEM:
-					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case GRENADEITEM:
-					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case POISIONDARTITEM:
-					gameObject = new PoisonDartItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new PoisonDartItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case ROCKETLAUNCHERITEM:
-					gameObject = new RocketLauncherItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new RocketLauncherItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				case REMOTEBOMBITEM:
-					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldItemPane());
+					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
 					break;
 				default:
 					continue;
