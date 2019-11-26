@@ -44,7 +44,7 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	protected void setDefaultPlayer() {
 		setHp(3);
 		setBombRange(1);
-		setBombCount(1);
+		setBombCount(10);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();
 		shieldTime = 0;
