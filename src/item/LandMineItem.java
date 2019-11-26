@@ -1,5 +1,6 @@
 package item;
 
+import controller.ObjectInGame;
 import javafx.scene.layout.Pane;
 import player.PlayerBase;
 import weapon.WeaponType;
@@ -20,4 +21,9 @@ public class LandMineItem extends Item implements PowerUp{
 		player.setCurrentWeapon(WeaponType.LANDMINE);
 	}
 
+	@Override
+	public ObjectInGame getObjectInGame() {
+		return ObjectInGame.LANDMINEITEM;
+	}
+	
 }

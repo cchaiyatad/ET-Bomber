@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import ai.AI;
+import ai.AStar;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -94,6 +96,8 @@ public class GameController extends Controller {
 
 	public AnimationTimer gameLoop() {
 		if (this.gameLoop == null) {
+
+			AStar astar = new AStar(this);
 			startTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
 			this.gameLoop = new AnimationTimer() {
 
@@ -107,6 +111,12 @@ public class GameController extends Controller {
 
 					for (PlayerBase player : players) {
 						checkPlayerMoveAndSetState(player);
+					}
+
+					for (PlayerBase player : players) {
+						if (player instanceof AI) {
+							((AI) player).checkStatus();
+						}
 					}
 
 					players.forEach(Moveable -> Moveable.move());
@@ -157,6 +167,12 @@ public class GameController extends Controller {
 							((Destroyable) gameObjectArray[x + 1][y]).onObjectIsDestroyed();
 						}
 						inputInGame.changeBitset(KeyCode.Y, false);
+					}
+					// Debug
+					if (inputInGame.isKeyPress(KeyCode.T)) {
+						astar.findPath(1, 1, 1, 2);
+						inputInGame.changeBitset(KeyCode.T, false);
+
 					}
 
 				}
@@ -342,7 +358,7 @@ public class GameController extends Controller {
 
 	}
 
-	private boolean checkMove(int x, int y) {
+	public boolean checkMove(int x, int y) {
 		x /= 50;
 		y /= 50;
 		return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall)
@@ -421,7 +437,6 @@ public class GameController extends Controller {
 					gameObjectArray[i][j] = new Wall(i * 50, j * 50, gamePage.getGameFieldItemPane());
 					continue;
 				}
-
 				Item gameObject = null;
 				switch (spawnObjectsInfomationArray[i][j]) {
 				case OBSTACLE:
@@ -465,19 +480,6 @@ public class GameController extends Controller {
 				gameObjectArray[i][j] = new Obstacle(i * 50, j * 50, gamePage.getGameFieldItemPane(), gameObject, this);
 			}
 		}
-//		for (int i = 0; i < 15; i++) {
-//			for (int j = 0; j < 15; j++) {
-//				System.out.print(i + " " + j + " " + spawnObjectsInfomationArray[i][j] + "\t");
-//			}
-//			System.out.println();
-//		}
-
-//		for (int i = 0; i < 15; i++) {
-//			for (int j = 0; j < 15; j++) {
-//				System.out.print(i + " " + j + " " + gameObjectArray[i][j] + "\t");
-//			}
-//			System.out.println();
-//		}
 	}
 
 	private void createPlayer(int numberOfPlayer) {
@@ -492,9 +494,13 @@ public class GameController extends Controller {
 			} else if (i == 1) {
 				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this);
 			} else if (i == 2) {
-				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this);
+				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this, players.get(0),
+						players.get(1));
 			} else if (i == 3) {
-				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this);
+				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this,players.get(0),
+						players.get(1));
+				((AI)player).setOtherAI(players.get(2));
+				((AI)players.get(2)).setOtherAI(player);
 			}
 			if (players.size() == numberOfPlayer) {
 				player.setScore(players.get(i).getScore());
@@ -537,7 +543,6 @@ public class GameController extends Controller {
 
 			}
 		}
-
 	}
 
 	public void setSummaryPageAppear(boolean value) {
@@ -552,4 +557,14 @@ public class GameController extends Controller {
 		return this.gameObjectArray[x][y];
 	}
 
+	public ObjectInGame getObjectOnPositionXY(int x, int y) {
+		if (gameObjectArray[x][y] != null && gameObjectArray[x][y] instanceof Wall) {
+			return ObjectInGame.WALL;
+		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Obstacle)) {
+			return ObjectInGame.OBSTACLE;
+		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Item)) {
+			return ((Item) gameObjectArray[x][y]).getObjectInGame();
+		}
+		return null;
+	}
 }

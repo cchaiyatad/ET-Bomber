@@ -1,5 +1,6 @@
 package item;
 
+import controller.ObjectInGame;
 import javafx.scene.layout.Pane;
 import player.PlayerBase;
 
@@ -19,4 +20,8 @@ public class Shield extends Item implements PowerUp {
 		player.setShield();
 	}
 
+	@Override
+	public ObjectInGame getObjectInGame() {
+		return ObjectInGame.SHIELDITEM;
+	}
 }
