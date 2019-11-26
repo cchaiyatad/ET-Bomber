@@ -1,8 +1,6 @@
 package player;
 
 import java.util.LinkedList;
-import java.util.Queue;
-
 import controller.GameController;
 import javafx.scene.layout.Pane;
 import weapon.*;
@@ -24,10 +22,6 @@ public class Player extends PlayerBase {
 		setSpeed(defaultMoveSpeed);
 		setCurrentWeapon(WeaponType.BOMB);
 		currentPlayerState = PlayerState.IDLE;
-	}
-
-	public Queue<Bomb> getCountBomb() {
-		return countBomb;
 	}
 
 	@Override

@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import ai.AI;
-import ai.AStar;
-import ai.CannotReachDestinateException;
+import ai.Action;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -98,7 +97,7 @@ public class GameController extends Controller {
 	public AnimationTimer gameLoop() {
 		if (this.gameLoop == null) {
 
-			AStar astar = new AStar(this);
+//			AStar astar = new AStar(this);
 			startTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
 			this.gameLoop = new AnimationTimer() {
 
@@ -176,7 +175,7 @@ public class GameController extends Controller {
 //						} catch (CannotReachDestinateException e) {
 //							e.printStackTrace();
 //						}
-//						Action.GoTo((AI) players.get(2), 1, 13);
+//						Action.PlaceBomb(((AI) players.get(2)));
 						inputInGame.changeBitset(KeyCode.T, false);
 
 					}
@@ -471,12 +470,6 @@ public class GameController extends Controller {
 					break;
 				case LANDMINEITEM:
 					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
-					break;
-				case GRENADEITEM:
-					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
-					break;
-				case ROCKETLAUNCHERITEM:
-					gameObject = new RocketLauncherItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case REMOTEBOMBITEM:
 					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);

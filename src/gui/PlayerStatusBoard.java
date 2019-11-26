@@ -61,20 +61,11 @@ public class PlayerStatusBoard extends VBox {
 			break;
 		case BOMBDETONATER:
 			break;
-		case GRENADE:
-			imagePath = "grenade";
-			break;
 		case LANDMINE:
 			imagePath = "landMine";
 			break;
-		case POISONDART:
-			imagePath = "poisonDart";
-			break;
 		case REMOTEBOMB:
 			imagePath = "remoteBomb";
-			break;
-		case ROCKETLAUNCHER:
-			imagePath = "rocketLauncher";
 			break;
 		default:
 			imagePath = "placeholder";

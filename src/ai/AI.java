@@ -9,7 +9,7 @@ public class AI extends PlayerBase {
 	private AIStatusCheckList aiStatus = new AIStatusCheckList();
 	private ObjectInGame[] objectInSightPlayer = new ObjectInGame[4]; // (wasd)
 	private int[] objectRangeInSightPlayer = new int[4]; // (wasd)
-	private ObjectInGame[] objectAroundPlayer = new ObjectInGame[8]; // (wqazxcde)
+//	private ObjectInGame[] objectAroundPlayer = new ObjectInGame[8]; // (wqazxcde)
 	private PlayerBase[] playerList = new PlayerBase[3];
 	private int[] playerInSightRangeList = new int[4]; // (wasd)
 
@@ -25,12 +25,13 @@ public class AI extends PlayerBase {
 	}
 
 	public void checkStatus() {
-		checkPlayerInSightObject();
+		checkPlayerAndObjectInSight();
 		aiStatus.canUseWeapon = this.canUseWeapon;
+		Action.PlaceBomb(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
 	}
 
-	public void checkPlayerInSightObject() {
+	public void checkPlayerAndObjectInSight() {
 		for (int i = 0; i < 4; i++) {
 			int x = xPosition / 50;
 			int y = yPosition / 50;
@@ -106,12 +107,6 @@ public class AI extends PlayerBase {
 	@Override
 	public void onObjectIsDestroyed() {
 		this.layer.getChildren().remove(this.imageView);
-	}
-
-	@Override
-	public void useWeapon() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public AIStatusCheckList getAiStatus() {

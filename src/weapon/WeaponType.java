@@ -2,11 +2,7 @@ package weapon;
 
 public enum WeaponType {
 	BOMB,
-	GRENADE,
 	LANDMINE,
-	POISONDART,
 	REMOTEBOMB,
 	BOMBDETONATER,
-	ROCKETLAUNCHER
-	
 }
