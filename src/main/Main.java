@@ -33,6 +33,7 @@ public class Main extends Application {
 	@Override
 	public void stop() throws Exception {
 		Platform.exit();
+		System.exit(0);
 	}
 
 }

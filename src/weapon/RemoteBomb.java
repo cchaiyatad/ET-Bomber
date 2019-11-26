@@ -1,5 +1,6 @@
 package weapon;
 
+import controller.ObjectInGame;
 import gameobject.GameObject;
 import javafx.scene.layout.Pane;
 import player.PlayerBase;
@@ -27,6 +28,10 @@ public class RemoteBomb extends GameObject implements Weapon {
 	public void makeDamageToObject() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public ObjectInGame getObjectInGame() {
+		return ObjectInGame.REMOTEBOMB;
 	}
 
 }

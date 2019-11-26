@@ -20,6 +20,7 @@ import javafx.scene.input.KeyCode;
 import player.*;
 import setting.Setting;
 import weapon.Bomb;
+import weapon.Weapon;
 import weapon.WeaponType;
 
 public class GameController extends Controller {
@@ -570,6 +571,8 @@ public class GameController extends Controller {
 			return ObjectInGame.OBSTACLE;
 		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Item)) {
 			return ((Item) gameObjectArray[x][y]).getObjectInGame();
+		}else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Weapon)) {
+			return ((Weapon) gameObjectArray[x][y]).getObjectInGame();
 		}
 		return null;
 	}

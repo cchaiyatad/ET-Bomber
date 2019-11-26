@@ -1,6 +1,7 @@
 package weapon;
 
 import controller.GameController;
+import controller.ObjectInGame;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Wall;
@@ -89,7 +90,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowTop()[i - 1] && canMakeDamageToobject(object)) {
-				((Destroyable)object).onObjectIsDestroyed();
+				((Destroyable) object).onObjectIsDestroyed();
 				break;
 			}
 		}
@@ -98,7 +99,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowBot()[i - 1] && canMakeDamageToobject(object)) {
-				((Destroyable)object).onObjectIsDestroyed();
+				((Destroyable) object).onObjectIsDestroyed();
 				break;
 
 			}
@@ -108,7 +109,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowLeft()[i - 1] && canMakeDamageToobject(object)) {
-				((Destroyable)object).onObjectIsDestroyed();
+				((Destroyable) object).onObjectIsDestroyed();
 				break;
 			}
 		}
@@ -117,11 +118,16 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowRight()[i - 1] && canMakeDamageToobject(object)) {
-				((Destroyable)object).onObjectIsDestroyed();
+				((Destroyable) object).onObjectIsDestroyed();
 				break;
 			}
 		}
 
+	}
+
+	@Override
+	public ObjectInGame getObjectInGame() {
+		return ObjectInGame.BOMB;
 	}
 
 }

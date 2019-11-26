@@ -9,7 +9,7 @@ public class AI extends PlayerBase {
 	private AIStatusCheckList aiStatus = new AIStatusCheckList();
 	private ObjectInGame[] objectInSightPlayer = new ObjectInGame[4]; // (wasd)
 	private int[] objectRangeInSightPlayer = new int[4]; // (wasd)
-//	private ObjectInGame[] objectAroundPlayer = new ObjectInGame[8]; // (wqazxcde)
+	public ObjectInGame[] objectAroundPlayer = new ObjectInGame[9]; // (wqazxcdes)
 	private PlayerBase[] playerList = new PlayerBase[3];
 	private int[] playerInSightRangeList = new int[4]; // (wasd)
 
@@ -27,7 +27,11 @@ public class AI extends PlayerBase {
 	public void checkStatus() {
 		checkPlayerAndObjectInSight();
 		aiStatus.canUseWeapon = this.canUseWeapon;
-		Action.PlaceBomb(this);
+//		Action.PlaceBomb(this);
+//		Action.GoTo(this, 12, 1);
+		Action.CheckForBomb(this);
+		Action.EscapeBomb(this, 0);
+		Action.GoTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
 	}
 
@@ -60,6 +64,9 @@ public class AI extends PlayerBase {
 			while (gameController.checkMove(x * 50, y * 50)) {
 				x += dx;
 				y += dy;
+			}
+			if (x == -1 || y == -1) {
+				System.out.println(x + " " + y);
 			}
 			objectInSightPlayer[i] = gameController.getObjectOnPositionXY(x, y);
 			objectRangeInSightPlayer[i] = Math.abs(x - xPosition / 50) + Math.abs(y - yPosition / 50);
@@ -102,6 +109,17 @@ public class AI extends PlayerBase {
 //			System.out.println(playerInSightRangeList[2] + " " + playerNumber + " S ");
 //			System.out.println(playerInSightRangeList[3] + " " + playerNumber + " D ");
 //		}
+
+		for (int i = 0; i < 9; i++) {
+			int[] xy = calCulatePosition(this, i);
+			objectAroundPlayer[i] = gameController.getObjectOnPositionXY(xy[0], xy[1]);
+		}
+//		if (playerNumber == 3) {
+//			for (int i = 0; i < 9; i++) {
+//				System.out.println(objectAroundPlayer[i] + " " + playerNumber + " " + i);
+//			}
+//			System.out.println();
+//		}
 	}
 
 	@Override
@@ -111,5 +129,51 @@ public class AI extends PlayerBase {
 
 	public AIStatusCheckList getAiStatus() {
 		return aiStatus;
+	}
+
+	public static int[] calCulatePosition(AI ai, int i) {
+		int x = ai.getxPosition() / 50;
+		int y = ai.getyPosition() / 50;
+		int dx = 0;
+		int dy = 0;
+		switch (i) {
+		case 0:
+			dx = 0;
+			dy = -1;
+			break;
+		case 1:
+			dx = -1;
+			dy = -1;
+			break;
+		case 2:
+			dx = -1;
+			dy = 0;
+			break;
+		case 3:
+			dx = -1;
+			dy = 1;
+			break;
+		case 4:
+			dx = 0;
+			dy = 1;
+			break;
+		case 5:
+			dx = 1;
+			dy = 1;
+			break;
+		case 6:
+			dx = 1;
+			dy = 0;
+			break;
+		case 7:
+			dx = 1;
+			dy = -1;
+			break;
+		case 8:
+			break;
+		default:
+			break;
+		}
+		return new int[] { x + dx, y + dy };
 	}
 }
