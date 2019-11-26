@@ -6,7 +6,7 @@ import gameobject.GameObject;
 import gameobject.Wall;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
-import player.Player;
+import player.PlayerBase;
 
 public class Bomb extends GameObject implements Weapon, Destroyable {
 	private int range;
@@ -14,10 +14,9 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	Thread thread;
 	BombArea area;
 
-	public Bomb(int xPosition, int yPosition, Pane layer, int range, Player player, GameController gameController) {
+	public Bomb(int xPosition, int yPosition, Pane layer, int range, PlayerBase player, GameController gameController) {
 		super(xPosition, yPosition, "bomb", layer);
 		if (player != null) {
-			System.out.println("Hit");
 			player.getCountBomb().add(this);
 			player.setCanUseWeapon();
 		}

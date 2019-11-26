@@ -31,8 +31,6 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	protected GameController gameController;
 	protected Queue<Bomb> countBomb;
 
-	public abstract void useWeapon();
-
 	public PlayerBase(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer);
@@ -44,7 +42,7 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	protected void setDefaultPlayer() {
 		setHp(3);
 		setBombRange(1);
-		setBombCount(10);
+		setBombCount(1);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();
 		shieldTime = 0;
@@ -234,6 +232,33 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 		xPosition += xy[0];
 		yPosition += xy[1];
 		SetPositionOnScreen();
+	}
+	
+	public void useWeapon() {
+		if(!canUseWeapon) {
+			return;
+		}
+		int x = xPosition / 50;
+		int y = yPosition / 50;
+		if (xPosition % 50 != 0) {
+			int xMid = (xPosition / 50 + 1) * 50;
+			x = Math.abs(xMid - xPosition) >= Math.abs(xMid - (xPosition + 50)) ? x : x + 1;
+		} else if (yPosition % 50 != 0) {
+			int yMid = (yPosition / 50 + 1) * 50;
+			y = Math.abs(yMid - yPosition) >= Math.abs(yMid - (yPosition + 50)) ? y : y + 1;
+		}
+
+		switch (getCurrentWeapon()) {
+		case BOMB:
+			if (this.gameController.canSetObject(x, y)) {
+				this.gameController.setObjectInGame(x, y,
+						new Bomb(x * 50, y * 50, this.getGameController().getGamePage().getGameFieldItemPane(),
+								getBombRange(), this, this.getGameController()));
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 	public long getShieldDuration() {

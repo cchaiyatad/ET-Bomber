@@ -40,7 +40,7 @@ public class Action {
 	}
 
 	public static void PlaceBomb(AI ai) {
-
+		
 	}
 
 	public static void EscapeBomb(AI ai) {

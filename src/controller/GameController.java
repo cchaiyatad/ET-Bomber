@@ -412,7 +412,7 @@ public class GameController extends Controller {
 				return;
 			}
 
-			if (inputInGame.isKeyPress(placeBombKey) && player.isCanUseWeapon()) {
+			if (inputInGame.isKeyPress(placeBombKey)) {
 				player.useWeapon();
 			}
 			inputInGame.changeBitset(placeBombKey, false);
