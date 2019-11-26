@@ -1,11 +1,9 @@
 package ai;
 
-import java.util.BitSet;
 import controller.GameController;
 import controller.ObjectInGame;
 import javafx.scene.layout.Pane;
 import player.PlayerBase;
-import player.PlayerState;
 
 public class AI extends PlayerBase {
 	private AIStatusCheckList aiStatus = new AIStatusCheckList();
@@ -27,11 +25,9 @@ public class AI extends PlayerBase {
 	}
 
 	public void checkStatus() {
-//		setCurrentPlayerState(PlayerState.MOVELEFT);
 //		checkPlayerInSightObject();
 
 		Action.GoTo(this, 1, 13);
-		System.out.println(aiStatus.moveDirection);
 		setCurrentPlayerState(aiStatus.moveDirection);
 	}
 

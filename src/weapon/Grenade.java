@@ -2,7 +2,6 @@ package weapon;
 
 import gameobject.GameObject;
 import javafx.scene.layout.Pane;
-import player.PlayerBase;
 
 public class Grenade extends GameObject implements Weapon {
 

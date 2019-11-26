@@ -7,7 +7,6 @@ import gameobject.Wall;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import player.Player;
-import player.PlayerBase;
 
 public class Bomb extends GameObject implements Weapon, Destroyable {
 	private int range;

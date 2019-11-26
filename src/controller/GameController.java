@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import ai.AI;
 import ai.AStar;
-import ai.Action;
+import ai.CannotReachDestinateException;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -171,7 +170,11 @@ public class GameController extends Controller {
 					}
 					// Debug
 					if (inputInGame.isKeyPress(KeyCode.T)) {
-//						astar.findPath(1, 1, 1, 2);
+//						try {
+//							astar.findPath(1, 1, 1, 1);
+//						} catch (CannotReachDestinateException e) {
+//							e.printStackTrace();
+//						}
 //						Action.GoTo((AI) players.get(2), 1, 13);
 						inputInGame.changeBitset(KeyCode.T, false);
 
@@ -445,37 +448,37 @@ public class GameController extends Controller {
 				case OBSTACLE:
 					break;
 				case BOMBUPGRADEITEM:
-					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new BombUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case POWERUPGRADEITEM:
-					gameObject = new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new PowerUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case SPEEDUPGRADEITEM:
-					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new SpeedUpgradeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case LIFEINCREASEITEM:
-					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new LifeIncreaseItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case SHIELDITEM:
-					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case PUSHBOMBSKILLITEM:
-					gameObject = new PushBombSkillItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new PushBombSkillItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case LANDMINEITEM:
-					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case GRENADEITEM:
-					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new GrenadeItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case POISIONDARTITEM:
-					gameObject = new PoisonDartItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new PoisonDartItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case ROCKETLAUNCHERITEM:
-					gameObject = new RocketLauncherItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new RocketLauncherItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				case REMOTEBOMBITEM:
-					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldItemPane(),this);
+					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
 				default:
 					continue;
