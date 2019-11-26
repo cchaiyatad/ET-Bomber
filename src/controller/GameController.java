@@ -494,9 +494,13 @@ public class GameController extends Controller {
 			} else if (i == 1) {
 				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this);
 			} else if (i == 2) {
-				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this);
+				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this, players.get(0),
+						players.get(1));
 			} else if (i == 3) {
-				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this);
+				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this,players.get(0),
+						players.get(1));
+				((AI)player).setOtherAI(players.get(2));
+				((AI)players.get(2)).setOtherAI(player);
 			}
 			if (players.size() == numberOfPlayer) {
 				player.setScore(players.get(i).getScore());
@@ -550,14 +554,12 @@ public class GameController extends Controller {
 	}
 
 	public ObjectInGame getObjectOnPositionXY(int x, int y) {
-		if(gameObjectArray[x][y] != null && gameObjectArray[x][y] instanceof Wall) {
+		if (gameObjectArray[x][y] != null && gameObjectArray[x][y] instanceof Wall) {
 			return ObjectInGame.WALL;
-		}
-		else if(gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Obstacle)) {
+		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Obstacle)) {
 			return ObjectInGame.OBSTACLE;
-		}
-		else if(gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Item)) {
-			return ((Item)gameObjectArray[x][y]).getObjectInGame();
+		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Item)) {
+			return ((Item) gameObjectArray[x][y]).getObjectInGame();
 		}
 		return null;
 	}
