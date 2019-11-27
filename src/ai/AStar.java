@@ -34,7 +34,6 @@ public class AStar {
 			currentNode = nodeList.get(0);
 			nodeList.remove(0);
 			if (currentNode.isFinish()) {
-				System.out.println("Hit");
 				break;
 			}
 			for (int i = 0; i < 2; i++) {

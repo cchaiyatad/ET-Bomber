@@ -7,9 +7,11 @@ import player.PlayerBase;
 
 public class AI extends PlayerBase {
 	private AIStatusCheckList aiStatus = new AIStatusCheckList();
-	private ObjectInGame[] objectInSightPlayer = new ObjectInGame[4]; // (wasd)
-	private int[] objectRangeInSightPlayer = new int[4]; // (wasd)
+	
+	public ObjectInGame[] objectInSightPlayer = new ObjectInGame[4]; // (wasd)
+	public int[] objectRangeInSightPlayer = new int[4]; // (wasd)
 	public ObjectInGame[] objectAroundPlayer = new ObjectInGame[9]; // (wqazxcdes)
+	
 	private PlayerBase[] playerList = new PlayerBase[3];
 	private int[] playerInSightRangeList = new int[4]; // (wasd)
 
@@ -18,6 +20,7 @@ public class AI extends PlayerBase {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController);
 		playerList[0] = playerOne;
 		playerList[1] = playerTwo;
+		Action.setGameController(gameController);
 	}
 
 	public void setOtherAI(PlayerBase ai) {
@@ -28,11 +31,24 @@ public class AI extends PlayerBase {
 		checkPlayerAndObjectInSight();
 		aiStatus.canUseWeapon = this.canUseWeapon;
 //		Action.PlaceBomb(this);
-//		Action.GoTo(this, 12, 1);
 		Action.CheckForBomb(this);
-		Action.EscapeBomb(this, 0);
+//		Action.EscapeBomb(this, 0);
 		Action.GoTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
+		if (getPlayerNumber() == 3) {
+			System.out.println(aiStatus.bombNearBy);
+			for (int i = 0; i < 5; i++) {
+				if (i != 4) {
+					System.out.println(i + " " + aiStatus.bombDirection[i] + " " + aiStatus.bombRange[i]);
+				} else {
+					System.out.println(i + " " + aiStatus.bombDirection[i]);
+				}
+			}
+			
+			System.out.println();
+//			System.out.println(aiStatus.moveToX + " " + aiStatus.moveToY + " " + getxPosition() + " " + getyPosition() + " " + aiStatus.moveDirection);
+		}
+
 	}
 
 	public void checkPlayerAndObjectInSight() {
@@ -64,9 +80,6 @@ public class AI extends PlayerBase {
 			while (gameController.checkMove(x * 50, y * 50)) {
 				x += dx;
 				y += dy;
-			}
-			if (x == -1 || y == -1) {
-				System.out.println(x + " " + y);
 			}
 			objectInSightPlayer[i] = gameController.getObjectOnPositionXY(x, y);
 			objectRangeInSightPlayer[i] = Math.abs(x - xPosition / 50) + Math.abs(y - yPosition / 50);
