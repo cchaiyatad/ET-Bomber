@@ -50,12 +50,6 @@ public class LevelGenerator {
 					objectsArray[i][j] = suffleList.get(0);
 					suffleList.remove(0);
 //					objectsArray[i][j] = ObjectInGame.EMPTY;
-//					if(random.nextInt(100) < 10) {
-//						objectsArray[i][j] = ObjectInGame.BOMBUPGRADEITEM;
-//					}	
-//					if(random.nextInt(100) < obstacleRate) {
-//						objectsArray[i][j] = ObjectInGame.LIFEINCREASEITEM;
-//					}
 					
 				}
 			}

@@ -8,12 +8,14 @@ public class AIStatusCheckList {
 	public boolean[] playerDead = new boolean[3];
 
 	// Moving
-	public int moveToX = -1;
-	public int moveToY = -1;
+	// -2 is random 
+	// -1 has nowhere to go
+	public int moveToX = -2;
+	public int moveToY = -2;
 	public PlayerState moveDirection = PlayerState.IDLE;
 	public PlayerState previousMoveDirection = null;
-	public boolean isMoveComplete = true;
 	public boolean isMoving = false;
+	public boolean[] ways = new boolean[4];
 
 	// DetectBomb
 	public boolean bombNearBy = false;

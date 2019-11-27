@@ -1,22 +1,22 @@
 package ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
-
 import controller.GameController;
 import controller.ObjectInGame;
 import player.PlayerState;
 
 public class Action {
 
-//	private static GameController gameController;
+	private static GameController gameController;
 	private static AStar astar;
+	private static Random random;
 
 	public static void setGameController(GameController gameController) {
-//		Action.gameController = gameController;
-		Action.astar = new AStar(gameController);
+		if (Action.gameController == null || astar == null || random == null) {
+			Action.gameController = gameController;
+			Action.astar = new AStar(gameController);
+			Action.random = new Random();
+		}
 	}
 
 	public static void Dead(AI ai) {
@@ -93,6 +93,33 @@ public class Action {
 //		}
 //	}
 //
+	public static void EscapeBomb(AI ai) {
+		if (!ai.getAiStatus().bombNearBy) {
+			return;
+		}
+		int saveRange = 2;
+		int hideChoice = -1;
+		for (int i = 0; i < 5; i++) {
+			if (ai.getAiStatus().bombRange[i] > saveRange) {
+				ai.getAiStatus().bombDirection[i] = false;
+			}
+		}
+		if (ai.getAiStatus().bombDirection[4] == true) {
+			// TODO
+			hideChoice = random.nextInt(4);
+		}
+
+		if (hideChoice != -1) {
+
+			int[] newxy = AI.calCulatePosition(ai, hideChoice * 2);
+			ai.getAiStatus().moveToX = newxy[0];
+			ai.getAiStatus().moveToY = newxy[1];
+
+			System.out.println(ai.getAiStatus().moveToX + " " + ai.getAiStatus().moveToY);
+		}
+
+	}
+
 	public static void CheckForBomb(AI ai) {
 		ai.getAiStatus().bombNearBy = false;
 		ai.getAiStatus().bombRange[4] = -1;
@@ -117,20 +144,76 @@ public class Action {
 	}
 
 	public static void RandomWalking(AI ai) {
-		AIStatusCheckList aiStatus = ai.getAiStatus();
-		// condition
-		// method
+		int currentMoveWay = -1;
+		int nextWay = -1;
+		switch (ai.getAiStatus().moveDirection) {
+		case MOVEUP:
+			currentMoveWay = 0;
+			break;
+		case MOVELEFT:
+			currentMoveWay = 1;
+			break;
+		case MOVERIGHT:
+			currentMoveWay = 2;
+			break;
+		case MOVEDOWN:
+			currentMoveWay = 3;
+			break;
+		default:
+			break;
+		}
+		int count = 0;
+		for (int i = 0; i < 4; i++) {
+			count = ai.getAiStatus().ways[i] ? count + 1 : count;
+		}
+		if (count > 1) {
+			nextWay = random.nextInt(4);
+			while (nextWay == currentMoveWay) {
+				nextWay = random.nextInt(4);
+			}
+		}
+		PlayerState newMoveState = PlayerState.IDLE;
+		switch (nextWay) {
+		case 0:
+			newMoveState = PlayerState.MOVEUP;
+			break;
+		case 1:
+			newMoveState = PlayerState.MOVELEFT;
+			break;
+		case 2:
+			newMoveState = PlayerState.MOVEDOWN;
+			break;
+		case 3:
+			newMoveState = PlayerState.MOVERIGHT;
+			break;
+		default:
+			break;
+		}
+		ai.getAiStatus().moveDirection = newMoveState;
 
 	}
 
+	public static void CheckForWay(AI ai) {
+		for (int i = 0; i < 4; i++) {
+			ai.getAiStatus().ways[i] = canMove(ai.objectAroundPlayer[i * 2]);
+		}
+	}
+
+	private static boolean canMove(ObjectInGame objectInGame) {
+		return objectInGame != ObjectInGame.BOMB && objectInGame != ObjectInGame.WALL
+				&& objectInGame != ObjectInGame.OBSTACLE;
+	}
+
 	public static void GoTo(AI ai) {
-		ai.getAiStatus().isMoveComplete = false;
 		int x = ai.getAiStatus().moveToX;
 		int y = ai.getAiStatus().moveToY;
 
+		if (x == -2 && y == -2) {
+			return;
+		}
+
 		if (x == -1 && y == -1 || ((ai.getxPosition()) == x * 50 && (ai.getyPosition()) == y * 50)) {
 			ai.getAiStatus().moveDirection = PlayerState.IDLE;
-			ai.getAiStatus().isMoveComplete = true;
 			ai.getAiStatus().isMoving = false;
 			ai.getAiStatus().moveToX = -1;
 			ai.getAiStatus().moveToY = -1;
@@ -140,7 +223,6 @@ public class Action {
 		if (ai.getGameController().checkMove(x * 50, y * 50) || ai.getAiStatus().isMoving == true) {
 
 			ai.getAiStatus().isMoving = true;
-
 			if ((ai.getxPosition()) != x * 50 || (ai.getyPosition()) != y * 50) {
 				int[] path;
 				try {
@@ -154,7 +236,6 @@ public class Action {
 					}
 				} catch (CannotReachDestinateException e) {
 					ai.getAiStatus().moveDirection = PlayerState.IDLE;
-					ai.getAiStatus().isMoveComplete = false;
 					ai.getAiStatus().isMoving = false;
 				}
 			}
