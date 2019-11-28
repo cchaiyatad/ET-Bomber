@@ -7,11 +7,11 @@ import player.PlayerBase;
 
 public class AI extends PlayerBase {
 	private AIStatusCheckList aiStatus = new AIStatusCheckList();
-	
+
 	public ObjectInGame[] objectInSightPlayer = new ObjectInGame[4]; // (wasd)
 	public int[] objectRangeInSightPlayer = new int[4]; // (wasd)
 	public ObjectInGame[] objectAroundPlayer = new ObjectInGame[9]; // (wqazxcdes)
-	
+
 	private PlayerBase[] playerList = new PlayerBase[3];
 	private int[] playerInSightRangeList = new int[4]; // (wasd)
 
@@ -38,6 +38,8 @@ public class AI extends PlayerBase {
 		Action.GoTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
 		if (getPlayerNumber() == 3) {
+//			System.out.println(aiStatus.moveToX + " " + aiStatus.moveToY + " " + getAiStatus().moveDirection);
+//			System.out.println();
 		}
 
 	}
@@ -76,13 +78,6 @@ public class AI extends PlayerBase {
 			objectRangeInSightPlayer[i] = Math.abs(x - xPosition / 50) + Math.abs(y - yPosition / 50);
 		}
 
-//		if (playerNumber == 3) {
-//			System.out.println(objectInSightPlayer[0] + " " + playerNumber + " W " + objectRangeInSightPlayer[0]);
-//			System.out.println(objectInSightPlayer[1] + " " + playerNumber + " A " + objectRangeInSightPlayer[1]);
-//			System.out.println(objectInSightPlayer[2] + " " + playerNumber + " S " + objectRangeInSightPlayer[2]);
-//			System.out.println(objectInSightPlayer[3] + " " + playerNumber + " D " + objectRangeInSightPlayer[3]);
-//		}
-
 		for (int i = 0; i < 4; i++) {
 			playerInSightRangeList[i] = -1;
 		}
@@ -107,23 +102,11 @@ public class AI extends PlayerBase {
 								: playerInSightRangeList[index];
 			}
 		}
-//		if (playerNumber == 3) {
-//			System.out.println(playerInSightRangeList[0] + " " + playerNumber + " W ");
-//			System.out.println(playerInSightRangeList[1] + " " + playerNumber + " A ");
-//			System.out.println(playerInSightRangeList[2] + " " + playerNumber + " S ");
-//			System.out.println(playerInSightRangeList[3] + " " + playerNumber + " D ");
-//		}
 
 		for (int i = 0; i < 9; i++) {
 			int[] xy = calCulatePosition(this, i);
 			objectAroundPlayer[i] = gameController.getObjectOnPositionXY(xy[0], xy[1]);
 		}
-//		if (playerNumber == 3) {
-//			for (int i = 0; i < 9; i++) {
-//				System.out.println(objectAroundPlayer[i] + " " + playerNumber + " " + i);
-//			}
-//			System.out.println();
-//		}
 	}
 
 	@Override

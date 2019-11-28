@@ -144,6 +144,10 @@ public class Action {
 	}
 
 	public static void RandomWalking(AI ai) {
+		if (ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0) {
+			return;
+		}
+		
 		int currentMoveWay = -1;
 		int nextWay = -1;
 		switch (ai.getAiStatus().moveDirection) {
@@ -163,15 +167,37 @@ public class Action {
 			break;
 		}
 		int count = 0;
+		boolean randomWay = false;
 		for (int i = 0; i < 4; i++) {
 			count = ai.getAiStatus().ways[i] ? count + 1 : count;
 		}
-		if (count > 1) {
+
+		
+
+		if (count == 1) {
+			nextWay = Math.abs((currentMoveWay + 2) % 4);
+
+		} else if (count == 2) {
+			if (((ai.getAiStatus().ways[0] && ai.getAiStatus().ways[2])
+					|| (ai.getAiStatus().ways[1] && ai.getAiStatus().ways[3])) && currentMoveWay != -1) {
+				nextWay = currentMoveWay;
+			} else {
+				randomWay = true;
+			}
+		}
+		
+		if (count > 2 || randomWay) {
 			nextWay = random.nextInt(4);
-			while (nextWay == currentMoveWay) {
+			while (!ai.getAiStatus().ways[nextWay] && nextWay != Math.abs((currentMoveWay + 2) % 4)) {
 				nextWay = random.nextInt(4);
 			}
 		}
+		if (ai.getPlayerNumber() == 3) {
+			System.out.println(count + " " + ai.getAiStatus().ways[0] + " " + ai.getAiStatus().ways[3] + " "
+					+ ai.getAiStatus().ways[1] + " " + ai.getAiStatus().ways[2] + " " + randomWay);
+			System.out.println();
+		}
+		
 		PlayerState newMoveState = PlayerState.IDLE;
 		switch (nextWay) {
 		case 0:
