@@ -189,10 +189,10 @@ public class Action {
 		case MOVELEFT:
 			currentMoveWay = 1;
 			break;
-		case MOVERIGHT:
+		case MOVEDOWN:
 			currentMoveWay = 2;
 			break;
-		case MOVEDOWN:
+		case MOVERIGHT:
 			currentMoveWay = 3;
 			break;
 		case IDLE:
