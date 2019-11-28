@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import ai.AI;
-import ai.Action;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -171,12 +170,12 @@ public class GameController extends Controller {
 					}
 					// Debug
 					if (inputInGame.isKeyPress(KeyCode.T)) {
-//						try {
-//							astar.findPath(1, 1, 1, 1);
-//						} catch (CannotReachDestinateException e) {
-//							e.printStackTrace();
-//						}
-//						Action.PlaceBomb(((AI) players.get(2)));
+						PlayerBase player = players.get(0);
+						int x = player.getxPosition() / 50;
+						int y = player.getyPosition() / 50;
+						if (gameObjectArray[x][y + 1] != null && gameObjectArray[x][y + 1] instanceof Destroyable) {
+							((Destroyable) gameObjectArray[x][y + 1]).onObjectIsDestroyed();
+						}
 						inputInGame.changeBitset(KeyCode.T, false);
 
 					}
@@ -571,7 +570,7 @@ public class GameController extends Controller {
 			return ObjectInGame.OBSTACLE;
 		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Item)) {
 			return ((Item) gameObjectArray[x][y]).getObjectInGame();
-		}else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Weapon)) {
+		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Weapon)) {
 			return ((Weapon) gameObjectArray[x][y]).getObjectInGame();
 		}
 		return null;

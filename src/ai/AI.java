@@ -4,7 +4,6 @@ import controller.GameController;
 import controller.ObjectInGame;
 import javafx.scene.layout.Pane;
 import player.PlayerBase;
-import player.PlayerState;
 
 public class AI extends PlayerBase {
 	private AIStatusCheckList aiStatus = new AIStatusCheckList();
@@ -165,4 +164,5 @@ public class AI extends PlayerBase {
 		}
 		return new int[] { x + dx, y + dy };
 	}
+
 }

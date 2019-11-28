@@ -15,6 +15,7 @@ public class AIStatusCheckList {
 	public PlayerState moveDirection = PlayerState.IDLE;
 	public PlayerState previousMoveDirection = null;
 	public boolean isMoving = false;
+	public boolean isFinishMoving = false;
 	public boolean[] ways = new boolean[4];
 	public boolean[] items = new boolean[4];
 
