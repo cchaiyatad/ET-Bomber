@@ -151,7 +151,6 @@ public class Action {
 			}
 		}
 		if (hasItem != -1) {
-			System.out.println("Hit");
 			int[] xy = AI.calCulatePosition(ai, hasItem * 2);
 			ai.getAiStatus().moveToX = xy[0];
 			ai.getAiStatus().moveToY = xy[1];
@@ -239,19 +238,14 @@ public class Action {
 		}
 
 		if (countWay != 0 && (countWay > 2 || randomWay)) {
-			int temp = 0;
 			int i = 5;
 			nextWay = random.nextInt(4);
 			while (!ai.getAiStatus().ways[nextWay] || nextWay == Math.abs((currentMoveWay + 2) % 4)) {
 				nextWay = random.nextInt(4);
 				i--;
-				if(i == 0) {
+				if (i == 0) {
 					break;
 				}
-				System.out.println(ai.getAiStatus().moveToX + " " + ai.getAiStatus().moveToY + " "
-						+ !ai.getAiStatus().ways[nextWay] + " " + (ai.getPlayerNumber()) + " "
-						+ (countWay > 1 && nextWay == Math.abs((currentMoveWay + 2) % 4)) + " " + temp + " "
-						+ countWay);
 			}
 		}
 
@@ -316,7 +310,6 @@ public class Action {
 			ai.getAiStatus().isFinishMoving = true;
 			ai.getAiStatus().moveToX = -2;
 			ai.getAiStatus().moveToY = -2;
-			System.out.println("Hello");
 			return;
 		}
 
@@ -327,10 +320,19 @@ public class Action {
 				int[] path;
 				try {
 					path = astar.findPath(ai.getxPosition() / 50, ai.getyPosition() / 50, x, y);
-					if (path[0] == ai.getxPosition() / 50 && Math.abs(path[0] * 50 - ai.getxPosition()) < 20) {
-						ai.getAiStatus().moveDirection = ai.getyPosition() / 50 < path[1] ? PlayerState.MOVEDOWN
-								: PlayerState.MOVEUP;
-					} else if (path[1] == ai.getyPosition() / 50 && Math.abs(path[1] * 50 - ai.getyPosition()) < 20) {
+					if (path[0] == (ai.getxPosition() + 20) / 50 && Math.abs(path[0] * 50 - ai.getxPosition()) < 20) {
+						if (ai.getAiStatus().moveDirection == PlayerState.MOVELEFT
+								|| ai.getAiStatus().moveDirection == PlayerState.MOVERIGHT) {
+							if (Math.abs(path[1] * 50 - ai.getyPosition()) > ai.getSpeed()) {
+								ai.getAiStatus().moveDirection = ai.getyPosition() / 50 < path[1] ? PlayerState.MOVEDOWN
+										: PlayerState.MOVEUP;
+							}
+						} else {
+							ai.getAiStatus().moveDirection = ai.getyPosition() / 50 < path[1] ? PlayerState.MOVEDOWN
+									: PlayerState.MOVEUP;
+						}
+					} else if (path[1] == (ai.getyPosition() + 20) / 50
+							&& Math.abs(path[1] * 50 - ai.getyPosition()) < 20) {
 						ai.getAiStatus().moveDirection = ai.getxPosition() / 50 < path[0] ? PlayerState.MOVERIGHT
 								: PlayerState.MOVELEFT;
 					}

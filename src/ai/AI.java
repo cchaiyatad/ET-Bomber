@@ -39,8 +39,7 @@ public class AI extends PlayerBase {
 		Action.GoTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
 		if (getPlayerNumber() == 3) {
-//			System.out.println(aiStatus.moveToX + " " + aiStatus.moveToY + " " + getAiStatus().moveDirection);
-//			System.out.println();
+			System.out.println(aiStatus.moveToX + " " + aiStatus.moveToY + " " + getAiStatus().moveDirection);
 		}
 
 	}
