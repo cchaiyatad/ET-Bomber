@@ -143,13 +143,45 @@ public class Action {
 		}
 	}
 
+	public static void CollectItem(AI ai) {
+		int hasItem = -1;
+		for (int i = 0; i < 4; i++) {
+			if (hasItem == -1 && ai.getAiStatus().items[i]) {
+				hasItem = i;
+			}
+		}
+		if (hasItem != -1) {
+			System.out.println("Hit");
+			int[] xy = AI.calCulatePosition(ai, hasItem * 2);
+			ai.getAiStatus().moveToX = xy[0];
+			ai.getAiStatus().moveToY = xy[1];
+		}
+	}
+
 	public static void RandomWalking(AI ai) {
-		if (ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0) {
+		if (ai.getPlayerNumber() == 3) {
+			System.out.println("Action");
+			System.out.println(ai.getxPosition());
+			System.out.println(ai.getyPosition());
+			System.out.println(ai.getAiStatus().moveToX);
+			System.out.println(ai.getAiStatus().moveToY);
+			System.out.println(ai.getAiStatus().moveDirection);
+			System.out.println(ai.objectAroundPlayer[0] + " " + ai.getAiStatus().items[0]);
+			System.out.println(ai.objectAroundPlayer[2] + " " + ai.getAiStatus().items[1]);
+			System.out.println(ai.objectAroundPlayer[4] + " " + ai.getAiStatus().items[2]);
+			System.out.println(ai.objectAroundPlayer[6] + " " + ai.getAiStatus().items[3]);
+		}
+
+		if ((ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0)
+				|| (ai.getAiStatus().moveToX != -2 && ai.getAiStatus().moveToY != -2)) {
 			return;
 		}
-		
+
 		int currentMoveWay = -1;
 		int nextWay = -1;
+		int countWay = 0;
+		boolean randomWay = false;
+
 		switch (ai.getAiStatus().moveDirection) {
 		case MOVEUP:
 			currentMoveWay = 0;
@@ -163,41 +195,52 @@ public class Action {
 		case MOVEDOWN:
 			currentMoveWay = 3;
 			break;
+		case IDLE:
+			randomWay = true;
+			break;
 		default:
 			break;
 		}
-		int count = 0;
-		boolean randomWay = false;
+
 		for (int i = 0; i < 4; i++) {
-			count = ai.getAiStatus().ways[i] ? count + 1 : count;
+			countWay = ai.getAiStatus().ways[i] ? countWay + 1 : countWay;
 		}
 
-		
+		if (ai.getPlayerNumber() == 3) {
+			System.out.println("Next way " + nextWay);
+			System.out.println("Count way " + countWay);
+		}
 
-		if (count == 1) {
+		if (countWay == 1) {
 			nextWay = Math.abs((currentMoveWay + 2) % 4);
 
-		} else if (count == 2) {
-			if (((ai.getAiStatus().ways[0] && ai.getAiStatus().ways[2])
-					|| (ai.getAiStatus().ways[1] && ai.getAiStatus().ways[3])) && currentMoveWay != -1) {
+		} else if (countWay == 2) {
+			if (((ai.getAiStatus().ways[0] && ai.getAiStatus().ways[2] && (currentMoveWay == 0 || currentMoveWay == 2))
+					|| (ai.getAiStatus().ways[1] && ai.getAiStatus().ways[3]
+							&& (currentMoveWay == 1 || currentMoveWay == 3)))
+					&& currentMoveWay != -1) {
 				nextWay = currentMoveWay;
 			} else {
 				randomWay = true;
 			}
 		}
-		
-		if (count > 2 || randomWay) {
+
+		if (countWay > 2 || randomWay) {
 			nextWay = random.nextInt(4);
 			while (!ai.getAiStatus().ways[nextWay] && nextWay != Math.abs((currentMoveWay + 2) % 4)) {
 				nextWay = random.nextInt(4);
 			}
+
 		}
+
 		if (ai.getPlayerNumber() == 3) {
-			System.out.println(count + " " + ai.getAiStatus().ways[0] + " " + ai.getAiStatus().ways[3] + " "
-					+ ai.getAiStatus().ways[1] + " " + ai.getAiStatus().ways[2] + " " + randomWay);
-			System.out.println();
+			System.out.println("Hit");
+			System.out.println(randomWay);
+			System.out.println(nextWay);
+			System.out.println(ai.getAiStatus().moveDirection);
+			System.out.println(countWay);
+			System.out.println("----");
 		}
-		
 		PlayerState newMoveState = PlayerState.IDLE;
 		switch (nextWay) {
 		case 0:
@@ -219,15 +262,20 @@ public class Action {
 
 	}
 
-	public static void CheckForWay(AI ai) {
+	public static void CheckForWayAndItem(AI ai) {
 		for (int i = 0; i < 4; i++) {
 			ai.getAiStatus().ways[i] = canMove(ai.objectAroundPlayer[i * 2]);
+			ai.getAiStatus().items[i] = isItem(ai.objectAroundPlayer[i * 2]);
 		}
 	}
 
 	private static boolean canMove(ObjectInGame objectInGame) {
 		return objectInGame != ObjectInGame.BOMB && objectInGame != ObjectInGame.WALL
 				&& objectInGame != ObjectInGame.OBSTACLE;
+	}
+
+	private static boolean isItem(ObjectInGame objectInGame) {
+		return canMove(objectInGame) && objectInGame != null;
 	}
 
 	public static void GoTo(AI ai) {
@@ -238,11 +286,12 @@ public class Action {
 			return;
 		}
 
-		if (x == -1 && y == -1 || ((ai.getxPosition()) == x * 50 && (ai.getyPosition()) == y * 50)) {
+		if ((x == -1 && y == -1) || ((ai.getxPosition() == x * 50) && (ai.getyPosition()) == y * 50)) {
 			ai.getAiStatus().moveDirection = PlayerState.IDLE;
 			ai.getAiStatus().isMoving = false;
-			ai.getAiStatus().moveToX = -1;
-			ai.getAiStatus().moveToY = -1;
+			ai.getAiStatus().moveToX = -2;
+			ai.getAiStatus().moveToY = -2;
+			System.out.println("Hello");
 			return;
 		}
 

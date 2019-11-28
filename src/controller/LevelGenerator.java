@@ -49,7 +49,7 @@ public class LevelGenerator {
 				} else {
 					objectsArray[i][j] = suffleList.get(0);
 					suffleList.remove(0);
-//					objectsArray[i][j] = ObjectInGame.EMPTY;
+//					objectsArray[i][j] = ObjectInGame.BOMBUPGRADEITEM;
 					
 				}
 			}

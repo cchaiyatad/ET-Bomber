@@ -16,6 +16,7 @@ public class AIStatusCheckList {
 	public PlayerState previousMoveDirection = null;
 	public boolean isMoving = false;
 	public boolean[] ways = new boolean[4];
+	public boolean[] items = new boolean[4];
 
 	// DetectBomb
 	public boolean bombNearBy = false;

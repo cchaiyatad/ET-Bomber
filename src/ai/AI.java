@@ -4,6 +4,7 @@ import controller.GameController;
 import controller.ObjectInGame;
 import javafx.scene.layout.Pane;
 import player.PlayerBase;
+import player.PlayerState;
 
 public class AI extends PlayerBase {
 	private AIStatusCheckList aiStatus = new AIStatusCheckList();
@@ -33,7 +34,8 @@ public class AI extends PlayerBase {
 //		Action.PlaceBomb(this);
 		Action.CheckForBomb(this);
 //		Action.EscapeBomb(this);
-		Action.CheckForWay(this);
+		Action.CheckForWayAndItem(this);
+		Action.CollectItem(this);
 		Action.RandomWalking(this);
 		Action.GoTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
