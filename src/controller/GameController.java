@@ -570,6 +570,10 @@ public class GameController extends Controller {
 	}
 
 	public ObjectInGame getObjectOnPositionXY(int x, int y) {
+		if (x < 0 || x > 14 || y < 0 || y > 14) {
+			return null;
+		}
+		
 		if (gameObjectArray[x][y] != null && gameObjectArray[x][y] instanceof Wall) {
 			return ObjectInGame.WALL;
 		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Obstacle)) {
@@ -579,6 +583,6 @@ public class GameController extends Controller {
 		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Weapon)) {
 			return ((Weapon) gameObjectArray[x][y]).getObjectInGame();
 		}
-		return null;
+		return ObjectInGame.EMPTY;
 	}
 }

@@ -280,12 +280,12 @@ public class Action {
 	}
 
 	private static boolean canMove(ObjectInGame objectInGame) {
-		return objectInGame != ObjectInGame.BOMB && objectInGame != ObjectInGame.WALL
+		return objectInGame != null && objectInGame != ObjectInGame.BOMB && objectInGame != ObjectInGame.WALL
 				&& objectInGame != ObjectInGame.OBSTACLE;
 	}
 
 	private static boolean isItem(ObjectInGame objectInGame) {
-		return canMove(objectInGame) && objectInGame != null;
+		return canMove(objectInGame) && objectInGame != ObjectInGame.EMPTY;
 	}
 
 	public static void GoTo(AI ai) {
@@ -367,9 +367,9 @@ public class Action {
 							System.out.println("path 0: " + path[0]);
 							System.out.println("path 1: " + path[1]);
 							System.out.println("x : " + ((ai.getxPosition() + 20) / 50));
-							System.out.println("x condition 2 " + Math.abs(path[0] * 50 - ai.getxPosition()) );
+							System.out.println("x condition 2 " + Math.abs(path[0] * 50 - ai.getxPosition()));
 							System.out.println("y : " + ((ai.getyPosition() + 20) / 50));
-							System.out.println("y condition 2 " + Math.abs(path[1] * 50 - ai.getyPosition()) );
+							System.out.println("y condition 2 " + Math.abs(path[1] * 50 - ai.getyPosition()));
 							System.out.println(ai.getAiStatus().moveDirection);
 							System.out.println("-------");
 						}
