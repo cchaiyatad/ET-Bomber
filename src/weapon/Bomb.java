@@ -26,7 +26,12 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 
 		thread = new Thread(() -> {
 			try {
-				Thread.sleep(1500);
+				while (true) {
+					Thread.sleep(1500);
+					if(gameController.isPlaying()) {
+						break;
+					}
+				}
 				area = new BombArea(this);
 				Platform.runLater(new Runnable() {
 

@@ -344,6 +344,9 @@ public class GameController extends Controller {
 					if (remainingTime <= endTime) {
 						break;
 					}
+					if(!isPlaying()) {
+						continue;
+					}
 					Platform.runLater(() -> {
 						for (int i = 0; i < bomb; i++) {
 							int x;
@@ -373,6 +376,9 @@ public class GameController extends Controller {
 	public boolean checkMove(int x, int y) {
 		x /= 50;
 		y /= 50;
+		if (x < 0 || x > 14 || y < 0 || y > 14) {
+			return false;
+		}
 		return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall)
 				&& !(gameObjectArray[x][y] instanceof Obstacle);
 	}

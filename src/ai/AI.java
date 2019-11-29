@@ -32,14 +32,22 @@ public class AI extends PlayerBase {
 		aiStatus.canUseWeapon = this.canUseWeapon;
 //		Action.PlaceBomb(this);
 		Action.CheckForBomb(this);
-//		Action.EscapeBomb(this);
 		Action.CheckForWayAndItem(this);
+//		if (playerNumber == 3) {
+			Action.EscapeBomb(this);
+//		}
 		Action.CollectItem(this);
 		Action.RandomWalking(this);
 		Action.GoTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
 		if (getPlayerNumber() == 3) {
-			System.out.println(aiStatus.moveToX + " " + aiStatus.moveToY + " " + getAiStatus().moveDirection);
+//			System.out.println(getAiStatus().moveDirection);
+//			System.out.println("Current x " + getxPosition() + " " + getxPosition() / 50);
+//			System.out.println("Current y " + getyPosition() + " " + getyPosition() / 50);
+//			System.out.println("Move x " + getAiStatus().moveToX);
+//			System.out.println("Move y " + getAiStatus().moveToY);
+//			System.out.println("Bombnearby : " + getAiStatus().bombNearBy);
+//			System.out.println("-----");
 		}
 
 	}
