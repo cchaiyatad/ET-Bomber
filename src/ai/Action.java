@@ -155,7 +155,6 @@ public class Action {
 		if (ai.getAiStatus().bombNearBy && ai.objectAroundPlayer[8] != ObjectInGame.BOMB) {
 			return;
 		}
-
 		if ((ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0)
 				|| (ai.getAiStatus().moveToX != -2 && ai.getAiStatus().moveToY != -2) || ((!ai.getAiStatus().bombNearBy
 						&& (ai.getAiStatus().moveToX == -1 && ai.getAiStatus().moveToY == -1)))) {
@@ -361,18 +360,6 @@ public class Action {
 							&& Math.abs(path[1] * 50 - ai.getyPosition()) < 20) {
 						ai.getAiStatus().moveDirection = ai.getxPosition() / 50 < path[0] ? PlayerState.MOVERIGHT
 								: PlayerState.MOVELEFT;
-					} else {
-						if (ai.getPlayerNumber() == 3) {
-							System.out.println("-------");
-							System.out.println("path 0: " + path[0]);
-							System.out.println("path 1: " + path[1]);
-							System.out.println("x : " + ((ai.getxPosition() + 20) / 50));
-							System.out.println("x condition 2 " + Math.abs(path[0] * 50 - ai.getxPosition()));
-							System.out.println("y : " + ((ai.getyPosition() + 20) / 50));
-							System.out.println("y condition 2 " + Math.abs(path[1] * 50 - ai.getyPosition()));
-							System.out.println(ai.getAiStatus().moveDirection);
-							System.out.println("-------");
-						}
 					}
 				} catch (CannotReachDestinateException e) {
 					System.out.println("cannot reach");
