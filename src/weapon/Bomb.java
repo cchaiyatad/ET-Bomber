@@ -28,7 +28,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			try {
 				while (true) {
 					Thread.sleep(1500);
-					if(gameController.isPlaying()) {
+					if (gameController.isPlaying()) {
 						break;
 					}
 				}
@@ -47,9 +47,13 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 						}
 					}
 				});
-				Thread.sleep(500);
+				while (true) {
+					Thread.sleep(500);
+					if (gameController.isPlaying()) {
+						break;
+					}
+				}
 				Platform.runLater(new Runnable() {
-
 					@Override
 					public void run() {
 						area.removeRange();
@@ -134,5 +138,4 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	public ObjectInGame getObjectInGame() {
 		return ObjectInGame.BOMB;
 	}
-
 }

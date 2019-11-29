@@ -28,7 +28,7 @@ public class Action {
 	}
 
 	public static void EscapeBomb(AI ai) {
-		if ((ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0)) {
+		if ((ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0) && (ai.getAiStatus().moveToX != -1)) {
 			return;
 		}
 		if (!ai.getAiStatus().bombNearBy) {
@@ -157,11 +157,13 @@ public class Action {
 		}
 
 		if ((ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0)
-				|| (ai.getAiStatus().moveToX != -2 && ai.getAiStatus().moveToY != -2)) {
+				|| (ai.getAiStatus().moveToX != -2 && ai.getAiStatus().moveToY != -2) || ((!ai.getAiStatus().bombNearBy
+						&& (ai.getAiStatus().moveToX == -1 && ai.getAiStatus().moveToY == -1)))) {
 			if (!ai.getAiStatus().isFinishMoving) {
 				return;
 			}
 		}
+
 		if (ai.getPlayerNumber() == 3) {
 			System.out.println("Random walk");
 		}
@@ -295,27 +297,56 @@ public class Action {
 		}
 
 		if (ai.getPlayerNumber() == 3) {
-			System.out.println("Go To");
+			System.out.println("Go To " + x + " " + y);
+			System.out.println("XPosition : " + ai.getxPosition() + " " + ai.getxPosition() / 50);
+			System.out.println("YPosition : " + ai.getyPosition() + " " + ai.getyPosition() / 50);
+			System.out.println("Current " + ai.getAiStatus().moveDirection);
 		}
-		
-		if ((x == -1 && y == -1) || (Math.abs(ai.getxPosition() - x * 50) < ai.getSpeed()
-				&& Math.abs(ai.getyPosition() - y * 50) < ai.getSpeed())) {
+
+		boolean isFinish = false;
+
+		if ((x == -1 && y == -1)) {
+			isFinish = true;
+		} else if ((Math.abs(ai.getxPosition() - x * 50) < ai.getSpeed())
+				&& Math.abs(ai.getyPosition() - y * 50) < ai.getSpeed())
+//				&& (ai.getAiStatus().moveDirection == PlayerState.MOVELEFT
+//						|| ai.getAiStatus().moveDirection == PlayerState.MOVEUP)) 
+		{
+			isFinish = true;
+		}
+//		else if ((Math.abs(ai.getxPosition() + 50 - x * 50) < ai.getSpeed())
+//				&& Math.abs(ai.getyPosition() - y * 50) < ai.getSpeed()
+//				&& (ai.getAiStatus().moveDirection == PlayerState.MOVERIGHT)) {
+//			isFinish = true;
+//		} else if ((Math.abs(ai.getxPosition() - x * 50) < ai.getSpeed())
+//				&& Math.abs(ai.getyPosition() + 50 - y * 50) < ai.getSpeed()
+//				&& (ai.getAiStatus().moveDirection == PlayerState.MOVEDOWN)) {
+//			isFinish = true;
+//		}
+
+		if (isFinish) {
+			System.out.println("Finish");
 			ai.getAiStatus().moveDirection = PlayerState.IDLE;
 			ai.getAiStatus().isMoving = false;
 			ai.getAiStatus().isFinishMoving = true;
-			ai.getAiStatus().moveToX = -2;
-			ai.getAiStatus().moveToY = -2;
+			ai.getAiStatus().moveToX = ai.getAiStatus().bombNearBy ? -1 : -2;
+			ai.getAiStatus().moveToY = ai.getAiStatus().bombNearBy ? -1 : -2;
 			return;
 		}
 
 		if (ai.getGameController().checkMove(x * 50, y * 50) || ai.getAiStatus().isMoving == true) {
 			ai.getAiStatus().isFinishMoving = false;
 			ai.getAiStatus().isMoving = true;
+
 			if ((ai.getxPosition()) != x * 50 || (ai.getyPosition()) != y * 50) {
 				int[] path;
 				try {
-					path = astar.findPath(ai.getxPosition() / 50, ai.getyPosition() / 50, x, y);
+					path = astar.findPath((ai.getxPosition() + 20) / 50, (ai.getyPosition() + 20) / 50, x, y);
+
 					if (path[0] == (ai.getxPosition() + 20) / 50 && Math.abs(path[0] * 50 - ai.getxPosition()) < 20) {
+						if (ai.getAiStatus().moveDirection == PlayerState.IDLE) {
+							System.out.println("IDLE");
+						}
 						if (ai.getAiStatus().moveDirection == PlayerState.MOVELEFT
 								|| ai.getAiStatus().moveDirection == PlayerState.MOVERIGHT) {
 							if (Math.abs(path[1] * 50 - ai.getyPosition()) > ai.getSpeed()) {
@@ -330,8 +361,21 @@ public class Action {
 							&& Math.abs(path[1] * 50 - ai.getyPosition()) < 20) {
 						ai.getAiStatus().moveDirection = ai.getxPosition() / 50 < path[0] ? PlayerState.MOVERIGHT
 								: PlayerState.MOVELEFT;
+					} else {
+						if (ai.getPlayerNumber() == 3) {
+							System.out.println("-------");
+							System.out.println("path 0: " + path[0]);
+							System.out.println("path 1: " + path[1]);
+							System.out.println("x : " + ((ai.getxPosition() + 20) / 50));
+							System.out.println("x condition 2 " + Math.abs(path[0] * 50 - ai.getxPosition()) );
+							System.out.println("y : " + ((ai.getyPosition() + 20) / 50));
+							System.out.println("y condition 2 " + Math.abs(path[1] * 50 - ai.getyPosition()) );
+							System.out.println(ai.getAiStatus().moveDirection);
+							System.out.println("-------");
+						}
 					}
 				} catch (CannotReachDestinateException e) {
+					System.out.println("cannot reach");
 					ai.getAiStatus().moveDirection = PlayerState.IDLE;
 					ai.getAiStatus().isMoving = false;
 				}
