@@ -344,7 +344,7 @@ public class GameController extends Controller {
 					if (remainingTime <= endTime) {
 						break;
 					}
-					if(!isPlaying()) {
+					if (!isPlaying()) {
 						continue;
 					}
 					Platform.runLater(() -> {
@@ -528,6 +528,7 @@ public class GameController extends Controller {
 				survirerIndex = i;
 			}
 		}
+		
 		if (survirerCount == 1) {
 			setSummaryPageAppear(true);
 			players.get(survirerIndex).setScore(players.get(survirerIndex).getScore() + 1);
@@ -573,7 +574,7 @@ public class GameController extends Controller {
 		if (x < 0 || x > 14 || y < 0 || y > 14) {
 			return null;
 		}
-		
+
 		if (gameObjectArray[x][y] != null && gameObjectArray[x][y] instanceof Wall) {
 			return ObjectInGame.WALL;
 		} else if (gameObjectArray[x][y] != null && (gameObjectArray[x][y] instanceof Obstacle)) {
@@ -585,4 +586,5 @@ public class GameController extends Controller {
 		}
 		return ObjectInGame.EMPTY;
 	}
+	 
 }

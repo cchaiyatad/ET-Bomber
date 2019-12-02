@@ -28,13 +28,14 @@ public class AI extends PlayerBase {
 	}
 
 	public void checkStatus() {
+		Action.Dead(this);
 		checkPlayerAndObjectInSight();
 		aiStatus.canUseWeapon = this.canUseWeapon;
 //		Action.PlaceBomb(this);
 		Action.CheckForBomb(this);
 		Action.CheckForWayAndItem(this);
 //		if (playerNumber == 3) {
-			Action.EscapeBomb(this);
+		Action.EscapeBomb(this);
 //		}
 		Action.CollectItem(this);
 		Action.RandomWalking(this);
@@ -172,4 +173,8 @@ public class AI extends PlayerBase {
 		return new int[] { x + dx, y + dy };
 	}
 
+	@Override
+	public boolean isDead() {
+		return getAiStatus().isDead;
+	}
 }

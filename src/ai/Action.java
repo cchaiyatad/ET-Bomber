@@ -20,14 +20,20 @@ public class Action {
 	}
 
 	public static void Dead(AI ai) {
-		ai.getAiStatus().isDead = true;
+		ai.getAiStatus().isDead = ai.getHp() == 0;
 	}
 
 	public static void PlaceBomb(AI ai) {
+		if (ai.getAiStatus().isDead) {
+			return;
+		}
 		ai.useWeapon();
 	}
 
 	public static void EscapeBomb(AI ai) {
+		if (ai.getAiStatus().isDead) {
+			return;
+		}
 		if ((ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0) && (ai.getAiStatus().moveToX != -1)) {
 			return;
 		}
@@ -35,9 +41,9 @@ public class Action {
 			return;
 		}
 
-		if (ai.getPlayerNumber() == 3) {
-			System.out.println("EscapeBomb");
-		}
+//		if (ai.getPlayerNumber() == 3) {
+//			System.out.println("EscapeBomb");
+//		}
 		int hideChoice = -1;
 
 		boolean[] canMove = { true, true, true, true };
@@ -96,6 +102,9 @@ public class Action {
 	}
 
 	public static void CheckForBomb(AI ai) {
+		if (ai.getAiStatus().isDead) {
+			return;
+		}
 		int saveRange = 2;
 
 		ai.getAiStatus().bombNearBy = false;
@@ -126,6 +135,9 @@ public class Action {
 	}
 
 	public static void CollectItem(AI ai) {
+		if (ai.getAiStatus().isDead) {
+			return;
+		}
 		if (ai.getAiStatus().bombNearBy) {
 			return;
 		}
@@ -152,6 +164,9 @@ public class Action {
 //			System.out.println(ai.getAiStatus().moveDirection);
 //		}
 
+		if (ai.getAiStatus().isDead) {
+			return;
+		}
 		if (ai.getAiStatus().bombNearBy && ai.objectAroundPlayer[8] != ObjectInGame.BOMB) {
 			return;
 		}
@@ -163,9 +178,9 @@ public class Action {
 			}
 		}
 
-		if (ai.getPlayerNumber() == 3) {
-			System.out.println("Random walk");
-		}
+//		if (ai.getPlayerNumber() == 3) {
+//			System.out.println("Random walk");
+//		}
 //		if (ai.getPlayerNumber() == 3) {
 //			System.out.println(ai.objectAroundPlayer[0] + " " + ai.getAiStatus().items[0]);
 //			System.out.println(ai.objectAroundPlayer[2] + " " + ai.getAiStatus().items[1]);
@@ -272,6 +287,9 @@ public class Action {
 	}
 
 	public static void CheckForWayAndItem(AI ai) {
+		if (ai.getAiStatus().isDead) {
+			return;
+		}
 		for (int i = 0; i < 4; i++) {
 			ai.getAiStatus().ways[i] = canMove(ai.objectAroundPlayer[i * 2]);
 			ai.getAiStatus().items[i] = isItem(ai.objectAroundPlayer[i * 2]);
@@ -288,19 +306,22 @@ public class Action {
 	}
 
 	public static void GoTo(AI ai) {
+		if (ai.getAiStatus().isDead) {
+			return;
+		}
 		int x = ai.getAiStatus().moveToX;
 		int y = ai.getAiStatus().moveToY;
 
 		if (x == -2 && y == -2) {
 			return;
 		}
-
-		if (ai.getPlayerNumber() == 3) {
-			System.out.println("Go To " + x + " " + y);
-			System.out.println("XPosition : " + ai.getxPosition() + " " + ai.getxPosition() / 50);
-			System.out.println("YPosition : " + ai.getyPosition() + " " + ai.getyPosition() / 50);
-			System.out.println("Current " + ai.getAiStatus().moveDirection);
-		}
+//
+//		if (ai.getPlayerNumber() == 3) {
+//			System.out.println("Go To " + x + " " + y);
+//			System.out.println("XPosition : " + ai.getxPosition() + " " + ai.getxPosition() / 50);
+//			System.out.println("YPosition : " + ai.getyPosition() + " " + ai.getyPosition() / 50);
+//			System.out.println("Current " + ai.getAiStatus().moveDirection);
+//		}
 
 		boolean isFinish = false;
 
@@ -324,7 +345,6 @@ public class Action {
 //		}
 
 		if (isFinish) {
-			System.out.println("Finish");
 			ai.getAiStatus().moveDirection = PlayerState.IDLE;
 			ai.getAiStatus().isMoving = false;
 			ai.getAiStatus().isFinishMoving = true;

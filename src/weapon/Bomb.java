@@ -33,34 +33,34 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 					}
 				}
 				area = new BombArea(this);
-				Platform.runLater(new Runnable() {
 
-					@Override
-					public void run() {
-						area.setIsCanShowRange();
-						onObjectIsDestroyed();
-						makeDamageToObject();
-						area.showRange();
-						if (player != null) {
-							player.getCountBomb().poll();
-							player.setCanUseWeapon();
-						}
+				Platform.runLater(() -> {
+					area.setIsCanShowRange();
+					onObjectIsDestroyed();
+					makeDamageToObject();
+					area.showRange();
+					if (player != null) {
+						player.getCountBomb().poll();
+						player.setCanUseWeapon();
 					}
 				});
+			} catch (InterruptedException e) {
+				System.out.println("interrupt 1");
+			}
+
+			try {
 				while (true) {
 					Thread.sleep(500);
 					if (gameController.isPlaying()) {
 						break;
 					}
 				}
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						area.removeRange();
-					}
+				Platform.runLater(() -> {
+					area.removeRange();
 				});
+
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				System.out.println("interrupt 2");
 			}
 		});
 		thread.start();
@@ -131,7 +131,6 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 				break;
 			}
 		}
-
 	}
 
 	@Override
