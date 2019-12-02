@@ -12,8 +12,9 @@ import player.PlayerBase;
 public class Bomb extends GameObject implements Weapon, Destroyable {
 	private int range;
 	private GameController gameController;
-	Thread thread;
-	BombArea area;
+	private Thread explodeThread;
+	private Thread bombAreaThread;
+	private BombArea area;
 
 	public Bomb(int xPosition, int yPosition, Pane layer, int range, PlayerBase player, GameController gameController) {
 		super(xPosition, yPosition, "bomb", layer);
@@ -24,7 +25,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 		this.range = range;
 		this.gameController = gameController;
 
-		thread = new Thread(() -> {
+		explodeThread = new Thread(() -> {
 			try {
 				while (true) {
 					Thread.sleep(1500);
@@ -32,22 +33,30 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 						break;
 					}
 				}
-				area = new BombArea(this);
-
-				Platform.runLater(() -> {
-					area.setIsCanShowRange();
-					onObjectIsDestroyed();
-					makeDamageToObject();
-					area.showRange();
-					if (player != null) {
-						player.getCountBomb().poll();
-						player.setCanUseWeapon();
-					}
-				});
 			} catch (InterruptedException e) {
-				System.out.println("interrupt 1");
+				onObjectIsDestroyed();
 			}
+			area = new BombArea(this);
 
+			Platform.runLater(() -> {
+				area.setIsCanShowRange();
+				onObjectIsDestroyed();
+				makeDamageToObject();
+				area.showRange();
+				if (player != null) {
+					player.getCountBomb().poll();
+					player.setCanUseWeapon();
+				}
+			});
+		});
+
+		bombAreaThread = new Thread(() -> {
+			try {
+				explodeThread.join();
+			} catch (InterruptedException e1) {
+//				System.out.println("interrupt join " + this.xPosition + " " + this.yPosition + " " + this.isExplode);
+			}
+			
 			try {
 				while (true) {
 					Thread.sleep(500);
@@ -60,10 +69,11 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 				});
 
 			} catch (InterruptedException e) {
-				System.out.println("interrupt 2");
+//				System.out.println("interrupt 2 " + this.xPosition + " " + this.yPosition + " " + this.isExplode);
 			}
 		});
-		thread.start();
+		explodeThread.start();
+		bombAreaThread.start();
 	}
 
 	@Override
@@ -84,6 +94,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	public void onObjectIsDestroyed() {
 		this.layer.getChildren().remove(this.imageView);
 		gameController.removeItem(xPosition / 50, yPosition / 50);
+		this.explodeThread.interrupt();
 	}
 
 	public GameController getGameController() {

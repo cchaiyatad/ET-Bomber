@@ -89,15 +89,15 @@ public class Action {
 			ai.getAiStatus().moveToY = newxy[1];
 		}
 
-		if (ai.getPlayerNumber() == 3) {
-			System.out.println(ai.getAiStatus().moveDirection);
-			System.out.println("Current x " + ai.getxPosition() + " " + ai.getxPosition() / 50);
-			System.out.println("Current y " + ai.getyPosition() + " " + ai.getyPosition() / 50);
-			System.out.println("Move x " + ai.getAiStatus().moveToX);
-			System.out.println("Move y " + ai.getAiStatus().moveToY);
-			System.out.println("Bombnearby : " + ai.getAiStatus().bombNearBy);
-			System.out.println("-----");
-		}
+//		if (ai.getPlayerNumber() == 3) {
+//			System.out.println(ai.getAiStatus().moveDirection);
+//			System.out.println("Current x " + ai.getxPosition() + " " + ai.getxPosition() / 50);
+//			System.out.println("Current y " + ai.getyPosition() + " " + ai.getyPosition() / 50);
+//			System.out.println("Move x " + ai.getAiStatus().moveToX);
+//			System.out.println("Move y " + ai.getAiStatus().moveToY);
+//			System.out.println("Bombnearby : " + ai.getAiStatus().bombNearBy);
+//			System.out.println("-----");
+//		}
 
 	}
 
