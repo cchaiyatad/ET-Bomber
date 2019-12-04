@@ -6,74 +6,39 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import player.PlayerBase;
 import setting.Setting;
 
-public class PlayerStatusBoard extends VBox {
+public class PlayerStatusBoard extends HBox {
 	private ImageView playerImageView;
-	private ImageView itemImageView;
-	private Label scoreLabel;
 	private Label hpLabel;
 	private PlayerBase player;
 
 	public PlayerStatusBoard() {
-		this.setPrefSize(200, 160);
+		this.setPrefSize(100, 50);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKSALMON, null, null)));
 
-		playerImageView = new ImageView(new Image(Setting.PATH_TO_PLACEHOLDER, 130, 130, false, false));
-		HBox imagePane = new HBox();
-		imagePane.resize(130, 130);
-		imagePane.getChildren().add(playerImageView);
+		playerImageView = new ImageView(new Image(Setting.PATH_TO_PLACEHOLDER));
 
-		itemImageView = new ImageView(new Image(Setting.PATH_TO_PLACEHOLDER, 70, 70, false, false));
 		hpLabel = new Label("HP");
 		hpLabel.setPrefHeight(60);
 
-		VBox vbox = new VBox();
-		vbox.getChildren().addAll(hpLabel, itemImageView);
-
-		HBox topHBox = new HBox();
-		topHBox.getChildren().addAll(imagePane, vbox);
-
-		scoreLabel = new Label("Score");
-		scoreLabel.setPrefHeight(30);
-
-		this.getChildren().addAll(topHBox, scoreLabel);
+		this.getChildren().addAll(playerImageView, hpLabel);
 	}
 
 	public void linkToPlayer(PlayerBase player) {
 		this.player = player;
-		upDateStatus();
+		playerImageView.setImage(new Image(player.getImagePath()));
+		updateStatus();
 	}
 
-	public void upDateStatus() {
+	public void updateStatus() {
 		if (player == null) {
 			return;
 		}
-		scoreLabel.setText(String.valueOf(player.getScore()));
 		hpLabel.setText(String.valueOf(player.getHp()));
-		String imagePath = "";
-		switch (player.getCurrentWeapon()) {
-		case BOMB:
-			imagePath = "bomb";
-			break;
-		case BOMBDETONATER:
-			break;
-		case LANDMINE:
-			imagePath = "landMine";
-			break;
-		case REMOTEBOMB:
-			imagePath = "remoteBomb";
-			break;
-		default:
-			imagePath = "placeholder";
-			break;
-		}
 
-		itemImageView.setImage(new Image("file:res/Image/" + imagePath + ".png", 70, 70, false, false));
-		playerImageView.setImage(new Image(player.getImagePath(), 130, 130, false, false));
 	}
 
 }

@@ -2,9 +2,9 @@ package gui;
 
 import controller.Controller;
 import javafx.geometry.Insets;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import setting.Setting;
 
 public class GamePage extends StackPane {
@@ -12,7 +12,7 @@ public class GamePage extends StackPane {
 	private ScoreBoard scoreBoard;
 
 	public GamePage(Controller controller) {
-		HBox gameHBoxPage = new HBox();
+		VBox gameHBoxPage = new VBox();
 		gameHBoxPage.setPadding(new Insets(20));
 		gameHBoxPage.setPrefSize(Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 		gameHBoxPage.setSpacing(20);

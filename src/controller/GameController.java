@@ -207,11 +207,7 @@ public class GameController extends Controller {
 				buttonLeft = Setting.PLAYERONE_MOVELEFT;
 				break;
 			case 2:
-				buttonUp = Setting.PLAYERTWO_MOVEUP;
-				buttonRight = Setting.PLAYERTWO_MOVERIGHT;
-				buttonDown = Setting.PLAYERTWO_MOVEDOWN;
-				buttonLeft = Setting.PLAYERTWO_MOVELEFT;
-				break;
+				return;
 			}
 			boolean up = inputInGame.isKeyPress(buttonUp);
 			boolean right = inputInGame.isKeyPress(buttonRight);
@@ -408,9 +404,6 @@ public class GameController extends Controller {
 			case 1:
 				placeBombKey = Setting.PLAYERONE_PLACEBOMB;
 				break;
-			case 2:
-				placeBombKey = Setting.PLAYERTWO_PLACEBOMB;
-				break;
 			default:
 				return;
 			}
@@ -526,7 +519,7 @@ public class GameController extends Controller {
 				survirerIndex = i;
 			}
 		}
-		
+
 		if (survirerCount == 1) {
 			setSummaryPageAppear(true);
 			players.get(survirerIndex).setScore(players.get(survirerIndex).getScore() + 1);
@@ -584,5 +577,5 @@ public class GameController extends Controller {
 		}
 		return ObjectInGame.EMPTY;
 	}
-	 
+
 }

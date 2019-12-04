@@ -30,10 +30,7 @@ public class AI extends PlayerBase {
 	public void checkStatus() {
 		Action.Dead(this);
 		aiStatus.canUseWeapon = this.canUseWeapon;
-		checkPlayerAndObjectInSight();
-		Action.CheckForBomb(this);
-		Action.CheckForWayAndItem(this);
-		Action.PlaceBomb(this);
+//		Action.PlaceBomb(this);
 		checkPlayerAndObjectInSight();
 		Action.CheckForBomb(this);
 		Action.CheckForWayAndItem(this);

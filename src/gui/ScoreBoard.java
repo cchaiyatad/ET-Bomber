@@ -7,10 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class ScoreBoard extends VBox implements HasButtonPage {
+public class ScoreBoard extends HBox implements HasButtonPage {
 
 	private PlayerStatusBoard[] playerStatusBoards = new PlayerStatusBoard[4];
 	private Label timer;
@@ -19,27 +20,31 @@ public class ScoreBoard extends VBox implements HasButtonPage {
 	private Controller controller;
 
 	public ScoreBoard(Controller controller) {
-		this.setPrefSize(50 * 4, 750);
+		this.setPrefSize(50 * 15, 50);
+		this.setSpacing(50);
 		this.setBackground(new Background(new BackgroundFill(Color.BROWN, null, null)));
 
+		HBox scores = new HBox();
 		for (int i = 0; i < 4; i++) {
 			playerStatusBoards[i] = new PlayerStatusBoard();
-			this.getChildren().add(playerStatusBoards[i]);
+			scores.getChildren().add(playerStatusBoards[i]);
 		}
 
+		HBox buttonController = new HBox();
 		timer = new Label("0:00");
-		timer.setPrefSize(200, 40);
+		timer.setPrefSize(100, 50);
 
 		pauseButton = new Button("PAUSE");
-		pauseButton.setPrefSize(200, 35);
+		pauseButton.setPrefSize(100, 50);
 		pauseButton.setFocusTraversable(false);
 
 		mainMenuButton = new Button("MAIN MENU");
-		mainMenuButton.setPrefSize(200, 35);
+		mainMenuButton.setPrefSize(100, 50);
 		mainMenuButton.setFocusTraversable(false);
 
+		buttonController.getChildren().addAll(timer, pauseButton, mainMenuButton);
 		setButtonAction();
-		this.getChildren().addAll(timer, pauseButton, mainMenuButton);
+		this.getChildren().addAll(scores, buttonController);
 		this.controller = controller;
 	}
 
@@ -56,7 +61,7 @@ public class ScoreBoard extends VBox implements HasButtonPage {
 
 	public void updateStatus() {
 		for (PlayerStatusBoard playerStatusBoard : playerStatusBoards) {
-			playerStatusBoard.upDateStatus();
+			playerStatusBoard.updateStatus();
 		}
 	}
 
