@@ -27,6 +27,10 @@ public class Action {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
+//		if() {
+//			
+//		}
+
 		ai.useWeapon();
 	}
 
@@ -41,21 +45,16 @@ public class Action {
 			return;
 		}
 
-//		if (ai.getPlayerNumber() == 3) {
-//			System.out.println("EscapeBomb");
-//		}
+		if (ai.getPlayerNumber() == 3) {
+			System.out.println(ai.getAiStatus().bombDirection[4]);
+			System.out.println("EscapeBomb");
+		}
 		int hideChoice = -1;
 
 		boolean[] canMove = { true, true, true, true };
 		for (int i = 0; i < 4; i++) {
 			canMove[i] = !ai.getAiStatus().bombDirection[i];
 		}
-//		if (ai.getPlayerNumber() == 3) {
-//			for (int i = 0; i < 4; i++) {
-//				System.out.println(canMove[i]);
-//			}
-//		}
-
 		boolean hasWay = true;
 		for (int i = 0; i < 4; i++) {
 			hasWay = canMove[i] && ai.getAiStatus().ways[i];
@@ -88,16 +87,6 @@ public class Action {
 			ai.getAiStatus().moveToX = newxy[0];
 			ai.getAiStatus().moveToY = newxy[1];
 		}
-
-//		if (ai.getPlayerNumber() == 3) {
-//			System.out.println(ai.getAiStatus().moveDirection);
-//			System.out.println("Current x " + ai.getxPosition() + " " + ai.getxPosition() / 50);
-//			System.out.println("Current y " + ai.getyPosition() + " " + ai.getyPosition() / 50);
-//			System.out.println("Move x " + ai.getAiStatus().moveToX);
-//			System.out.println("Move y " + ai.getAiStatus().moveToY);
-//			System.out.println("Bombnearby : " + ai.getAiStatus().bombNearBy);
-//			System.out.println("-----");
-//		}
 
 	}
 
@@ -155,38 +144,36 @@ public class Action {
 	}
 
 	public static void RandomWalking(AI ai) {
-//		if (ai.getPlayerNumber() == 3) {
-//			System.out.println("--------");
-//			System.out.println(ai.getxPosition());
-//			System.out.println(ai.getyPosition());
-//			System.out.println(ai.getAiStatus().moveToX);
-//			System.out.println(ai.getAiStatus().moveToY);
-//			System.out.println(ai.getAiStatus().moveDirection);
-//		}
-
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
 		if (ai.getAiStatus().bombNearBy && ai.objectAroundPlayer[8] != ObjectInGame.BOMB) {
 			return;
+		} else if (ai.getAiStatus().bombNearBy && ai.objectAroundPlayer[8] == ObjectInGame.BOMB) {
+			if (ai.getPlayerNumber() == 3) {
+				System.out.println("Hit");
+				System.out.println(ai.getAiStatus().moveToX + " " + ai.getAiStatus().moveToY);
+				for (int i = 0; i < 8; i += 2) {
+					System.out.println(ai.objectAroundPlayer[i]);
+
+				}
+				System.out.println("============");
+			}
 		}
+
 		if ((ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0)
 				|| (ai.getAiStatus().moveToX != -2 && ai.getAiStatus().moveToY != -2) || ((!ai.getAiStatus().bombNearBy
 						&& (ai.getAiStatus().moveToX == -1 && ai.getAiStatus().moveToY == -1)))) {
 			if (!ai.getAiStatus().isFinishMoving) {
+				if (ai.getPlayerNumber() == 3) {
+					System.out.println("Exit");
+				}
 				return;
 			}
 		}
-
-//		if (ai.getPlayerNumber() == 3) {
-//			System.out.println("Random walk");
-//		}
-//		if (ai.getPlayerNumber() == 3) {
-//			System.out.println(ai.objectAroundPlayer[0] + " " + ai.getAiStatus().items[0]);
-//			System.out.println(ai.objectAroundPlayer[2] + " " + ai.getAiStatus().items[1]);
-//			System.out.println(ai.objectAroundPlayer[4] + " " + ai.getAiStatus().items[2]);
-//			System.out.println(ai.objectAroundPlayer[6] + " " + ai.getAiStatus().items[3]);
-//		}
+		if (ai.getPlayerNumber() == 3) {
+			System.out.println("Hi");
+		}
 		ai.getAiStatus().isFinishMoving = false;
 		int currentMoveWay = -1;
 		int nextWay = -1;
@@ -216,11 +203,6 @@ public class Action {
 		for (int i = 0; i < 4; i++) {
 			countWay = ai.getAiStatus().ways[i] ? countWay + 1 : countWay;
 		}
-
-//		if (ai.getPlayerNumber() == 3) {
-//			System.out.println("Next way " + nextWay);
-//			System.out.println("Count way " + countWay);
-//		}
 
 		if (countWay == 1) {
 			int position = 0;
@@ -256,15 +238,6 @@ public class Action {
 			}
 		}
 
-//		if (ai.getPlayerNumber() == 3) {
-//			System.out.println("Hit");
-//			System.out.println(randomWay);
-//			System.out.println("nextWay " + nextWay);
-//			System.out.println("opposite " + Math.abs((currentMoveWay + 2) % 4));
-//			System.out.println(ai.getAiStatus().moveDirection);
-//			System.out.println(countWay);
-//			System.out.println("----");
-//		}
 		PlayerState newMoveState = PlayerState.IDLE;
 		switch (nextWay) {
 		case 0:
@@ -315,35 +288,15 @@ public class Action {
 		if (x == -2 && y == -2) {
 			return;
 		}
-//
-//		if (ai.getPlayerNumber() == 3) {
-//			System.out.println("Go To " + x + " " + y);
-//			System.out.println("XPosition : " + ai.getxPosition() + " " + ai.getxPosition() / 50);
-//			System.out.println("YPosition : " + ai.getyPosition() + " " + ai.getyPosition() / 50);
-//			System.out.println("Current " + ai.getAiStatus().moveDirection);
-//		}
 
 		boolean isFinish = false;
 
 		if ((x == -1 && y == -1)) {
 			isFinish = true;
 		} else if ((Math.abs(ai.getxPosition() - x * 50) < ai.getSpeed())
-				&& Math.abs(ai.getyPosition() - y * 50) < ai.getSpeed())
-//				&& (ai.getAiStatus().moveDirection == PlayerState.MOVELEFT
-//						|| ai.getAiStatus().moveDirection == PlayerState.MOVEUP)) 
-		{
+				&& Math.abs(ai.getyPosition() - y * 50) < ai.getSpeed()) {
 			isFinish = true;
 		}
-//		else if ((Math.abs(ai.getxPosition() + 50 - x * 50) < ai.getSpeed())
-//				&& Math.abs(ai.getyPosition() - y * 50) < ai.getSpeed()
-//				&& (ai.getAiStatus().moveDirection == PlayerState.MOVERIGHT)) {
-//			isFinish = true;
-//		} else if ((Math.abs(ai.getxPosition() - x * 50) < ai.getSpeed())
-//				&& Math.abs(ai.getyPosition() + 50 - y * 50) < ai.getSpeed()
-//				&& (ai.getAiStatus().moveDirection == PlayerState.MOVEDOWN)) {
-//			isFinish = true;
-//		}
-
 		if (isFinish) {
 			ai.getAiStatus().moveDirection = PlayerState.IDLE;
 			ai.getAiStatus().isMoving = false;
@@ -363,9 +316,6 @@ public class Action {
 					path = astar.findPath((ai.getxPosition() + 20) / 50, (ai.getyPosition() + 20) / 50, x, y);
 
 					if (path[0] == (ai.getxPosition() + 20) / 50 && Math.abs(path[0] * 50 - ai.getxPosition()) < 20) {
-						if (ai.getAiStatus().moveDirection == PlayerState.IDLE) {
-							System.out.println("IDLE");
-						}
 						if (ai.getAiStatus().moveDirection == PlayerState.MOVELEFT
 								|| ai.getAiStatus().moveDirection == PlayerState.MOVERIGHT) {
 							if (Math.abs(path[1] * 50 - ai.getyPosition()) > ai.getSpeed()) {
@@ -382,7 +332,10 @@ public class Action {
 								: PlayerState.MOVELEFT;
 					}
 				} catch (CannotReachDestinateException e) {
-					System.out.println("cannot reach");
+					System.out.println("cannot reach " + ai.getPlayerNumber() + " " + ai.getAiStatus().moveToX + " "
+							+ ai.getAiStatus().moveToY);
+					ai.getAiStatus().moveToX = -2;
+					ai.getAiStatus().moveToY = -2;
 					ai.getAiStatus().moveDirection = PlayerState.IDLE;
 					ai.getAiStatus().isMoving = false;
 				}

@@ -16,8 +16,7 @@ public class AStar {
 	public int[] findPath(int startX, int startY, int destinationX, int destinationY)
 			throws CannotReachDestinateException {
 		if (startX == destinationX && startY == destinationY) {
-			int[] xy = { startX, startY };
-			return xy;
+			return new int[]{ startX, startY };
 		}
 		Node destinateNode = new Node(startX, startY, null, null, null);
 		Node startNode = new Node(destinationX, destinationY, null, null, destinateNode);
@@ -29,6 +28,7 @@ public class AStar {
 		while (true) {
 			nodeSort(nodeList);
 			if (nodeList.isEmpty()) {
+				System.out.println(startX + " " + startY + " " + destinationX + " " + destinationY);
 				throw new CannotReachDestinateException();
 			}
 			currentNode = nodeList.get(0);

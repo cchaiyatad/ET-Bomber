@@ -96,8 +96,6 @@ public class GameController extends Controller {
 
 	public AnimationTimer gameLoop() {
 		if (this.gameLoop == null) {
-
-//			AStar astar = new AStar(this);
 			startTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
 			this.gameLoop = new AnimationTimer() {
 
