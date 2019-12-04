@@ -9,7 +9,6 @@ import gameobject.GameObject;
 import gameobject.Moveable;
 import javafx.scene.layout.Pane;
 import weapon.Bomb;
-import weapon.WeaponType;
 
 public abstract class PlayerBase extends GameObject implements Moveable, Destroyable {
 	private long shieldDuration = 5;
@@ -19,7 +18,6 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	protected int bombRange;
 	protected int speed;
 
-	protected WeaponType currentWeapon;
 	protected long shieldTime;
 	protected boolean canUseWeapon;
 
@@ -45,7 +43,6 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 		shieldTime = 0;
 
 		setSpeed(defaultMoveSpeed);
-		setCurrentWeapon(WeaponType.BOMB);
 		currentPlayerState = PlayerState.IDLE;
 
 	}
@@ -101,14 +98,6 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 		this.speed = speed;
 	}
 
-	public WeaponType getCurrentWeapon() {
-		return currentWeapon;
-	}
-
-	public void setCurrentWeapon(WeaponType currentWeapon) {
-		this.currentWeapon = currentWeapon;
-	}
-
 	public boolean isHasShield() {
 		return shieldTime > TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
 	}
@@ -144,7 +133,7 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	public Queue<Bomb> getCountBomb() {
 		return countBomb;
 	}
-	
+
 	@Override
 	public void move() {
 		int xDirectionSpeed = 0;
@@ -214,9 +203,9 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 		yPosition += xy[1];
 		SetPositionOnScreen();
 	}
-	
+
 	public void useWeapon() {
-		if(!canUseWeapon) {
+		if (!canUseWeapon) {
 			return;
 		}
 		int x = xPosition / 50;
@@ -229,16 +218,10 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 			y = Math.abs(yMid - yPosition) >= Math.abs(yMid - (yPosition + 50)) ? y : y + 1;
 		}
 
-		switch (getCurrentWeapon()) {
-		case BOMB:
-			if (this.gameController.canSetObject(x, y)) {
-				this.gameController.setObjectInGame(x, y,
-						new Bomb(x * 50, y * 50, this.getGameController().getGamePage().getGameFieldItemPane(),
-								getBombRange(), this, this.getGameController()));
-			}
-			break;
-		default:
-			break;
+		if (this.gameController.canSetObject(x, y)) {
+			this.gameController.setObjectInGame(x, y,
+					new Bomb(x * 50, y * 50, this.getGameController().getGamePage().getGameFieldItemPane(),
+							getBombRange(), this, this.getGameController()));
 		}
 	}
 

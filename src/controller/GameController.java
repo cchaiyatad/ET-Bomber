@@ -20,7 +20,6 @@ import player.*;
 import setting.Setting;
 import weapon.Bomb;
 import weapon.Weapon;
-import weapon.WeaponType;
 
 public class GameController extends Controller {
 	private GameObject[][] gameObjectArray = new GameObject[15][15];
@@ -179,9 +178,7 @@ public class GameController extends Controller {
 					}
 					// Debug
 					if (inputInGame.isKeyPress(KeyCode.R)) {
-						players.get(0).setCurrentWeapon(WeaponType.BOMB);
 						inputInGame.changeBitset(KeyCode.R, false);
-
 					}
 
 				}
@@ -446,12 +443,6 @@ public class GameController extends Controller {
 				case SHIELDITEM:
 					gameObject = new Shield(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
 					break;
-				case LANDMINEITEM:
-					gameObject = new LandMineItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
-					break;
-				case REMOTEBOMBITEM:
-					gameObject = new RemoteBombItem(i * 50, j * 50, gamePage.getGameFieldItemPane(), this);
-					break;
 				default:
 					continue;
 				}
@@ -470,7 +461,7 @@ public class GameController extends Controller {
 			if (i == 0) {
 				player = new Player(50, 50, "playerOne", gamePage.getGameFieldPlayerPane(), 1, this);
 			} else if (i == 1) {
-				player = new AI(50 * 13, 50 * 13, "playerThree", gamePage.getGameFieldPlayerPane(), 2, this,
+				player = new AI(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this,
 						players.get(0));
 			} else if (i == 2) {
 				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this, players.get(0));
@@ -478,12 +469,12 @@ public class GameController extends Controller {
 				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this, players.get(0));
 			}
 
-			if (players.size() == numberOfPlayer) {
-				players.get(i).onObjectIsDestroyed();
-				players.set(i, player);
-			} else {
-				players.add(player);
-			}
+//			if (players.size() == numberOfPlayer) {
+//				players.get(i).onObjectIsDestroyed();
+//				players.set(i, player);
+//			} else {
+			players.add(player);
+//			}
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
 		}
 	}

@@ -26,7 +26,6 @@ public class AI extends PlayerBase {
 	public void checkStatus() {
 		Action.Dead(this);
 		aiStatus.canUseWeapon = this.canUseWeapon;
-//		Action.PlaceBomb(this);
 		checkPlayerAndObjectInSight();
 		Action.CheckForBomb(this);
 		Action.CheckForWayAndItem(this);
@@ -50,8 +49,8 @@ public class AI extends PlayerBase {
 
 	public void checkPlayerAndObjectInSight() {
 		for (int i = 0; i < 4; i++) {
-			int x = (xPosition + 25) / 50;
-			int y = (yPosition + 25) / 50;
+			int x = (xPosition) / 50;
+			int y = (yPosition) / 50;
 			int dx = 0;
 			int dy = 0;
 			switch (i) {
@@ -123,8 +122,8 @@ public class AI extends PlayerBase {
 	}
 
 	public static int[] calCulatePosition(AI ai, int i) {
-		int x = (ai.getxPosition() + 25) / 50;
-		int y = (ai.getyPosition() + 25) / 50;
+		int x = (ai.getxPosition()) / 50;
+		int y = (ai.getyPosition()) / 50;
 		int dx = 0;
 		int dy = 0;
 		switch (i) {

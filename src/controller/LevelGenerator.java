@@ -20,7 +20,7 @@ public class LevelGenerator {
 		int objectCount = random.nextInt(emptyTileCount - obstacleRate) + obstacleRate;
 		List<ObjectInGame> suffleList = new ArrayList<ObjectInGame>();
 
-		for (int k = 3; k < 10; k++) {
+		for (int k = 3; k < 8; k++) {
 			int count;
 			if (k == 3 || k == 4 || k == 5) {
 				count = random.nextInt(4) + 12;
