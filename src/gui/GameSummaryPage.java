@@ -46,10 +46,17 @@ public class GameSummaryPage extends FlowPane implements HasButtonPage {
 		});
 	}
 
-	public void setText(int[] data) {
-		mainLabel.setText(String.format("Player %d win!!", data[0] + 1));
-		statusLabel.setText(String.format("Player 1: %d\nPlayer 2: %d\nPlayer 3: %d\nPlayer 4: %d", data[1], data[2],
-				data[3], data[4]));
+	public void setText(boolean isSurvive, int level) {
+		String mainLabelText = isSurvive ? "You survive" : "You died";
+		String statusLabelText;
+		if (level == 3) {
+			statusLabelText = isSurvive ? "You defeated all enemy" : "You was defeated";
+		} else {
+			statusLabelText = isSurvive ? "You defeated " + level + " monster"
+					: "You was defeated by " + level + " monster";
+		}
+		mainLabel.setText(mainLabelText);
+		statusLabel.setText(statusLabelText);
 	}
 
 }

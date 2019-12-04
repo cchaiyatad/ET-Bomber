@@ -18,7 +18,6 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	protected int bombCount;
 	protected int bombRange;
 	protected int speed;
-	protected int score;
 
 	protected WeaponType currentWeapon;
 	protected long shieldTime;
@@ -100,14 +99,6 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	public void setSpeed(int speed) {
 		speed = speed > 10 ? 10 : speed;
 		this.speed = speed;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
 	}
 
 	public WeaponType getCurrentWeapon() {

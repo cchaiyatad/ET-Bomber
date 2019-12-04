@@ -10,7 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import setting.Setting;
 
-public class InstuctionPage extends FlowPane implements HasButtonPage{
+public class InstuctionPage extends FlowPane implements HasButtonPage {
 	private StartPage startPage;
 	private Button backButton;
 
@@ -31,11 +31,11 @@ public class InstuctionPage extends FlowPane implements HasButtonPage{
 
 		backButton = new Button("Back");
 		backButton.setFocusTraversable(false);
-		
+
 		setButtonAction();
 		this.setOrientation(Orientation.VERTICAL);
 		this.setAlignment(Pos.CENTER);
-		this.setBackground(new Background(new BackgroundFill(Color.FIREBRICK, null, null)));
+		this.setBackground(new Background(new BackgroundFill(Color.HONEYDEW, null, null)));
 		this.getChildren().addAll(instuctionLabel, backButton);
 
 		this.startPage = startPage;

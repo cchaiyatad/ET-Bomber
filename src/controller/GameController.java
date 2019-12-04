@@ -500,7 +500,6 @@ public class GameController extends Controller {
 				((AI) players.get(2)).setOtherAI(player);
 			}
 			if (players.size() == numberOfPlayer) {
-				player.setScore(players.get(i).getScore());
 				players.get(i).onObjectIsDestroyed();
 				players.set(i, player);
 			} else {
@@ -511,26 +510,25 @@ public class GameController extends Controller {
 	}
 
 	private void checkGameFinish() {
-		int survirerCount = 0;
-		int survirerIndex = -1;
+		if (players.get(0).isDead()) {
+			setSummaryPageAppear(true);
+			gameLoop.stop();
+			removeGame();
+			gameSummaryPage.setText(false, 0);
+		}
+
+		int survirorCount = 0;
 		for (int i = 0; i < players.size(); i++) {
 			if (!players.get(i).isDead()) {
-				survirerCount++;
-				survirerIndex = i;
+				survirorCount++;
 			}
 		}
 
-		if (survirerCount == 1) {
+		if (survirorCount == 1) {
 			setSummaryPageAppear(true);
-			players.get(survirerIndex).setScore(players.get(survirerIndex).getScore() + 1);
 			gameLoop.stop();
 			removeGame();
-			int[] data = new int[players.size() + 1];
-			data[0] = survirerIndex;
-			for (int i = 0; i < players.size(); i++) {
-				data[i + 1] = players.get(i).getScore();
-			}
-			gameSummaryPage.setText(data);
+			gameSummaryPage.setText(true, 0);
 		}
 	}
 
