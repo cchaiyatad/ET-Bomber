@@ -11,9 +11,9 @@ public class Setting {
 	public static int GAME_TIME = 120;
 	
 	//Input
-	public static KeyCode PLAYERONE_MOVEUP 		= KeyCode.W;
-	public static KeyCode PLAYERONE_MOVEDOWN  	= KeyCode.S;
-	public static KeyCode PLAYERONE_MOVELEFT  	= KeyCode.A;
-	public static KeyCode PLAYERONE_MOVERIGHT  	= KeyCode.D;
-	public static KeyCode PLAYERONE_PLACEBOMB  	= KeyCode.SPACE;
+	public static KeyCode MOVEUP_KEY 		= KeyCode.W;
+	public static KeyCode MOVEDOWN_KEY  	= KeyCode.S;
+	public static KeyCode MOVELEFT_KEY  	= KeyCode.A;
+	public static KeyCode MOVERIGHT_KEY  	= KeyCode.D;
+	public static KeyCode PLACEBOMB_KEY  	= KeyCode.SPACE;
 }

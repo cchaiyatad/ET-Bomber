@@ -20,8 +20,8 @@ public class GameSummaryPage extends FlowPane implements HasButtonPage {
 
 	public GameSummaryPage(GameController gameController) {
 		this.gameController = gameController;
-		mainLabel = new Label("Player X win");
-		statusLabel = new Label("Player 1 : 0 game\n" + "Player 2 : 0 game");
+		mainLabel = new Label("");
+		statusLabel = new Label("");
 		continueButton = new Button("Continue");
 		continueButton.setFocusTraversable(false);
 		mainMenuButton = new Button("Main Menu");

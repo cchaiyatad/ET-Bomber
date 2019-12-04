@@ -194,37 +194,25 @@ public class GameController extends Controller {
 		if (player.isDead()) {
 			return;
 		}
-		KeyCode buttonUp = null;
-		KeyCode buttonRight = null;
-		KeyCode buttonDown = null;
-		KeyCode buttonLeft = null;
-		if (player instanceof Player) {
-			switch (player.getPlayerNumber()) {
-			case 1:
-				buttonUp = Setting.PLAYERONE_MOVEUP;
-				buttonRight = Setting.PLAYERONE_MOVERIGHT;
-				buttonDown = Setting.PLAYERONE_MOVEDOWN;
-				buttonLeft = Setting.PLAYERONE_MOVELEFT;
-				break;
-			case 2:
-				return;
-			}
-			boolean up = inputInGame.isKeyPress(buttonUp);
-			boolean right = inputInGame.isKeyPress(buttonRight);
-			boolean down = inputInGame.isKeyPress(buttonDown);
-			boolean left = inputInGame.isKeyPress(buttonLeft);
+		if (!(player instanceof Player)) {
+			return;
+		}
 
-			if (up && !right && !down && !left) {
-				player.setCurrentPlayerState(PlayerState.MOVEUP);
-			} else if (!up && right && !down && !left) {
-				player.setCurrentPlayerState(PlayerState.MOVERIGHT);
-			} else if (!up && !right && down && !left) {
-				player.setCurrentPlayerState(PlayerState.MOVEDOWN);
-			} else if (!up && !right && !down && left) {
-				player.setCurrentPlayerState(PlayerState.MOVELEFT);
-			} else {
-				player.setCurrentPlayerState(PlayerState.IDLE);
-			}
+		boolean up = inputInGame.isKeyPress(Setting.MOVEUP_KEY);
+		boolean right = inputInGame.isKeyPress(Setting.MOVERIGHT_KEY);
+		boolean down = inputInGame.isKeyPress(Setting.MOVEDOWN_KEY);
+		boolean left = inputInGame.isKeyPress(Setting.MOVELEFT_KEY);
+
+		if (up && !right && !down && !left) {
+			player.setCurrentPlayerState(PlayerState.MOVEUP);
+		} else if (!up && right && !down && !left) {
+			player.setCurrentPlayerState(PlayerState.MOVERIGHT);
+		} else if (!up && !right && down && !left) {
+			player.setCurrentPlayerState(PlayerState.MOVEDOWN);
+		} else if (!up && !right && !down && left) {
+			player.setCurrentPlayerState(PlayerState.MOVELEFT);
+		} else {
+			player.setCurrentPlayerState(PlayerState.IDLE);
 		}
 	}
 
@@ -255,7 +243,6 @@ public class GameController extends Controller {
 			break;
 		}
 		return xy;
-
 	}
 
 	public void restartGame() {
@@ -398,21 +385,15 @@ public class GameController extends Controller {
 		if (player.isDead()) {
 			return;
 		}
-		KeyCode placeBombKey = null;
-		if (player instanceof Player) {
-			switch (player.getPlayerNumber()) {
-			case 1:
-				placeBombKey = Setting.PLAYERONE_PLACEBOMB;
-				break;
-			default:
-				return;
-			}
 
-			if (inputInGame.isKeyPress(placeBombKey)) {
-				player.useWeapon();
-			}
-			inputInGame.changeBitset(placeBombKey, false);
+		if (!(player instanceof Player)) {
+			return;
 		}
+		KeyCode placeBombKey = Setting.PLACEBOMB_KEY;
+		if (inputInGame.isKeyPress(placeBombKey)) {
+			player.useWeapon();
+		}
+		inputInGame.changeBitset(placeBombKey, false);
 	}
 
 	private void getItem(int x, int y, PlayerBase player) {
@@ -489,16 +470,14 @@ public class GameController extends Controller {
 			if (i == 0) {
 				player = new Player(50, 50, "playerOne", gamePage.getGameFieldPlayerPane(), 1, this);
 			} else if (i == 1) {
-				player = new Player(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this);
+				player = new AI(50 * 13, 50 * 13, "playerThree", gamePage.getGameFieldPlayerPane(), 2, this,
+						players.get(0));
 			} else if (i == 2) {
-				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this, players.get(0),
-						players.get(1));
+				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this, players.get(0));
 			} else if (i == 3) {
-				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this, players.get(0),
-						players.get(1));
-				((AI) player).setOtherAI(players.get(2));
-				((AI) players.get(2)).setOtherAI(player);
+				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this, players.get(0));
 			}
+
 			if (players.size() == numberOfPlayer) {
 				players.get(i).onObjectIsDestroyed();
 				players.set(i, player);

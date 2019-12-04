@@ -12,19 +12,15 @@ public class AI extends PlayerBase {
 	public int[] objectRangeInSightPlayer = new int[4]; // (wasd)
 	public ObjectInGame[] objectAroundPlayer = new ObjectInGame[9]; // (wqazxcdes)
 
-	private PlayerBase[] playerList = new PlayerBase[3];
-	private int[] playerInSightRangeList = new int[4]; // (wasd)
+	@SuppressWarnings("unused")
+	private PlayerBase player;
+//	private int[] playerInSightRangeList = new int[4]; // (wasd)
 
 	public AI(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
-			GameController gameController, PlayerBase playerOne, PlayerBase playerTwo) {
+			GameController gameController, PlayerBase player) {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController);
-		playerList[0] = playerOne;
-		playerList[1] = playerTwo;
+		this.player = player;
 		Action.setGameController(gameController);
-	}
-
-	public void setOtherAI(PlayerBase ai) {
-		this.playerList[2] = ai;
 	}
 
 	public void checkStatus() {
@@ -86,30 +82,30 @@ public class AI extends PlayerBase {
 			objectRangeInSightPlayer[i] = Math.abs(x - xPosition / 50) + Math.abs(y - yPosition / 50);
 		}
 
-		for (int i = 0; i < 4; i++) {
-			playerInSightRangeList[i] = -1;
-		}
+//		for (int i = 0; i < 4; i++) {
+//			playerInSightRangeList[i] = -1;
+//		}
 
-		for (int i = 0; i < 3; i++) {
-			if ((xPosition / 50 == playerList[i].getxPosition() / 50)
-					&& (yPosition / 50 == playerList[i].getyPosition() / 50)) {
-				continue;
-			}
-			if (xPosition / 50 == playerList[i].getxPosition() / 50) {
-				int diff = (playerList[i].getyPosition() / 50) - (yPosition / 50);
-				int index = diff > 0 ? 2 : 0;
-				playerInSightRangeList[index] = playerInSightRangeList[index] == -1
-						|| Math.abs(diff) < playerInSightRangeList[index] ? Math.abs(diff)
-								: playerInSightRangeList[index];
-
-			} else if (yPosition / 50 == playerList[i].getyPosition() / 50) {
-				int diff = (playerList[i].getxPosition() / 50) - (xPosition / 50);
-				int index = diff > 0 ? 3 : 1;
-				playerInSightRangeList[index] = playerInSightRangeList[index] == -1
-						|| Math.abs(diff) < playerInSightRangeList[index] ? Math.abs(diff)
-								: playerInSightRangeList[index];
-			}
-		}
+//		for (int i = 0; i < 3; i++) {
+//			if ((xPosition / 50 == playerList[i].getxPosition() / 50)
+//					&& (yPosition / 50 == playerList[i].getyPosition() / 50)) {
+//				continue;
+//			}
+//			if (xPosition / 50 == playerList[i].getxPosition() / 50) {
+//				int diff = (playerList[i].getyPosition() / 50) - (yPosition / 50);
+//				int index = diff > 0 ? 2 : 0;
+//				playerInSightRangeList[index] = playerInSightRangeList[index] == -1
+//						|| Math.abs(diff) < playerInSightRangeList[index] ? Math.abs(diff)
+//								: playerInSightRangeList[index];
+//
+//			} else if (yPosition / 50 == playerList[i].getyPosition() / 50) {
+//				int diff = (playerList[i].getxPosition() / 50) - (xPosition / 50);
+//				int index = diff > 0 ? 3 : 1;
+//				playerInSightRangeList[index] = playerInSightRangeList[index] == -1
+//						|| Math.abs(diff) < playerInSightRangeList[index] ? Math.abs(diff)
+//								: playerInSightRangeList[index];
+//			}
+//		}
 
 		for (int i = 0; i < 9; i++) {
 			int[] xy = calCulatePosition(this, i);
