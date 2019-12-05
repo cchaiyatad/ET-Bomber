@@ -23,15 +23,12 @@ public class Action {
 		ai.getAiStatus().isDead = ai.getHp() == 0;
 	}
 
-	public static void PlaceBomb(AIBase ai) {
+	public static void SpawnMinion(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
-//		if() {
-//			
-//		}
-
-		ai.useWeapon();
+		
+		
 	}
 
 	public static void EscapeBomb(AIBase ai) {

@@ -47,7 +47,6 @@ public class GameSummaryPage extends FlowPane implements HasButtonPage {
 	}
 
 	public void setText(boolean isSurvive) {
-		System.out.println(GameController.level);
 		String buttonText = isSurvive && !(GameController.level == 3) ? "Continue" : "Restart";
 		String mainLabelText = isSurvive ? "You survive" : "You died";
 		String statusLabelText;

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import ai.AIBase;
+import ai.Boss;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -482,13 +483,25 @@ public class GameController extends Controller {
 			if (i == 0) {
 				player = new Player(50 * dx, 50 * dy, "playerOne", gamePage.getGameFieldPlayerPane(), 1, this);
 			} else if (i == 1) {
-				player = new AIBase(50 * (14 - dx), 50 * (14 - dy), "playerTwo", gamePage.getGameFieldPlayerPane(), 2,
-						this, players.get(0));
+				String imagePath = "";
+				switch (level % 3 + 2) {
+				case 2:
+					imagePath = "playerTwo";
+					break;
+				case 3:
+					imagePath = "playerThree";
+					break;
+				case 4:
+					imagePath = "playerFour";
+					break;
+				}
+				player = new Boss(50 * (14 - dx), 50 * (14 - dy), imagePath, gamePage.getGameFieldPlayerPane(),
+						level % 3 + 2, this, players.get(0));
 			} else if (i == 2) {
-				player = new AIBase(50 * dx, 50 * (14 - dy), "playerThree", gamePage.getGameFieldPlayerPane(), 3, this,
+				player = new Boss(50 * dx, 50 * (14 - dy), "playerThree", gamePage.getGameFieldPlayerPane(), 3, this,
 						players.get(0));
 			} else if (i == 3) {
-				player = new AIBase(50 * (14 - dx), 50 * dy, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this,
+				player = new Boss(50 * (14 - dx), 50 * dy, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this,
 						players.get(0));
 			}
 			players.add(player);

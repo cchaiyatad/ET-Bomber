@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class LevelGenerator {
 
-	private final int obstacleRate = 103;
-	private final int emptyTileCount = 121;
+	private final int obstacleRate = 103 - 20;
+	private final int emptyTileCount = 121 + 20;
 	private ObjectInGame[][] objectsArray = new ObjectInGame[15][15];
 	private Random random;
 

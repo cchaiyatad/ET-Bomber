@@ -11,4 +11,13 @@ public class Minion extends AIBase {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController, player);
 	}
 
+	@Override
+	public void checkStatus() {
+		Action.Dead(this);
+		Action.CheckForWayAndItem(this);
+		Action.RandomWalking(this);
+		Action.GoTo(this);
+		setCurrentPlayerState(aiStatus.moveDirection);
+	}
+
 }
