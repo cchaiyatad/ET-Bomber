@@ -23,12 +23,43 @@ public class Action {
 		ai.getAiStatus().isDead = ai.getHp() == 0;
 	}
 
-	public static void SpawnMinion(AIBase ai) {
+	public static void SpawnMinion(Boss ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
+
+		int ratePerTime = 0;
+		int time = 0;
+		if (gameController.getRemainingTime() > 90) {
+			ratePerTime = 1;
+			time = 5;
+		} else if (gameController.getRemainingTime() > 60) {
+			ratePerTime = 2;
+			time = 5;
+		} else if (gameController.getRemainingTime() > 40) {
+			ratePerTime = 1;
+			time = 4;
+		} else if (gameController.getRemainingTime() > 20) {
+			ratePerTime = 2;
+			time = 4;
+		} else if (gameController.getRemainingTime() >= 0) {
+			ratePerTime = 1;
+			time = 3;
+		}
 		
-		
+		String minionImagePath = "minion";
+		switch (ai.getPlayerNumber()) {
+		case 2:
+			minionImagePath += "One";
+			break;
+		case 3:
+			minionImagePath += "Two";
+			break;
+		case 4:
+			minionImagePath += "Three";
+			break;
+		}
+
 	}
 
 	public static void EscapeBomb(AIBase ai) {
@@ -162,15 +193,15 @@ public class Action {
 				|| (ai.getAiStatus().moveToX != -2 && ai.getAiStatus().moveToY != -2) || ((!ai.getAiStatus().bombNearBy
 						&& (ai.getAiStatus().moveToX == -1 && ai.getAiStatus().moveToY == -1)))) {
 			if (!ai.getAiStatus().isFinishMoving) {
-				if (ai.getPlayerNumber() == 3) {
-					System.out.println("Exit");
-				}
+//				if (ai.getPlayerNumber() == 3) {
+//					System.out.println("Exit");
+//				}
 				return;
 			}
 		}
-		if (ai.getPlayerNumber() == 3) {
-			System.out.println("Hi");
-		}
+//		if (ai.getPlayerNumber() == 3) {
+//			System.out.println("Hi");
+//		}
 		ai.getAiStatus().isFinishMoving = false;
 		int currentMoveWay = -1;
 		int nextWay = -1;

@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import ai.AIBase;
 import ai.Boss;
+import ai.Minion;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -26,8 +27,10 @@ public class GameController extends Controller {
 	public static int level = 0;
 
 	private GameObject[][] gameObjectArray = new GameObject[15][15];
+	
 	private List<PlayerBase> players;
-
+	private List<Minion> minions;
+	
 	private LevelGenerator levelGenerator;
 	private GameSummaryPage gameSummaryPage;
 	private GamePage gamePage;
@@ -245,12 +248,9 @@ public class GameController extends Controller {
 		return xy;
 	}
 
-	public void restartGame() {
+	private void clearGame() {
 		removeGame();
-		createGame();
-		createPlayer();
-		this.gameLoop = gameLoop();
-		gameLoop.start();
+		removeGame();
 		remainingTime = Setting.GAME_TIME;
 		if (this.createBombThread != null) {
 			this.createBombThread.interrupt();
@@ -258,19 +258,23 @@ public class GameController extends Controller {
 		currentNextThreadTime = 60;
 		this.createBombThread = null;
 	}
+	
+	public void restartGame() {
+		clearGame();
+		createGame();
+		createPlayer();
+		this.gameLoop = gameLoop();
+		gameLoop.start();
+		
+		
+	}
 
 	public void onRemoveScene() {
-		removeGame();
+		clearGame();
 		players = null;
 		inputInGame.removeListeners();
 		inputInGame.clearKeyBoardCheck();
 		this.scene = null;
-		remainingTime = Setting.GAME_TIME;
-		if (this.createBombThread != null) {
-			this.createBombThread.interrupt();
-		}
-		currentNextThreadTime = 60;
-		this.createBombThread = null;
 	}
 
 	private void setTimer(long now) {
@@ -510,7 +514,6 @@ public class GameController extends Controller {
 	}
 
 	private void checkGameFinish() {
-
 		int survirorCount = 0;
 		for (int i = 0; i < players.size(); i++) {
 			if (!players.get(i).isDead()) {
@@ -518,13 +521,14 @@ public class GameController extends Controller {
 			}
 		}
 
-		if (survirorCount == 1 || players.get(0).isDead()) {
+		if (survirorCount == 1 || players.get(0).isDead() || remainingTime == 0) {
 			setSummaryPageAppear(true);
+			clearGame();
 			gameLoop.stop();
 			removeGame();
-			gameSummaryPage.setText(!players.get(0).isDead());
+			gameSummaryPage.setText(!(players.get(0).isDead() || remainingTime == 0));
 
-			level = players.get(0).isDead() ? 0 : (level + 1) % 4;
+			level = players.get(0).isDead() || remainingTime == 0 ? 0 : (level + 1) % 4;
 		}
 	}
 
@@ -572,4 +576,14 @@ public class GameController extends Controller {
 		return ObjectInGame.EMPTY;
 	}
 
+	public List<Minion> getMinions(){
+		if(minions == null) {
+			minions = new ArrayList<Minion>();
+		}
+		return minions;
+	}
+	
+	public long getRemainingTime() {
+		return remainingTime;
+	}
 }

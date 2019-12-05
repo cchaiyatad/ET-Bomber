@@ -6,6 +6,7 @@ import player.PlayerBase;
 
 public class Boss extends AIBase {
 
+	public int minionCount = 0;
 	public Boss(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController, PlayerBase player) {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController, player);
