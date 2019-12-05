@@ -24,11 +24,6 @@ public abstract class AIBase extends PlayerBase {
 
 	public abstract void checkStatus();
 	
-	@Override
-	public void onObjectIsDestroyed() {
-		this.layer.getChildren().remove(this.imageView);
-	}
-
 	public AIStatusCheckList getAiStatus() {
 		return aiStatus;
 	}
@@ -82,5 +77,9 @@ public abstract class AIBase extends PlayerBase {
 	@Override
 	public boolean isDead() {
 		return getAiStatus().isDead;
+	}
+	
+	public PlayerBase getPlayer() {
+		return player;
 	}
 }

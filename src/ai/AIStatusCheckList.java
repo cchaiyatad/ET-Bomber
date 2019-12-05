@@ -33,5 +33,8 @@ public class AIStatusCheckList {
 
 	// ---
 	public boolean hasAction = false;
+	
+	// spawn minion
+	public boolean isSpawnMinion = false;
 
 }

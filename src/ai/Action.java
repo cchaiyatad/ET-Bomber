@@ -46,7 +46,7 @@ public class Action {
 			ratePerTime = 1;
 			time = 3;
 		}
-		
+
 		String minionImagePath = "minion";
 		switch (ai.getPlayerNumber()) {
 		case 2:
@@ -58,6 +58,19 @@ public class Action {
 		case 4:
 			minionImagePath += "Three";
 			break;
+		}
+
+		if (gameController.getRemainingTime() % time == 0 && !ai.getAiStatus().isSpawnMinion) {
+			System.out.println("spawn " + ratePerTime);
+			ai.getAiStatus().isSpawnMinion = true;
+			gameController.getMinions()
+					.add(new Minion(ai.getxPosition(), ai.getyPosition(), minionImagePath,
+							gameController.getGamePage().getGameFieldPlayerPane(), ai.getPlayerNumber(), gameController,
+							ai.getPlayer()));
+		}
+
+		if (gameController.getRemainingTime() % time != 0) {
+			ai.getAiStatus().isSpawnMinion = false;
 		}
 
 	}
@@ -73,10 +86,6 @@ public class Action {
 			return;
 		}
 
-		if (ai.getPlayerNumber() == 3) {
-			System.out.println(ai.getAiStatus().bombDirection[4]);
-			System.out.println("EscapeBomb");
-		}
 		int hideChoice = -1;
 
 		boolean[] canMove = { true, true, true, true };

@@ -79,7 +79,7 @@ public class Boss extends AIBase {
 
 	public void checkStatus() {
 		Action.Dead(this);
-		aiStatus.canUseWeapon = this.canUseWeapon;
+		Action.SpawnMinion(this);
 		checkPlayerAndObjectInSight();
 		Action.CheckForBomb(this);
 		Action.CheckForWayAndItem(this);

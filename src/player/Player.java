@@ -8,10 +8,4 @@ public class Player extends PlayerBase {
 			GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController);	
 	}
-	
-	@Override
-	public void onObjectIsDestroyed() {
-		this.layer.getChildren().remove(this.imageView);
-	}
-
 }

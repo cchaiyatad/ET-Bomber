@@ -250,7 +250,6 @@ public class GameController extends Controller {
 
 	private void clearGame() {
 		removeGame();
-		removeGame();
 		remainingTime = Setting.GAME_TIME;
 		if (this.createBombThread != null) {
 			this.createBombThread.interrupt();
@@ -265,8 +264,6 @@ public class GameController extends Controller {
 		createPlayer();
 		this.gameLoop = gameLoop();
 		gameLoop.start();
-		
-		
 	}
 
 	public void onRemoveScene() {
@@ -543,6 +540,11 @@ public class GameController extends Controller {
 				}
 				gameObjectArray[i][j] = null;
 
+			}
+		}
+		if (minions != null) {
+			for(Minion minion : minions) {
+				minion.onObjectIsDestroyed();
 			}
 		}
 	}
