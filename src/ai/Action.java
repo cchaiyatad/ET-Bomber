@@ -19,11 +19,11 @@ public class Action {
 		}
 	}
 
-	public static void Dead(AI ai) {
+	public static void Dead(AIBase ai) {
 		ai.getAiStatus().isDead = ai.getHp() == 0;
 	}
 
-	public static void PlaceBomb(AI ai) {
+	public static void PlaceBomb(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -34,7 +34,7 @@ public class Action {
 		ai.useWeapon();
 	}
 
-	public static void EscapeBomb(AI ai) {
+	public static void EscapeBomb(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -83,14 +83,14 @@ public class Action {
 		}
 
 		if (hideChoice != -1) {
-			int[] newxy = AI.calCulatePosition(ai, hideChoice * 2);
+			int[] newxy = AIBase.calCulatePosition(ai, hideChoice * 2);
 			ai.getAiStatus().moveToX = newxy[0];
 			ai.getAiStatus().moveToY = newxy[1];
 		}
 
 	}
 
-	public static void CheckForBomb(AI ai) {
+	public static void CheckForBomb(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -123,7 +123,7 @@ public class Action {
 		}
 	}
 
-	public static void CollectItem(AI ai) {
+	public static void CollectItem(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -137,13 +137,13 @@ public class Action {
 			}
 		}
 		if (hasItem != -1) {
-			int[] xy = AI.calCulatePosition(ai, hasItem * 2);
+			int[] xy = AIBase.calCulatePosition(ai, hasItem * 2);
 			ai.getAiStatus().moveToX = xy[0];
 			ai.getAiStatus().moveToY = xy[1];
 		}
 	}
 
-	public static void RandomWalking(AI ai) {
+	public static void RandomWalking(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -259,7 +259,7 @@ public class Action {
 
 	}
 
-	public static void CheckForWayAndItem(AI ai) {
+	public static void CheckForWayAndItem(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -278,7 +278,7 @@ public class Action {
 		return canMove(objectInGame) && objectInGame != ObjectInGame.EMPTY;
 	}
 
-	public static void GoTo(AI ai) {
+	public static void GoTo(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}

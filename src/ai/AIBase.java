@@ -5,7 +5,7 @@ import controller.ObjectInGame;
 import javafx.scene.layout.Pane;
 import player.PlayerBase;
 
-public class AI extends PlayerBase {
+public class AIBase extends PlayerBase {
 	private AIStatusCheckList aiStatus = new AIStatusCheckList();
 
 	public ObjectInGame[] objectInSightPlayer = new ObjectInGame[4]; // (wasd)
@@ -16,7 +16,7 @@ public class AI extends PlayerBase {
 	private PlayerBase player;
 //	private int[] playerInSightRangeList = new int[4]; // (wasd)
 
-	public AI(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
+	public AIBase(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController, PlayerBase player) {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController);
 		this.player = player;
@@ -121,7 +121,7 @@ public class AI extends PlayerBase {
 		return aiStatus;
 	}
 
-	public static int[] calCulatePosition(AI ai, int i) {
+	public static int[] calCulatePosition(AIBase ai, int i) {
 		int x = (ai.getxPosition()) / 50;
 		int y = (ai.getyPosition()) / 50;
 		int dx = 0;

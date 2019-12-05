@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import ai.AI;
+import ai.AIBase;
 import gameobject.Destroyable;
 import gameobject.GameObject;
 import gameobject.Obstacle;
@@ -22,6 +22,8 @@ import weapon.Bomb;
 import weapon.Weapon;
 
 public class GameController extends Controller {
+	public static int level = 0;
+
 	private GameObject[][] gameObjectArray = new GameObject[15][15];
 	private List<PlayerBase> players;
 
@@ -45,7 +47,7 @@ public class GameController extends Controller {
 		createBackground();
 		createGame();
 
-		createPlayer(4);
+		createPlayer();
 		this.scene = new Scene(gamePage, Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 
 		inputInGame = new InputInGame(scene);
@@ -111,8 +113,8 @@ public class GameController extends Controller {
 					}
 
 					for (PlayerBase player : players) {
-						if (player instanceof AI) {
-							((AI) player).checkStatus();
+						if (player instanceof AIBase) {
+							((AIBase) player).checkStatus();
 						}
 					}
 
@@ -245,7 +247,7 @@ public class GameController extends Controller {
 	public void restartGame() {
 		removeGame();
 		createGame();
-		createPlayer(4);
+		createPlayer();
 		this.gameLoop = gameLoop();
 		gameLoop.start();
 		remainingTime = Setting.GAME_TIME;
@@ -451,41 +453,50 @@ public class GameController extends Controller {
 		}
 	}
 
-	private void createPlayer(int numberOfPlayer) {
-		if (players == null) {
-			players = new ArrayList<PlayerBase>();
+	private void createPlayer() {
+		int numberOfPlayer = level == 3 ? 4 : 2;
+		if (players != null) {
+			for (PlayerBase player : players) {
+				player.onObjectIsDestroyed();
+			}
+		}
+		players = new ArrayList<PlayerBase>();
+		int dx = 1;
+		int dy = 1;
+
+		switch (level) {
+		case 1:
+			dx = 13;
+			break;
+		case 2:
+			dx = 13;
+			dy = 13;
+			break;
+		case 3:
+			dy = 13;
+			break;
 		}
 
 		for (int i = 0; i < numberOfPlayer; i++) {
 			PlayerBase player = null;
 			if (i == 0) {
-				player = new Player(50, 50, "playerOne", gamePage.getGameFieldPlayerPane(), 1, this);
+				player = new Player(50 * dx, 50 * dy, "playerOne", gamePage.getGameFieldPlayerPane(), 1, this);
 			} else if (i == 1) {
-				player = new AI(50 * 13, 50 * 13, "playerTwo", gamePage.getGameFieldPlayerPane(), 2, this,
-						players.get(0));
+				player = new AIBase(50 * (14 - dx), 50 * (14 - dy), "playerTwo", gamePage.getGameFieldPlayerPane(), 2,
+						this, players.get(0));
 			} else if (i == 2) {
-				player = new AI(50 * 13, 50, "playerThree", gamePage.getGameFieldPlayerPane(), 3, this, players.get(0));
+				player = new AIBase(50 * dx, 50 * (14 - dy), "playerThree", gamePage.getGameFieldPlayerPane(), 3, this,
+						players.get(0));
 			} else if (i == 3) {
-				player = new AI(50, 50 * 13, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this, players.get(0));
+				player = new AIBase(50 * (14 - dx), 50 * dy, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this,
+						players.get(0));
 			}
-
-//			if (players.size() == numberOfPlayer) {
-//				players.get(i).onObjectIsDestroyed();
-//				players.set(i, player);
-//			} else {
 			players.add(player);
-//			}
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);
 		}
 	}
 
 	private void checkGameFinish() {
-		if (players.get(0).isDead()) {
-			setSummaryPageAppear(true);
-			gameLoop.stop();
-			removeGame();
-			gameSummaryPage.setText(false, 0);
-		}
 
 		int survirorCount = 0;
 		for (int i = 0; i < players.size(); i++) {
@@ -494,11 +505,13 @@ public class GameController extends Controller {
 			}
 		}
 
-		if (survirorCount == 1) {
+		if (survirorCount == 1 || players.get(0).isDead()) {
 			setSummaryPageAppear(true);
 			gameLoop.stop();
 			removeGame();
-			gameSummaryPage.setText(true, 0);
+			gameSummaryPage.setText(!players.get(0).isDead());
+
+			level = players.get(0).isDead() ? 0 : (level + 1) % 4;
 		}
 	}
 

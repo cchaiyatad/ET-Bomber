@@ -99,6 +99,7 @@ public class ScoreBoard extends HBox implements HasButtonPage {
 		}
 		Controller otherController = controller.getOtherController();
 		controller.getStage().setScene(otherController.getScene());
+		GameController.level = 0;
 
 	}
 }
