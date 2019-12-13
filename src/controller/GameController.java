@@ -571,7 +571,7 @@ public class GameController extends Controller {
 		}
 	}
 
-	public GameObject getObjecyInGame(int x, int y) {
+	public GameObject getObjectInGame(int x, int y) {
 		return this.gameObjectArray[x][y];
 	}
 

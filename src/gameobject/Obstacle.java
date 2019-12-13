@@ -2,6 +2,8 @@ package gameobject;
 
 import controller.GameController;
 import item.Item;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class Obstacle extends GameObject implements Destroyable {
@@ -17,7 +19,7 @@ public class Obstacle extends GameObject implements Destroyable {
 
 	@Override
 	public void onObjectIsDestroyed() {
-		this.layer.getChildren().remove(this.imageView);
+		this.setImageShow(false);
 		this.gameController.removeItem(xPosition / 50, yPosition / 50);
 		if (itemInObstacle != null) {
 			gameController.setObjectInGame(xPosition / 50, yPosition / 50, this.itemInObstacle);
