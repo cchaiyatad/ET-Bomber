@@ -10,6 +10,7 @@ public class Minion extends AIBase {
 			GameController gameController, PlayerBase player) {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController, player);
 		setHp(1);
+		this.setSpeed(this.getSpeed() - 1);
 	}
 
 	@Override

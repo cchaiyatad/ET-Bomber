@@ -508,13 +508,13 @@ public class GameController extends Controller {
 					break;
 				}
 				player = new Boss(50 * (14 - dx), 50 * (14 - dy), imagePath, gamePage.getGameFieldPlayerPane(),
-						level % 3 + 2, this, players.get(0));
+						level % 3 + 2, this, players.get(0), level % 3 + 2);
 			} else if (i == 2) {
 				player = new Boss(50 * dx, 50 * (14 - dy), "playerThree", gamePage.getGameFieldPlayerPane(), 3, this,
-						players.get(0));
+						players.get(0), 3);
 			} else if (i == 3) {
 				player = new Boss(50 * (14 - dx), 50 * dy, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this,
-						players.get(0));
+						players.get(0), 4);
 			}
 			players.add(player);
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);

@@ -28,22 +28,12 @@ public class Action {
 			return;
 		}
 
-		int ratePerTime = 0;
 		int time = 0;
-		if (gameController.getRemainingTime() > 90) {
-			ratePerTime = 1;
+		if (gameController.getRemainingTime() > 60) {
 			time = 5;
-		} else if (gameController.getRemainingTime() > 60) {
-			ratePerTime = 2;
-			time = 5;
-		} else if (gameController.getRemainingTime() > 40) {
-			ratePerTime = 1;
-			time = 4;
-		} else if (gameController.getRemainingTime() > 20) {
-			ratePerTime = 2;
+		} else if (gameController.getRemainingTime() > 30) {
 			time = 4;
 		} else if (gameController.getRemainingTime() >= 0) {
-			ratePerTime = 1;
 			time = 3;
 		}
 
@@ -61,7 +51,6 @@ public class Action {
 		}
 
 		if (gameController.getRemainingTime() % time == 0 && !ai.getAiStatus().isSpawnMinion) {
-			System.out.println("spawn " + ratePerTime);
 			ai.getAiStatus().isSpawnMinion = true;
 			gameController.getMinions()
 					.add(new Minion(ai.getxPosition() / 50 * 50, ai.getyPosition() / 50 * 50, minionImagePath,

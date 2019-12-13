@@ -5,11 +5,12 @@ import javafx.scene.layout.Pane;
 import player.PlayerBase;
 
 public class Boss extends AIBase {
-
-	public int minionCount = 0;
+	
+	public int bossNumber;
 	public Boss(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
-			GameController gameController, PlayerBase player) {
+			GameController gameController, PlayerBase player,int bossNumber) {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController, player);
+		this.bossNumber = bossNumber;
 	}
 
 	
