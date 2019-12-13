@@ -1,5 +1,6 @@
 package weapon;
 
+import ai.Minion;
 import controller.GameController;
 import controller.ObjectInGame;
 import gameobject.Destroyable;
@@ -204,6 +205,24 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 //			} else if (!TLinbomb && !TRinbomb && BLinbomb && !BRinbomb) {
 //				player.setHp(player.getHp() - 1);
 //			}
+			}
+		}
+		for (Minion minion : this.gameController.getMinions()) {
+			int x1 = minion.getxPosition();
+			int x2 = x1 + 50;
+			int x3 = x2;
+			int x4 = x1;
+			int y1 = minion.getyPosition();
+			int y2 = y1;
+			int y3 = y1 + 50;
+			int y4 = y3;
+			boolean TLinbomb = isinRange(x1, y1, xMin, xMax, yMin, yMax);
+			boolean TRinbomb = isinRange(x2, y2, xMin, xMax, yMin, yMax);
+			boolean BRinbomb = isinRange(x3, y3, xMin, xMax, yMin, yMax);
+			boolean BLinbomb = isinRange(x4, y4, xMin, xMax, yMin, yMax);
+
+			if (TLinbomb && TRinbomb && BLinbomb && BRinbomb) {
+				minion.onObjectIsDestroyed();
 			}
 		}
 	}
