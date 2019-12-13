@@ -292,18 +292,24 @@ public class Action {
 			return;
 		}
 		for (int i = 0; i < 4; i++) {
-			ai.getAiStatus().ways[i] = canMove(ai.objectAroundPlayer[i * 2]);
-			ai.getAiStatus().items[i] = isItem(ai.objectAroundPlayer[i * 2]);
+			ai.getAiStatus().ways[i] = canMove(ai, ai.objectAroundPlayer[i * 2]);
+			ai.getAiStatus().items[i] = isItem(ai, ai.objectAroundPlayer[i * 2]);
 		}
 	}
 
-	private static boolean canMove(ObjectInGame objectInGame) {
+	private static boolean canMove(AIBase ai, ObjectInGame objectInGame) {
+		if(ai.getPlayerNumber() == 3) {
+			return objectInGame != null && objectInGame != ObjectInGame.BOMB && objectInGame != ObjectInGame.WALL;
+		}
 		return objectInGame != null && objectInGame != ObjectInGame.BOMB && objectInGame != ObjectInGame.WALL
 				&& objectInGame != ObjectInGame.OBSTACLE;
 	}
 
-	private static boolean isItem(ObjectInGame objectInGame) {
-		return canMove(objectInGame) && objectInGame != ObjectInGame.EMPTY;
+	private static boolean isItem(AIBase ai, ObjectInGame objectInGame) {
+		if(ai.getPlayerNumber() == 3) {
+			return canMove(ai, objectInGame) && objectInGame != ObjectInGame.EMPTY && objectInGame != ObjectInGame.OBSTACLE;
+		}
+		return canMove(ai, objectInGame) && objectInGame != ObjectInGame.EMPTY;
 	}
 
 	public static void GoTo(AIBase ai) {
@@ -334,14 +340,14 @@ public class Action {
 			return;
 		}
 
-		if (ai.getGameController().checkMove(x * 50, y * 50) || ai.getAiStatus().isMoving == true) {
+		if (ai.getGameController().checkMove(x * 50, y * 50, ai) || ai.getAiStatus().isMoving == true) {
 			ai.getAiStatus().isFinishMoving = false;
 			ai.getAiStatus().isMoving = true;
 
 			if ((ai.getxPosition()) != x * 50 || (ai.getyPosition()) != y * 50) {
 				int[] path;
 				try {
-					path = astar.findPath((ai.getxPosition() + 20) / 50, (ai.getyPosition() + 20) / 50, x, y);
+					path = astar.findPath((ai.getxPosition() + 20) / 50, (ai.getyPosition() + 20) / 50, x, y, ai);
 
 					if (path[0] == (ai.getxPosition() + 20) / 50 && Math.abs(path[0] * 50 - ai.getxPosition()) < 20) {
 						if (ai.getAiStatus().moveDirection == PlayerState.MOVELEFT

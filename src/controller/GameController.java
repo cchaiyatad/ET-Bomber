@@ -235,21 +235,21 @@ public class GameController extends Controller {
 		switch (player.getCurrentPlayerState()) {
 		case MOVEDOWN:
 			xy[1] = ((50 - ((y - player.getSpeed()) % 50)) % 50 < player.getSpeed() && x % 50 == 0
-					&& !checkMove(x, y + 50 + player.getSpeed())) ? (50 - ((y - player.getSpeed()) % 50)) % 50
+					&& !checkMove(x, y + 50 + player.getSpeed(), player)) ? (50 - ((y - player.getSpeed()) % 50)) % 50
 							: player.getSpeed();
 			break;
 		case MOVERIGHT:
 			xy[0] = ((50 - ((x - player.getSpeed()) % 50)) % 50 < player.getSpeed() && y % 50 == 0
-					&& !checkMove(x + 50 + player.getSpeed(), y)) ? (50 - ((x - player.getSpeed()) % 50)) % 50
+					&& !checkMove(x + 50 + player.getSpeed(), y, player)) ? (50 - ((x - player.getSpeed()) % 50)) % 50
 							: player.getSpeed();
 			break;
 		case MOVELEFT:
-			xy[0] = ((x + player.getSpeed()) % 50 < player.getSpeed() && y % 50 == 0 && !checkMove(x, y))
+			xy[0] = ((x + player.getSpeed()) % 50 < player.getSpeed() && y % 50 == 0 && !checkMove(x, y, player))
 					? ((x + player.getSpeed()) % 50) * -1
 					: player.getSpeed() * -1;
 			break;
 		case MOVEUP:
-			xy[1] = ((y + player.getSpeed()) % 50 < player.getSpeed() && x % 50 == 0 && !checkMove(x, y))
+			xy[1] = ((y + player.getSpeed()) % 50 < player.getSpeed() && x % 50 == 0 && !checkMove(x, y, player))
 					? ((y + player.getSpeed()) % 50) * -1
 					: player.getSpeed() * -1;
 			break;
@@ -366,11 +366,14 @@ public class GameController extends Controller {
 
 	}
 
-	public boolean checkMove(int x, int y) {
+	public boolean checkMove(int x, int y, PlayerBase player) {
 		x /= 50;
 		y /= 50;
 		if (x < 0 || x > 14 || y < 0 || y > 14) {
 			return false;
+		}
+		if(player.getPlayerNumber() == 3) {
+			return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall);
 		}
 		return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall)
 				&& !(gameObjectArray[x][y] instanceof Obstacle);
@@ -508,13 +511,13 @@ public class GameController extends Controller {
 					break;
 				}
 				player = new Boss(50 * (14 - dx), 50 * (14 - dy), imagePath, gamePage.getGameFieldPlayerPane(),
-						level % 3 + 2, this, players.get(0), level % 3 + 2);
+						level % 3 + 2, this, players.get(0));
 			} else if (i == 2) {
 				player = new Boss(50 * dx, 50 * (14 - dy), "playerThree", gamePage.getGameFieldPlayerPane(), 3, this,
-						players.get(0), 3);
+						players.get(0));
 			} else if (i == 3) {
 				player = new Boss(50 * (14 - dx), 50 * dy, "playerFour", gamePage.getGameFieldPlayerPane(), 4, this,
-						players.get(0), 4);
+						players.get(0));
 			}
 			players.add(player);
 			gamePage.getScoreBoard().getPlayerStatusBoardViaIndex(i).linkToPlayer(player);

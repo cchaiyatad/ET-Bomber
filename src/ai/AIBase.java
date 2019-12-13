@@ -109,7 +109,7 @@ public abstract class AIBase extends PlayerBase {
 			}
 			x += dx;
 			y += dy;
-			while (gameController.checkMove(x * 50, y * 50)) {
+			while (gameController.checkMove(x * 50, y * 50, this)) {
 				x += dx;
 				y += dy;
 			}

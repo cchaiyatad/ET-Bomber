@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controller.GameController;
+import player.PlayerBase;
 
 public class AStar {
 
@@ -13,7 +14,7 @@ public class AStar {
 		this.gameController = gameController;
 	}
 
-	public int[] findPath(int startX, int startY, int destinationX, int destinationY)
+	public int[] findPath(int startX, int startY, int destinationX, int destinationY, PlayerBase player)
 			throws CannotReachDestinateException {
 		if (startX == destinationX && startY == destinationY) {
 			return new int[]{ startX, startY };
@@ -41,7 +42,7 @@ public class AStar {
 					int newX = currentNode.getXY()[0] + (i * j);
 					int newY = currentNode.getXY()[1] + ((1 - i) * j);
 					if (!(newX < 1 || newX > 13 || newY < 1 || newY > 13)
-							&& gameController.checkMove(newX * 50, newY * 50)) {
+							&& gameController.checkMove(newX * 50, newY * 50, player)) {
 						Node newNode = new Node(newX, newY, currentNode, startNode, destinateNode);
 						if (!checkContain(newNode, checkList)) {
 							nodeList.add(newNode);
