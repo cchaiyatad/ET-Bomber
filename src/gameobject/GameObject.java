@@ -48,8 +48,8 @@ public abstract class GameObject {
 	}
 
 	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath.equals("") ? "file:res/Image/placeholder.png"
-				: "file:res/Image/" + imagePath + ".png";
+		this.imagePath = imagePath.equals("") ? ClassLoader.getSystemResource("image/placeholder.png").toString()
+				: ClassLoader.getSystemResource(String.format("image/%s.png", imagePath)).toString();
 	}
 
 	@Override
