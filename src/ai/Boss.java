@@ -9,6 +9,11 @@ public class Boss extends AIBase {
 	public Boss(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController, PlayerBase player) {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController, player);
+		if(playerNumber == 4) {
+			aiStatus.vanishTime = 3;
+			aiStatus.showTime = 2;
+			aiStatus.nextVanishTime = gameController.getRemainingTime() - 5;
+		}
 	}
 
 	
@@ -16,6 +21,7 @@ public class Boss extends AIBase {
 	public void checkStatus() {
 		Action.Dead(this);
 		Action.SpawnMinion(this);
+		Action.Vanish(this);
 		checkPlayerAndObjectInSight();
 		Action.CheckForBomb(this);
 		Action.CheckForWayAndItem(this);
@@ -25,5 +31,4 @@ public class Boss extends AIBase {
 		Action.GoTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
 	}
-
 }

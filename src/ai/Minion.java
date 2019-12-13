@@ -11,11 +11,17 @@ public class Minion extends AIBase {
 		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController, player);
 		setHp(1);
 		this.setSpeed(this.getSpeed() - 1);
+		if(playerNumber == 4) {
+			aiStatus.vanishTime = 1;
+			aiStatus.showTime = 2;
+			aiStatus.nextVanishTime = gameController.getRemainingTime() - 5;
+		}
 	}
 
 	@Override
 	public void checkStatus() {
 		Action.Dead(this);
+		Action.Vanish(this);
 		checkPlayerAndObjectInSight();
 		Action.CheckForWayAndItem(this);
 		Action.RandomWalking(this);

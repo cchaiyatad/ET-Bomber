@@ -36,5 +36,13 @@ public class AIStatusCheckList {
 	
 	// spawn minion
 	public boolean isSpawnMinion = false;
+	
+	// For enemy 4 (Vanish)
+	public long nextVanishTime = -1;
+	public long vanishTime = -1;
+	public long showTime = -1;
+	public long nextShowTime = -1;
+	public boolean isVanish = false;
+	public boolean isMakeAction = true;
 
 }

@@ -48,9 +48,10 @@ public abstract class GameObject {
 	}
 
 	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath.equals("") ? "file:res/Image/placeholder.png" : "file:res/Image/" + imagePath + ".png";
+		this.imagePath = imagePath.equals("") ? "file:res/Image/placeholder.png"
+				: "file:res/Image/" + imagePath + ".png";
 	}
-	
+
 	@Override
 	public String toString() {
 		return imagePath;
@@ -63,5 +64,13 @@ public abstract class GameObject {
 	public ImageView getImageView() {
 		return imageView;
 	}
-	
+
+	public void setImageShow(boolean value) {
+		if (value) {
+			this.layer.getChildren().add(this.imageView);
+		} else {
+			this.layer.getChildren().remove(this.imageView);
+		}
+	}
+
 }

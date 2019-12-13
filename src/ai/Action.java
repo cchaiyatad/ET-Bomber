@@ -23,6 +23,33 @@ public class Action {
 		ai.getAiStatus().isDead = ai.getHp() == 0;
 	}
 
+	public static void Vanish(AIBase ai) {
+		if (ai.getAiStatus().isDead) {
+			return;
+		}
+		if (ai.getPlayerNumber() != 4) {
+			return;
+		}
+
+		long currentTime = gameController.getRemainingTime();
+
+		if (currentTime == ai.getAiStatus().nextVanishTime && !ai.getAiStatus().isVanish) {
+			ai.getAiStatus().nextShowTime = ai.getAiStatus().nextVanishTime - ai.getAiStatus().vanishTime;
+			ai.getAiStatus().isVanish = true;
+			ai.getAiStatus().isMakeAction = false;
+		}
+		if (currentTime == ai.getAiStatus().nextShowTime && ai.getAiStatus().isVanish) {
+			ai.getAiStatus().nextVanishTime = ai.getAiStatus().nextShowTime - ai.getAiStatus().showTime;
+			ai.getAiStatus().isVanish = false;
+			ai.getAiStatus().isMakeAction = false;
+		}
+
+		if (!ai.getAiStatus().isMakeAction) {
+			ai.getAiStatus().isMakeAction = true;
+			ai.setImageShow(!ai.getAiStatus().isVanish);
+		}
+	}
+
 	public static void SpawnMinion(Boss ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
@@ -30,11 +57,11 @@ public class Action {
 
 		int time = 0;
 		if (gameController.getRemainingTime() > 60) {
-			time = 5;
+			time = 7;
 		} else if (gameController.getRemainingTime() > 30) {
-			time = 4;
+			time = 6;
 		} else if (gameController.getRemainingTime() >= 0) {
-			time = 3;
+			time = 5;
 		}
 
 		String minionImagePath = "minion";
@@ -298,7 +325,7 @@ public class Action {
 	}
 
 	private static boolean canMove(AIBase ai, ObjectInGame objectInGame) {
-		if(ai.getPlayerNumber() == 3) {
+		if (ai.getPlayerNumber() == 3) {
 			return objectInGame != null && objectInGame != ObjectInGame.BOMB && objectInGame != ObjectInGame.WALL;
 		}
 		return objectInGame != null && objectInGame != ObjectInGame.BOMB && objectInGame != ObjectInGame.WALL
@@ -306,8 +333,9 @@ public class Action {
 	}
 
 	private static boolean isItem(AIBase ai, ObjectInGame objectInGame) {
-		if(ai.getPlayerNumber() == 3) {
-			return canMove(ai, objectInGame) && objectInGame != ObjectInGame.EMPTY && objectInGame != ObjectInGame.OBSTACLE;
+		if (ai.getPlayerNumber() == 3) {
+			return canMove(ai, objectInGame) && objectInGame != ObjectInGame.EMPTY
+					&& objectInGame != ObjectInGame.OBSTACLE;
 		}
 		return canMove(ai, objectInGame) && objectInGame != ObjectInGame.EMPTY;
 	}
