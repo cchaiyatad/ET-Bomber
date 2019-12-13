@@ -13,7 +13,7 @@ public class PowerUpgradeItem extends Item implements PowerUp {
 
 	@Override
 	public void onObjectIsDestroyed() {
-		this.layer.getChildren().remove(this.imageView);
+		setImageShow(false);
 		this.getGameController().removeItem(getxPosition()/50, getyPosition()/50);
 	}
 

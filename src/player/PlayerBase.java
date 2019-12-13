@@ -227,6 +227,6 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 
 	@Override
 	public void onObjectIsDestroyed() {
-		this.layer.getChildren().remove(this.imageView);
+		setImageShow(false);
 	}
 }

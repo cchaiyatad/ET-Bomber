@@ -2,8 +2,6 @@ package gameobject;
 
 import controller.GameController;
 import item.Item;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class Obstacle extends GameObject implements Destroyable {
