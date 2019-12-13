@@ -27,10 +27,10 @@ public class GameController extends Controller {
 	public static int level = 0;
 
 	private GameObject[][] gameObjectArray = new GameObject[15][15];
-	
+
 	private List<PlayerBase> players;
 	private List<Minion> minions;
-	
+
 	private LevelGenerator levelGenerator;
 	private GameSummaryPage gameSummaryPage;
 	private GamePage gamePage;
@@ -122,7 +122,18 @@ public class GameController extends Controller {
 						}
 					}
 
+					if (minions != null) {
+						minions.forEach(Minion -> Minion.checkStatus());
+					}
+
 					players.forEach(Moveable -> Moveable.move());
+
+					if (minions != null) {
+//						if (minions.size() >= 2) {
+//							System.out.println(minions.get(1).getAiStatus().moveDirection);
+//						}
+						minions.forEach(Moveable -> Moveable.move());
+					}
 
 					for (PlayerBase player : players) {
 						checkPlayerGetItem(player);
@@ -257,7 +268,7 @@ public class GameController extends Controller {
 		currentNextThreadTime = 60;
 		this.createBombThread = null;
 	}
-	
+
 	public void restartGame() {
 		clearGame();
 		createGame();
@@ -543,7 +554,7 @@ public class GameController extends Controller {
 			}
 		}
 		if (minions != null) {
-			for(Minion minion : minions) {
+			for (Minion minion : minions) {
 				minion.onObjectIsDestroyed();
 			}
 		}
@@ -578,13 +589,13 @@ public class GameController extends Controller {
 		return ObjectInGame.EMPTY;
 	}
 
-	public List<Minion> getMinions(){
-		if(minions == null) {
+	public List<Minion> getMinions() {
+		if (minions == null) {
 			minions = new ArrayList<Minion>();
 		}
 		return minions;
 	}
-	
+
 	public long getRemainingTime() {
 		return remainingTime;
 	}

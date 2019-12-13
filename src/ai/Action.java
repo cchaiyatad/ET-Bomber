@@ -64,8 +64,8 @@ public class Action {
 			System.out.println("spawn " + ratePerTime);
 			ai.getAiStatus().isSpawnMinion = true;
 			gameController.getMinions()
-					.add(new Minion(ai.getxPosition(), ai.getyPosition(), minionImagePath,
-							gameController.getGamePage().getGameFieldPlayerPane(), ai.getPlayerNumber(), gameController,
+					.add(new Minion(ai.getxPosition() / 50 * 50, ai.getyPosition() / 50 * 50, minionImagePath,
+							gameController.getGamePage().getGameFieldItemPane(), ai.getPlayerNumber(), gameController,
 							ai.getPlayer()));
 		}
 
@@ -186,17 +186,18 @@ public class Action {
 		}
 		if (ai.getAiStatus().bombNearBy && ai.objectAroundPlayer[8] != ObjectInGame.BOMB) {
 			return;
-		} else if (ai.getAiStatus().bombNearBy && ai.objectAroundPlayer[8] == ObjectInGame.BOMB) {
-			if (ai.getPlayerNumber() == 3) {
-				System.out.println("Hit");
-				System.out.println(ai.getAiStatus().moveToX + " " + ai.getAiStatus().moveToY);
-				for (int i = 0; i < 8; i += 2) {
-					System.out.println(ai.objectAroundPlayer[i]);
-
-				}
-				System.out.println("============");
-			}
 		}
+//		else if (ai.getAiStatus().bombNearBy && ai.objectAroundPlayer[8] == ObjectInGame.BOMB) {
+//			if (ai.getPlayerNumber() == 3) {
+//				System.out.println("Hit");
+//				System.out.println(ai.getAiStatus().moveToX + " " + ai.getAiStatus().moveToY);
+//				for (int i = 0; i < 8; i += 2) {
+//					System.out.println(ai.objectAroundPlayer[i]);
+//
+//				}
+//				System.out.println("============");
+//			}
+//		}
 
 		if ((ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0)
 				|| (ai.getAiStatus().moveToX != -2 && ai.getAiStatus().moveToY != -2) || ((!ai.getAiStatus().bombNearBy
@@ -205,6 +206,7 @@ public class Action {
 //				if (ai.getPlayerNumber() == 3) {
 //					System.out.println("Exit");
 //				}
+//				System.out.println("Hit");
 				return;
 			}
 		}
