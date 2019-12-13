@@ -57,11 +57,11 @@ public class Action {
 
 		int time = 0;
 		if (gameController.getRemainingTime() > 60) {
-			time = 7;
+			time = 15;
 		} else if (gameController.getRemainingTime() > 30) {
-			time = 6;
+			time = 10;
 		} else if (gameController.getRemainingTime() >= 0) {
-			time = 5;
+			time = 8;
 		}
 
 		String minionImagePath = "minion";

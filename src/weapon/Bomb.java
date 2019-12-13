@@ -92,7 +92,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 
 	@Override
 	public void onObjectIsDestroyed() {
-		this.layer.getChildren().remove(this.imageView);
+		setImageShow(false);
 		gameController.removeItem(xPosition / 50, yPosition / 50);
 		this.explodeThread.interrupt();
 	}

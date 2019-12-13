@@ -134,6 +134,12 @@ public class GameController extends Controller {
 //						}
 						minions.forEach(Moveable -> Moveable.move());
 					}
+					
+					if(minions != null) {
+						for(int i = 0; i < minions.size();i++) {
+							minions.get(i).checkContactPlayer();
+						}
+					}
 
 					for (PlayerBase player : players) {
 						checkPlayerGetItem(player);
@@ -280,6 +286,7 @@ public class GameController extends Controller {
 	public void onRemoveScene() {
 		clearGame();
 		players = null;
+		minions = null;
 		inputInGame.removeListeners();
 		inputInGame.clearKeyBoardCheck();
 		this.scene = null;
@@ -560,6 +567,7 @@ public class GameController extends Controller {
 			for (Minion minion : minions) {
 				minion.onObjectIsDestroyed();
 			}
+			minions = null;
 		}
 	}
 
