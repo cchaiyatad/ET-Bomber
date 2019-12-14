@@ -193,18 +193,29 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			boolean TRinbomb = isinRange(x2, y2, xMin, xMax, yMin, yMax);
 			boolean BRinbomb = isinRange(x3, y3, xMin, xMax, yMin, yMax);
 			boolean BLinbomb = isinRange(x4, y4, xMin, xMax, yMin, yMax);
+			System.out.println(TLinbomb + " " + TRinbomb + "" + BRinbomb + " " + BLinbomb);
 
-			if (TLinbomb && TRinbomb && BLinbomb && BRinbomb) {
-				player.setHp(player.getHp() - 1);
-//			} else if (!TLinbomb && !BLinbomb && TRinbomb && BRinbomb) {
-//				player.setHp(player.getHp() - 1);
-//			} else if (TLinbomb && BLinbomb && !TRinbomb && !BRinbomb) {
-//				player.setHp(player.getHp() - 1);
-//			} else if (TLinbomb && TRinbomb && !BLinbomb && !BRinbomb) {
-//				player.setHp(player.getHp() - 1);
-//			} else if (!TLinbomb && !TRinbomb && BLinbomb && !BRinbomb) {
-//				player.setHp(player.getHp() - 1);
-//			}
+			if (((x2 <= xPosition) || (x1 >= xPosition + 50)) && ((y1 == yPosition + 50) || (y1 == yPosition - 50))) {
+				System.out.println("Hereeee");
+				continue;
+			} else if (((y3 <= yPosition) || (y1 >= yPosition + 50))
+					&& ((x1 == xPosition - 50) || (x1 == xPosition + 50))) {
+				continue;
+			} else if ((y3 == (yPosition / 50 - yMin) * 50) || (y1 == (yPosition / 50 + yMax) * 50)
+					|| (x2 == (xPosition / 50 - xMin) * 50) || (x1 == (xPosition / 50 + xMax) * 50)) {
+				continue;
+			} else {
+				if (TLinbomb && BLinbomb && TRinbomb && BRinbomb) {
+					player.setHp(player.getHp() - 1);
+				} else if (!TLinbomb && !BLinbomb && TRinbomb && BRinbomb) {
+					player.setHp(player.getHp() - 1);
+				} else if (TLinbomb && BLinbomb && !TRinbomb && !BRinbomb) {
+					player.setHp(player.getHp() - 1);
+				} else if (!TLinbomb && BLinbomb && !TRinbomb && BRinbomb) {
+					player.setHp(player.getHp() - 1);
+				} else if (TLinbomb && !BLinbomb && TRinbomb && !BRinbomb) {
+					player.setHp(player.getHp() - 1);
+				}
 			}
 		}
 		for (Minion minion : this.gameController.getMinions()) {
@@ -221,19 +232,40 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			boolean BRinbomb = isinRange(x3, y3, xMin, xMax, yMin, yMax);
 			boolean BLinbomb = isinRange(x4, y4, xMin, xMax, yMin, yMax);
 
-			if (TLinbomb && TRinbomb && BLinbomb && BRinbomb) {
-				minion.onObjectIsDestroyed();
+			// check minion's position is in Range of bomb
+			if (((x2 <= xPosition) || (x1 >= xPosition + 50)) && ((y1 == yPosition + 50) || (y1 == yPosition - 50))) {
+				System.out.println("Hereeee");
+				continue;
+			} else if (((y3 <= yPosition) || (y1 >= yPosition + 50))
+					&& ((x1 == xPosition - 50) || (x1 == xPosition + 50))) {
+				continue;
+			} else if ((y3 == (yPosition / 50 - yMin) * 50) || (y1 == (yPosition / 50 + yMax) * 50)
+					|| (x2 == (xPosition / 50 - xMin) * 50) || (x1 == (xPosition / 50 + xMax) * 50)) {
+				continue;
+			} else {
+				if (TLinbomb && BLinbomb && TRinbomb && BRinbomb) {
+					minion.setHp(minion.getHp()-1);
+				} else if (!TLinbomb && !BLinbomb && TRinbomb && BRinbomb) {
+					minion.setHp(minion.getHp()-1);
+				} else if (TLinbomb && BLinbomb && !TRinbomb && !BRinbomb) {
+					minion.setHp(minion.getHp()-1);
+				} else if (!TLinbomb && BLinbomb && !TRinbomb && BRinbomb) {
+					minion.setHp(minion.getHp()-1);
+				} else if (TLinbomb && !BLinbomb && TRinbomb && !BRinbomb) {
+					minion.setHp(minion.getHp()-1);
+				}
 			}
+
 		}
 	}
 
 	public boolean isinRange(int x, int y, int xMin, int xMax, int yMin, int yMax) {
-		if (((xPosition / 50 - xMin) * 50 <= x) && (x <= (xPosition / 50 + xMax) * 50) && ((yPosition / 50) * 50 <= y)
+		if (((xPosition / 50 - xMin) * 50 <= x) && (x <= (xPosition / 50 + xMax) * 50) && (yPosition <= y)
 				&& (y <= (yPosition / 50 + 1) * 50)) {
 			return true;
 		}
 		// check y axis
-		else if (((xPosition / 50) * 50 <= x) && (x <= (xPosition / 50 + 1) * 50) && ((yPosition / 50 - yMin) * 50 <= y)
+		else if ((xPosition <= x) && (x <= (xPosition / 50 + 1) * 50) && ((yPosition / 50 - yMin) * 50 <= y)
 				&& (y <= (yPosition / 50 + yMax) * 50)) {
 			return true;
 		} else {
