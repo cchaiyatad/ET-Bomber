@@ -8,7 +8,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import player.PlayerBase;
-import setting.Setting;
 
 public class PlayerStatusBoard extends HBox {
 	private ImageView playerImageView;
@@ -19,9 +18,9 @@ public class PlayerStatusBoard extends HBox {
 		this.setPrefSize(100, 50);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKSALMON, null, null)));
 
-		playerImageView = new ImageView(new Image(Setting.PATH_TO_PLACEHOLDER));
+		playerImageView = new ImageView();
 
-		hpLabel = new Label("HP");
+		hpLabel = new Label();
 		hpLabel.setPrefHeight(60);
 
 		this.getChildren().addAll(playerImageView, hpLabel);
@@ -37,7 +36,7 @@ public class PlayerStatusBoard extends HBox {
 		if (player == null) {
 			return;
 		}
-		hpLabel.setText(String.valueOf(player.getHp()));
+		hpLabel.setText(String.format("HP:%d", player.getHp()));
 
 	}
 
