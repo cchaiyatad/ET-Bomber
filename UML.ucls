@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="false" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="gameobject.Destroyable" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gameobject/Destroyable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1513" y="-368"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" language="java" name="gameobject.Moveable" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gameobject/Moveable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2149" y="-377"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="gameobject.GameObject" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gameobject/GameObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1771" y="-812"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="gameobject.Obstacle" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gameobject/Obstacle.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1915" y="-254"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="gameobject.Wall" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gameobject/Wall.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2009" y="-495"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="controller.GameController" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/controller/GameController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="388" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="controller.InputInGame" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/controller/InputInGame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="768" y="584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="8" language="java" name="controller.ObjectInGame" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/controller/ObjectInGame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="999" y="251"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="9" language="java" name="controller.StartPageController" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/controller/StartPageController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="725" y="-225"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="controller.Controller" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="726" y="104"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="controller.LevelGenerator" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/controller/LevelGenerator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="724" y="348"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="item.BombUpgradeItem" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/item/BombUpgradeItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1051" y="-361"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="item.Item" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/item/Item.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1362" y="-645"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="item.LifeIncreaseItem" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/item/LifeIncreaseItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1284" y="-984"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="15" language="java" name="item.PowerUp" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/item/PowerUp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="911" y="-693"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="16" language="java" name="item.PowerUpgradeItem" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/item/PowerUpgradeItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="695" y="-487"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="item.Shield" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/item/Shield.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="859" y="-1057"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="item.SpeedUpgradeItem" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/item/SpeedUpgradeItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="612" y="-879"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="main.Main" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/main/Main.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="401" y="-239"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="player.Player" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/player/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1810" y="-1106"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="player.PlayerBase" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/player/PlayerBase.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2272" y="-876"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="22" language="java" name="player.PlayerState" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/player/PlayerState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2337" y="-414"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="23" language="java" name="setting.Setting" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/setting/Setting.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="982" y="-25"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="weapon.Bomb" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/weapon/Bomb.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1632" y="9"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="weapon.BombArea" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/weapon/BombArea.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1967" y="127"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="26" language="java" name="weapon.Site" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/weapon/Site.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1725" y="297"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <interface id="27" language="java" name="weapon.Weapon" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/weapon/Weapon.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1275" y="-156"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="28" language="java" name="ai.Action" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/ai/Action.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3083" y="-322"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="ai.AIBase" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/ai/AIBase.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2780" y="-749"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="ai.AIStatusCheckList" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/ai/AIStatusCheckList.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3184" y="-955"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="ai.AStar" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/ai/AStar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2914" y="-1038"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="ai.Boss" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/ai/Boss.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3194" y="-592"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="ai.CannotReachDestinateException" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/ai/CannotReachDestinateException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2619" y="-1001"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="ai.Minion" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/ai/Minion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2664" y="-481"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="ai.Node" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/ai/Node.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2583" y="-261"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="gui.GameField" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gui/GameField.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2530" y="12"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="gui.GamePage" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gui/GamePage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2744" y="21"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="gui.GameSummaryPage" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gui/GameSummaryPage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2994" y="40"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="39" language="java" name="gui.HasButtonPage" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gui/HasButtonPage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2734" y="317"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="40" language="java" name="gui.InstuctionPage" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gui/InstuctionPage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2366" y="236"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="gui.PlayerStatusBoard" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gui/PlayerStatusBoard.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2343" y="21"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="gui.ScoreBoard" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gui/ScoreBoard.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2384" y="476"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="gui.StartPage" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/gui/StartPage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3014" y="406"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <realization id="45">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="46">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="50">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="29"/>  
+  </generalization>  
+  <realization id="52">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="53">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <generalization id="54">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="56">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <realization id="58">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="59">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="60">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <generalization id="61">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="62">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="63">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="64">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="29"/>  
+  </generalization>  
+  <generalization id="65">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <realization id="66">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
+  <realization id="67">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="68">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <realization id="69">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <generalization id="70">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <realization id="71">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
+  <realization id="72">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
+  <realization id="73">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
+  <generalization id="74">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
