@@ -15,7 +15,6 @@ public class BombArea {
 	private boolean[] isCanShowRight;
 	private int[] afterDestroy;
 	private ArrayList<ImageView> allImageViews = new ArrayList<ImageView>();
-	private String imagePath;
 	private Bomb bomb;
 	private int range;
 	private int xPos;
@@ -25,7 +24,6 @@ public class BombArea {
 		setBomb(bomb);
 		xPos = bomb.getxPosition() / 50;
 		yPos = bomb.getyPosition() / 50;
-		imagePath = ClassLoader.getSystemResource("image/bombArea.png").toString();
 		setRange(bomb.getDamageRange());
 		isCanShowTop = new boolean[getRange()];
 		isCanShowBot = new boolean[getRange()];
@@ -42,7 +40,7 @@ public class BombArea {
 		showRangeBySite(Site.TOP);
 		showRangeBySite(Site.RIGHT);
 		showRangeBySite(Site.LEFT);
-		ImageView imageView = new ImageView(new Image(imagePath));
+		ImageView imageView = new ImageView(new Image(ClassLoader.getSystemResource("image/bombAreaC.png").toString()));
 		bomb.getLayer().getChildren().add(imageView);
 		imageView.relocate(xPos * 50, yPos * 50);
 		allImageViews.add(imageView);
@@ -84,11 +82,13 @@ public class BombArea {
 	}
 
 	public void showRangeBySite(Site site) {
+		String imagePathTB = ClassLoader.getSystemResource("image/bombArea2.png").toString();
+		String imagePathLR = ClassLoader.getSystemResource("image/bombArea1.png").toString();
 		switch (site) {
 		case TOP:
 			for (int j = 0; j < getRange(); j++) {
 				if (isCanShowTop[j]) {
-					ImageView imageView = new ImageView(new Image(imagePath));
+					ImageView imageView = new ImageView(new Image(imagePathTB));
 					bomb.getLayer().getChildren().add(imageView);
 					imageView.relocate(xPos * 50, Math.max(yPos - j - 1, 0) * 50);
 					allImageViews.add(imageView);
@@ -99,7 +99,7 @@ public class BombArea {
 		case BOT:
 			for (int j = 0; j < getRange(); j++) {
 				if (isCanShowBot[j]) {
-					ImageView imageView = new ImageView(new Image(imagePath));
+					ImageView imageView = new ImageView(new Image(imagePathTB));
 					bomb.getLayer().getChildren().add(imageView);
 					imageView.relocate(xPos * 50, Math.min(yPos + j + 1, 14) * 50);
 					allImageViews.add(imageView);
@@ -110,7 +110,7 @@ public class BombArea {
 		case LEFT:
 			for (int j = 0; j < getRange(); j++) {
 				if (isCanShowLeft[j]) {
-					ImageView imageView = new ImageView(new Image(imagePath));
+					ImageView imageView = new ImageView(new Image(imagePathLR));
 					bomb.getLayer().getChildren().add(imageView);
 					imageView.relocate(Math.max(xPos - j - 1, 0) * 50, yPos * 50);
 					allImageViews.add(imageView);
@@ -121,7 +121,7 @@ public class BombArea {
 		case RIGHT:
 			for (int j = 0; j < getRange(); j++) {
 				if (isCanShowRight[j]) {
-					ImageView imageView = new ImageView(new Image(imagePath));
+					ImageView imageView = new ImageView(new Image(imagePathLR));
 					bomb.getLayer().getChildren().add(imageView);
 					imageView.relocate(Math.min(xPos + j + 1, 14) * 50, yPos * 50);
 					allImageViews.add(imageView);
