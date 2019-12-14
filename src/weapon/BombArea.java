@@ -81,27 +81,6 @@ public class BombArea {
 		isCanShowBot = setIsCanShowBySite(Site.BOT);
 		isCanShowLeft = setIsCanShowBySite(Site.LEFT);
 		isCanShowRight = setIsCanShowBySite(Site.RIGHT);
-		
-		System.out.print("isCanShowTop");
-		for(int i = 0; i<getRange(); i++) {
-			System.out.print(" " + isCanShowTop[i]);
-		}
-		
-		System.out.print("\nisCanShowBot");
-		for(int i = 0; i<getRange(); i++) {
-			System.out.print(" " + isCanShowBot[i]);
-		}
-		
-		System.out.print("\nisCanShowLeft");
-		for(int i = 0; i<getRange(); i++) {
-			System.out.print(" " + isCanShowLeft[i]);
-		}
-		
-		System.out.print("\nisCanShowRight");
-		for(int i = 0; i<getRange(); i++) {
-			System.out.print(" " + isCanShowRight[i]);
-		}
-		System.out.println("\n--------------------------------");
 	}
 
 	public void showRangeBySite(Site site) {

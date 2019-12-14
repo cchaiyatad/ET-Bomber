@@ -1,5 +1,6 @@
 package weapon;
 
+import ai.Minion;
 import controller.GameController;
 import controller.ObjectInGame;
 import gameobject.Destroyable;
@@ -42,6 +43,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 				area.setIsCanShowRange();
 				onObjectIsDestroyed();
 				makeDamageToObject();
+				makeDamageToPlayer();
 				area.setAfterDestroy();
 				area.showRange();
 				if (player != null) {
@@ -57,7 +59,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			} catch (InterruptedException e1) {
 //				System.out.println("interrupt join " + this.xPosition + " " + this.yPosition + " " + this.isExplode);
 			}
-			
+
 			try {
 				while (true) {
 					Thread.sleep(500);
@@ -144,14 +146,104 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			}
 		}
 	}
-	
+
 	public void makeDamageToPlayer() {
-		this.gameController.getPlayers();
+		int yMax, yMin, xMax, xMin;
+		yMax = 0;
+		yMin = 0;
+		xMax = 0;
+		xMin = 0;
+		for (int i = getDamageRange() - 1; i >= 0; i--) {
+			if (area.getIsCanShowTop()[i]) {
+				yMin = i + 1;
+				break;
+			}
+		}
+
+		for (int i = getDamageRange() - 1; i >= 0; i--) {
+			if (area.getIsCanShowBot()[i]) {
+				yMax = i + 2;
+				break;
+			}
+		}
+
+		for (int i = getDamageRange() - 1; i >= 0; i--) {
+			if (area.getIsCanShowLeft()[i]) {
+				xMin = i + 1;
+				break;
+			}
+		}
+
+		for (int i = getDamageRange() - 1; i >= 0; i--) {
+			if (area.getIsCanShowRight()[i]) {
+				xMax = i + 2;
+				break;
+			}
+		}
+		for (PlayerBase player : this.gameController.getPlayers()) {
+			int x1 = player.getxPosition();
+			int x2 = x1 + 50;
+			int x3 = x2;
+			int x4 = x1;
+			int y1 = player.getyPosition();
+			int y2 = y1;
+			int y3 = y1 + 50;
+			int y4 = y3;
+			boolean TLinbomb = isinRange(x1, y1, xMin, xMax, yMin, yMax);
+			boolean TRinbomb = isinRange(x2, y2, xMin, xMax, yMin, yMax);
+			boolean BRinbomb = isinRange(x3, y3, xMin, xMax, yMin, yMax);
+			boolean BLinbomb = isinRange(x4, y4, xMin, xMax, yMin, yMax);
+
+			if (TLinbomb && TRinbomb && BLinbomb && BRinbomb) {
+				player.setHp(player.getHp() - 1);
+//			} else if (!TLinbomb && !BLinbomb && TRinbomb && BRinbomb) {
+//				player.setHp(player.getHp() - 1);
+//			} else if (TLinbomb && BLinbomb && !TRinbomb && !BRinbomb) {
+//				player.setHp(player.getHp() - 1);
+//			} else if (TLinbomb && TRinbomb && !BLinbomb && !BRinbomb) {
+//				player.setHp(player.getHp() - 1);
+//			} else if (!TLinbomb && !TRinbomb && BLinbomb && !BRinbomb) {
+//				player.setHp(player.getHp() - 1);
+//			}
+			}
+		}
+		for (Minion minion : this.gameController.getMinions()) {
+			int x1 = minion.getxPosition();
+			int x2 = x1 + 50;
+			int x3 = x2;
+			int x4 = x1;
+			int y1 = minion.getyPosition();
+			int y2 = y1;
+			int y3 = y1 + 50;
+			int y4 = y3;
+			boolean TLinbomb = isinRange(x1, y1, xMin, xMax, yMin, yMax);
+			boolean TRinbomb = isinRange(x2, y2, xMin, xMax, yMin, yMax);
+			boolean BRinbomb = isinRange(x3, y3, xMin, xMax, yMin, yMax);
+			boolean BLinbomb = isinRange(x4, y4, xMin, xMax, yMin, yMax);
+
+			if (TLinbomb && TRinbomb && BLinbomb && BRinbomb) {
+				minion.onObjectIsDestroyed();
+			}
+		}
+	}
+
+	public boolean isinRange(int x, int y, int xMin, int xMax, int yMin, int yMax) {
+		if (((xPosition / 50 - xMin) * 50 <= x) && (x <= (xPosition / 50 + xMax) * 50) && ((yPosition / 50) * 50 <= y)
+				&& (y <= (yPosition / 50 + 1) * 50)) {
+			return true;
+		}
+		// check y axis
+		else if (((xPosition / 50) * 50 <= x) && (x <= (xPosition / 50 + 1) * 50) && ((yPosition / 50 - yMin) * 50 <= y)
+				&& (y <= (yPosition / 50 + yMax) * 50)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public ObjectInGame getObjectInGame() {
 		return ObjectInGame.BOMB;
 	}
-	
+
 }
