@@ -30,6 +30,10 @@ public class Minion extends AIBase {
 	}
 
 	public void checkContactPlayer() {
+		if(getAiStatus().isDead) {
+			gameController.getMinions().remove(this);
+			return;
+		}
 		int playerX = player.getxPosition();
 		int playerY = player.getyPosition();
 		boolean isXHit = (playerX <= this.getxPosition() && this.getxPosition() <= playerX + 50)

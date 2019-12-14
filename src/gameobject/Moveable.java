@@ -1,6 +1,6 @@
 package gameobject;
 
 public interface Moveable {
-	int defaultMoveSpeed = 2;
+	int defaultMoveSpeed = 5;
 	void move();
 }

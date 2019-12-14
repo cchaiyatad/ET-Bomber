@@ -35,8 +35,8 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 	}
 
 	protected void setDefaultPlayer() {
-		setHp(100000);
-		setBombRange(5);
+		setHp(10);
+		setBombRange(1);
 		setBombCount(1);
 		countBomb = new LinkedList<Bomb>();
 		setCanUseWeapon();
@@ -65,7 +65,7 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 		}
 		if (hp <= 0) {
 			hp = 0;
-			this.layer.getChildren().remove(this.imageView);
+			onObjectIsDestroyed();
 			currentPlayerState = PlayerState.DEAD;
 		}
 		this.hp = hp;
