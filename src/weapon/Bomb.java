@@ -193,10 +193,8 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			boolean TRinbomb = isinRange(x2, y2, xMin, xMax, yMin, yMax);
 			boolean BRinbomb = isinRange(x3, y3, xMin, xMax, yMin, yMax);
 			boolean BLinbomb = isinRange(x4, y4, xMin, xMax, yMin, yMax);
-			System.out.println(TLinbomb + " " + TRinbomb + "" + BRinbomb + " " + BLinbomb);
 
 			if (((x2 <= xPosition) || (x1 >= xPosition + 50)) && ((y1 == yPosition + 50) || (y1 == yPosition - 50))) {
-				System.out.println("Hereeee");
 				continue;
 			} else if (((y3 <= yPosition) || (y1 >= yPosition + 50))
 					&& ((x1 == xPosition - 50) || (x1 == xPosition + 50))) {
@@ -234,7 +232,6 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 
 			// check minion's position is in Range of bomb
 			if (((x2 <= xPosition) || (x1 >= xPosition + 50)) && ((y1 == yPosition + 50) || (y1 == yPosition - 50))) {
-				System.out.println("Hereeee");
 				continue;
 			} else if (((y3 <= yPosition) || (y1 >= yPosition + 50))
 					&& ((x1 == xPosition - 50) || (x1 == xPosition + 50))) {
