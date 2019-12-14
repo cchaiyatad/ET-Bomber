@@ -106,7 +106,7 @@ public class GameController extends Controller {
 
 				@Override
 				public void handle(long now) {
-
+					
 					checkGameFinish();
 					setTimer(now);
 					checkRemainingTime();
@@ -129,9 +129,6 @@ public class GameController extends Controller {
 					players.forEach(Moveable -> Moveable.move());
 
 					if (minions != null) {
-//						if (minions.size() >= 2) {
-//							System.out.println(minions.get(1).getAiStatus().moveDirection);
-//						}
 						minions.forEach(Moveable -> Moveable.move());
 					}
 					
@@ -150,60 +147,6 @@ public class GameController extends Controller {
 					for (PlayerBase player : players) {
 						checkPlayerPlaceBome(player);
 					}
-
-					/// Debug
-					for (PlayerBase player : players) {
-						KeyCode key = null;
-						switch (player.getPlayerNumber()) {
-						case 1:
-							key = KeyCode.U;
-							break;
-						case 2:
-							key = KeyCode.I;
-							break;
-						case 3:
-							key = KeyCode.O;
-							break;
-						case 4:
-							key = KeyCode.P;
-							break;
-						default:
-							return;
-						}
-
-						if (inputInGame.isKeyPress(key)) {
-							player.setHp(player.getHp() - 1);
-						}
-						inputInGame.changeBitset(key, false);
-					}
-					///
-
-					/// Debug
-					if (inputInGame.isKeyPress(KeyCode.Y)) {
-						PlayerBase player = players.get(0);
-						int x = player.getxPosition() / 50;
-						int y = player.getyPosition() / 50;
-						if (gameObjectArray[x + 1][y] != null && gameObjectArray[x + 1][y] instanceof Destroyable) {
-							((Destroyable) gameObjectArray[x + 1][y]).onObjectIsDestroyed();
-						}
-						inputInGame.changeBitset(KeyCode.Y, false);
-					}
-					// Debug
-					if (inputInGame.isKeyPress(KeyCode.T)) {
-						PlayerBase player = players.get(0);
-						int x = player.getxPosition() / 50;
-						int y = player.getyPosition() / 50;
-						if (gameObjectArray[x][y + 1] != null && gameObjectArray[x][y + 1] instanceof Destroyable) {
-							((Destroyable) gameObjectArray[x][y + 1]).onObjectIsDestroyed();
-						}
-						inputInGame.changeBitset(KeyCode.T, false);
-
-					}
-					// Debug
-					if (inputInGame.isKeyPress(KeyCode.R)) {
-						inputInGame.changeBitset(KeyCode.R, false);
-					}
-
 				}
 			};
 		}
@@ -271,6 +214,7 @@ public class GameController extends Controller {
 		if (this.createBombThread != null) {
 			this.createBombThread.interrupt();
 		}
+		this.createBombThread = null;
 		currentNextThreadTime = 60;
 		this.createBombThread = null;
 	}
@@ -336,8 +280,10 @@ public class GameController extends Controller {
 
 	private void generateBombThread(int time, int bomb, long endTime) {
 		Random random = new Random();
+		if(this.createBombThread != null) {
+			createBombThread.interrupt();
+		}
 		this.createBombThread = new Thread(() -> {
-
 			while (true) {
 				try {
 					Thread.sleep(time * 1000);
@@ -369,6 +315,7 @@ public class GameController extends Controller {
 			}
 		});
 		this.createBombThread.start();
+		
 		this.currentNextThreadTime = (int) endTime;
 
 	}

@@ -252,7 +252,6 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 					minion.setHp(minion.getHp()-1);
 				}
 			}
-
 		}
 	}
 
