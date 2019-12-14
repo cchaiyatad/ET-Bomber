@@ -19,16 +19,16 @@ public class Boss extends AIBase {
 	
 
 	public void checkStatus() {
-		Action.Dead(this);
-		Action.SpawnMinion(this);
-		Action.Vanish(this);
+		Action.dead(this);
+		Action.spawnMinion(this);
+		Action.vanish(this);
 		checkPlayerAndObjectInSight();
-		Action.CheckForBomb(this);
-		Action.CheckForWayAndItem(this);
-		Action.EscapeBomb(this);
-		Action.CollectItem(this);
-		Action.RandomWalking(this);
-		Action.GoTo(this);
+		Action.checkForBomb(this);
+		Action.checkForWayAndItem(this);
+		Action.escapeBomb(this);
+		Action.collectItem(this);
+		Action.randomWalking(this);
+		Action.goTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
 	}
 }

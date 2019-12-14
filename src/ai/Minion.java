@@ -20,12 +20,12 @@ public class Minion extends AIBase {
 
 	@Override
 	public void checkStatus() {
-		Action.Dead(this);
-		Action.Vanish(this);
+		Action.dead(this);
+		Action.vanish(this);
 		checkPlayerAndObjectInSight();
-		Action.CheckForWayAndItem(this);
-		Action.RandomWalking(this);
-		Action.GoTo(this);
+		Action.checkForWayAndItem(this);
+		Action.randomWalking(this);
+		Action.goTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
 	}
 

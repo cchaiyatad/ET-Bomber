@@ -8,22 +8,22 @@ import player.PlayerState;
 public class Action {
 
 	private static GameController gameController;
-	private static AStar astar;
+	private static PathFinding pathFinding;
 	private static Random random;
 
 	public static void setGameController(GameController gameController) {
-		if (Action.gameController == null || astar == null || random == null) {
+		if (Action.gameController == null || pathFinding == null || random == null) {
 			Action.gameController = gameController;
-			Action.astar = new AStar(gameController);
+			Action.pathFinding = new PathFinding(gameController);
 			Action.random = new Random();
 		}
 	}
 
-	public static void Dead(AIBase ai) {
+	public static void dead(AIBase ai) {
 		ai.getAiStatus().isDead = ai.getHp() == 0;
 	}
 
-	public static void Vanish(AIBase ai) {
+	public static void vanish(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -50,7 +50,7 @@ public class Action {
 		}
 	}
 
-	public static void SpawnMinion(Boss ai) {
+	public static void spawnMinion(Boss ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -91,7 +91,7 @@ public class Action {
 
 	}
 
-	public static void EscapeBomb(AIBase ai) {
+	public static void escapeBomb(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -143,7 +143,7 @@ public class Action {
 
 	}
 
-	public static void CheckForBomb(AIBase ai) {
+	public static void checkForBomb(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -176,7 +176,7 @@ public class Action {
 		}
 	}
 
-	public static void CollectItem(AIBase ai) {
+	public static void collectItem(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -196,39 +196,21 @@ public class Action {
 		}
 	}
 
-	public static void RandomWalking(AIBase ai) {
+	public static void randomWalking(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
 		if (ai.getAiStatus().bombNearBy && ai.objectAroundPlayer[8] != ObjectInGame.BOMB) {
 			return;
 		}
-//		else if (ai.getAiStatus().bombNearBy && ai.objectAroundPlayer[8] == ObjectInGame.BOMB) {
-//			if (ai.getPlayerNumber() == 3) {
-//				System.out.println("Hit");
-//				System.out.println(ai.getAiStatus().moveToX + " " + ai.getAiStatus().moveToY);
-//				for (int i = 0; i < 8; i += 2) {
-//					System.out.println(ai.objectAroundPlayer[i]);
-//
-//				}
-//				System.out.println("============");
-//			}
-//		}
 
 		if ((ai.getxPosition() % 50 != 0 || ai.getyPosition() % 50 != 0)
 				|| (ai.getAiStatus().moveToX != -2 && ai.getAiStatus().moveToY != -2) || ((!ai.getAiStatus().bombNearBy
 						&& (ai.getAiStatus().moveToX == -1 && ai.getAiStatus().moveToY == -1)))) {
 			if (!ai.getAiStatus().isFinishMoving) {
-//				if (ai.getPlayerNumber() == 3) {
-//					System.out.println("Exit");
-//				}
-//				System.out.println("Hit");
 				return;
 			}
 		}
-//		if (ai.getPlayerNumber() == 3) {
-//			System.out.println("Hi");
-//		}
 		ai.getAiStatus().isFinishMoving = false;
 		int currentMoveWay = -1;
 		int nextWay = -1;
@@ -314,7 +296,7 @@ public class Action {
 
 	}
 
-	public static void CheckForWayAndItem(AIBase ai) {
+	public static void checkForWayAndItem(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -340,7 +322,7 @@ public class Action {
 		return canMove(ai, objectInGame) && objectInGame != ObjectInGame.EMPTY;
 	}
 
-	public static void GoTo(AIBase ai) {
+	public static void goTo(AIBase ai) {
 		if (ai.getAiStatus().isDead) {
 			return;
 		}
@@ -375,7 +357,7 @@ public class Action {
 			if ((ai.getxPosition()) != x * 50 || (ai.getyPosition()) != y * 50) {
 				int[] path;
 				try {
-					path = astar.findPath((ai.getxPosition() + 20) / 50, (ai.getyPosition() + 20) / 50, x, y, ai);
+					path = pathFinding.findPath((ai.getxPosition() + 20) / 50, (ai.getyPosition() + 20) / 50, x, y, ai);
 
 					if (path[0] == (ai.getxPosition() + 20) / 50 && Math.abs(path[0] * 50 - ai.getxPosition()) < 20) {
 						if (ai.getAiStatus().moveDirection == PlayerState.MOVELEFT
