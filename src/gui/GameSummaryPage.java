@@ -36,7 +36,7 @@ public class GameSummaryPage extends FlowPane implements HasButtonPage {
 		setButtonAction();
 		this.setOrientation(Orientation.VERTICAL);
 		this.setAlignment(Pos.CENTER);
-		this.setBackground(new Background(new BackgroundFill(Color.NAVAJOWHITE, null, null)));
+		this.setBackground(new Background(new BackgroundFill(Color.HONEYDEW, null, null)));
 		this.getChildren().addAll(mainLabel, statusLabel, continueButton, mainMenuButton);
 
 	}
@@ -59,8 +59,8 @@ public class GameSummaryPage extends FlowPane implements HasButtonPage {
 		if (GameController.level == 3) {
 			statusLabelText = isSurvive ? "You defeated all enemy" : "You was defeated";
 		} else {
-			statusLabelText = isSurvive ? "You defeated monster " + GameController.level
-					: "You was defeated by monster in Level " + GameController.level;
+			statusLabelText = isSurvive ? "You defeated level " + (GameController.level + 1)
+					: "You was defeated on Level " + (GameController.level + 1);
 		}
 		mainLabel.setText(mainLabelText);
 		mainLabel.setFont(Font.loadFont(Main.fontpath, 20));

@@ -104,8 +104,7 @@ public class PathFinding {
 		}
 
 		private int[] getXY() {
-			int[] xy = { x, y };
-			return xy;
+			return new int[] {x, y};
 		}
 		
 		private Node getParent() {
