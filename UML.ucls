@@ -109,16 +109,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="item.Item" project="project-2019-1-bomberman-1" 
-    file="/project-2019-1-bomberman-1/src/item/Item.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1362" y="-645"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="item.LifeIncreaseItem" project="project-2019-1-bomberman-1" 
+  <class id="13" language="java" name="item.LifeIncreaseItem" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/item/LifeIncreaseItem.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1284" y="-984"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -127,7 +118,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="15" language="java" name="item.PowerUp" project="project-2019-1-bomberman-1" 
+  <interface id="14" language="java" name="item.PowerUp" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/item/PowerUp.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="911" y="-693"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -136,7 +127,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="16" language="java" name="item.PowerUpgradeItem" project="project-2019-1-bomberman-1" 
+  <class id="15" language="java" name="item.PowerUpgradeItem" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/item/PowerUpgradeItem.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="695" y="-487"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -145,7 +136,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="item.Shield" project="project-2019-1-bomberman-1" 
+  <class id="16" language="java" name="item.Shield" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/item/Shield.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="859" y="-1057"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -154,7 +145,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="item.SpeedUpgradeItem" project="project-2019-1-bomberman-1" 
+  <class id="17" language="java" name="item.SpeedUpgradeItem" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/item/SpeedUpgradeItem.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="612" y="-879"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -163,7 +154,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="main.Main" project="project-2019-1-bomberman-1" 
+  <class id="18" language="java" name="main.Main" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/main/Main.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="401" y="-239"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -172,7 +163,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="player.Player" project="project-2019-1-bomberman-1" 
+  <class id="19" language="java" name="player.Player" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/player/Player.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1810" y="-1106"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -181,7 +172,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="player.PlayerBase" project="project-2019-1-bomberman-1" 
+  <class id="20" language="java" name="player.PlayerBase" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/player/PlayerBase.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2272" y="-876"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -190,7 +181,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="22" language="java" name="player.PlayerState" project="project-2019-1-bomberman-1" 
+  <enumeration id="21" language="java" name="player.PlayerState" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/player/PlayerState.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2337" y="-414"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -199,7 +190,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="23" language="java" name="setting.Setting" project="project-2019-1-bomberman-1" 
+  <class id="22" language="java" name="setting.Setting" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/setting/Setting.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="982" y="-25"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -208,7 +199,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="weapon.Bomb" project="project-2019-1-bomberman-1" 
+  <class id="23" language="java" name="weapon.Bomb" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/weapon/Bomb.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1632" y="9"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -217,7 +208,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="weapon.BombArea" project="project-2019-1-bomberman-1" 
+  <class id="24" language="java" name="weapon.BombArea" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/weapon/BombArea.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1967" y="127"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -226,7 +217,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="26" language="java" name="weapon.Site" project="project-2019-1-bomberman-1" 
+  <enumeration id="25" language="java" name="weapon.Site" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/weapon/Site.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1725" y="297"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -235,7 +226,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <interface id="27" language="java" name="weapon.Weapon" project="project-2019-1-bomberman-1" 
+  <interface id="26" language="java" name="weapon.Weapon" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/weapon/Weapon.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1275" y="-156"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -244,7 +235,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="28" language="java" name="ai.Action" project="project-2019-1-bomberman-1" 
+  <class id="27" language="java" name="ai.Action" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/ai/Action.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3083" y="-322"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -253,7 +244,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="29" language="java" name="ai.AIBase" project="project-2019-1-bomberman-1" 
+  <class id="28" language="java" name="ai.AIBase" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/ai/AIBase.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2780" y="-749"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -262,7 +253,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="30" language="java" name="ai.AIStatusCheckList" project="project-2019-1-bomberman-1" 
+  <class id="29" language="java" name="ai.AIStatusCheckList" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/ai/AIStatusCheckList.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3184" y="-955"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -271,7 +262,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="31" language="java" name="ai.Boss" project="project-2019-1-bomberman-1" 
+  <class id="30" language="java" name="ai.Boss" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/ai/Boss.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3194" y="-592"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -280,7 +271,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="ai.CannotReachDestinateException" project="project-2019-1-bomberman-1" 
+  <class id="31" language="java" name="ai.CannotReachDestinateException" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/ai/CannotReachDestinateException.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2619" y="-1001"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -289,7 +280,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="ai.Minion" project="project-2019-1-bomberman-1" 
+  <class id="32" language="java" name="ai.Minion" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/ai/Minion.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2664" y="-481"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -298,7 +289,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="34" language="java" name="gui.GameField" project="project-2019-1-bomberman-1" 
+  <class id="33" language="java" name="gui.GameField" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/gui/GameField.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2530" y="12"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -307,7 +298,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="35" language="java" name="gui.GamePage" project="project-2019-1-bomberman-1" 
+  <class id="34" language="java" name="gui.GamePage" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/gui/GamePage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2744" y="21"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -316,7 +307,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="36" language="java" name="gui.GameSummaryPage" project="project-2019-1-bomberman-1" 
+  <class id="35" language="java" name="gui.GameSummaryPage" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/gui/GameSummaryPage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2994" y="40"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -325,7 +316,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="37" language="java" name="gui.HasButtonPage" project="project-2019-1-bomberman-1" 
+  <interface id="36" language="java" name="gui.HasButtonPage" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/gui/HasButtonPage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2734" y="317"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -334,7 +325,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="38" language="java" name="gui.PlayerStatusBoard" project="project-2019-1-bomberman-1" 
+  <class id="37" language="java" name="gui.PlayerStatusBoard" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/gui/PlayerStatusBoard.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2343" y="21"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -343,7 +334,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="39" language="java" name="gui.ScoreBoard" project="project-2019-1-bomberman-1" 
+  <class id="38" language="java" name="gui.ScoreBoard" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/gui/ScoreBoard.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2384" y="476"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -352,7 +343,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="40" language="java" name="gui.StartPage" project="project-2019-1-bomberman-1" 
+  <class id="39" language="java" name="gui.StartPage" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/gui/StartPage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3124" y="330"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -361,7 +352,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="41" language="java" name="gui.InstuctionPage" project="project-2019-1-bomberman-1" 
+  <class id="40" language="java" name="gui.InstuctionPage" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/gui/InstuctionPage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2367" y="223"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -370,7 +361,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="42" language="java" name="gui.CreditPage" project="project-2019-1-bomberman-1" 
+  <class id="41" language="java" name="gui.CreditPage" project="project-2019-1-bomberman-1" 
     file="/project-2019-1-bomberman-1/src/gui/CreditPage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2834" y="527"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -379,133 +370,142 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
+  <class id="42" language="java" name="item.Item" project="project-2019-1-bomberman-1" 
+    file="/project-2019-1-bomberman-1/src/item/Item.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1353" y="-642"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
   <realization id="43">    
-    <end type="SOURCE" refId="42"/>    
-    <end type="TARGET" refId="37"/>  
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="36"/>  
   </realization>  
-  <realization id="44">    
-    <end type="SOURCE" refId="36"/>    
-    <end type="TARGET" refId="37"/>  
-  </realization>  
-  <realization id="45">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <generalization id="46">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <realization id="47">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="48">    
+  <generalization id="44">    
     <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="15"/>  
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <realization id="46">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="1"/>  
   </realization>  
-  <generalization id="49">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="50">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="51">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <generalization id="52">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="29"/>  
-  </generalization>  
-  <realization id="53">    
-    <end type="SOURCE" refId="41"/>    
-    <end type="TARGET" refId="37"/>  
-  </realization>  
-  <generalization id="54">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="55">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="56">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <realization id="57">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="15"/>  
-  </realization>  
-  <realization id="58">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="15"/>  
-  </realization>  
-  <generalization id="59">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="21"/>  
-  </generalization>  
-  <generalization id="60">    
-    <end type="SOURCE" refId="33"/>    
-    <end type="TARGET" refId="29"/>  
-  </generalization>  
-  <realization id="61">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="15"/>  
-  </realization>  
-  <realization id="62">    
-    <end type="SOURCE" refId="21"/>    
+  <realization id="47">    
+    <end type="SOURCE" refId="20"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <realization id="63">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <generalization id="64">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="65">    
-    <end type="SOURCE" refId="4"/>    
+  <generalization id="48">    
+    <end type="SOURCE" refId="42"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <realization id="66">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="27"/>  
-  </realization>  
-  <realization id="67">    
-    <end type="SOURCE" refId="39"/>    
-    <end type="TARGET" refId="37"/>  
-  </realization>  
-  <generalization id="68">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="69">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="21"/>  
-  </generalization>  
-  <generalization id="70">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <realization id="71">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="15"/>  
-  </realization>  
-  <generalization id="72">    
+  <generalization id="49">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="10"/>  
   </generalization>  
-  <realization id="73">    
-    <end type="SOURCE" refId="40"/>    
-    <end type="TARGET" refId="37"/>  
+  <realization id="50">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="36"/>  
   </realization>  
-  <realization id="74">    
-    <end type="SOURCE" refId="21"/>    
+  <generalization id="51">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <realization id="52">    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="53">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <generalization id="54">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <realization id="55">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <generalization id="56">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
+  <realization id="58">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <generalization id="59">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="60">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="61">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="62">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <generalization id="63">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
+  <realization id="64">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="65">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <generalization id="66">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <realization id="67">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <generalization id="68">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
+  <generalization id="69">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
+  <realization id="70">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <realization id="71">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <realization id="72">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="73">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="74">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

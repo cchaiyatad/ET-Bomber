@@ -12,20 +12,19 @@ public class PowerUpgradeItem extends Item implements PowerUp {
 	}
 
 	@Override
+	public ObjectInGame getObjectInGame() {
+		return ObjectInGame.POWERUPGRADEITEM;
+	}
+
+	@Override
 	public void onObjectIsDestroyed() {
 		setImageShow(false);
-		this.getGameController().removeItem(getxPosition()/50, getyPosition()/50);
+		this.getGameController().removeItem(getxPosition() / 50, getyPosition() / 50);
 	}
 
 	@Override
 	public void onPlayerGetItem(PlayerBase player) {
 		player.setBombRange(player.getBombRange() + 1);
 	}
-	
-	@Override
-	public ObjectInGame getObjectInGame() {
-		return ObjectInGame.POWERUPGRADEITEM;
-	}
 
-	
 }

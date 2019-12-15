@@ -10,5 +10,7 @@ public interface Weapon {
 
 	void makeDamageToObject();
 
+	void makeDamageToPlayer();
+
 	public abstract ObjectInGame getObjectInGame();
 }

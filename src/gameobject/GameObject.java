@@ -5,12 +5,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public abstract class GameObject {
+	protected Image image;
+	protected ImageView imageView;
+	protected String imagePath;
+	protected Pane layer;
 	protected int xPosition;
 	protected int yPosition;
-	protected String imagePath;
-	protected ImageView imageView;
-	protected Image image;
-	protected Pane layer;
 
 	public GameObject(int xPosition, int yPosition, String imagePath, Pane layer) {
 		setxPosition(xPosition);
@@ -19,42 +19,8 @@ public abstract class GameObject {
 		image = new Image(getImagePath());
 		imageView = new ImageView(image);
 		this.layer = layer;
-		this.layer.getChildren().add(this.imageView);
+		setImageShow(true);
 		SetPositionOnScreen();
-	}
-
-	public void SetPositionOnScreen() {
-		imageView.relocate(getxPosition(), getyPosition());
-	}
-
-	public int getxPosition() {
-		return xPosition;
-	}
-
-	public void setxPosition(int xPosition) {
-		this.xPosition = xPosition;
-	}
-
-	public int getyPosition() {
-		return yPosition;
-	}
-
-	public void setyPosition(int yPosition) {
-		this.yPosition = yPosition;
-	}
-
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath.equals("") ? ClassLoader.getSystemResource("image/placeholder.png").toString()
-				: ClassLoader.getSystemResource(String.format("image/%s.png", imagePath)).toString();
-	}
-
-	@Override
-	public String toString() {
-		return imagePath;
 	}
 
 	public Pane getLayer() {
@@ -65,12 +31,46 @@ public abstract class GameObject {
 		return imageView;
 	}
 
+	public void SetPositionOnScreen() {
+		imageView.relocate(getxPosition(), getyPosition());
+	}
+
+	@Override
+	public String toString() {
+		return imagePath;
+	}
+
 	public void setImageShow(boolean value) {
 		if (value) {
 			this.layer.getChildren().add(this.imageView);
 		} else {
 			this.layer.getChildren().remove(this.imageView);
 		}
+	}
+
+	public int getxPosition() {
+		return xPosition;
+	}
+
+	public void setyPosition(int yPosition) {
+		this.yPosition = yPosition;
+	}
+
+	public int getyPosition() {
+		return yPosition;
+	}
+
+	public void setxPosition(int xPosition) {
+		this.xPosition = xPosition;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath.equals("") ? ClassLoader.getSystemResource("image/placeholder.png").toString()
+				: ClassLoader.getSystemResource(String.format("image/%s.png", imagePath)).toString();
 	}
 
 }

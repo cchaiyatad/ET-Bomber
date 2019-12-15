@@ -8,22 +8,22 @@ import player.PlayerBase;
 public class Shield extends Item implements PowerUp {
 
 	public Shield(int xPosition, int yPosition, Pane layer, GameController gameController) {
-		super(xPosition, yPosition, "shield", layer,gameController);
-	}
-
-	@Override
-	public void onObjectIsDestroyed() {
-		setImageShow(false);
-		this.getGameController().removeItem(getxPosition()/50, getyPosition()/50);
-	}
-
-	@Override
-	public void onPlayerGetItem(PlayerBase player) {
-		player.setShield();
+		super(xPosition, yPosition, "shield", layer, gameController);
 	}
 
 	@Override
 	public ObjectInGame getObjectInGame() {
 		return ObjectInGame.SHIELDITEM;
+	}
+
+	@Override
+	public void onObjectIsDestroyed() {
+		setImageShow(false);
+		this.getGameController().removeItem(getxPosition() / 50, getyPosition() / 50);
+	}
+
+	@Override
+	public void onPlayerGetItem(PlayerBase player) {
+		player.setShield();
 	}
 }

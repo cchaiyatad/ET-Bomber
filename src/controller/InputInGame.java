@@ -10,7 +10,7 @@ public class InputInGame {
 
 	private Scene scene;
 	private BitSet keyboardBitSet = new BitSet();
-	
+
 	private EventHandler<KeyEvent> keyOnPressHandle = e -> {
 		keyboardBitSet.set(e.getCode().ordinal(), true);
 	};
@@ -18,7 +18,6 @@ public class InputInGame {
 	private EventHandler<KeyEvent> keyOnReleaseHandle = e -> {
 		keyboardBitSet.set(e.getCode().ordinal(), false);
 	};
-	
 
 	public InputInGame(Scene scene) {
 		this.scene = scene;

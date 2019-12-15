@@ -1,8 +1,5 @@
 package weapon;
 
 public enum Site {
-	TOP,
-	BOT,
-	LEFT,
-	RIGHT
+	TOP, BOT, LEFT, RIGHT
 }

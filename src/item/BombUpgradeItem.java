@@ -12,6 +12,11 @@ public class BombUpgradeItem extends Item implements PowerUp{
 	}
 
 	@Override
+	public ObjectInGame getObjectInGame() {
+		return ObjectInGame.BOMBUPGRADEITEM;
+	}
+
+	@Override
 	public void onObjectIsDestroyed() {
 		setImageShow(false);
 		this.getGameController().removeItem(getxPosition()/50, getyPosition()/50);
@@ -21,11 +26,6 @@ public class BombUpgradeItem extends Item implements PowerUp{
 	public void onPlayerGetItem(PlayerBase player) {
 		player.setBombCount(player.getBombCount() + 1);
 		player.setCanUseWeapon();
-	}
-
-	@Override
-	public ObjectInGame getObjectInGame() {
-		return ObjectInGame.BOMBUPGRADEITEM;
 	}
 
 }

@@ -10,7 +10,7 @@ public abstract class Item extends GameObject implements Destroyable {
 	private GameController gameController;
 	public Item(int xPosition, int yPosition, String imagePath, Pane layer,GameController gameController) {
 		super(xPosition, yPosition, imagePath, layer);
-		this.gameController = gameController;
+		setGameController(gameController);
 	}
 	
 	public abstract ObjectInGame getObjectInGame();
@@ -19,4 +19,8 @@ public abstract class Item extends GameObject implements Destroyable {
 		return gameController;
 	}
 
+	public void setGameController(GameController gameController) {
+		this.gameController = gameController;
+	}
+	
 }

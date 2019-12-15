@@ -46,7 +46,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 				makeDamageToPlayer();
 				area.setAfterDestroy();
 				area.showRange();
-				
+
 				if (player != null) {
 					player.getCountBomb().poll();
 					player.setCanUseWeapon();
@@ -81,11 +81,6 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	}
 
 	@Override
-	public int getDamageRange() {
-		return this.range;
-	}
-
-	@Override
 	public boolean canMakeDamageToobject(GameObject targetobj) {
 		if (targetobj instanceof Wall) {
 			return false;
@@ -95,14 +90,31 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 	}
 
 	@Override
-	public void onObjectIsDestroyed() {
-		setImageShow(false);
-		gameController.removeItem(xPosition / 50, yPosition / 50);
-		this.explodeThread.interrupt();
+	public int getDamageRange() {
+		return this.range;
 	}
 
 	public GameController getGameController() {
 		return gameController;
+	}
+
+	@Override
+	public ObjectInGame getObjectInGame() {
+		return ObjectInGame.BOMB;
+	}
+
+	public boolean isinRange(int x, int y, int xMin, int xMax, int yMin, int yMax) {
+		if (((xPosition / 50 - xMin) * 50 <= x) && (x <= (xPosition / 50 + xMax) * 50) && (yPosition <= y)
+				&& (y <= (yPosition / 50 + 1) * 50)) {
+			return true;
+		}
+		// check y axis
+		else if ((xPosition <= x) && (x <= (xPosition / 50 + 1) * 50) && ((yPosition / 50 - yMin) * 50 <= y)
+				&& (y <= (yPosition / 50 + yMax) * 50)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -200,7 +212,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			} else if (((y3 <= yPosition) || (y1 >= yPosition + 50))
 					&& ((x1 == xPosition - 50) || (x1 == xPosition + 50))) {
 				continue;
-			} else if ((y3 == (yPosition / 50 - yMin) * 50) || (y1 == (yPosition / 50 + yMax) * 50)
+			} else if ((y4 == (yPosition / 50 - yMin) * 50) || (y1 == (yPosition / 50 + yMax) * 50)
 					|| (x2 == (xPosition / 50 - xMin) * 50) || (x1 == (xPosition / 50 + xMax) * 50)) {
 				continue;
 			} else {
@@ -237,42 +249,31 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			} else if (((y3 <= yPosition) || (y1 >= yPosition + 50))
 					&& ((x1 == xPosition - 50) || (x1 == xPosition + 50))) {
 				continue;
-			} else if ((y3 == (yPosition / 50 - yMin) * 50) || (y1 == (yPosition / 50 + yMax) * 50)
+
+			} else if ((y4 == (yPosition / 50 - yMin) * 50) || (y1 == (yPosition / 50 + yMax) * 50)
 					|| (x2 == (xPosition / 50 - xMin) * 50) || (x1 == (xPosition / 50 + xMax) * 50)) {
 				continue;
 			} else {
 				if (TLinbomb && BLinbomb && TRinbomb && BRinbomb) {
-					minion.setHp(minion.getHp()-1);
+					minion.setHp(minion.getHp() - 1);
 				} else if (!TLinbomb && !BLinbomb && TRinbomb && BRinbomb) {
-					minion.setHp(minion.getHp()-1);
+					minion.setHp(minion.getHp() - 1);
 				} else if (TLinbomb && BLinbomb && !TRinbomb && !BRinbomb) {
-					minion.setHp(minion.getHp()-1);
+					minion.setHp(minion.getHp() - 1);
 				} else if (!TLinbomb && BLinbomb && !TRinbomb && BRinbomb) {
-					minion.setHp(minion.getHp()-1);
+					minion.setHp(minion.getHp() - 1);
 				} else if (TLinbomb && !BLinbomb && TRinbomb && !BRinbomb) {
-					minion.setHp(minion.getHp()-1);
+					minion.setHp(minion.getHp() - 1);
 				}
 			}
 		}
 	}
 
-	public boolean isinRange(int x, int y, int xMin, int xMax, int yMin, int yMax) {
-		if (((xPosition / 50 - xMin) * 50 <= x) && (x <= (xPosition / 50 + xMax) * 50) && (yPosition <= y)
-				&& (y <= (yPosition / 50 + 1) * 50)) {
-			return true;
-		}
-		// check y axis
-		else if ((xPosition <= x) && (x <= (xPosition / 50 + 1) * 50) && ((yPosition / 50 - yMin) * 50 <= y)
-				&& (y <= (yPosition / 50 + yMax) * 50)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	@Override
-	public ObjectInGame getObjectInGame() {
-		return ObjectInGame.BOMB;
+	public void onObjectIsDestroyed() {
+		setImageShow(false);
+		gameController.removeItem(xPosition / 50, yPosition / 50);
+		this.explodeThread.interrupt();
 	}
 
 }
