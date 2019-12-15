@@ -11,4 +11,3 @@ public enum ObjectInGame {
 	SHIELDITEM,
 	BOMB,
 }
-

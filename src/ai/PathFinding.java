@@ -6,11 +6,11 @@ import java.util.List;
 import controller.GameController;
 import player.PlayerBase;
 
-public class AStar {
+public class PathFinding {
 
 	private GameController gameController;
 
-	public AStar(GameController gameController) {
+	public PathFinding(GameController gameController) {
 		this.gameController = gameController;
 	}
 
@@ -29,7 +29,6 @@ public class AStar {
 		while (true) {
 			nodeSort(nodeList);
 			if (nodeList.isEmpty()) {
-				System.out.println(startX + " " + startY + " " + destinationX + " " + destinationY);
 				throw new CannotReachDestinateException();
 			}
 			currentNode = nodeList.get(0);
@@ -77,5 +76,49 @@ public class AStar {
 			}
 		}
 		return false;
+	}
+	
+	private class Node {
+		private int x;
+		private int y;
+		private Node parentNode;
+		private Node startNode;
+		private Node destinate;
+
+		public Node(int x, int y, Node parentNode, Node startNode, Node destinate) {
+			this.x = x;
+			this.y = y;
+			this.parentNode = parentNode;
+			this.startNode = startNode;
+			this.destinate = destinate;
+		}
+
+		private int getF() {
+			int g = Math.abs(startNode.x - x) + Math.abs(startNode.y - y);
+			int h = Math.abs(destinate.x - x) + Math.abs(destinate.y - y);
+			return g + h;
+		}
+
+		private boolean isFinish() {
+			return x == destinate.x && y == destinate.y;
+		}
+
+		private int[] getXY() {
+			int[] xy = { x, y };
+			return xy;
+		}
+		
+		private Node getParent() {
+			return this.parentNode;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof Node) {
+				return this.x == ((Node) obj).x && this.y == ((Node) obj).y;
+			}
+			return false;
+		}
+
 	}
 }

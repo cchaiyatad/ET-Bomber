@@ -13,7 +13,6 @@ public abstract class AIBase extends PlayerBase {
 	public ObjectInGame[] objectAroundPlayer = new ObjectInGame[9]; // (wqazxcdes)
 	
 	protected PlayerBase player;
-//	private int[] playerInSightRangeList = new int[4]; // (wasd)
 
 	public AIBase(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
 			GameController gameController, PlayerBase player) {
@@ -22,13 +21,13 @@ public abstract class AIBase extends PlayerBase {
 		Action.setGameController(gameController);
 	}
 
-	public abstract void checkStatus();
+	public abstract void checkForAction();
 	
-	public AIStatusCheckList getAiStatus() {
+	protected AIStatusCheckList getAIStatus() {
 		return aiStatus;
 	}
 
-	public static int[] calCulatePosition(AIBase ai, int i) {
+	protected static int[] calCulatePosition(AIBase ai, int i) {
 		int x = (ai.getxPosition()) / 50;
 		int y = (ai.getyPosition()) / 50;
 		int dx = 0;
@@ -76,7 +75,7 @@ public abstract class AIBase extends PlayerBase {
 
 	@Override
 	public boolean isDead() {
-		return getAiStatus().isDead;
+		return getAIStatus().isDead;
 	}
 	
 	public PlayerBase getPlayer() {
@@ -113,38 +112,13 @@ public abstract class AIBase extends PlayerBase {
 				x += dx;
 				y += dy;
 			}
-			objectInSightPlayer[i] = gameController.getObjectOnPositionXY(x, y);
+			objectInSightPlayer[i] = gameController.getObjectInGame(x, y);
 			objectRangeInSightPlayer[i] = Math.abs(x - xPosition / 50) + Math.abs(y - yPosition / 50);
 		}
 
-//		for (int i = 0; i < 4; i++) {
-//			playerInSightRangeList[i] = -1;
-//		}
-
-//		for (int i = 0; i < 3; i++) {
-//			if ((xPosition / 50 == playerList[i].getxPosition() / 50)
-//					&& (yPosition / 50 == playerList[i].getyPosition() / 50)) {
-//				continue;
-//			}
-//			if (xPosition / 50 == playerList[i].getxPosition() / 50) {
-//				int diff = (playerList[i].getyPosition() / 50) - (yPosition / 50);
-//				int index = diff > 0 ? 2 : 0;
-//				playerInSightRangeList[index] = playerInSightRangeList[index] == -1
-//						|| Math.abs(diff) < playerInSightRangeList[index] ? Math.abs(diff)
-//								: playerInSightRangeList[index];
-//
-//			} else if (yPosition / 50 == playerList[i].getyPosition() / 50) {
-//				int diff = (playerList[i].getxPosition() / 50) - (xPosition / 50);
-//				int index = diff > 0 ? 3 : 1;
-//				playerInSightRangeList[index] = playerInSightRangeList[index] == -1
-//						|| Math.abs(diff) < playerInSightRangeList[index] ? Math.abs(diff)
-//								: playerInSightRangeList[index];
-//			}
-//		}
-
 		for (int i = 0; i < 9; i++) {
 			int[] xy = calCulatePosition(this, i);
-			objectAroundPlayer[i] = gameController.getObjectOnPositionXY(xy[0], xy[1]);
+			objectAroundPlayer[i] = gameController.getObjectInGame(xy[0], xy[1]);
 		}
 	}
 }

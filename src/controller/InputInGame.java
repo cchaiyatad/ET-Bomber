@@ -10,6 +10,15 @@ public class InputInGame {
 
 	private Scene scene;
 	private BitSet keyboardBitSet = new BitSet();
+	
+	private EventHandler<KeyEvent> keyOnPressHandle = e -> {
+		keyboardBitSet.set(e.getCode().ordinal(), true);
+	};
+
+	private EventHandler<KeyEvent> keyOnReleaseHandle = e -> {
+		keyboardBitSet.set(e.getCode().ordinal(), false);
+	};
+	
 
 	public InputInGame(Scene scene) {
 		this.scene = scene;
@@ -33,24 +42,7 @@ public class InputInGame {
 		return keyboardBitSet.get(key.ordinal());
 	}
 
-	private EventHandler<KeyEvent> keyOnPressHandle = new EventHandler<KeyEvent>() {
-		@Override
-		public void handle(KeyEvent e) {
-			keyboardBitSet.set(e.getCode().ordinal(), true);
-		}
-	};
-
-	private EventHandler<KeyEvent> keyOnReleaseHandle = new EventHandler<KeyEvent>() {
-		@Override
-		public void handle(KeyEvent e) {
-			keyboardBitSet.set(e.getCode().ordinal(), false);
-		}
-	};
-
 	public void changeBitset(KeyCode keyCode, boolean value) {
-//		if (keyCode == KeyCode.Y) {
-//			System.out.println("Hit" + " " + keyCode + " " + value);
-//		}
 		keyboardBitSet.set(keyCode.ordinal(), value);
 	}
 

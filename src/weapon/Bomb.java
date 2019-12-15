@@ -110,7 +110,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 		int xPos = getxPosition() / 50;
 		int yPos = getyPosition() / 50;
 		for (int i = 1; i < getDamageRange() + 1; i++) {
-			GameObject object = getGameController().getObjectInGame(xPos, Math.max(yPos - i, 0));
+			GameObject object = getGameController().getGameObject(xPos, Math.max(yPos - i, 0));
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowTop()[i - 1] && canMakeDamageToobject(object)) {
@@ -119,7 +119,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			}
 		}
 		for (int i = 1; i < getDamageRange() + 1; i++) {
-			GameObject object = getGameController().getObjectInGame(xPos, Math.min(yPos + i, 14));
+			GameObject object = getGameController().getGameObject(xPos, Math.min(yPos + i, 14));
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowBot()[i - 1] && canMakeDamageToobject(object)) {
@@ -129,7 +129,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			}
 		}
 		for (int i = 1; i < getDamageRange() + 1; i++) {
-			GameObject object = getGameController().getObjectInGame(Math.max(xPos - i, 0), yPos);
+			GameObject object = getGameController().getGameObject(Math.max(xPos - i, 0), yPos);
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowLeft()[i - 1] && canMakeDamageToobject(object)) {
@@ -138,7 +138,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			}
 		}
 		for (int i = 1; i < getDamageRange() + 1; i++) {
-			GameObject object = getGameController().getObjectInGame(Math.min(xPos + i, 14), yPos);
+			GameObject object = getGameController().getGameObject(Math.min(xPos + i, 14), yPos);
 			if (object instanceof Wall)
 				break;
 			if (!area.getIsCanShowRight()[i - 1] && canMakeDamageToobject(object)) {
@@ -253,7 +253,6 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 					minion.setHp(minion.getHp()-1);
 				}
 			}
-
 		}
 	}
 

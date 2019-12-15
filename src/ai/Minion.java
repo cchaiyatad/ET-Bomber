@@ -19,18 +19,18 @@ public class Minion extends AIBase {
 	}
 
 	@Override
-	public void checkStatus() {
-		Action.Dead(this);
-		Action.Vanish(this);
+	public void checkForAction() {
+		Action.dead(this);
+		Action.vanish(this);
 		checkPlayerAndObjectInSight();
-		Action.CheckForWayAndItem(this);
-		Action.RandomWalking(this);
-		Action.GoTo(this);
+		Action.checkForWayAndItem(this);
+		Action.randomWalking(this);
+		Action.goTo(this);
 		setCurrentPlayerState(aiStatus.moveDirection);
 	}
 
 	public void checkContactPlayer() {
-		if(getAiStatus().isDead) {
+		if(getAIStatus().isDead) {
 			gameController.getMinions().remove(this);
 			return;
 		}
@@ -46,10 +46,4 @@ public class Minion extends AIBase {
 			gameController.getMinions().remove(this);
 		}
 	}
-	
-	@Override
-	public void onObjectIsDestroyed() {
-		setImageShow(false);
-	}
-
 }
