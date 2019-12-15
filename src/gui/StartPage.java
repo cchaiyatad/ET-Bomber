@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import main.Main;
 import setting.Setting;
 
@@ -19,8 +18,10 @@ public class StartPage extends StackPane implements HasButtonPage {
 	private Label gameLabel;
 	private Button playButton;
 	private Button instuctionButton;
+	private Button creditButton;
 	private Button quitButton;
 	private InstuctionPage instuctionPage;
+	private CreditPage creditPage;
 
 	private Controller controller;
 
@@ -35,8 +36,7 @@ public class StartPage extends StackPane implements HasButtonPage {
 
 		gameLabel = new Label("E.T. Bomber");
 		gameLabel.setFont(Font.loadFont(Main.fontpath, 70));
-		
-		
+
 		playButton = new Button("PLAY");
 		playButton.setFont(Font.loadFont(Main.fontpath, 30));
 		playButton.setFocusTraversable(false);
@@ -45,14 +45,20 @@ public class StartPage extends StackPane implements HasButtonPage {
 		instuctionButton.setFont(Font.loadFont(Main.fontpath, 30));
 		instuctionButton.setFocusTraversable(false);
 
+		creditButton = new Button("CREDIT");
+		creditButton.setFont(Font.loadFont(Main.fontpath, 30));
+		creditButton.setFocusTraversable(false);
+
 		quitButton = new Button("QUIT");
 		quitButton.setFont(Font.loadFont(Main.fontpath, 30));
 		quitButton.setFocusTraversable(false);
 
 		instuctionPage = new InstuctionPage(this);
+		creditPage = new CreditPage(this);
+		
 
 		setButtonAction();
-		mainMenu.getChildren().addAll(gameLabel,playButton, instuctionButton, quitButton);
+		mainMenu.getChildren().addAll(gameLabel, playButton, instuctionButton, creditButton, quitButton);
 
 		this.getChildren().add(mainMenu);
 	}
@@ -72,7 +78,11 @@ public class StartPage extends StackPane implements HasButtonPage {
 		});
 
 		instuctionButton.setOnAction(e -> {
-			setInstructionAppear(true);
+			setPageAppear(instuctionPage,true);
+		});
+		
+		creditButton.setOnAction(e -> {
+			setPageAppear(creditPage,true);
 		});
 
 		quitButton.setOnAction(e -> {
@@ -81,12 +91,13 @@ public class StartPage extends StackPane implements HasButtonPage {
 		});
 	}
 
-	public void setInstructionAppear(boolean value) {
+	public void setPageAppear(VBox page, boolean value) {
 		if (value) {
-			this.getChildren().add(instuctionPage);
+			this.getChildren().add(page);
 		} else {
-			this.getChildren().remove(instuctionPage);
+			this.getChildren().remove(page);
 		}
 	}
+	
 
 }

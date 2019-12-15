@@ -37,7 +37,7 @@ public class InstuctionPage extends VBox implements HasButtonPage {
 	@Override
 	public void setButtonAction() {
 		backButton.setOnAction(e -> {
-			startPage.setInstructionAppear(false);
+			startPage.setPageAppear(this, false);
 		});
 	}
 
