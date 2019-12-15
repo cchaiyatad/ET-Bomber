@@ -19,7 +19,7 @@ public class Minion extends AIBase {
 	}
 
 	@Override
-	public void checkStatus() {
+	public void checkForAction() {
 		Action.dead(this);
 		Action.vanish(this);
 		checkPlayerAndObjectInSight();
@@ -30,7 +30,7 @@ public class Minion extends AIBase {
 	}
 
 	public void checkContactPlayer() {
-		if(getAiStatus().isDead) {
+		if(getAIStatus().isDead) {
 			gameController.getMinions().remove(this);
 			return;
 		}

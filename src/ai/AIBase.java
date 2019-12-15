@@ -21,13 +21,13 @@ public abstract class AIBase extends PlayerBase {
 		Action.setGameController(gameController);
 	}
 
-	public abstract void checkStatus();
+	public abstract void checkForAction();
 	
-	public AIStatusCheckList getAiStatus() {
+	protected AIStatusCheckList getAIStatus() {
 		return aiStatus;
 	}
 
-	public static int[] calCulatePosition(AIBase ai, int i) {
+	protected static int[] calCulatePosition(AIBase ai, int i) {
 		int x = (ai.getxPosition()) / 50;
 		int y = (ai.getyPosition()) / 50;
 		int dx = 0;
@@ -75,7 +75,7 @@ public abstract class AIBase extends PlayerBase {
 
 	@Override
 	public boolean isDead() {
-		return getAiStatus().isDead;
+		return getAIStatus().isDead;
 	}
 	
 	public PlayerBase getPlayer() {

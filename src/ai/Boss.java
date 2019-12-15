@@ -16,9 +16,7 @@ public class Boss extends AIBase {
 		}
 	}
 
-	
-
-	public void checkStatus() {
+	public void checkForAction() {
 		Action.dead(this);
 		Action.spawnMinion(this);
 		Action.vanish(this);

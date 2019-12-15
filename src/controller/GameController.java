@@ -118,12 +118,12 @@ public class GameController extends Controller {
 
 					for (PlayerBase player : players) {
 						if (player instanceof AIBase) {
-							((AIBase) player).checkStatus();
+							((AIBase) player).checkForAction();
 						}
 					}
 
 					if (minions != null) {
-						minions.forEach(Minion -> Minion.checkStatus());
+						minions.forEach(Minion -> Minion.checkForAction());
 					}
 
 					players.forEach(Moveable -> Moveable.move());
