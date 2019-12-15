@@ -15,7 +15,6 @@ import setting.Setting;
 
 public class StartPage extends StackPane implements HasButtonPage {
 
-	private Label gameLabel;
 	private Button playButton;
 	private Button instuctionButton;
 	private Button creditButton;
@@ -34,7 +33,7 @@ public class StartPage extends StackPane implements HasButtonPage {
 		mainMenu.setAlignment(Pos.CENTER);
 		mainMenu.setSpacing(20);
 
-		gameLabel = new Label("E.T. Bomber");
+		Label gameLabel = new Label("E.T. Bomber");
 		gameLabel.setFont(Font.loadFont(Main.fontpath, 70));
 
 		playButton = new Button("PLAY");

@@ -102,12 +102,12 @@ public class GameController extends Controller {
 	public AnimationTimer gameLoop() {
 		if (this.gameLoop == null) {
 			startTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
-			
+
 			this.gameLoop = new AnimationTimer() {
 
 				@Override
 				public void handle(long now) {
-					
+
 					checkGameFinish();
 					setTimer(now);
 					checkRemainingTime();
@@ -132,9 +132,9 @@ public class GameController extends Controller {
 					if (minions != null) {
 						minions.forEach(Moveable -> Moveable.move());
 					}
-					
-					if(minions != null) {
-						for(int i = 0; i < minions.size();i++) {
+
+					if (minions != null) {
+						for (int i = 0; i < minions.size(); i++) {
 							minions.get(i).checkContactPlayer();
 						}
 					}
@@ -281,7 +281,7 @@ public class GameController extends Controller {
 
 	private void generateBombThread(int time, int bomb, long endTime) {
 		Random random = new Random();
-		if(this.createBombThread != null) {
+		if (this.createBombThread != null) {
 			createBombThread.interrupt();
 		}
 		this.createBombThread = new Thread(() -> {
@@ -316,7 +316,7 @@ public class GameController extends Controller {
 			}
 		});
 		this.createBombThread.start();
-		
+
 		this.currentNextThreadTime = (int) endTime;
 
 	}
@@ -327,7 +327,7 @@ public class GameController extends Controller {
 		if (x < 0 || x > 14 || y < 0 || y > 14) {
 			return false;
 		}
-		if(player.getPlayerNumber() == 3) {
+		if (player.getPlayerNumber() == 3) {
 			return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall);
 		}
 		return !(gameObjectArray[x][y] instanceof Bomb) && !(gameObjectArray[x][y] instanceof Wall)
@@ -375,9 +375,7 @@ public class GameController extends Controller {
 	}
 
 	public void removeItem(int x, int y) {
-		if (gameObjectArray[x][y] != null) {
-			gameObjectArray[x][y] = null;
-		}
+		gameObjectArray[x][y] = null;
 	}
 
 	private void createBackground() {
