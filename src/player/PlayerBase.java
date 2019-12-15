@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import weapon.Bomb;
 
 public abstract class PlayerBase extends GameObject implements Moveable, Destroyable {
-	private long shieldDuration = 5;
+	private final long shieldDuration = 5;
 
 	protected int hp;
 	protected int bombCount;
