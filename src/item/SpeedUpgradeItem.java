@@ -19,7 +19,7 @@ public class SpeedUpgradeItem extends Item implements PowerUp{
 
 	@Override
 	public void onPlayerGetItem(PlayerBase player) {
-		player.setSpeed(player.getSpeed() + 1);
+		player.setSpeed(Math.min((player.getSpeed() + 1),5));
 	}
 
 	@Override

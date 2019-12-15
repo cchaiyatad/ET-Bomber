@@ -44,6 +44,7 @@ public class StartPage extends StackPane implements HasButtonPage {
 		instuctionButton = new Button("INSTUCTION");
 		instuctionButton.setFont(Font.loadFont(Main.fontpath, 30));
 		instuctionButton.setFocusTraversable(false);
+		
 
 		creditButton = new Button("CREDIT");
 		creditButton.setFont(Font.loadFont(Main.fontpath, 30));
