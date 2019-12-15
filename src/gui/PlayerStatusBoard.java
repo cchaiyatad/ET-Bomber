@@ -7,6 +7,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import main.Main;
 import player.PlayerBase;
 
 public class PlayerStatusBoard extends HBox {
@@ -22,6 +24,7 @@ public class PlayerStatusBoard extends HBox {
 
 		hpLabel = new Label();
 		hpLabel.setPrefHeight(60);
+		hpLabel.setFont(Font.loadFont(Main.fontpath, 16));
 
 		this.getChildren().addAll(playerImageView, hpLabel);
 	}

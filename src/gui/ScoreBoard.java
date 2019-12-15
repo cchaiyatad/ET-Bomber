@@ -9,6 +9,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import main.Main;
 
 public class ScoreBoard extends HBox implements HasButtonPage {
 
@@ -32,12 +34,15 @@ public class ScoreBoard extends HBox implements HasButtonPage {
 		HBox buttonController = new HBox();
 		timer = new Label("0:00");
 		timer.setPrefSize(100, 50);
+		timer.setFont(Font.loadFont(Main.fontpath, 20));
 
 		pauseButton = new Button("PAUSE");
+		pauseButton.setFont(Font.loadFont(Main.fontpath, 14));
 		pauseButton.setPrefSize(100, 50);
 		pauseButton.setFocusTraversable(false);
 
 		mainMenuButton = new Button("MAIN MENU");
+		mainMenuButton.setFont(Font.loadFont(Main.fontpath, 12));
 		mainMenuButton.setPrefSize(100, 50);
 		mainMenuButton.setFocusTraversable(false);
 

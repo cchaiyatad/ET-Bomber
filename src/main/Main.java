@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	private StartPageController startPageController;
 	private GameController gameController;
+	public static String fontpath = ClassLoader.getSystemResource("font/PixelEmulator-xq08.ttf").toString();
 
 	@SuppressWarnings("exports")
 	@Override

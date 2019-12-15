@@ -64,23 +64,10 @@ public class Action {
 			time = 8;
 		}
 
-		String minionImagePath = "minion";
-		switch (ai.getPlayerNumber()) {
-		case 2:
-			minionImagePath += "One";
-			break;
-		case 3:
-			minionImagePath += "Two";
-			break;
-		case 4:
-			minionImagePath += "Three";
-			break;
-		}
-
 		if (gameController.getRemainingTime() % time == 0 && !ai.getAiStatus().isSpawnMinion) {
 			ai.getAiStatus().isSpawnMinion = true;
 			gameController.getMinions()
-					.add(new Minion(ai.getxPosition() / 50 * 50, ai.getyPosition() / 50 * 50, minionImagePath,
+					.add(new Minion(ai.getxPosition() / 50 * 50, ai.getyPosition() / 50 * 50,
 							gameController.getGamePage().getGameFieldItemPane(), ai.getPlayerNumber(), gameController,
 							ai.getPlayer()));
 		}
