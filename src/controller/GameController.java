@@ -102,6 +102,7 @@ public class GameController extends Controller {
 	public AnimationTimer gameLoop() {
 		if (this.gameLoop == null) {
 			startTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
+			
 			this.gameLoop = new AnimationTimer() {
 
 				@Override
@@ -145,7 +146,7 @@ public class GameController extends Controller {
 					gamePage.getScoreBoard().updateStatus();
 
 					for (PlayerBase player : players) {
-						checkPlayerPlaceBome(player);
+						checkPlayerPlaceBomb(player);
 					}
 				}
 			};
@@ -179,7 +180,7 @@ public class GameController extends Controller {
 		}
 	}
 
-	public int[] isMoveAble(int x, int y, PlayerBase player) {
+	public int[] checkXYSpeed(int x, int y, PlayerBase player) {
 		int[] xy = { 0, 0 };
 		switch (player.getCurrentPlayerState()) {
 		case MOVEDOWN:
@@ -350,7 +351,7 @@ public class GameController extends Controller {
 		}
 	}
 
-	private void checkPlayerPlaceBome(PlayerBase player) {
+	private void checkPlayerPlaceBomb(PlayerBase player) {
 		if (player.isDead()) {
 			return;
 		}
@@ -532,11 +533,11 @@ public class GameController extends Controller {
 		}
 	}
 
-	public GameObject getObjectInGame(int x, int y) {
+	public GameObject getGameObject(int x, int y) {
 		return this.gameObjectArray[x][y];
 	}
 
-	public ObjectInGame getObjectOnPositionXY(int x, int y) {
+	public ObjectInGame getObjectInGame(int x, int y) {
 		if (x < 0 || x > 14 || y < 0 || y > 14) {
 			return null;
 		}

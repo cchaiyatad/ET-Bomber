@@ -93,22 +93,22 @@ public class PathFinding {
 			this.destinate = destinate;
 		}
 
-		public int getF() {
+		private int getF() {
 			int g = Math.abs(startNode.x - x) + Math.abs(startNode.y - y);
 			int h = Math.abs(destinate.x - x) + Math.abs(destinate.y - y);
 			return g + h;
 		}
 
-		public boolean isFinish() {
+		private boolean isFinish() {
 			return x == destinate.x && y == destinate.y;
 		}
 
-		public int[] getXY() {
+		private int[] getXY() {
 			int[] xy = { x, y };
 			return xy;
 		}
 		
-		public Node getParent() {
+		private Node getParent() {
 			return this.parentNode;
 		}
 

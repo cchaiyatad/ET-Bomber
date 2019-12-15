@@ -10,11 +10,7 @@ public class LevelGenerator {
 	private final int obstacleRate = 103 - 20;
 	private final int emptyTileCount = 121 + 20;
 	private ObjectInGame[][] objectsArray = new ObjectInGame[15][15];
-	private Random random;
-
-	public LevelGenerator() {
-		random = new Random();
-	}
+	private Random random = new Random();
 
 	public ObjectInGame[][] generateLevel() {
 		int objectCount = random.nextInt(emptyTileCount - obstacleRate) + obstacleRate;
@@ -49,8 +45,6 @@ public class LevelGenerator {
 				} else {
 					objectsArray[i][j] = suffleList.get(0);
 					suffleList.remove(0);
-//					objectsArray[i][j] = ObjectInGame.BOMBUPGRADEITEM;
-					
 				}
 			}
 		}

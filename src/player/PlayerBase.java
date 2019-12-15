@@ -198,7 +198,7 @@ public abstract class PlayerBase extends GameObject implements Moveable, Destroy
 			break;
 		}
 
-		int[] xy = gameController.isMoveAble(xPosition + xDirectionSpeed, yPosition + yDirectionSpeed, this);
+		int[] xy = gameController.checkXYSpeed(xPosition + xDirectionSpeed, yPosition + yDirectionSpeed, this);
 		xPosition += xy[0];
 		yPosition += xy[1];
 		SetPositionOnScreen();

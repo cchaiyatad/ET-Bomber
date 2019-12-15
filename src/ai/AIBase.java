@@ -112,13 +112,13 @@ public abstract class AIBase extends PlayerBase {
 				x += dx;
 				y += dy;
 			}
-			objectInSightPlayer[i] = gameController.getObjectOnPositionXY(x, y);
+			objectInSightPlayer[i] = gameController.getObjectInGame(x, y);
 			objectRangeInSightPlayer[i] = Math.abs(x - xPosition / 50) + Math.abs(y - yPosition / 50);
 		}
 
 		for (int i = 0; i < 9; i++) {
 			int[] xy = calCulatePosition(this, i);
-			objectAroundPlayer[i] = gameController.getObjectOnPositionXY(xy[0], xy[1]);
+			objectAroundPlayer[i] = gameController.getObjectInGame(xy[0], xy[1]);
 		}
 	}
 }

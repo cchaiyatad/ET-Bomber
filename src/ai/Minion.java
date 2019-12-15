@@ -46,10 +46,4 @@ public class Minion extends AIBase {
 			gameController.getMinions().remove(this);
 		}
 	}
-	
-	@Override
-	public void onObjectIsDestroyed() {
-		setImageShow(false);
-	}
-
 }

@@ -64,10 +64,10 @@ public class BombArea {
 			else if (site == Site.LEFT) isCanShow[j] = bomb.getGameController().canSetObject(Math.max(xPos - j - 1, 0), yPos);
 			else if (site == Site.RIGHT) isCanShow[j] = bomb.getGameController().canSetObject(Math.min(xPos + j + 1, 14), yPos);
 			if(!isCanShow[j]) {
-				if(site == Site.TOP && bomb.getGameController().getObjectOnPositionXY(xPos, Math.max(yPos - j - 1, 0))!= ObjectInGame.WALL) afterDestroy[0] = j;
-				else if (site == Site.BOT && bomb.getGameController().getObjectOnPositionXY(xPos, Math.min(yPos + j + 1, 14))!= ObjectInGame.WALL) afterDestroy[1] = j;
-				else if (site == Site.LEFT && bomb.getGameController().getObjectOnPositionXY(Math.max(xPos - j - 1, 0), yPos)!= ObjectInGame.WALL) afterDestroy[2] = j;
-				else if (site == Site.RIGHT && bomb.getGameController().getObjectOnPositionXY(Math.min(xPos + j + 1, 14), yPos)!= ObjectInGame.WALL) afterDestroy[3] = j;
+				if(site == Site.TOP && bomb.getGameController().getObjectInGame(xPos, Math.max(yPos - j - 1, 0))!= ObjectInGame.WALL) afterDestroy[0] = j;
+				else if (site == Site.BOT && bomb.getGameController().getObjectInGame(xPos, Math.min(yPos + j + 1, 14))!= ObjectInGame.WALL) afterDestroy[1] = j;
+				else if (site == Site.LEFT && bomb.getGameController().getObjectInGame(Math.max(xPos - j - 1, 0), yPos)!= ObjectInGame.WALL) afterDestroy[2] = j;
+				else if (site == Site.RIGHT && bomb.getGameController().getObjectInGame(Math.min(xPos + j + 1, 14), yPos)!= ObjectInGame.WALL) afterDestroy[3] = j;
 				break;
 			}
 		}
