@@ -46,6 +46,7 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 				makeDamageToPlayer();
 				area.setAfterDestroy();
 				area.showRange();
+				
 				if (player != null) {
 					player.getCountBomb().poll();
 					player.setCanUseWeapon();

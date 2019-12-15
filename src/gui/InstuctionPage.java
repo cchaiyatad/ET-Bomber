@@ -11,6 +11,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import main.Main;
 
 public class InstuctionPage extends VBox implements HasButtonPage {
 	private StartPage startPage;
@@ -21,7 +23,8 @@ public class InstuctionPage extends VBox implements HasButtonPage {
 
 		backButton = new Button("Back");
 		backButton.setFocusTraversable(false);
-
+		backButton.setFont(Font.loadFont(Main.fontpath, 14));
+		
 		setButtonAction();
 		this.setSpacing(16);
 		this.setPadding(new Insets(50));
@@ -39,24 +42,44 @@ public class InstuctionPage extends VBox implements HasButtonPage {
 	}
 
 	private void createPage() {
-		Label headerLabel = new Label("INSTRUCTION");
-
+		Background bg = new Background(new BackgroundFill(Color.LIGHTBLUE, null, null));
+		Label headerLabel = new Label(" INSTRUCTION ");
+		headerLabel.setFont(Font.loadFont(Main.fontpath, 30));
+		headerLabel.setBackground(bg);
+		
 		String aimOfTheGameContentString = "1. Blow up your opponents before they kill you.\n"
 				+ "2. Blow up your opponents before time out.\n" + "3. Avoid your opponents minions at all cost.\n"
 				+ "4. Bomb can damage not only opponents but yourself too, so look before you leap.";
 		VBox aimOfTheGame = new VBox();
-		Label aimOfGameHeader = new Label("RULE");
+		aimOfTheGame.setSpacing(10);
+		
+		Label aimOfGameHeader = new Label(" RULE ");
+		aimOfGameHeader.setFont(Font.loadFont(Main.fontpath, 20));
+		aimOfGameHeader.setBackground(bg);
+		
 		Label aimOfGameContentLabel = new Label(aimOfTheGameContentString);
+		aimOfGameContentLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		aimOfGameContentLabel.setWrapText(true);
 		aimOfTheGame.getChildren().addAll(aimOfGameHeader, aimOfGameContentLabel);
 
-		String keyString = "W : Move up\n" + "A : Move Left\n" + "S : Move Down\n" + "D : Move Right\n"
-				+ "Space : place bomb";
+		String keyString = "W : Move Up\n" + "A : Move Left\n" + "S : Move Down\n" + "D : Move Right\n"
+				+ "Space : Place bomb";
 		VBox keyBox = new VBox();
-		Label keyBoxHeader = new Label("KEY");
+		keyBox.setSpacing(10);
+		
+		Label keyBoxHeader = new Label(" KEY ");
+		keyBoxHeader.setFont(Font.loadFont(Main.fontpath, 20));
+		keyBoxHeader.setBackground(bg);
+		
 		Label keyContentLabel = new Label(keyString);
+		keyContentLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		keyContentLabel.setWrapText(true);
-		keyBox.getChildren().addAll(keyBoxHeader, keyContentLabel);
+		
+		Label legendBoxHeader = new Label(" LEGEND ");
+		legendBoxHeader.setFont(Font.loadFont(Main.fontpath, 20));
+		legendBoxHeader.setBackground(bg);
+		
+		keyBox.getChildren().addAll(keyBoxHeader, keyContentLabel,legendBoxHeader);
 
 		GridPane legendBox = createLegendBox();
 
@@ -65,72 +88,81 @@ public class InstuctionPage extends VBox implements HasButtonPage {
 
 	private GridPane createLegendBox() {
 		GridPane legendBox = new GridPane();
-		Label legendBoxHeader = new Label("LEGEND");
+		legendBox.setVgap(10);
+		legendBox.setHgap(5);
+		
+		ImageView playeroneImage = createImageView("playerOne");
+		Label playeroneImageLabel = new Label("Player");
+		playeroneImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
+		playeroneImageLabel.setWrapText(true);
+		
+		ImageView playertwoImage = createImageView("playerTwo");
+		Label playertwoImageLabel = new Label("Simple Monster. Just summon minions.");
+		playertwoImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
+		playertwoImageLabel.setWrapText(true);
+		
+		ImageView playerthreeImage = createImageView("playerThree");
+		Label playerthreeImageLabel = new Label("More advanced Monster. Can pass though the wall.");
+		playerthreeImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
+		playerthreeImageLabel.setWrapText(true);
+		
+		ImageView playerfourImage = createImageView("playerFour");
+		Label playerfourImageLabel = new Label("The most advanced Monster. Can invisible for a while.");
+		playerfourImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
+		playerfourImageLabel.setWrapText(true);
 
-		ImageView playerImage = createImageView("playerOne");
-		Label playerImageLabel = new Label("Player or opponents");
-		playerImageLabel.setWrapText(true);
-
-		ImageView minionImage = createImageView("minionOne");
+		ImageView minionImage = createImageView("minion");
 		Label minionImageLabel = new Label("Minion of enemy");
+		minionImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		minionImageLabel.setWrapText(true);
 
 		ImageView obstacleImage = createImageView("obstacle");
 		Label obstacleImageLabel = new Label("An obstacle ,destroy obstacle to get an item");
+		obstacleImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		obstacleImageLabel.setWrapText(true);
 
 		ImageView wallImage = createImageView("wall");
 		Label wallImageLabel = new Label("A wall, you cannot destroy it");
+		wallImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		wallImageLabel.setWrapText(true);
 
 		ImageView bombImage = createImageView("bomb");
 		Label bombImageLabel = new Label("A bomb");
+		bombImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		bombImageLabel.setWrapText(true);
 
 		ImageView bombUpgradeImage = createImageView("bombItem");
 		Label bombUpgradeLabel = new Label("Increse number of bomb that you can place by one");
+		bombUpgradeLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		bombUpgradeLabel.setWrapText(true);
 
 		ImageView powerImage = createImageView("powerItem");
 		Label powerImageLabel = new Label("Increse power of bomb by one square");
+		powerImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		powerImageLabel.setWrapText(true);
 
 		ImageView speedImage = createImageView("speedItem");
 		Label speedImageLabel = new Label("Increse running speed by one");
+		speedImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		speedImageLabel.setWrapText(true);
 
 		ImageView lifeImage = createImageView("lifeItem");
 		Label lifeImageLabel = new Label("Increse HP by one");
+		lifeImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		lifeImageLabel.setWrapText(true);
 
 		ImageView shieldImage = createImageView("shield");
 		Label shieldImageLabel = new Label("Make player invulnerable to damage 5 second");
+		shieldImageLabel.setFont(Font.loadFont(Main.fontpath, 14));
 		shieldImageLabel.setWrapText(true);
 
-		legendBox.add(legendBoxHeader, 0, 0);
-
-		legendBox.add(playerImage, 0, 1);
-		legendBox.add(playerImageLabel, 1, 1);
-		legendBox.add(minionImage, 0, 2);
-		legendBox.add(minionImageLabel, 1, 2);
-		legendBox.add(obstacleImage, 0, 3);
-		legendBox.add(obstacleImageLabel, 1, 3);
-		legendBox.add(wallImage, 0, 4);
-		legendBox.add(wallImageLabel, 1, 4);
-		legendBox.add(bombImage, 0, 5);
-		legendBox.add(bombImageLabel, 1, 5);
-
-		legendBox.add(bombUpgradeImage, 2, 1);
-		legendBox.add(bombUpgradeLabel, 3, 1);
-		legendBox.add(powerImage, 2, 2);
-		legendBox.add(powerImageLabel, 3, 2);
-		legendBox.add(speedImage, 2, 3);
-		legendBox.add(speedImageLabel, 3, 3);
-		legendBox.add(lifeImage, 2, 4);
-		legendBox.add(lifeImageLabel, 3, 4);
-		legendBox.add(shieldImage, 2, 5);
-		legendBox.add(shieldImageLabel, 3, 5);
-
+		legendBox.addRow(2, playeroneImage,playeroneImageLabel,playertwoImage,playertwoImageLabel);
+		legendBox.addRow(3, playerthreeImage,playerthreeImageLabel,playerfourImage,playerfourImageLabel);
+		legendBox.addRow(4, minionImage,minionImageLabel,powerImage,powerImageLabel);
+		legendBox.addRow(5, obstacleImage,obstacleImageLabel,speedImage,speedImageLabel);
+		legendBox.addRow(6, wallImage,wallImageLabel,lifeImage,lifeImageLabel);
+		legendBox.addRow(7, bombUpgradeImage,bombUpgradeLabel,shieldImage,shieldImageLabel);
+		legendBox.addRow(8, bombImage,bombImageLabel);
 		return legendBox;
 	}
 

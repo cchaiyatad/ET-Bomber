@@ -9,6 +9,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import main.Main;
 
 public class GameSummaryPage extends FlowPane implements HasButtonPage {
 
@@ -20,11 +22,15 @@ public class GameSummaryPage extends FlowPane implements HasButtonPage {
 
 	public GameSummaryPage(GameController gameController) {
 		this.gameController = gameController;
+		setVgap(20);
 		mainLabel = new Label("");
 		statusLabel = new Label("");
 		continueButton = new Button("Continue");
+		continueButton.setFont(Font.loadFont(Main.fontpath, 30));
 		continueButton.setFocusTraversable(false);
+		
 		mainMenuButton = new Button("Main Menu");
+		mainMenuButton.setFont(Font.loadFont(Main.fontpath, 30));
 		mainMenuButton.setFocusTraversable(false);
 
 		setButtonAction();
@@ -54,10 +60,14 @@ public class GameSummaryPage extends FlowPane implements HasButtonPage {
 			statusLabelText = isSurvive ? "You defeated all enemy" : "You was defeated";
 		} else {
 			statusLabelText = isSurvive ? "You defeated monster " + GameController.level
-					: "You was defeated by monster " + GameController.level;
+					: "You was defeated by monster in Level " + GameController.level;
 		}
 		mainLabel.setText(mainLabelText);
+		mainLabel.setFont(Font.loadFont(Main.fontpath, 20));
+		mainLabel.setTextFill((!isSurvive)? Color.RED: Color.BLUE);
+		
 		statusLabel.setText(statusLabelText);
+		statusLabel.setFont(Font.loadFont(Main.fontpath, 20));
 		continueButton.setText(buttonText);
 	}
 

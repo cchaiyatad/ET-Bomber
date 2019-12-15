@@ -6,9 +6,9 @@ import player.PlayerBase;
 
 public class Minion extends AIBase {
 
-	public Minion(int xPosition, int yPosition, String imagePath, Pane layer, int playerNumber,
+	public Minion(int xPosition, int yPosition, Pane layer, int playerNumber,
 			GameController gameController, PlayerBase player) {
-		super(xPosition, yPosition, imagePath, layer, playerNumber, gameController, player);
+		super(xPosition, yPosition, "minion", layer, playerNumber, gameController, player);
 		setHp(1);
 		this.setSpeed(this.getSpeed() - 1);
 		if (playerNumber == 4) {

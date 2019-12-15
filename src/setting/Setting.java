@@ -7,7 +7,7 @@ public class Setting {
 	public static double SCENE_WIDTH 	= 790;
 	public static double SCENE_HEIGHT 	= 860;
 	
-	public static String PATH_TO_PLACEHOLDER = "file:res/Image/placeholder.png";
+	public static String PATH_TO_PLACEHOLDER = ClassLoader.getSystemResource("image/placeholder.png").toString();
 	public static int GAME_TIME = 150;
 	
 	//Input

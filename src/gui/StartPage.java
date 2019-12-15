@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import main.Main;
 import setting.Setting;
 
 public class StartPage extends StackPane implements HasButtonPage {
@@ -28,21 +31,28 @@ public class StartPage extends StackPane implements HasButtonPage {
 
 		VBox mainMenu = new VBox();
 		mainMenu.setAlignment(Pos.CENTER);
+		mainMenu.setSpacing(20);
 
-		gameLabel = new Label("Bomberman");
+		gameLabel = new Label("E.T. Bomber");
+		gameLabel.setFont(Font.loadFont(Main.fontpath, 70));
+		
+		
 		playButton = new Button("PLAY");
+		playButton.setFont(Font.loadFont(Main.fontpath, 30));
 		playButton.setFocusTraversable(false);
 
 		instuctionButton = new Button("INSTUCTION");
+		instuctionButton.setFont(Font.loadFont(Main.fontpath, 30));
 		instuctionButton.setFocusTraversable(false);
 
 		quitButton = new Button("QUIT");
+		quitButton.setFont(Font.loadFont(Main.fontpath, 30));
 		quitButton.setFocusTraversable(false);
 
 		instuctionPage = new InstuctionPage(this);
 
 		setButtonAction();
-		mainMenu.getChildren().addAll(gameLabel, playButton, instuctionButton, quitButton);
+		mainMenu.getChildren().addAll(gameLabel,playButton, instuctionButton, quitButton);
 
 		this.getChildren().add(mainMenu);
 	}

@@ -383,7 +383,7 @@ public class GameController extends Controller {
 	private void createBackground() {
 		for (int i = 1; i <= 13; i++) {
 			for (int j = 1; j <= 13; j++) {
-				new Wall(50 * j, 50 * i, "background", gamePage.getGameFieldItemPane());
+				new Wall(50 * j, 50 * i, "newbackground", gamePage.getGameFieldItemPane());
 			}
 		}
 	}
