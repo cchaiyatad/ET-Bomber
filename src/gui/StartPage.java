@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import main.Main;
 import setting.Setting;
 
 public class StartPage extends StackPane implements HasButtonPage {
@@ -25,6 +24,7 @@ public class StartPage extends StackPane implements HasButtonPage {
 	private Controller controller;
 
 	public StartPage(Controller controller) {
+		String fontpath = ClassLoader.getSystemResource("font/PixelEmulator-xq08.ttf").toString();
 		this.controller = controller;
 		this.setPrefSize(Setting.SCENE_WIDTH, Setting.SCENE_HEIGHT);
 		this.setAlignment(Pos.CENTER);
@@ -34,23 +34,23 @@ public class StartPage extends StackPane implements HasButtonPage {
 		mainMenu.setSpacing(20);
 
 		Label gameLabel = new Label("E.T. Bomber");
-		gameLabel.setFont(Font.loadFont(Main.fontpath, 70));
+		gameLabel.setFont(Font.loadFont(fontpath, 70));
 
 		playButton = new Button("PLAY");
-		playButton.setFont(Font.loadFont(Main.fontpath, 30));
+		playButton.setFont(Font.loadFont(fontpath, 30));
 		playButton.setFocusTraversable(false);
 
 		instuctionButton = new Button("INSTUCTION");
-		instuctionButton.setFont(Font.loadFont(Main.fontpath, 30));
+		instuctionButton.setFont(Font.loadFont(fontpath, 30));
 		instuctionButton.setFocusTraversable(false);
 		
 
 		creditButton = new Button("CREDIT");
-		creditButton.setFont(Font.loadFont(Main.fontpath, 30));
+		creditButton.setFont(Font.loadFont(fontpath, 30));
 		creditButton.setFocusTraversable(false);
 
 		quitButton = new Button("QUIT");
-		quitButton.setFont(Font.loadFont(Main.fontpath, 30));
+		quitButton.setFont(Font.loadFont(fontpath, 30));
 		quitButton.setFocusTraversable(false);
 
 		instuctionPage = new InstuctionPage(this);

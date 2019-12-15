@@ -222,11 +222,6 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			boolean TRinbomb = isinRange(x2, y2, xMin, xMax, yMin, yMax);
 			boolean BRinbomb = isinRange(x3, y3, xMin, xMax, yMin, yMax);
 			boolean BLinbomb = isinRange(x4, y4, xMin, xMax, yMin, yMax);
-			System.out.println(TLinbomb + " " + TRinbomb + " " + BLinbomb + " " + BRinbomb);
-			System.out.print(yMin + " ");
-			System.out.print(yMax + " ");
-			System.out.print(xMin + " ");
-			System.out.print(xMax);
 
 			if (TLinbomb && BLinbomb && TRinbomb && BRinbomb) {
 				player.setHp(player.getHp() - 1);

@@ -8,7 +8,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import main.Main;
 import player.PlayerBase;
 
 public class PlayerStatusBoard extends HBox {
@@ -17,6 +16,7 @@ public class PlayerStatusBoard extends HBox {
 	private PlayerBase player;
 
 	public PlayerStatusBoard() {
+		String fontpath = ClassLoader.getSystemResource("font/PixelEmulator-xq08.ttf").toString();
 		this.setPrefSize(100, 50);
 		this.setBackground(new Background(new BackgroundFill(Color.DARKSALMON, null, null)));
 
@@ -24,7 +24,7 @@ public class PlayerStatusBoard extends HBox {
 
 		hpLabel = new Label();
 		hpLabel.setPrefHeight(60);
-		hpLabel.setFont(Font.loadFont(Main.fontpath, 16));
+		hpLabel.setFont(Font.loadFont(fontpath, 16));
 
 		this.getChildren().addAll(playerImageView, hpLabel);
 	}
