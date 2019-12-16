@@ -202,22 +202,22 @@ public class Bomb extends GameObject implements Weapon, Destroyable {
 			int y2 = y1;
 			int y3 = y1 + 50;
 			int y4 = y3;
-//			if (y3 == yPosition || y3 == (yPosition / 50 - yMin) * 50) {
-//				y3--;
-//				y4--;
-//			}
-//			if (y1 == yPosition + 50 || y1 == (yPosition / 50 + yMax) * 50) {
-//				y1++;
-//				y2++;
-//			}
-//			if (x2 == xPosition || x2 == (xPosition / 50 - xMin) * 50) {
-//				x2--;
-//				x3--;
-//			}
-//			if (x1 == xPosition + 50 || x1 == (xPosition / 50 + xMax) * 50) {
-//				x1++;
-//				x4++;
-//			}
+			if (y3 == yPosition || y3 == (yPosition / 50 - yMin) * 50) {
+				y3--;
+				y4--;
+			}
+			if (y1 == yPosition + 50 || y1 == (yPosition / 50 + yMax) * 50) {
+				y1++;
+				y2++;
+			}
+			if (x2 == xPosition || x2 == (xPosition / 50 - xMin) * 50) {
+				x2--;
+				x3--;
+			}
+			if (x1 == xPosition + 50 || x1 == (xPosition / 50 + xMax) * 50) {
+				x1++;
+				x4++;
+			}
 			boolean TLinbomb = isinRange(x1, y1, xMin, xMax, yMin, yMax);
 			boolean TRinbomb = isinRange(x2, y2, xMin, xMax, yMin, yMax);
 			boolean BRinbomb = isinRange(x3, y3, xMin, xMax, yMin, yMax);

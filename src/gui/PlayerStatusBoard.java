@@ -21,6 +21,7 @@ public class PlayerStatusBoard extends HBox {
 		this.setBackground(new Background(new BackgroundFill(Color.DARKSALMON, null, null)));
 
 		playerImageView = new ImageView();
+		
 
 		hpLabel = new Label();
 		hpLabel.setPrefHeight(60);
@@ -40,7 +41,11 @@ public class PlayerStatusBoard extends HBox {
 			return;
 		}
 		hpLabel.setText(String.format("HP:%d", player.getHp()));
-
+		if(player.getHp() == 0){
+			hpLabel.setText("");
+			playerImageView.setImage(null);
+			
+		}
 	}
 
 }
